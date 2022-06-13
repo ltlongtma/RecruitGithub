@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  .menu {
+    display: flex;
+    justify-content: space-around;
+    width: 500px;
+  }
+}
