@@ -1,10 +1,25 @@
 .container {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  // justify-content: space-around;
   .menu {
     display: flex;
-    justify-content: space-around;
-    width: 500px;
+    justify-content: flex-start;
+    width: 50%;
+  }
+  .action {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+  }
+  a {
+    padding: 1rem;
+    text-decoration: none;
+    font-size: 22px;
+    color: darkblue;
+    &:active {
+      color: red;
+      font-style: bold;
+    }
   }
 }

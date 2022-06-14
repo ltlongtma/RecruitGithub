@@ -6,4 +6,9 @@
 }
 .container {
   display: flex;
+  width: 80%;
+  margin: auto;
+  .content {
+    width: 100%;
+  }
 }

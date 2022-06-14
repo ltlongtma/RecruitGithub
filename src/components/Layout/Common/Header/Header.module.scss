@@ -1,8 +1,10 @@
 .wrapper {
   width: 100%;
   display: flex;
+  background: var(--mainBackground);
 }
 .inner {
   display: flex;
-  width: 100%;
+  width: 80%;
+  margin: auto;
 }
