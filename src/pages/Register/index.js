@@ -2,7 +2,9 @@ import className from "classnames/bind";
 import styles from "./Register.module.scss";
 import logo from "../../assets/logo-tma.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useRef } from "react";
 
 const cx = className.bind(styles);
 
@@ -11,30 +13,53 @@ export const Register = () => {
   const handleBackToLogin = () => {
     navigate("/login");
   };
-  const [formInput, setFormInput] = useState({
-    email: "",
-    username: "",
-    password: "",
-    passwordConfirm: "",
-  });
-  const handleChange = (e) => {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-  const handleCreateNewAccount = (e) => {
-    e.preventDefault();
-    alert(`${JSON.stringify(formInput)}`);
-    setFormInput({
+  //validate Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+    getValues,
+  } = useForm({
+    defaultValues: {
       email: "",
       username: "",
       password: "",
       passwordConfirm: "",
-    });
+    },
+  });
+  const email = useRef({});
+  email.current = watch("email");
+  const username = useRef({});
+  username.current = watch("username");
+  const password = useRef({});
+  password.current = watch("password");
+  const passwordConfirm = useRef({});
+  passwordConfirm.current = watch("passwordConfirm");
+
+  // console.log("EMAIL " + JSON.stringify(email));
+  // console.log("PASSWORD " + JSON.stringify(password));
+
+  // const [formInput, setFormInput] = useState({
+  //   email: "",
+  //   username: "",
+  //   password: "",
+  //   passwordConfirm: "",
+  // });
+  // const handleChange = (e) => {
+  //   const target = e.target;
+  //   const name = target.name;
+  //   const value = target.value;
+  //   setFormInput((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+  const handleCreateNewAccount = (e) => {
+    // e.preventDefault();
+    alert(`${JSON.stringify(e)}`);
+    reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
   };
   return (
     <div className={cx("container-fluid", "register-container")}>
@@ -46,8 +71,12 @@ export const Register = () => {
             </div>
             <div className={cx("detail")}>TMA's RECRUITMENT TOOL V1.0</div>
           </div>
-          <div className={cx("content-right col-md-5")}>
-            <form>
+          <div className={cx("content-right", "col-md-5")}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               <div className="mb-3">
                 <label className="form-label" htmlFor="emailAddress">
                   Email Address
@@ -55,12 +84,22 @@ export const Register = () => {
                 <input
                   type="email"
                   className="form-control"
-                  name="email"
+                  // name="email"
                   id="emailAddress"
                   placeholder="Email Address"
-                  value={formInput.email}
-                  onChange={handleChange}
+                  {...register("email", {
+                    required: "You have to input your email",
+                    pattern: {
+                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      message: " You entered wrong syntax EmailAdress",
+                    },
+                  })}
                 ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="email"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
               </div>
               <div className="mb-3">
                 <label className="form-label" htmlFor="userName">
@@ -72,9 +111,19 @@ export const Register = () => {
                   name="username"
                   id="userName"
                   placeholder="User Name"
-                  value={formInput.username}
-                  onChange={handleChange}
+                  {...register("username", {
+                    required: "You have to input your username",
+                    minLength: {
+                      value: 3,
+                      message: "User Name must be at least 3 characters",
+                    },
+                  })}
                 ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="username"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
               </div>
               <div className="mb-3">
                 <label className="form-label" htmlFor="password">
@@ -86,9 +135,16 @@ export const Register = () => {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  value={formInput.password}
-                  onChange={handleChange}
+                  {...register("password", {
+                    required: "You have to input your password",
+                    minLength: { value: 8, message: "Password must be at least 8 characters" },
+                  })}
                 ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="password"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
               </div>
               <div className="mb-3">
                 <label className="form-label" htmlFor="passwordConfirm">
@@ -100,14 +156,21 @@ export const Register = () => {
                   name="passwordConfirm"
                   id="passwordConfirm"
                   placeholder="Confirm Password"
-                  value={formInput.passwordConfirm}
-                  onChange={handleChange}
+                  {...register("passwordConfirm", {
+                    required: "Please confirm your password",
+                    validate: (value) => value === password.current || "The passwords do not match",
+                  })}
                 ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="passwordConfirm"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
               </div>
               <button
                 type="submit"
                 className="btn login btn-success mt-3 col-12 mx-auto"
-                onClick={handleCreateNewAccount}
+                onClick={handleSubmit(handleCreateNewAccount)}
               >
                 Create new account
               </button>

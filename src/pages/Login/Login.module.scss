@@ -16,3 +16,13 @@
 img {
   width: 400px;
 }
+//Validate Form
+.content-right {
+  .text-error {
+    color: #bf1650;
+  }
+  p::before {
+    display: inline;
+    content: "⚠ ";
+  }
+}
