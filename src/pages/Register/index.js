@@ -1,10 +1,10 @@
+import React, { useRef } from "react";
 import className from "classnames/bind";
 import styles from "./Register.module.scss";
 import logo from "../../assets/logo-tma.png";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useRef } from "react";
 
 const cx = className.bind(styles);
 
@@ -21,6 +21,7 @@ export const Register = () => {
     formState: { errors },
     reset,
     getValues,
+    setFocus,
   } = useForm({
     defaultValues: {
       email: "",
@@ -61,6 +62,9 @@ export const Register = () => {
     alert(`${JSON.stringify(e)}`);
     reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
   };
+  React.useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
   return (
     <div className={cx("container-fluid", "register-container")}>
       <div className={cx("container", "container-content")}>

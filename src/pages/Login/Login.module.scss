@@ -1,20 +1,24 @@
 .login-container {
+  display: flex;
   background: var(--mainBackground);
   position: absolute;
   width: 100%;
   height: 100%;
   .container-content {
-    margin-top: 14%;
+    margin-bottom: auto;
+    margin-top: auto;
+    width: 100%;
   }
 }
 .detail {
   font-size: 40px;
-  color: darkolivegreen;
+  color: #198754;
   font-weight: bold;
+  font-family: unset;
 }
 .brand,
 img {
-  width: 400px;
+  width: auto;
 }
 //Validate Form
 .content-right {

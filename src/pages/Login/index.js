@@ -4,7 +4,7 @@ import logo from "../../assets/logo-tma.png";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 const cx = className.bind(styles);
 
@@ -21,6 +21,7 @@ export const Login = () => {
     formState: { errors },
     reset,
     getValues,
+    setFocus,
   } = useForm({
     defaultValues: {
       email: "",
@@ -32,7 +33,7 @@ export const Login = () => {
   const password = useRef({});
   password.current = watch("password");
 
-  // console.log("EMAIL " + JSON.stringify(email));
+  // console.log("EMAIL " + JSON.stringify(email.current));
   // console.log("PASSWORD " + JSON.stringify(password));
 
   const onSubmit = (e) => {
@@ -44,6 +45,9 @@ export const Login = () => {
       password: "",
     });
   };
+  React.useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
 
   return (
     <div className={cx("container-fluid", "login-container")}>

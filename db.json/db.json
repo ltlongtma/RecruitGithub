@@ -1,0 +1,34 @@
+{
+  "questionBank": [
+    {
+      "id": 1,
+      "question": "What is HTML?",
+      "skill": "HTML/CSS",
+      "level": "easy"
+    },
+    {
+      "id": 2,
+      "question": "What is lifecycle of React? How each work?",
+      "skill": "React",
+      "level": "Medium"
+    },
+    {
+      "id": 3,
+      "question": "What is React? Why should i use React",
+      "skill": "React",
+      "level": "easy"
+    },
+    {
+      "id": 4,
+      "question": "How many way to style css?",
+      "skill": "HTML/CSS",
+      "level": "easy"
+    },
+    {
+      "id": 5,
+      "question": "What do you want in our company? What enviroment that you want?",
+      "skill": "Soft skills",
+      "level": "easy"
+    }
+  ]
+}
