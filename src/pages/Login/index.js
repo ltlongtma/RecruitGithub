@@ -16,7 +16,7 @@ export const Login = () => {
   //Validate Form with react-hook-form
   const {
     register,
-    handleSubmit,
+
     watch,
     formState: { errors },
     reset,
@@ -36,18 +36,40 @@ export const Login = () => {
   // console.log("EMAIL " + JSON.stringify(email.current));
   // console.log("PASSWORD " + JSON.stringify(password));
 
-  const onSubmit = (e) => {
-    // e.preventDefault();
-    alert(`${JSON.stringify(e)}`);
-    reset({
-      ...getValues,
-      email: "",
-      password: "",
-    });
-  };
+  // const onSubmit = (e) => {
+  //   // e.preventDefault();
+  //   alert(`${JSON.stringify(e)}`);
+  //   reset({
+  //     ...getValues,
+  //     email: "",
+  //     password: "",
+  //   });
+  // };
   React.useEffect(() => {
     setFocus("email");
   }, [setFocus]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const dataInputLogin = {
+      email: email.current,
+      password: password.current,
+    };
+
+    const dataFetchLogin = fetch("http://localhost:8080/api/user/login", {
+      method: "POST",
+      body: JSON.stringify(dataInputLogin),
+    });
+    console.log(dataFetchLogin);
+
+    // const fakeToken = {
+    //   token:
+    //     "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiYWRtaW5AdG1hLmNvbS52biIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1NTY0NjQ1MSwiZXhwIjoxNjU2NTEwNDUxfQ.KKVkSOUhqFzFqoPJj9eryQefI4aSZDfssZa1f7Cy8mya0FsVCjHDtFxQXTykiDyHiMY9bL81TD42r4QYroUiIA",
+    // };
+    // sessionStorage.setItem("isToken", JSON.stringify(fakeToken));
+
+    // navigate("/user");
+  };
 
   return (
     <div className={cx("container-fluid", "login-container")}>
@@ -60,7 +82,7 @@ export const Login = () => {
             <div className={cx("detail")}>TMA's RECRUITMENT TOOL V1.0</div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label className="form-label" htmlFor="emailAdress">
                   Email Adress
@@ -106,11 +128,7 @@ export const Login = () => {
                   render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>
-              <button
-                type="submit"
-                className="btn login btn-success mt-3 col-12 mx-auto"
-                onClick={handleSubmit(onSubmit)}
-              >
+              <button type="submit" className="btn login btn-success mt-3 col-12 mx-auto">
                 Login
               </button>
               <span className="text-center d-block mt-3 mb-3 ">Forgot password?</span>

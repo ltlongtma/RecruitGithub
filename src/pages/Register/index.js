@@ -65,6 +65,7 @@ export const Register = () => {
   React.useEffect(() => {
     setFocus("email");
   }, [setFocus]);
+
   return (
     <div className={cx("container-fluid", "register-container")}>
       <div className={cx("container", "container-content")}>
@@ -76,11 +77,7 @@ export const Register = () => {
             <div className={cx("detail")}>TMA's RECRUITMENT TOOL V1.0</div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
+            <form>
               <div className="mb-3">
                 <label className="form-label" htmlFor="emailAddress">
                   Email Address

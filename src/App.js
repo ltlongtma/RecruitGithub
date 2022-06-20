@@ -1,18 +1,28 @@
-import { routes } from "./routes";
-import { Routes, Route } from "react-router-dom";
+import { privateRoute, publicRoute } from "./routes";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { DefaultLayout } from "./components/Layout/DefaultLayout";
+import { useEffect, useState } from "react";
 
 function App() {
+  const navigate = useNavigate();
+  const [isLogined, setIsLogined] = useState(false);
+
+  useEffect(() => {
+    const isToken = sessionStorage.getItem("isToken");
+
+    if (!isToken) {
+      navigate("/login");
+    }
+
+    setIsLogined(true);
+  }, []);
+
   return (
     <div className="App">
       <Routes>
-        {routes.map((route, index) => {
+        {publicRoute.map((route, index) => {
           const Page = route.component;
-          let Layout = DefaultLayout;
-
-          if (route.layout) {
-            Layout = route.layout;
-          }
+          let Layout = route.layout;
           return (
             <Route
               key={index}
@@ -25,6 +35,23 @@ function App() {
             ></Route>
           );
         })}
+
+        {isLogined &&
+          privateRoute.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              ></Route>
+            );
+          })}
       </Routes>
     </div>
   );
