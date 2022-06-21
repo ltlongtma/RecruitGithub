@@ -2,7 +2,7 @@
   display: flex;
   background: var(--mainBackground);
   position: absolute;
-  width: 100%;
+  width: 80%;
   height: 100%;
   .container-content {
     margin-bottom: auto;
@@ -10,18 +10,44 @@
     width: 100%;
   }
 }
-.detail {
-  font-size: 40px;
-  color: #198754;
-  font-weight: bold;
-  font-family: unset;
-}
-.brand,
-img {
-  width: auto;
+
+.brand {
+  margin-top: 35px;
+  .title {
+    font-size: 2rem;
+    color: #198754;
+    font-weight: bold;
+    font-family: unset;
+  }
+  img {
+    width: 80%;
+  }
 }
 //Validate Form
 .content-right {
+  .btn {
+    border-radius: 20px;
+    border: none;
+  }
+  .forgot-password {
+    cursor: pointer;
+    color: #1d2c17;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.form-password {
+  position: relative;
+
+  .icon-eye {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+  }
+}
+.modal-body {
   .text-error {
     color: #bf1650;
   }

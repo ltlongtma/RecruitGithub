@@ -8,15 +8,20 @@
     margin: auto;
   }
 }
-.detail {
-  font-size: 40px;
-  color: darkolivegreen;
-  font-weight: bold;
+
+.brand {
+  margin-top: 80px;
+  .title {
+    font-size: 2rem;
+    color: #198754;
+
+    font-weight: bold;
+  }
+  img {
+    width: 80%;
+  }
 }
-.brand,
-img {
-  width: 400px;
-}
+
 //Validate Form
 .content-right {
   .text-error {
@@ -25,5 +30,14 @@ img {
   p::before {
     display: inline;
     content: "⚠ ";
+  }
+}
+.input-password {
+  position: relative;
+  .icon-eye {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
   }
 }

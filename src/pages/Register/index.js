@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import className from "classnames/bind";
 import styles from "./Register.module.scss";
 import logo from "../../assets/logo-tma.png";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const cx = className.bind(styles);
 
@@ -13,6 +16,7 @@ export const Register = () => {
   const handleBackToLogin = () => {
     navigate("/login");
   };
+  const [showPassword, setShowPassword] = useState(false);
   //validate Form
   const {
     register,
@@ -62,6 +66,9 @@ export const Register = () => {
     alert(`${JSON.stringify(e)}`);
     reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
   };
+  const handleShowHidePassword = (e) => {
+    setShowPassword(!showPassword);
+  };
   React.useEffect(() => {
     setFocus("email");
   }, [setFocus]);
@@ -73,8 +80,8 @@ export const Register = () => {
           <div className={cx("content-left col-md-7")}>
             <div className={cx("brand")}>
               <img src={logo} alt="TMA-s Logo" />
+              <div className={cx("title")}>TMA's RECRUITMENT TOOL V1.0</div>
             </div>
-            <div className={cx("detail")}>TMA's RECRUITMENT TOOL V1.0</div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
             <form>
@@ -130,17 +137,25 @@ export const Register = () => {
                 <label className="form-label" htmlFor="password">
                   Password
                 </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  {...register("password", {
-                    required: "You have to input your password",
-                    minLength: { value: 8, message: "Password must be at least 8 characters" },
-                  })}
-                ></input>
+                <div className={cx("input-password")}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: "You have to input your password",
+                      minLength: { value: 8, message: "Password must be at least 8 characters" },
+                    })}
+                  ></input>
+                  <span onClick={handleShowHidePassword}>
+                    <FontAwesomeIcon
+                      className={cx("icon-eye")}
+                      icon={showPassword ? faEyeSlash : faEye}
+                    />
+                  </span>
+                </div>
                 <ErrorMessage
                   errors={errors}
                   name="password"
@@ -151,17 +166,26 @@ export const Register = () => {
                 <label className="form-label" htmlFor="passwordConfirm">
                   Confirm Password
                 </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  placeholder="Confirm Password"
-                  {...register("passwordConfirm", {
-                    required: "Please confirm your password",
-                    validate: (value) => value === password.current || "The passwords do not match",
-                  })}
-                ></input>
+                <div className={cx("input-password")}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    name="passwordConfirm"
+                    id="passwordConfirm"
+                    placeholder="Confirm Password"
+                    {...register("passwordConfirm", {
+                      required: "Please confirm your password",
+                      validate: (value) =>
+                        value === password.current || "The passwords do not match",
+                    })}
+                  ></input>
+                  <span onClick={handleShowHidePassword}>
+                    <FontAwesomeIcon
+                      className={cx("icon-eye")}
+                      icon={showPassword ? faEyeSlash : faEye}
+                    />
+                  </span>
+                </div>
                 <ErrorMessage
                   errors={errors}
                   name="passwordConfirm"
