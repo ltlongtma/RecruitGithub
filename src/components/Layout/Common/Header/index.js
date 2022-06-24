@@ -5,7 +5,7 @@ const cx = className.bind(styles);
 
 export const Header = ({ children }) => {
   return (
-    <header className={cx("wrapper")}>
+    <header className={cx("container-fluid", "wrapper")}>
       <div className={cx("inner")}>{children}</div>
     </header>
   );

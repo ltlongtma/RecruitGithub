@@ -2,9 +2,11 @@
   width: 100%;
   display: flex;
   background: var(--mainBackground);
-}
-.inner {
-  display: flex;
-  width: 80%;
-  margin: auto;
+
+  .inner {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+  }
 }

@@ -11,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 const cx = className.bind(styles);
 
@@ -34,7 +35,7 @@ const ModalForgotPassword = (props) => {
       `Your email: ${email.current} has been submitted. Check your email for further instructions`
     );
 
-    // navigate("/user");
+    navigate("/resetpassword");
   };
 
   return (
@@ -92,8 +93,6 @@ export const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
-    getValues,
     setFocus,
   } = useForm({
     defaultValues: {
@@ -112,29 +111,31 @@ export const Login = () => {
   const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
-  const Submit = async (e) => {
-    e.preventDefault();
-    // const dataInputLogin = {
-    //   email: email.current,
-    //   password: password.current,
-    // };
+  const Submit = () => {
+    // e.preventDefault();
+    const dataInputLogin = {
+      email: email.current,
+      password: password.current,
+    };
+    axios
+      .post(`http://localhost:8080/api/user/login`, { ...dataInputLogin })
+      .then((res) => {
+        sessionStorage.setItem("isRole", JSON.stringify(res.data.role[0]));
+        sessionStorage.setItem("isToken", JSON.stringify(res.data.token));
 
-    // const dataFetchLogin = fetch("http://localhost:8080/api/user/login", {
-    //   method: "POST",
-    //   body: JSON.stringify(dataInputLogin),
-    // });
-    // console.log(dataFetchLogin);
+        const isToken = sessionStorage.getItem("isToken");
 
-    reset({ ...getValues, email: "", password: "" });
-
-    // const fakeToken = {
-    //   token:
-    //     "eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiYWRtaW5AdG1hLmNvbS52biIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1NTY0NjQ1MSwiZXhwIjoxNjU2NTEwNDUxfQ.KKVkSOUhqFzFqoPJj9eryQefI4aSZDfssZa1f7Cy8mya0FsVCjHDtFxQXTykiDyHiMY9bL81TD42r4QYroUiIA",
-    // };
-    // sessionStorage.setItem("isToken", JSON.stringify(fakeToken));
-
-    // navigate("/user");
+        if (isToken) {
+          navigate("/user");
+        }
+      })
+      .catch((errors) => {
+        console.log("ERROR " + errors);
+        alert("Your account is not authorized to login. Please create a new account.");
+        navigate("/register");
+      });
   };
+
   const handleForgotPassword = () => {
     setModalShow(true);
   };

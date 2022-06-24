@@ -1,71 +1,56 @@
-import React, { useRef, useState } from "react";
 import className from "classnames/bind";
-import styles from "./Register.module.scss";
+import styles from "./reset.module.scss";
 import logo from "../../assets/logo-tma.png";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
 
-export const Register = () => {
+export const ResetPassword = () => {
   const navigate = useNavigate();
-  const handleBackToLogin = () => {
-    navigate("/login");
-  };
+
   const [showPassword, setShowPassword] = useState(false);
-  //validate Form
+
+  //Validate Form with react-hook-form
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
-    getValues,
     setFocus,
   } = useForm({
     defaultValues: {
-      email: "",
-      username: "",
+      codeNumber: "",
       password: "",
       passwordConfirm: "",
     },
   });
-  const email = useRef({});
-  email.current = watch("email");
-  const username = useRef({});
-  username.current = watch("username");
+  const codeNumber = useRef();
+  codeNumber.current = watch("codeNumber");
   const password = useRef({});
   password.current = watch("password");
   const passwordConfirm = useRef({});
   passwordConfirm.current = watch("passwordConfirm");
 
-  const handleCreateNewAccount = (e) => {
-    const dataRegister = {
-      email: email.current,
-      password: password.current,
-    };
-    axios
-      .post(`http://localhost:8080/api/user/sign-up`, { ...dataRegister })
-      .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
-
-      .catch((err) => console.log("ERROR " + err));
-
-    // reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
-  };
-  const handleShowHidePassword = (e) => {
+  React.useEffect(() => {
+    setFocus("codeNumber");
+  }, [setFocus]);
+  const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
-  React.useEffect(() => {
-    setFocus("email");
-  }, [setFocus]);
+  const handleSubmitForm = (e) => {
+    // e.preventDefault();
+    alert("Your password has been reset successfully.");
+    navigate("/login");
+  };
 
   return (
-    <div className={cx("container-fluid", "register-container")}>
+    <div className={cx("container-fluid", "login-container")}>
       <div className={cx("container", "container-content")}>
         <div className={cx("row")}>
           <div className={cx("content-left col-md-7")}>
@@ -75,66 +60,36 @@ export const Register = () => {
             </div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
-            <form onSubmit={handleSubmit(handleCreateNewAccount)}>
+            <form onSubmit={handleSubmit(handleSubmitForm)}>
               <div className="mb-3">
-                <label className="form-label" htmlFor="emailAddress">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  // name="email"
-                  id="emailAddress"
-                  placeholder="Email Address"
-                  {...register("email", {
-                    required: "You have to input your email",
-                    pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: " You entered wrong syntax EmailAdress",
-                    },
-                  })}
-                ></input>
-                <ErrorMessage
-                  errors={errors}
-                  name="email"
-                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label" htmlFor="userName">
-                  User Name
+                <label className="form-label" htmlFor="codeNumber">
+                  Reset Code Number
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  name="username"
-                  id="userName"
-                  placeholder="User Name"
-                  {...register("username", {
-                    required: "You have to input your username",
-                    minLength: {
-                      value: 3,
-                      message: "User Name must be at least 3 characters",
-                    },
+                  placeholder="Input your reset code number"
+                  {...register("codeNumber", {
+                    required: "Your reset code number must not be blank",
                   })}
                 ></input>
                 <ErrorMessage
                   errors={errors}
-                  name="username"
+                  name="codeNumber"
                   render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>
+
               <div className="mb-3">
-                <label className="form-label" htmlFor="password">
-                  Password
+                <label className="form-label" htmlFor="emailPassword">
+                  New Password
                 </label>
-                <div className={cx("input-password")}>
+                <div className={cx("form-password")}>
                   <input
                     type={showPassword ? "text" : "password"}
                     className="form-control"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
+                    placeholder="Input your new password"
+                    id="emailPassword"
                     {...register("password", {
                       required: "You have to input your password",
                       minLength: { value: 8, message: "Password must be at least 8 characters" },
@@ -142,9 +97,9 @@ export const Register = () => {
                   ></input>
                   <span onClick={handleShowHidePassword}>
                     <FontAwesomeIcon
-                      className={cx("icon-eye")}
                       icon={showPassword ? faEyeSlash : faEye}
-                    />
+                      className={cx("icon-eye")}
+                    ></FontAwesomeIcon>
                   </span>
                 </div>
                 <ErrorMessage
@@ -157,7 +112,7 @@ export const Register = () => {
                 <label className="form-label" htmlFor="passwordConfirm">
                   Confirm Password
                 </label>
-                <div className={cx("input-password")}>
+                <div className={cx("form-password")}>
                   <input
                     type={showPassword ? "text" : "password"}
                     className="form-control"
@@ -185,17 +140,12 @@ export const Register = () => {
               </div>
               <button
                 type="submit"
-                className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
-                // onClick={handleSubmit(handleCreateNewAccount)}
+                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
               >
-                Create new account
+                Reset Password
               </button>
-              <button
-                className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
-                onClick={handleBackToLogin}
-              >
-                Already have an account. Login
-              </button>
+
+              <hr />
             </form>
           </div>
         </div>

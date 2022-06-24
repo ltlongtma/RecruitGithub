@@ -14,7 +14,7 @@
   .title {
     font-size: 2rem;
     color: #198754;
-
+    margin-left: 6%;
     font-weight: bold;
   }
   img {
@@ -30,6 +30,10 @@
   p::before {
     display: inline;
     content: "⚠ ";
+  }
+  .btn {
+    border-radius: 20px;
+    border: none;
   }
 }
 .input-password {
