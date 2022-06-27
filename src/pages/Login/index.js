@@ -126,7 +126,7 @@ export const Login = () => {
         const isToken = sessionStorage.getItem("isToken");
 
         if (isToken) {
-          navigate("/user");
+          navigate("/");
         }
       })
       .catch((errors) => {

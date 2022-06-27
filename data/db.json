@@ -1,0 +1,1178 @@
+[
+  {
+    "id": 1,
+    "level": "MEDIUM",
+    "createdDate": "2022-06-24T09:23:33.000+00:00",
+    "updatedDate": "2022-06-24T09:23:33.000+00:00",
+    "author": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "updatedUser": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "category": {
+      "id": 1,
+      "createdDate": "2022-06-24T09:23:32.000+00:00",
+      "updatedDate": "2022-06-24T09:23:32.000+00:00",
+      "author": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "updatedUser": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "name": "Java"
+    },
+    "content": "Sự khác nhau giữa bộ nhớ heap và stack trong java?",
+    "answer": "Stack là một vùng nhớ được sử dụng để lưu trữ các tham số và các biến local của phương thức mỗi khi một phương thức được gọi ra.\n\nHeap là một vùng nhớ trong bộ nhớ được sử dụng để lưu trữ các đối tượng khi từ khóa new được gọi ra, các biến static và các biến toàn cục (biến instance).",
+    "approvedDate": null,
+    "approver": null,
+    "criteria": [
+      {
+        "id": 1,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Hiểu"
+      },
+      {
+        "id": 2,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Vận dụng"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "level": "MEDIUM",
+    "createdDate": "2022-06-24T09:23:33.000+00:00",
+    "updatedDate": "2022-06-24T09:23:33.000+00:00",
+    "author": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "updatedUser": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "category": {
+      "id": 1,
+      "createdDate": "2022-06-24T09:23:32.000+00:00",
+      "updatedDate": "2022-06-24T09:23:32.000+00:00",
+      "author": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "updatedUser": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "name": "Java"
+    },
+    "content": "Có thể tạo constructor final không?",
+    "answer": "không, constructor không thể là final.",
+    "approvedDate": null,
+    "approver": null,
+    "criteria": [
+      {
+        "id": 1,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Hiểu"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "level": "MEDIUM",
+    "createdDate": "2022-06-24T09:23:33.000+00:00",
+    "updatedDate": "2022-06-24T09:23:33.000+00:00",
+    "author": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "updatedUser": {
+      "id": 1,
+      "name": null,
+      "email": "admin@tma.com.vn",
+      "roles": null,
+      "createdDate": "2022-06-24T09:22:24.000+00:00",
+      "updatedDate": "2022-06-24T09:22:24.000+00:00",
+      "author": null,
+      "updatedUser": null
+    },
+    "category": {
+      "id": 2,
+      "createdDate": "2022-06-24T09:23:32.000+00:00",
+      "updatedDate": "2022-06-24T09:23:32.000+00:00",
+      "author": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "updatedUser": {
+        "id": 1,
+        "name": null,
+        "email": "admin@tma.com.vn",
+        "roles": [
+          {
+            "id": 1,
+            "name": "ADMIN",
+            "permissions": [
+              {
+                "id": 1,
+                "name": "CREATE",
+                "permissionKey": "CREATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 2,
+                "name": "UPDATE",
+                "permissionKey": "UPDATE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 3,
+                "name": "DELETE",
+                "permissionKey": "DELETE",
+                "createdDate": "2022-06-24T09:22:23.000+00:00",
+                "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                "author": null,
+                "updatedUser": null
+              },
+              {
+                "id": 4,
+                "name": "VIEW",
+                "permissionKey": "VIEW",
+                "createdDate": "2022-06-24T09:22:24.000+00:00",
+                "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                "author": null,
+                "updatedUser": null
+              }
+            ],
+            "createdDate": "2022-06-24T09:22:24.000+00:00",
+            "updatedDate": "2022-06-24T09:22:24.000+00:00",
+            "author": null,
+            "updatedUser": null
+          }
+        ],
+        "createdDate": "2022-06-24T09:22:24.000+00:00",
+        "updatedDate": "2022-06-24T09:22:24.000+00:00",
+        "author": null,
+        "updatedUser": null
+      },
+      "name": "Python"
+    },
+    "content": "Những tính năng chính của Python?",
+    "answer": "Với một người lập trình về ngôn ngữ Python, bạn cần hiểu rõ những tính năng chính của ngôn ngữ này khi gặp câu hỏi phỏng vấn Python từ nhà tuyển dụng:\n\nPython là một ngôn ngữ lập trình phổ biến nhất. Nó không cần phải biên dịch trước khi chạy chương trình.\nLà một ngôn ngữ lập trình gõ động, người lập trình không cần phải nêu các biến trước khi biên dịch.\nPhù hợp ngôn ngữ lập trình hướng đối tượng, có thể dễ dàng xác định các lớp với tính tổng hợp và tính kế thừa.\nCác hàm của nó là các đối tượng hạng nhất. Nó có thể được gán cho các biến, được trả lại và chuyển vào các hàm khác.\nPython có nhiều mục đích sử dụng – nó có thể được sử dụng trong tự động hóa, ứng dụng web, mô hình hóa khoa học, ứng dụng dữ liệu lớn… Nó có thể được sử dụng như một thành phần cấu thành để các ngôn ngữ và thành phần khác hoạt động cùng nhau.",
+    "approvedDate": null,
+    "approver": null,
+    "criteria": [
+      {
+        "id": 1,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Hiểu"
+      },
+      {
+        "id": 2,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Vận dụng"
+      },
+      {
+        "id": 3,
+        "createdDate": "2022-06-24T09:23:33.000+00:00",
+        "updatedDate": "2022-06-24T09:23:33.000+00:00",
+        "author": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "updatedUser": {
+          "id": 1,
+          "name": null,
+          "email": "admin@tma.com.vn",
+          "roles": [
+            {
+              "id": 1,
+              "name": "ADMIN",
+              "permissions": [
+                {
+                  "id": 1,
+                  "name": "CREATE",
+                  "permissionKey": "CREATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 2,
+                  "name": "UPDATE",
+                  "permissionKey": "UPDATE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 3,
+                  "name": "DELETE",
+                  "permissionKey": "DELETE",
+                  "createdDate": "2022-06-24T09:22:23.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:23.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                },
+                {
+                  "id": 4,
+                  "name": "VIEW",
+                  "permissionKey": "VIEW",
+                  "createdDate": "2022-06-24T09:22:24.000+00:00",
+                  "updatedDate": "2022-06-24T09:22:24.000+00:00",
+                  "author": null,
+                  "updatedUser": null
+                }
+              ],
+              "createdDate": "2022-06-24T09:22:24.000+00:00",
+              "updatedDate": "2022-06-24T09:22:24.000+00:00",
+              "author": null,
+              "updatedUser": null
+            }
+          ],
+          "createdDate": "2022-06-24T09:22:24.000+00:00",
+          "updatedDate": "2022-06-24T09:22:24.000+00:00",
+          "author": null,
+          "updatedUser": null
+        },
+        "name": "Tự tin"
+      }
+    ]
+  }
+]
