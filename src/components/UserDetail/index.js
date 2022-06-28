@@ -12,13 +12,15 @@ import Modal from "react-bootstrap/Modal";
 const cx = className.bind(styles);
 
 export function UserDetail() {
+  const navigate = useNavigate();
+  const ref = useRef(null);
+
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [target, setTarget] = useState(null);
+
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  const [target, setTarget] = useState(null);
-  const ref = useRef(null);
-  const navigate = useNavigate();
 
   const handleClickAvatar = (event) => {
     setShow(!show);

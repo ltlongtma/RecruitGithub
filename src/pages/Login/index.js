@@ -81,38 +81,15 @@ const ModalForgotPassword = (props) => {
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const handleCreateNewAccount = () => {
     navigate("/register");
   };
-  const [showPassword, setShowPassword] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
-
-  //Validate Form with react-hook-form
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    setFocus,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  const email = useRef({});
-  email.current = watch("email");
-  const password = useRef({});
-  password.current = watch("password");
-
-  React.useEffect(() => {
-    setFocus("email");
-  }, [setFocus]);
   const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
-  const Submit = () => {
-    // e.preventDefault();
+  const handleOnSubmit = () => {
     const dataInputLogin = {
       email: email.current,
       password: password.current,
@@ -140,6 +117,28 @@ export const Login = () => {
     setModalShow(true);
   };
 
+  //Validate Form with react-hook-form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setFocus,
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const email = useRef({});
+  email.current = watch("email");
+  const password = useRef({});
+  password.current = watch("password");
+
+  React.useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
+
   return (
     <div className={cx("container-fluid", "login-container")}>
       <div className={cx("container", "container-content")}>
@@ -147,11 +146,11 @@ export const Login = () => {
           <div className={cx("content-left col-md-7")}>
             <div className={cx("brand")}>
               <img src={logo} alt="TMA-s Logo" />
-              <div className={cx("title")}>TMA's RECRUITMENT TOOL V1.0</div>
+              <div className={cx("title")}>DC22's RECRUITMENT TOOL V1.0</div>
             </div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
-            <form onSubmit={handleSubmit(Submit)}>
+            <form onSubmit={handleSubmit(handleOnSubmit)}>
               <div className="mb-3">
                 <label className="form-label" htmlFor="emailAdress">
                   Email Adress

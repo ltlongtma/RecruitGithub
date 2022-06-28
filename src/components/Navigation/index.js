@@ -1,13 +1,11 @@
 import className from "classnames/bind";
 import styles from "./Navigation.module.scss";
 import logo from "../../assets/logo-tma.png";
-import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { UserDetail } from "../UserDetail";
-import { User } from "../../pages/User";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Badge from "@mui/material/Badge";
 const cx = className.bind(styles);
@@ -15,7 +13,6 @@ const cx = className.bind(styles);
 export const Navigation = () => {
   return (
     <Navbar className={cx("navbar")}>
-      {/* <Container fluid> */}
       <Navbar.Brand href="#home" className={cx("brand")}>
         <img
           alt="tma-logo"
@@ -44,7 +41,6 @@ export const Navigation = () => {
 
         <UserDetail />
       </Nav>
-      {/* </Container> */}
     </Navbar>
   );
 };

@@ -15,6 +15,14 @@ export const ResetPassword = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+  const handleShowHidePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleSubmitForm = (e) => {
+    // e.preventDefault();
+    alert("Your password has been reset successfully.");
+    navigate("/login");
+  };
 
   //Validate Form with react-hook-form
   const {
@@ -40,14 +48,6 @@ export const ResetPassword = () => {
   React.useEffect(() => {
     setFocus("codeNumber");
   }, [setFocus]);
-  const handleShowHidePassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleSubmitForm = (e) => {
-    // e.preventDefault();
-    alert("Your password has been reset successfully.");
-    navigate("/login");
-  };
 
   return (
     <div className={cx("container-fluid", "login-container")}>

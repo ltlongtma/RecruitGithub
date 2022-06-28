@@ -14,18 +14,33 @@ const cx = className.bind(styles);
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleBackToLogin = () => {
     navigate("/login");
   };
-  const [showPassword, setShowPassword] = useState(false);
+  const handleCreateNewAccount = (e) => {
+    const dataRegister = {
+      email: email.current,
+      password: password.current,
+    };
+    axios
+      .post(`http://localhost:8080/api/user/sign-up`, { ...dataRegister })
+      .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
+
+      .catch((err) => console.log("ERROR " + err));
+
+    // reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
+  };
+  const handleShowHidePassword = (e) => {
+    setShowPassword(!showPassword);
+  };
   //validate Form
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
-    getValues,
     setFocus,
   } = useForm({
     defaultValues: {
@@ -44,22 +59,6 @@ export const Register = () => {
   const passwordConfirm = useRef({});
   passwordConfirm.current = watch("passwordConfirm");
 
-  const handleCreateNewAccount = (e) => {
-    const dataRegister = {
-      email: email.current,
-      password: password.current,
-    };
-    axios
-      .post(`http://localhost:8080/api/user/sign-up`, { ...dataRegister })
-      .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
-
-      .catch((err) => console.log("ERROR " + err));
-
-    // reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
-  };
-  const handleShowHidePassword = (e) => {
-    setShowPassword(!showPassword);
-  };
   React.useEffect(() => {
     setFocus("email");
   }, [setFocus]);
@@ -71,7 +70,7 @@ export const Register = () => {
           <div className={cx("content-left col-md-7")}>
             <div className={cx("brand")}>
               <img src={logo} alt="TMA-s Logo" />
-              <div className={cx("title")}>TMA's RECRUITMENT TOOL V1.0</div>
+              <div className={cx("title")}>DC22's RECRUITMENT TOOL V1.0</div>
             </div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
