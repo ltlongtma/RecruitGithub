@@ -11,6 +11,7 @@ import Badge from "@mui/material/Badge";
 const cx = className.bind(styles);
 
 export const Navigation = () => {
+  const role = sessionStorage.getItem("isRole");
   return (
     <Navbar className={cx("navbar")}>
       <Navbar.Brand href="#home" className={cx("brand")}>
@@ -25,9 +26,9 @@ export const Navigation = () => {
       </Navbar.Brand>
 
       <Nav className={cx("action")}>
-        <Nav.Link href="#action1">Question Bank</Nav.Link>
-        <Nav.Link href="#action2">Interview</Nav.Link>
-        <Nav.Link href="#action2">Manage User</Nav.Link>
+        <Nav.Link href="/">Question Bank</Nav.Link>
+        <Nav.Link href="/">Interview</Nav.Link>
+        {role === "ADMIN" && <Nav.Link href="/user">Manage User</Nav.Link>}
 
         <Form className={cx("search", "d-flex")}>
           <Form.Control type="search" placeholder="Search" aria-label="Search" size="sm" />

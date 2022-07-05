@@ -1,4 +1,4 @@
-import { privateRoute, publicRoute } from "./routes";
+import { guestRoute, adminRoute, publicRoute } from "./routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { DefaultLayout } from "./components/Layout/DefaultLayout";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 function App() {
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState(false);
+  const role = sessionStorage.getItem("isRole");
 
   useEffect(() => {
     const isToken = sessionStorage.getItem("isToken");
@@ -37,7 +38,26 @@ function App() {
         })}
 
         {isLogined &&
-          privateRoute.map((route, index) => {
+          role === "ADMIN" &&
+          adminRoute.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              ></Route>
+            );
+          })}
+
+        {isLogined &&
+          role === "GUEST" &&
+          guestRoute.map((route, index) => {
             const Page = route.component;
             let Layout = DefaultLayout;
             return (

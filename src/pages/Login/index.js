@@ -89,29 +89,6 @@ export const Login = () => {
   const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
-  const handleOnSubmit = () => {
-    const dataInputLogin = {
-      email: email.current,
-      password: password.current,
-    };
-    axios
-      .post(`http://localhost:8080/api/user/login`, { ...dataInputLogin })
-      .then((res) => {
-        sessionStorage.setItem("isRole", JSON.stringify(res.data.role[0]));
-        sessionStorage.setItem("isToken", JSON.stringify(res.data.token));
-
-        const isToken = sessionStorage.getItem("isToken");
-
-        if (isToken) {
-          navigate("/");
-        }
-      })
-      .catch((errors) => {
-        console.log("ERROR " + errors);
-        alert("Your account is not authorized to login. Please create a new account.");
-        navigate("/register");
-      });
-  };
 
   const handleForgotPassword = () => {
     setModalShow(true);
@@ -126,17 +103,41 @@ export const Login = () => {
     setFocus,
   } = useForm({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
-  const email = useRef({});
-  email.current = watch("email");
+  const username = useRef({});
+  username.current = watch("username");
   const password = useRef({});
   password.current = watch("password");
 
+  const handleOnSubmit = () => {
+    const dataInputLogin = {
+      username: username.current,
+      password: password.current,
+    };
+    axios
+      .post(`http://localhost:8080/api/user/login`, { ...dataInputLogin })
+      .then((res) => {
+        sessionStorage.setItem("isRole", res.data.role[0]);
+        sessionStorage.setItem("isToken", res.data.token);
+
+        const isToken = sessionStorage.getItem("isToken");
+
+        if (isToken) {
+          navigate("/");
+        }
+      })
+      .catch((errors) => {
+        console.log("ERROR " + errors);
+        alert("Your account is not authorized to login. Please create a new account.");
+        navigate("/register");
+      });
+  };
+
   React.useEffect(() => {
-    setFocus("email");
+    setFocus("username");
   }, [setFocus]);
 
   return (
@@ -152,26 +153,23 @@ export const Login = () => {
           <div className={cx("content-right", "col-md-5")}>
             <form onSubmit={handleSubmit(handleOnSubmit)}>
               <div className="mb-3">
-                <label className="form-label" htmlFor="emailAdress">
-                  Email Adress
+                <label className="form-label" htmlFor="username">
+                  User Name
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  // name="email"
-                  id="emailAdress"
-                  placeholder="Your email address"
-                  {...register("email", {
-                    required: "You have to input your email",
-                    pattern: {
-                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                      message: " You entered wrong syntax EmailAdress",
-                    },
+                  // name="username"
+                  id="username"
+                  placeholder="Your username"
+                  {...register("username", {
+                    required: "You have to input your user name",
+                    minLength: { value: 3, message: "User name must be at least 3 characters" },
                   })}
                 ></input>
                 <ErrorMessage
                   errors={errors}
-                  name="email"
+                  name="username"
                   render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>
@@ -227,7 +225,7 @@ export const Login = () => {
                 className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
                 onClick={handleCreateNewAccount}
               >
-                Create new account
+                Create a new account
               </button>
             </form>
           </div>

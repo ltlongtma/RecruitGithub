@@ -21,6 +21,7 @@ export const Register = () => {
   };
   const handleCreateNewAccount = (e) => {
     const dataRegister = {
+      username: username.current,
       email: email.current,
       password: password.current,
     };
@@ -46,6 +47,7 @@ export const Register = () => {
     defaultValues: {
       email: "",
       username: "",
+      name: "",
       password: "",
       passwordConfirm: "",
     },
@@ -54,6 +56,8 @@ export const Register = () => {
   email.current = watch("email");
   const username = useRef({});
   username.current = watch("username");
+  const name = useRef({});
+  name.current = watch("name");
   const password = useRef({});
   password.current = watch("password");
   const passwordConfirm = useRef({});
@@ -124,6 +128,30 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
+                <label className="form-label" htmlFor="name">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  id="name"
+                  placeholder="Full Name"
+                  {...register("name", {
+                    required: "You have to input your fullname",
+                    minLength: {
+                      value: 3,
+                      message: "Your full name must be at least 3 characters",
+                    },
+                  })}
+                ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="name"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
+              </div>
+              <div className="mb-3">
                 <label className="form-label" htmlFor="password">
                   Password
                 </label>
@@ -187,7 +215,7 @@ export const Register = () => {
                 className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
                 // onClick={handleSubmit(handleCreateNewAccount)}
               >
-                Create new account
+                Create a new account
               </button>
               <button
                 className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}

@@ -7,7 +7,8 @@ export const publicRoute = [
   { path: "/resetpassword", component: ResetPassword, layout: LoginLayout },
 ];
 
-export const privateRoute = [
+export const adminRoute = [
   { path: "/", component: Home },
   { path: "/user", component: User },
 ];
+export const guestRoute = [{ path: "/", component: Home }];
