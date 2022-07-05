@@ -21,8 +21,9 @@ export const Register = () => {
   };
   const handleCreateNewAccount = (e) => {
     const dataRegister = {
-      username: username.current,
       email: email.current,
+      username: username.current,
+      name: name.current,
       password: password.current,
     };
     axios

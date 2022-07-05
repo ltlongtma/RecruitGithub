@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = { user: [] };
 
 export const getUsersSlice = createSlice({
   name: "getUsers",
@@ -10,7 +10,7 @@ export const getUsersSlice = createSlice({
       state.push(...action.payload);
     },
     deleteUser: (state, action) => {
-      // state.splice(action.payload, 1);
+      return state.filter((user) => user.id !== action.payload);
     },
   },
 });
