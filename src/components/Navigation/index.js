@@ -32,7 +32,7 @@ export const Navigation = () => {
 
         <Form className={cx("search", "d-flex")}>
           <Form.Control type="search" placeholder="Search" aria-label="Search" size="sm" />
-          <Button size="sm" variant="outline-success">
+          <Button size="sm" variant="success">
             Search
           </Button>
         </Form>

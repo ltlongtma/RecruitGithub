@@ -1,14 +1,37 @@
 .user-list-header {
   display: flex;
   justify-content: space-between;
+  // margin-left: 3rem;
+  padding: 1rem;
+  & Button {
+    cursor: pointer;
+    margin-right: 3rem;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
+    &:hover {
+      color: #fff;
+    }
+  }
+  & a {
+    color: green;
+  }
 }
 .form {
   display: flex;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
   .form-group {
     display: flex;
     height: auto;
     .form-group-input {
       margin: 0 10px;
+      &:focus {
+        border-color: darkgreen;
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
+        outline: 0 none;
+      }
     }
   }
+}
+.table{
+  text-align: center;
 }

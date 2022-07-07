@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getUsers, deleteUser } from "./getUsersSlice";
+import { getUsers, deleteUser, editUser } from "./getUsersSlice";
 import Table from "react-bootstrap/Table";
 import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTone";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
@@ -14,8 +14,10 @@ export const UserList = () => {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [user, setUser] = useState();
+  const [role, setRole] = useState();
 
   const UserList = useSelector((state) => state.user);
+  // console.log("USERLIST ", UserList);
 
   const token = sessionStorage.getItem("isToken");
   useEffect(() => {
@@ -26,13 +28,13 @@ export const UserList = () => {
         },
       })
       .then((response) => {
-        //  console.log("RESPONE ", response.data);
+        // console.log("RESPONE ", response.data);
         dispatch(getUsers(response.data));
       })
       .catch((error) => {
         console.log("ERROR ", error);
       });
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const handleDelete = (e) => {
     const id = e;
@@ -44,6 +46,7 @@ export const UserList = () => {
         },
       })
       .then((response) => {
+        // console.log("RESPONE ", response.data);
         dispatch(deleteUser(id));
       })
       .catch((error) => {
@@ -51,20 +54,39 @@ export const UserList = () => {
       });
     setShowModalDelete(false);
   };
-  const handleClose = () => setShowModalDelete(false);
-  const handleShow = (id) => {
+  const handleCloseModalDelete = () => setShowModalDelete(false);
+  const handleShowModalDelete = (item) => {
     setShowModalDelete(true);
-    setUser(id);
+    setUser(item);
   };
-  // console.log("USER LIST " + UserList);
+  const handleShowModalEdit = (item) => {
+    setShowModalEdit(true);
+    setUser(item);
+  };
+  const handleCloseModalEdit = () => setShowModalEdit(false);
+  const handleEditNewRole = (id) => {
+    const data = { roles: [{ id: role }] };
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios.put(`http://localhost:8080/api/user/${id}`, data, { headers }).then((res) => {
+      // console.log("RES EDIT " + JSON.stringify(res.data));
+    });
 
+    handleCloseModalEdit();
+  };
+  const handleChangeRole = (e) => {
+    const value = e.target.value;
+    // console.log("ROLE " + e.target.value);
+    setRole(value === "ADMIN" ? 1 : value === "USER" ? 2 : 3);
+  };
   return (
     <div>
-      <Table striped bordered hover responsive>
+      <Table striped bordered hover responsive >
         <thead>
-          <tr>
+          <tr >
             <th>Num</th>
-            <th>ID</th>
+            <th>Id Badge</th>
             <th>Username</th>
             <th>Full Name</th>
             <th>Email</th>
@@ -78,14 +100,14 @@ export const UserList = () => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item?.id}</td>
+                  <td>{item?.badgeId}</td>
                   <td>{item?.username}</td>
                   <td>{item?.name}</td>
                   <td>{item?.email}</td>
                   <td>{item?.roles[0].name}</td>
                   <td>
-                    {/* <ModeEditOutlineTwoToneIcon onClick={() => setShowModalEdit(true)} /> */}
-                    <DeleteRoundedIcon onClick={() => handleShow(item)} />
+                    <ModeEditOutlineTwoToneIcon onClick={() => handleShowModalEdit(item)} />
+                    <DeleteRoundedIcon onClick={() => handleShowModalDelete(item)} />
                   </td>
                 </tr>
               );
@@ -93,7 +115,7 @@ export const UserList = () => {
         </tbody>
       </Table>
       {/* Modal delete */}
-      <Modal show={showModalDelete} onHide={handleClose}>
+      <Modal show={showModalDelete} onHide={handleCloseModalDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Are you sure want to delete this user?</Modal.Title>
         </Modal.Header>
@@ -101,29 +123,55 @@ export const UserList = () => {
           <Button variant="secondary" onClick={() => handleDelete(user?.id)}>
             Yes
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCloseModalDelete}>
             No
           </Button>
         </Modal.Footer>
       </Modal>
 
       {/* Modal Edit Role */}
-      <Modal show={showModalEdit} onHide={() => setShowModalEdit(!showModalEdit)} centered>
+      <Modal show={showModalEdit} onHide={handleCloseModalEdit} centered>
         <Modal.Header closeButton>
           <Modal.Title>Edit Role</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Edit account {user.name} with role {user.roles[0].name}?
+          Edit account {user?.username} with role {user?.roles[0].name}?
           <Form>
             <Form.Text>New Role</Form.Text>
-            <Form.Check type="radio" label="ADMIN" id="admin" name="role" />
-            <Form.Check type="radio" label="USER" id="user" name="role" />
-            <Form.Check type="radio" label="GUEST" id="guest" name="role" />
+            <Form.Check
+              type="radio"
+              label="ADMIN"
+              id="admin"
+              name="role"
+              value="ADMIN"
+              onChange={handleChangeRole}
+              defaultChecked={user?.roles[0].name === "ADMIN" ? true : false}
+            />
+            <Form.Check
+              type="radio"
+              label="USER"
+              id="user"
+              name="role"
+              value="USER"
+              onChange={handleChangeRole}
+              defaultChecked={user?.roles[0].name === "USER" ? true : false}
+            />
+            <Form.Check
+              type="radio"
+              label="GUEST"
+              id="guest"
+              name="role"
+              value="GUEST"
+              onChange={handleChangeRole}
+              defaultChecked={user?.roles[0].name === "GUEST" ? true : false}
+            />
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary">Save</Button>
-          <Button variant="primary" onClick={() => setShowModalEdit(!showModalEdit)}>
+          <Button variant="secondary" onClick={() => handleEditNewRole(user?.id)}>
+            Save
+          </Button>
+          <Button variant="primary" onClick={handleCloseModalEdit}>
             Cancer
           </Button>
         </Modal.Footer>

@@ -22,6 +22,7 @@ export const Register = () => {
   const handleCreateNewAccount = (e) => {
     const dataRegister = {
       email: email.current,
+      badgeId: badgeId.current,
       username: username.current,
       name: name.current,
       password: password.current,
@@ -47,6 +48,7 @@ export const Register = () => {
   } = useForm({
     defaultValues: {
       email: "",
+      badgeId: "",
       username: "",
       name: "",
       password: "",
@@ -55,6 +57,8 @@ export const Register = () => {
   });
   const email = useRef({});
   email.current = watch("email");
+  const badgeId = useRef({});
+  badgeId.current = watch("badgeId");
   const username = useRef({});
   username.current = watch("username");
   const name = useRef({});
@@ -101,6 +105,25 @@ export const Register = () => {
                 <ErrorMessage
                   errors={errors}
                   name="email"
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label" htmlFor="emailAddress">
+                  Id Badge
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="badgeId"
+                  placeholder="Input your ID Badge"
+                  {...register("badgeId", {
+                    required: "You have to input your ID Badge",
+                  })}
+                ></input>
+                <ErrorMessage
+                  errors={errors}
+                  name="badgeId"
                   render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>

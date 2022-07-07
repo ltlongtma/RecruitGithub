@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 export const Questionbank = () => {
   const dispatch = useDispatch();
   const token = sessionStorage.getItem("isToken");
-  const QuestionList = useSelector((state) => state.user);
+  const QuestionList = useSelector((state) => state.questionBank);
 
   useEffect(() => {
     axios
@@ -23,14 +23,15 @@ export const Questionbank = () => {
         console.log("ERROR " + err);
       });
   }, [dispatch]);
+  console.log("QUESTIONLIST: " + JSON.stringify(QuestionList));
   return (
     <div>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Num</th>
-            <th>ID</th>
             <th>Content</th>
+            <th>Answer</th>
             <th>Category</th>
             <th>Level</th>
             <th>Dated_added</th>
@@ -44,10 +45,14 @@ export const Questionbank = () => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{question.id}</td>
-                <td>{question.content}</td>
-                <td>{question.category.name}</td>
-                <td>{question.category.name}</td>
+                <td>{question?.content}</td>
+                <td>{question?.answer}</td>
+                <td>{question?.category.name}</td>
+                <td>{question?.level}</td>
+                <td>{question?.createdDate}</td>
+                <td>{question?.author.name}</td>
+                <td>{question?.approver}</td>
+                <td>{question?.approvedDate}</td>
               </tr>
             );
           })}
