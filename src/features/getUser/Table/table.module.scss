@@ -1,0 +1,20 @@
+.table {
+  tr:hover {
+    color: darkgreen;
+  }
+  .table-head {
+    background: rgb(152, 197, 152);
+  }
+  .deleteIcon {
+    cursor: pointer;
+    &:hover {
+      font-size:xx-large;
+    }
+  }
+  .editIcon {
+    cursor: pointer;
+    &:hover {
+        font-size:xx-large;
+      }
+  }
+}

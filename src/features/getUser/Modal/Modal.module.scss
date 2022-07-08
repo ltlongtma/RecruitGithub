@@ -1,0 +1,29 @@
+.modal {
+  .modal-title {
+    margin-left: 10rem;
+    color: cadetblue;
+  }
+  .modal-body-title {
+    text-align: center;
+  }
+  label {
+    font-weight: 600;
+    color: teal;
+  }
+  .input-password {
+    position: relative;
+    .icon-eye {
+      position: absolute;
+      top: 28%;
+      right: 1rem;
+      cursor: pointer;
+    }
+  }
+  .text-error {
+    color: #bf1650;
+  }
+  p::before {
+    display: inline;
+    content: "⚠ ";
+  }
+}

@@ -11,7 +11,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../../services/AxiosInstance";
 
 const cx = className.bind(styles);
 
@@ -117,8 +118,8 @@ export const Login = () => {
       username: username.current,
       password: password.current,
     };
-    axios
-      .post(`http://localhost:8080/api/user/login`, { ...dataInputLogin })
+    axiosInstance
+      .post(`user/login`, { ...dataInputLogin })
       .then((res) => {
         sessionStorage.setItem("isRole", res.data.role[0]);
         sessionStorage.setItem("isToken", res.data.token);

@@ -8,13 +8,24 @@ export const getUsersSlice = createSlice({
 
   reducers: {
     getUsers: (state, action) => {
-      state.push(...action.payload);
+      // const newState = [...action.payload];
+      state = [...action.payload];
+      return state;
     },
-    deleteUser: (state, action) => {
-      return state.filter((user) => user.id !== action.payload);
+
+    editUser: (state, action) => {
+      const newState = [...state];
+
+      const index = newState.findIndex((user) => user.id === action.payload.id);
+      newState[index] = action.payload;
+      return newState;
+    },
+
+    createNewUser: (state, action) => {
+      state.push(action.payload);
     },
   },
 });
 
-export const { getUsers, deleteUser, editUser } = getUsersSlice.actions;
+export const { getUsers, editUser, createNewUser } = getUsersSlice.actions;
 export default getUsersSlice.reducer;

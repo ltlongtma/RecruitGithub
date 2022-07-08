@@ -6,9 +6,8 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { UserList } from "../../features/getUser/UserList";
-import { ModalAddNewUser } from "../../components/Modal/ModalAddNewUser.js";
+import { ModalAddNewUser } from "../../features/getUser/Modal/ModalAddNewUser.js";
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 
 const cx = className.bind(styles);
 
@@ -29,21 +28,18 @@ export const User = () => {
           <AddIcon /> Add new user
         </Button>
       </div>
-      <div></div>
-      <div>
-        <ModalAddNewUser
-          show={showModalAddNewUser}
-          onHide={() => toggleModalAddNewUser(!showModalAddNewUser)}
-          closeModal={() => toggleModalAddNewUser(!showModalAddNewUser)}
-        />
-      </div>
 
       <div>
         <Form className={cx("form")}>
           <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
             <Form.Control className={cx("form-group-input")} type="text" placeholder="user name" />
             <Form.Control className={cx("form-group-input")} type="email" placeholder="email" />
-            <Form.Control className={cx("form-group-input")} type="text" placeholder="role" />
+
+            <Form.Select className={cx("form-group-input")}>
+              <option value="1">Admin</option>
+              <option value="2">User</option>
+              <option value="3">Guest</option>
+            </Form.Select>
           </Form.Group>
           <Button variant="outline-success" size="sm">
             <SearchIcon />
@@ -52,6 +48,11 @@ export const User = () => {
       </div>
       <div className={cx("table")}>
         <UserList />
+        <ModalAddNewUser
+          show={showModalAddNewUser}
+          onHide={() => toggleModalAddNewUser(!showModalAddNewUser)}
+          closeModal={() => toggleModalAddNewUser(!showModalAddNewUser)}
+        />
       </div>
     </div>
   );

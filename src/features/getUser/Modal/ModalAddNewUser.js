@@ -8,16 +8,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
+// import axios from "axios";
+import axiosInstance from "../../../services/AxiosInstance";
+import { useDispatch } from "react-redux";
+import { createNewUser } from "../../../features/getUser/getUsersSlice";
+import styles from "../Modal/Modal.module.scss";
 
-const cx = className.bind();
+const cx = className.bind(styles);
 
 export const ModalAddNewUser = (props) => {
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   setFocus("email");
   // }, []);
+  const token = sessionStorage.getItem("isToken");
 
   const [showPassword, setShowPassword] = useState(false);
-  const [userRole, setUserRole] = useState();
+  const [userRole, setUserRole] = useState(1);
 
   const handleShowHidePassword = (e) => {
     setShowPassword(!showPassword);
@@ -27,7 +34,6 @@ export const ModalAddNewUser = (props) => {
     handleSubmit,
     watch,
     formState: { errors },
-    setFocus,
   } = useForm({
     defaultValues: {
       email: "",
@@ -38,6 +44,7 @@ export const ModalAddNewUser = (props) => {
     },
     mode: "onSubmit",
   });
+
   const email = useRef({});
   email.current = watch("email");
   const badgeId = useRef({});
@@ -50,13 +57,10 @@ export const ModalAddNewUser = (props) => {
   password.current = watch("password");
 
   const handleChangeRole = (role) => {
-    console.log("ROLE " + role);
     setUserRole(role);
   };
 
   const handleCreateNewUser = (e) => {
-    // e.preventDefault();
-
     const newUser = {
       email: email.current,
       badgeId: badgeId.current,
@@ -65,22 +69,32 @@ export const ModalAddNewUser = (props) => {
       password: password.current,
       roles: [{ id: userRole }],
     };
-    console.log("NEW USER " + e);
+    axiosInstance
+      .post(`user/`, { ...newUser }, { headers: { Authorization: `Bearer ${token}` } })
+      .then((response) => {
+        dispatch(createNewUser(response.data));
+        const closeModal = props.closeModal;
+        closeModal();
+      })
+      .catch((error) => {
+        console.log("ERROR ", error);
+      });
   };
   return (
     <div>
-      <Modal show={props.show} onHide={props.onHide}>
+      <Modal show={props.show} onHide={props.onHide} className={cx("modal")}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New User</Modal.Title>
+          <Modal.Title className={cx("modal-title")}>Add New User</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleCreateNewUser}>
+        <form onSubmit={handleSubmit(handleCreateNewUser)}>
+          <Modal.Body>
             <div className="mb-3">
               <label className="form-label" htmlFor="emailAddress">
                 Email Address
               </label>
               <input
                 type="email"
+                autoFocus
                 className="form-control"
                 id="emailAddress"
                 placeholder="Email Address"
@@ -117,7 +131,7 @@ export const ModalAddNewUser = (props) => {
                 name="badgeId"
                 render={({ message }) => <p className={cx("text-error")}>{message}</p>}
               />
-              <div>
+              <div className="pt-3">
                 <label className="form-label" htmlFor="role">
                   Role
                 </label>
@@ -125,7 +139,7 @@ export const ModalAddNewUser = (props) => {
                   aria-label="role"
                   id="role"
                   onChange={(e) => {
-                    handleChangeRole(e);
+                    handleChangeRole(e.target.value);
                   }}
                 >
                   <option value="1">Admin</option>
@@ -149,6 +163,11 @@ export const ModalAddNewUser = (props) => {
                   minLength: {
                     value: 3,
                     message: "User Name must be at least 3 characters",
+                  },
+                  pattern: {
+                    value: /^\w[a-zA-Z@#0-9.]*$/,
+
+                    message: " Your user name should not contain space",
                   },
                 })}
               ></input>
@@ -189,7 +208,7 @@ export const ModalAddNewUser = (props) => {
               <div className={cx("input-password")}>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="form-control"
+                  className={cx("form-control", "form-password")}
                   name="password"
                   id="password"
                   placeholder="Password"
@@ -211,16 +230,16 @@ export const ModalAddNewUser = (props) => {
                 render={({ message }) => <p className={cx("text-error")}>{message}</p>}
               />
             </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" type="submit">
-            Save Changes
-          </Button>
-          <Button variant="secondary" onClick={props.closeModal}>
-            Cancer
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" type="submit">
+              Save Changes
+            </Button>
+            <Button variant="secondary" onClick={props.closeModal}>
+              Cancer
+            </Button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </div>
   );
