@@ -30,6 +30,9 @@ export function UserDetail() {
     sessionStorage.clear();
     navigate("/login");
   };
+  const handleChangePassword = () => {
+    navigate("/change-password")
+  };
   const role = sessionStorage.getItem("isRole");
   return (
     <div ref={ref}>
@@ -57,6 +60,11 @@ export function UserDetail() {
             <span className={cx("popover-body")} onClick={handleShow}>
               <LogoutIcon sx={{ fontSize: 25 }} />
               Log Out
+            </span>
+          </Popover.Body>
+          <Popover.Body>
+            <span className={cx("popover-body")} onClick={handleChangePassword}>
+              Change password
             </span>
           </Popover.Body>
         </Popover>
