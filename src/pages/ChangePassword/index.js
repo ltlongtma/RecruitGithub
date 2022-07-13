@@ -7,10 +7,7 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axiosClient from "../../services/AxiosClient";
-<<<<<<< HEAD
-=======
 import { Spinner } from "react-bootstrap";
->>>>>>> 33837d5c96660db1a71f72b3cc374660a75632a2
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
