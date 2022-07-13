@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../services/AxiosInstance";
+import axiosClient from "../../services/AxiosClient";
 import { getUsers, editUser } from "./getUsersSlice";
 import { ModalDeleteUser } from "./Modal/ModalDeleteUser";
 import { ModalEditRole } from "./Modal/ModalEditRole";
@@ -15,40 +15,29 @@ export const UserList = () => {
 
   const userList = useSelector((state) => state.user);
 
-  const token = sessionStorage.getItem("isToken");
   useEffect(() => {
-    axiosInstance
+    axiosClient
       .get(`user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      
       })
       .then((response) => {
-        dispatch(getUsers(response.data));
+        dispatch(getUsers(response));
       })
       .catch((error) => {
-        console.log("ERROR ", error);
+      
       });
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   const handleDelete = (e) => {
     const id = e;
 
-    axiosInstance
-      .delete(`user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    axiosClient
+      .delete(`user/${id}`)
+      .then((response) => {
+        return axiosClient.get(`user`);
       })
       .then((response) => {
-        return axiosInstance.get(`user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      })
-      .then((response) => {
-        dispatch(getUsers(response.data));
+        dispatch(getUsers(response));
       })
       .catch((error) => {
         console.log("ERROR ", error);
@@ -68,12 +57,16 @@ export const UserList = () => {
   const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleEditNewRole = (id) => {
     const data = { roles: [{ id: role }] };
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    axiosInstance.put(`user/${id}`, data, { headers }).then((res) => {
-      dispatch(editUser(res.data));
-    });
+   
+    axiosClient
+      .put(`user/${id}`, data)
+      .then((res) => {
+        console.log("RESPONSE ", res);
+        dispatch(editUser(res));
+      })
+      .catch((error) => {
+        console.log("ERROR ", error);
+      });
 
     handleCloseModalEdit();
   };

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import axios from "axios";
-import axiosInstance from "../../services/AxiosInstance";
+import axiosClient from "../../services/AxiosClient";
 
 const cx = className.bind(styles);
 
@@ -28,7 +28,7 @@ export const Register = () => {
       name: name.current,
       password: password.current,
     };
-    axiosInstance
+    axiosClient
       .post(`user/sign-up`, { ...dataRegister })
       .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
 

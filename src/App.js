@@ -2,24 +2,25 @@ import { guestRoute, adminRoute, publicRoute } from "./routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { DefaultLayout } from "./components/Layout/DefaultLayout";
 import { useEffect, useState } from "react";
+import Test from "./pages/Test";
 
 function App() {
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState(false);
   const role = sessionStorage.getItem("isRole");
+  const isToken = sessionStorage.getItem("isToken");
 
   useEffect(() => {
-    const isToken = sessionStorage.getItem("isToken");
-
     if (!isToken) {
       navigate("/login");
     }
 
     setIsLogined(true);
-  }, []);
+  }, [isToken]);
 
   return (
     <div className="App">
+      {/* <Test /> */}
       <Routes>
         {publicRoute.map((route, index) => {
           const Page = route.component;
