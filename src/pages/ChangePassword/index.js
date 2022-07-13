@@ -6,7 +6,7 @@ import styles from "./ChangePassword.module.scss";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import axiosInstance from "../../services/AxiosInstance";
+import axiosClient from "../../services/AxiosClient";
 import { Spinner } from "react-bootstrap";
 
 export const ChangePassword = () => {
@@ -21,14 +21,14 @@ export const ChangePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  
+  const [checkWaiting, setCheckWaiting] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState(true);
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(true);
   const [checkValidationError, setCheckValidationError] = useState(true);
   const [newPasswordErrorText, setNewPasswordErrorText] = useState(
     "Password must have: at least 8 characters"
   );
-  const [checkWaiting, setCheckWaiting] = useState(false);
 
   const [confirmPasswordErrorText, setConfirmPasswordErrorText] =
     useState(newPasswordErrorText);
@@ -55,7 +55,7 @@ export const ChangePassword = () => {
         newPassword: newPassword,
       };
 
-      axiosInstance
+      axiosClient
         .post(
           "user/change-password",
           { ...dataInput },

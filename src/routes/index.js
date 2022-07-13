@@ -11,7 +11,7 @@ export const publicRoute = [
 ];
 
 export const adminRoute = [
-  { path: "/",component: CreateQuestion, layout:LoginLayout },
+  { path: "/",component: Home },
   { path: "/user", component: User },
 ];
 export const guestRoute = [{ path: "/", component: Home }];
