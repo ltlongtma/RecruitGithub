@@ -7,6 +7,10 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axiosClient from "../../services/AxiosClient";
+<<<<<<< HEAD
+=======
+import { Spinner } from "react-bootstrap";
+>>>>>>> 33837d5c96660db1a71f72b3cc374660a75632a2
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
@@ -20,13 +24,15 @@ export const ChangePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  
+  const [checkWaiting, setCheckWaiting] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState(true);
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(true);
   const [checkValidationError, setCheckValidationError] = useState(true);
   const [newPasswordErrorText, setNewPasswordErrorText] = useState(
     "Password must have: at least 8 characters"
   );
+
   const [confirmPasswordErrorText, setConfirmPasswordErrorText] =
     useState(newPasswordErrorText);
 
@@ -46,11 +52,11 @@ export const ChangePassword = () => {
     e.preventDefault();
     if (validateForm()) {
       setCheckValidationError(true);
+      setCheckWaiting(true);
       const dataInput = {
         oldPassword: oldPassword,
         newPassword: newPassword,
       };
-      console.log(token);
 
       axiosClient
         .post(
@@ -67,10 +73,8 @@ export const ChangePassword = () => {
           sessionStorage.setItem("isToken", res.data.token);
 
           const isToken = sessionStorage.getItem("isToken");
-          
-          alert(
-            "Change password success"
-          );
+
+          alert("Change password success");
 
           if (isToken) {
             navigate("/");
@@ -78,9 +82,13 @@ export const ChangePassword = () => {
         })
         .catch((errors) => {
           console.log("ERROR " + errors);
-          alert(
-            "Change password failed"
+          const checkConfirmPasswordContainer = document.getElementById(
+            "check-old-password-container"
           );
+          checkConfirmPasswordContainer.style.visibility = "visible";
+        })
+        .finally((e) => {
+          setCheckWaiting(false);
         });
     } else {
       setCheckValidationError(false);
@@ -167,7 +175,6 @@ export const ChangePassword = () => {
                       );
                       if (e.target.value.length > 0) {
                         checkNewPasswordContainer.style.visibility = "visible";
-                        console.log(checkNewPassword);
                         if (e.target.value.length < 8) {
                           setCheckNewPassword(false);
                         } else {
@@ -270,11 +277,24 @@ export const ChangePassword = () => {
                   </div>
                 </div>
               </div>
+
               <button
                 type="submit"
                 className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
+                disabled={checkWaiting ? true : false}
                 // onClick={handleSubmit(handleCreateNewAccount)}
               >
+                {checkWaiting ? (
+                  <Spinner
+                    className={cx("spinner")}
+                    as="span"
+                    variant="light"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    animation="border"
+                  />
+                ) : null}
                 Change password
               </button>
               <span
