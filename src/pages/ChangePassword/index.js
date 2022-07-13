@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import className from "classnames/bind";
 import logo from "../../assets/logo-tma.png";
 import styles from "./ChangePassword.module.scss";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import axiosInstance from "../../services/AxiosInstance";
+import axiosClient from "../../services/AxiosClient";
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export const ChangePassword = () => {
       };
       console.log(token);
 
-      axiosInstance
+      axiosClient
         .post(
           "user/change-password",
           { ...dataInput },

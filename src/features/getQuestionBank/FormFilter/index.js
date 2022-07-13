@@ -7,7 +7,7 @@ import styles from "./form.module.scss";
 
 const cx = className.bind(styles);
 
-export const FormFilter = ({ onFilter }) => {
+export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
   const [paramStatus, setParamStatus] = useState({
     page: 1,
     pageSize: 5,
@@ -20,8 +20,9 @@ export const FormFilter = ({ onFilter }) => {
 
     const newParamStatus = { ...paramStatus, [name]: value };
     setParamStatus(newParamStatus);
-    onFilter(newParamStatus);
+    onFilterAll(newParamStatus);
   };
+
   return (
     <div>
       {" "}
@@ -44,9 +45,11 @@ export const FormFilter = ({ onFilter }) => {
             name="categoryId"
           >
             <option value="">Category - All</option>
-{/* //asked backend about Id  of category? */}
-            <option value="2">Java</option>
-            <option value="3">HTML</option>
+            {onFilterCategory.map((item, index) => (
+              <option value={item?.id} key={index}>
+                {item?.name}
+              </option>
+            ))}
           </Form.Select>
 
           <Form.Select
