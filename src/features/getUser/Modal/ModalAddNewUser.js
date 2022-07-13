@@ -9,7 +9,7 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 // import axios from "axios";
-import axiosInstance from "../../../services/AxiosInstance";
+import axiosClient from "../../../services/AxiosClient";
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../../features/getUser/getUsersSlice";
 import styles from "../Modal/Modal.module.scss";
@@ -21,7 +21,7 @@ export const ModalAddNewUser = (props) => {
   // useEffect(() => {
   //   setFocus("email");
   // }, []);
-  const token = sessionStorage.getItem("isToken");
+  // const token = sessionStorage.getItem("isToken");
 
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState(1);
@@ -69,10 +69,10 @@ export const ModalAddNewUser = (props) => {
       password: password.current,
       roles: [{ id: userRole }],
     };
-    axiosInstance
-      .post(`user/`, { ...newUser }, { headers: { Authorization: `Bearer ${token}` } })
+    axiosClient
+      .post(`user/`, { ...newUser })
       .then((response) => {
-        dispatch(createNewUser(response.data));
+        dispatch(createNewUser(response));
         const closeModal = props.closeModal;
         closeModal();
       })

@@ -7,7 +7,8 @@ export const getQuestionBankSlice = createSlice({
   initialState,
   reducers: {
     getQuestionBank: (state, action) => {
-      state.push(...action.payload);
+      state = [...action.payload];
+      return state;
     },
   },
 });
