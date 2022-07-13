@@ -33,6 +33,9 @@ export function UserDetail() {
   const handleChangePassword = () => {
     navigate("/change-password")
   };
+  const handleCreateQuestion = () => {
+    navigate("/question/create")
+  };
   const role = sessionStorage.getItem("isRole");
   return (
     <div ref={ref}>
@@ -65,6 +68,11 @@ export function UserDetail() {
           <Popover.Body>
             <span className={cx("popover-body")} onClick={handleChangePassword}>
               Change password
+            </span>
+          </Popover.Body>
+          <Popover.Body>
+            <span className={cx("popover-body")} onClick={handleCreateQuestion}>
+              Create question
             </span>
           </Popover.Body>
         </Popover>

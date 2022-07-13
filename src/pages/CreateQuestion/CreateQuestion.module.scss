@@ -1,0 +1,47 @@
+.question-bank-breadcrumb {
+    padding: 1rem;
+
+    & a {
+        color: green;
+    }
+}
+
+.table {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+
+    .form-group {
+        display: flex;
+        height: auto;
+        width: 54rem;
+
+        .form-group-input {
+            margin: 0 10px;
+
+            text-align:justify &:focus {
+                border-color: darkgreen;
+                box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
+                outline: 0 none;
+            }
+
+            &:hover {
+                border-color: darkgreen;
+            }
+        }
+    }
+}
+
+fieldset {
+    // background-color: #eeeeee;
+}
+
+legend {
+    background-color: darkgreen;
+    color: white;
+    padding: 5px 10px;
+}
