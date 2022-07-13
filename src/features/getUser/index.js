@@ -5,6 +5,7 @@ import { getUsers, editUser } from "./getUsersSlice";
 import { ModalDeleteUser } from "./Modal/ModalDeleteUser";
 import { ModalEditRole } from "./Modal/ModalEditRole";
 import { TableData } from "./Table";
+import FormFilterUser from "../../features/getUser/FormFilter";
 
 export const UserList = () => {
   const dispatch = useDispatch();
@@ -17,15 +18,11 @@ export const UserList = () => {
 
   useEffect(() => {
     axiosClient
-      .get(`user`, {
-      
-      })
+      .get(`user`, {})
       .then((response) => {
         dispatch(getUsers(response));
       })
-      .catch((error) => {
-      
-      });
+      .catch((error) => {});
   }, [dispatch]);
 
   const handleDelete = (e) => {
@@ -56,8 +53,14 @@ export const UserList = () => {
   };
   const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleEditNewRole = (id) => {
-    const data = { roles: [{ id: role }] };
-   
+    const data = {
+      roles: [
+        {
+          id: role,
+        },
+      ],
+    };
+
     axiosClient
       .put(`user/${id}`, data)
       .then((res) => {
@@ -74,8 +77,19 @@ export const UserList = () => {
     const value = e.target.value;
     setRole(value === "ADMIN" ? 1 : value === "USER" ? 2 : 3);
   };
+  //Filter data, accept data from children FormFilterUser
+  const onFilterAll = (e) => {
+    axiosClient
+      .get(`user/filter`, { params: e })
+      .then((response) => {
+        dispatch(getUsers(response.data));
+      })
+      .catch((error) => {});
+  };
   return (
     <div>
+      <FormFilterUser onFilterAll={onFilterAll} />
+
       <TableData
         userList={userList}
         handleShowModalEdit={handleShowModalEdit}

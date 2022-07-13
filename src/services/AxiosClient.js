@@ -30,7 +30,6 @@ axiosClient.interceptors.response.use(
     if (error.response.data === "INVALID JWT") {
       sessionStorage.clear();
       //dispatch a DeleteAction to the store to redirect back to the login pages//
-     
     }
     return Promise.reject(error);
   }

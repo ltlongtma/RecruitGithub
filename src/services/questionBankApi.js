@@ -5,6 +5,10 @@ const questionBankApi = {
     const url = `question/filter`;
     return axiosClient.get(url, { params: params });
   },
+  getFilterCategory() {
+    const url = `question-category`;
+    return axiosClient.get(url);
+  },
 
   getById(id) {
     const url = `/products/${id}`;
