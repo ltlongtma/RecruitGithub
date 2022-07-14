@@ -1,34 +1,30 @@
 import axiosClient from "./AxiosClient";
 
-const questionBankApi = {
-  getAll(params) {
-    const url = `/question/filter`;
-    return axiosClient.get(url, { params: params });
-  },
-  getFilterCategory() {
+const questionCategoryApi = {
+  getAll() {
     const url = `/question-category`;
     return axiosClient.get(url);
   },
 
   getById(id) {
-    const url = `/question/${id}`;
+    const url = `/question-category/${id}`;
     return axiosClient.get(url);
   },
 
   create(data) {
-    const url = "/question";
+    const url = "/question-category";
     return axiosClient.post(url, data);
   },
 
   delete(id) {
-    const url = `/question/${id}`;
+    const url = `/question-category/${id}`;
     return axiosClient.delete(url);
   },
 
   update(data) {
-    const url = `/question/${data.id}`;
+    const url = `/question-category/${data.id}`;
     return axiosClient.put(url, data);
   },
 };
 
-export default questionBankApi;
+export default questionCategoryApi;

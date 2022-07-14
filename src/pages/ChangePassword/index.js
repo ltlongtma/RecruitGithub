@@ -55,7 +55,6 @@ export const ChangePassword = () => {
         newPassword: newPassword,
       };
 
-    
       userApi
         .changePassword(dataInput)
         .then((res) => {
@@ -83,6 +82,10 @@ export const ChangePassword = () => {
     } else {
       setCheckValidationError(false);
     }
+  };
+
+  const cancel = () => {
+    navigate("/");
   };
 
   const checkMatchPassword = (newPassword, confirmPassword) => newPassword === confirmPassword;
@@ -233,7 +236,6 @@ export const ChangePassword = () => {
                   </div>
                 </div>
               </div>
-
               <button
                 type="submit"
                 className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
@@ -252,6 +254,12 @@ export const ChangePassword = () => {
                   />
                 ) : null}
                 Change password
+              </button>
+              <button
+                className={cx("btn", "btn btn-secondary mt-3 col-12 mx-auto")}
+                onClick={cancel}
+              >
+                Cancel
               </button>
               <span
                 className={cx("error-text")}
