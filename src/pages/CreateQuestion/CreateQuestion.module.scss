@@ -45,3 +45,16 @@ legend {
     color: white;
     padding: 5px 10px;
 }
+
+.div-btn{
+    button {
+        margin: 10px;
+    }
+    
+}
+
+.error-text {
+    color: red;
+    background-color: green($color: #000000);
+    text-align: center;
+}

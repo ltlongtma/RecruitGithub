@@ -14,7 +14,6 @@ export const publicRoute = [
   { path: "/register", component: Register, layout: LoginLayout },
   { path: "/resetpassword", component: ResetPassword, layout: LoginLayout },
   { path: "/change-password", component: ChangePassword, layout: LoginLayout },
-  { path: "/question/create", component: CreateQuestion, layout:LoginLayout},
 ]
 export const adminRoute = [
   { path: "/", component: Home },
@@ -23,7 +22,4 @@ export const adminRoute = [
 ];
 export const guestRoute = [
   { path: "/", component: Home },
-  { path: "/question/create", component: CreateQuestion },
 ];
-
-  
