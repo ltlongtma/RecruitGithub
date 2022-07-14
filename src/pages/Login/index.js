@@ -10,6 +10,7 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../services/AxiosClient";
 import { ModalForgotPassword } from "../ForgotPassword/ModalForgotPassword";
+import userApi from "../../services/ManageUserApi";
 
 const cx = className.bind(styles);
 
@@ -34,7 +35,6 @@ export const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    setFocus,
   } = useForm({
     defaultValues: {
       username: "",
@@ -52,8 +52,8 @@ export const Login = () => {
       password: password.current,
     };
 
-    axiosClient
-      .post(`user/login`, { ...dataInputLogin })
+    userApi
+      .login(dataInputLogin)
       .then((res) => {
         // console.log("RES ", res);
         sessionStorage.setItem("isRole", res.role[0]);
@@ -62,19 +62,15 @@ export const Login = () => {
         const isToken = sessionStorage.getItem("isToken");
 
         if (isToken) {
-          navigate("/");
+          navigate("/question");
         }
       })
       .catch((errors) => {
         console.log("ERROR LOGIN " + errors);
-        alert("Your account is not authorized to login. Please create a new account.");
-        navigate("/register");
+        alert("Your account is not authorized to login. Please create a new account and try again");
+        // navigate("/register");
       });
   };
-
-  React.useEffect(() => {
-    setFocus("username");
-  }, [setFocus]);
 
   return (
     <div className={cx("container-fluid", "login-container")}>
@@ -95,7 +91,7 @@ export const Login = () => {
                 <input
                   type="text"
                   className="form-control"
-                  // name="username"
+                  autoFocus
                   id="username"
                   placeholder="Your username"
                   {...register("username", {

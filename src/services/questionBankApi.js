@@ -11,7 +11,7 @@ const questionBankApi = {
   },
 
   getById(id) {
-    const url = `/products/${id}`;
+    const url = `/question/${id}`;
     return axiosClient.get(url);
   },
 

@@ -7,7 +7,7 @@ const cx = className.bind(styles);
 
 export const ModalEditRole = ({
   user,
-  handleChangeRole,
+  handleChangeRoleId,
   handleEditNewRole,
   handleCloseModalEdit,
   ...props
@@ -19,35 +19,35 @@ export const ModalEditRole = ({
       </Modal.Header>
       <Modal.Body>
         <h6>
-          Edit account {user?.username} with role {user?.roles[0].name}?
+          Edit account {user?.username} with role {user?.roles[0].name}
         </h6>
         <Form>
           <Form.Text>New Role</Form.Text>
           <Form.Check
             type="radio"
             label="ADMIN"
-            id="admin"
+            id="1"
             name="role"
             value="ADMIN"
-            onChange={handleChangeRole}
+            onChange={handleChangeRoleId}
             defaultChecked={user?.roles[0].name === "ADMIN" ? true : false}
           />
           <Form.Check
             type="radio"
             label="USER"
-            id="user"
+            id="2"
             name="role"
             value="USER"
-            onChange={handleChangeRole}
+            onChange={handleChangeRoleId}
             defaultChecked={user?.roles[0].name === "USER" ? true : false}
           />
           <Form.Check
             type="radio"
             label="GUEST"
-            id="guest"
+            id="3"
             name="role"
             value="GUEST"
-            onChange={handleChangeRole}
+            onChange={handleChangeRoleId}
             defaultChecked={user?.roles[0].name === "GUEST" ? true : false}
           />
         </Form>

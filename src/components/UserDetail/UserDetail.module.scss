@@ -2,8 +2,19 @@
   width: 14rem;
   .popover-header {
     text-align: center;
+    background-color: darkseagreen;
+    color: white;
+    font-weight: 500;
+    h6 {
+      padding-top: 11px;
+    }
   }
   .popover-body {
+    margin-left: 9px;
     cursor: pointer;
+    font-weight: 700;
+    &:hover {
+      color: seagreen;
+    }
   }
 }

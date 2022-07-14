@@ -45,9 +45,9 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
             name="categoryId"
           >
             <option value="">Category - All</option>
-            {onFilterCategory.map((item, index) => (
-              <option value={item?.id} key={index}>
-                {item?.name}
+            {onFilterCategory?.map((item, index) => (
+              <option value={item.id} key={index}>
+                {item.name}
               </option>
             ))}
           </Form.Select>

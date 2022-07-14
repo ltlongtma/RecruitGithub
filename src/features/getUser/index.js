@@ -6,6 +6,7 @@ import { ModalDeleteUser } from "./Modal/ModalDeleteUser";
 import { ModalEditRole } from "./Modal/ModalEditRole";
 import { TableData } from "./Table";
 import FormFilterUser from "../../features/getUser/FormFilter";
+import userApi from "../../services/ManageUserApi";
 
 export const UserList = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ export const UserList = () => {
   const userList = useSelector((state) => state.user);
 
   useEffect(() => {
-    axiosClient
-      .get(`user`, {})
+    userApi
+      .getAllUsers()
       .then((response) => {
         dispatch(getUsers(response));
       })
@@ -26,10 +27,10 @@ export const UserList = () => {
   }, [dispatch]);
 
   const handleDelete = (e) => {
-    const id = e;
+    // const id = e;
 
-    axiosClient
-      .delete(`user/${id}`)
+    userApi
+      .deleteUser(e)
       .then((response) => {
         return axiosClient.get(`user`);
       })
@@ -53,38 +54,30 @@ export const UserList = () => {
   };
   const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleEditNewRole = (id) => {
-    const data = {
-      roles: [
-        {
-          id: role,
-        },
-      ],
-    };
-
-    axiosClient
-      .put(`user/${id}`, data)
-      .then((res) => {
-        console.log("RESPONSE ", res);
-        dispatch(editUser(res));
+    userApi
+      .changeRoleUser(id, role)
+      .then((response) => {
+        dispatch(editUser(response));
       })
       .catch((error) => {
-        console.log("ERROR ", error);
+        console.log("ERROR Edit User >>>", error);
       });
-
-    handleCloseModalEdit();
+    setShowModalEdit(false);
   };
-  const handleChangeRole = (e) => {
-    const value = e.target.value;
-    setRole(value === "ADMIN" ? 1 : value === "USER" ? 2 : 3);
+  const handleChangeRoleId = (e) => {
+    const value = e.target.id;
+    setRole(value);
   };
   //Filter data, accept data from children FormFilterUser
   const onFilterAll = (e) => {
-    axiosClient
-      .get(`user/filter`, { params: e })
+    userApi
+      .filterUser(e)
       .then((response) => {
         dispatch(getUsers(response.data));
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log("ERROR FILTER USER >>> " + error);
+      });
   };
   return (
     <div>
@@ -108,7 +101,7 @@ export const UserList = () => {
         centered
         show={showModalEdit}
         onHide={handleCloseModalEdit}
-        handleChangeRole={handleChangeRole}
+        handleChangeRoleId={handleChangeRoleId}
         handleEditNewRole={handleEditNewRole}
         handleCloseModalEdit={handleCloseModalEdit}
         user={user}

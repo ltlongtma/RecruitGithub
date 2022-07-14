@@ -17,6 +17,7 @@ export const getUsersSlice = createSlice({
 
       const index = newState.findIndex((user) => user.id === action.payload.id);
       newState[index] = action.payload;
+
       return newState;
     },
 

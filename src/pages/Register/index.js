@@ -8,8 +8,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-// import axios from "axios";
-import axiosClient from "../../services/AxiosClient";
+import userApi from "../../services/ManageUserApi";
 
 const cx = className.bind(styles);
 
@@ -28,13 +27,12 @@ export const Register = () => {
       name: name.current,
       password: password.current,
     };
-    axiosClient
-      .post(`user/sign-up`, { ...dataRegister })
+
+    userApi
+      .signUp(dataRegister)
       .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
 
       .catch((err) => console.log("ERROR " + err));
-
-    // reset({ ...getValues, email: "", username: "", password: "", passwordConfirm: "" });
   };
   const handleShowHidePassword = (e) => {
     setShowPassword(!showPassword);
@@ -45,7 +43,6 @@ export const Register = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    setFocus,
   } = useForm({
     defaultValues: {
       email: "",
@@ -69,10 +66,6 @@ export const Register = () => {
   const passwordConfirm = useRef({});
   passwordConfirm.current = watch("passwordConfirm");
 
-  React.useEffect(() => {
-    setFocus("email");
-  }, [setFocus]);
-
   return (
     <div className={cx("container-fluid", "register-container")}>
       <div className={cx("container", "container-content")}>
@@ -92,7 +85,7 @@ export const Register = () => {
                 <input
                   type="email"
                   className="form-control"
-                  // name="email"
+                  autoFocus
                   id="emailAddress"
                   placeholder="Email Address"
                   {...register("email", {

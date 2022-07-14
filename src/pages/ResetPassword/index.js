@@ -30,7 +30,6 @@ export const ResetPassword = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    setFocus,
   } = useForm({
     defaultValues: {
       codeNumber: "",
@@ -44,10 +43,6 @@ export const ResetPassword = () => {
   password.current = watch("password");
   const passwordConfirm = useRef({});
   passwordConfirm.current = watch("passwordConfirm");
-
-  React.useEffect(() => {
-    setFocus("codeNumber");
-  }, [setFocus]);
 
   return (
     <div className={cx("container-fluid", "login-container")}>
@@ -66,6 +61,7 @@ export const ResetPassword = () => {
                   Reset Code Number
                 </label>
                 <input
+                  autoFocus
                   type="text"
                   className="form-control"
                   placeholder="Input your reset code number"

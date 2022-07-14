@@ -1,4 +1,4 @@
-import { guestRoute, adminRoute, publicRoute } from "./routes";
+import { guestRoute, adminRoute, publicRoute, userRoute } from "./routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { DefaultLayout } from "./components/Layout/DefaultLayout";
 import { useEffect, useState } from "react";
@@ -55,7 +55,23 @@ function App() {
               ></Route>
             );
           })}
-
+        {isLogined &&
+          role === "USER" &&
+          userRoute.map((route, index) => {
+            const Page = route.component;
+            let Layout = DefaultLayout;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              ></Route>
+            );
+          })}
         {isLogined &&
           role === "GUEST" &&
           guestRoute.map((route, index) => {

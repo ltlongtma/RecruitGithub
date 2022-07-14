@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 import className from "classnames/bind";
@@ -8,10 +8,26 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import axiosClient from "../../services/AxiosClient";
 
 const cx = className.bind(styles);
 
 export function UserDetail() {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    axiosClient
+      .get(`user/profile`)
+      .then((res) => {
+        const newProfile = { ...profile, res };
+        setProfile(newProfile);
+      })
+      .catch((err) => {
+        console.log("ERROR axios profile >>> ", err);
+      });
+  }, []);
+
   const navigate = useNavigate();
   const ref = useRef(null);
 
@@ -31,7 +47,7 @@ export function UserDetail() {
     navigate("/login");
   };
   const handleChangePassword = () => {
-    navigate("/change-password")
+    navigate("/change-password");
   };
   const role = sessionStorage.getItem("isRole");
   return (
@@ -55,16 +71,18 @@ export function UserDetail() {
         <Popover id="popover-contained" className={cx("popover")}>
           <Popover.Header className={cx("popover-header")}>
             {role != "undefined" ? role : "GUEST"}
+            <h6>{`Hi, ${profile?.res?.username} `}</h6>
           </Popover.Header>
           <Popover.Body>
-            <span className={cx("popover-body")} onClick={handleShow}>
-              <LogoutIcon sx={{ fontSize: 25 }} />
-              Log Out
+            <VpnKeyIcon fontSize="small" color="warning" />
+            <span className={cx("popover-body")} onClick={handleChangePassword}>
+              Change password
             </span>
           </Popover.Body>
           <Popover.Body>
-            <span className={cx("popover-body")} onClick={handleChangePassword}>
-              Change password
+            <LogoutIcon fontSize="small" color="success" />
+            <span className={cx("popover-body")} onClick={handleShow}>
+              Log Out
             </span>
           </Popover.Body>
         </Popover>
@@ -72,14 +90,13 @@ export function UserDetail() {
       {/* ModalConfirmLogout */}
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure to log out?</Modal.Title>
+          <Modal.Title>Are you sure want to log out?</Modal.Title>
         </Modal.Header>
-        {/* <Modal.Body>Are you sure to log out?</Modal.Body> */}
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleLogout}>
+          <Button variant="success" onClick={handleLogout}>
             Yes
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose}>
             No
           </Button>
         </Modal.Footer>

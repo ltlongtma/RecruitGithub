@@ -13,15 +13,12 @@ import axiosClient from "../../../services/AxiosClient";
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../../features/getUser/getUsersSlice";
 import styles from "../Modal/Modal.module.scss";
+import userApi from "../../../services/ManageUserApi";
 
 const cx = className.bind(styles);
 
 export const ModalAddNewUser = (props) => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   setFocus("email");
-  // }, []);
-  // const token = sessionStorage.getItem("isToken");
 
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState(1);
@@ -69,8 +66,9 @@ export const ModalAddNewUser = (props) => {
       password: password.current,
       roles: [{ id: userRole }],
     };
-    axiosClient
-      .post(`user/`, { ...newUser })
+    userApi
+      .postNewUser(newUser)
+
       .then((response) => {
         dispatch(createNewUser(response));
         const closeModal = props.closeModal;

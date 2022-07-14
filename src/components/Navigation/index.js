@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { UserDetail } from "../UserDetail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Badge from "@mui/material/Badge";
+import { NavLink } from "react-router-dom";
 const cx = className.bind(styles);
 
 export const Navigation = () => {
@@ -26,9 +27,9 @@ export const Navigation = () => {
       </Navbar.Brand>
 
       <Nav className={cx("action")}>
-        <Nav.Link href="/">Question Bank</Nav.Link>
-        <Nav.Link href="/">Interview</Nav.Link>
-        {role === "ADMIN" && <Nav.Link href="/user">Manage User</Nav.Link>}
+        <NavLink to="/question">Question Bank</NavLink>
+        <NavLink to="/interview">Interview</NavLink>
+        {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}
 
         <Form className={cx("search", "d-flex")}>
           <Form.Control type="search" placeholder="Search" aria-label="Search" size="sm" />

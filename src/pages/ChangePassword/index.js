@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import className from "classnames/bind";
 import logo from "../../assets/logo-tma.png";
 import styles from "./ChangePassword.module.scss";
@@ -7,10 +7,8 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axiosClient from "../../services/AxiosClient";
-<<<<<<< HEAD
-=======
 import { Spinner } from "react-bootstrap";
->>>>>>> 33837d5c96660db1a71f72b3cc374660a75632a2
+import userApi from "../../services/ManageUserApi";
 
 export const ChangePassword = () => {
   const navigate = useNavigate();
@@ -24,7 +22,7 @@ export const ChangePassword = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+
   const [checkWaiting, setCheckWaiting] = useState(false);
   const [checkNewPassword, setCheckNewPassword] = useState(true);
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(true);
@@ -33,8 +31,7 @@ export const ChangePassword = () => {
     "Password must have: at least 8 characters"
   );
 
-  const [confirmPasswordErrorText, setConfirmPasswordErrorText] =
-    useState(newPasswordErrorText);
+  const [confirmPasswordErrorText, setConfirmPasswordErrorText] = useState(newPasswordErrorText);
 
   const handleShowHideOldPassword = (e) => {
     setShowOldPassword(!showOldPassword);
@@ -58,16 +55,9 @@ export const ChangePassword = () => {
         newPassword: newPassword,
       };
 
-      axiosClient
-        .post(
-          "user/change-password",
-          { ...dataInput },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+    
+      userApi
+        .changePassword(dataInput)
         .then((res) => {
           sessionStorage.setItem("isRole", res.data.role[0]);
           sessionStorage.setItem("isToken", res.data.token);
@@ -95,8 +85,7 @@ export const ChangePassword = () => {
     }
   };
 
-  const checkMatchPassword = (newPassword, confirmPassword) =>
-    newPassword === confirmPassword;
+  const checkMatchPassword = (newPassword, confirmPassword) => newPassword === confirmPassword;
 
   const validateForm = () => {
     return (
@@ -118,17 +107,15 @@ export const ChangePassword = () => {
             </div>
           </div>
           <div className={cx("content-right", "col-md-5")}>
-            <h1 className={cx("change-password-heading", "text-center")}>
-              Change Password
-            </h1>
+            <h1 className={cx("change-password-heading", "text-center")}>Change Password</h1>
             <br />
             <br />
             <br />
             <form onSubmit={handleSubmit}>
               <div>
-                <lable className="form-label" htmlFor="password">
+                <label className="form-label" htmlFor="password">
                   Old Password
-                </lable>
+                </label>
                 <div className={cx("input-password")}>
                   <input
                     type={showOldPassword ? "text" : "password"}
@@ -145,23 +132,17 @@ export const ChangePassword = () => {
                       icon={showOldPassword ? faEyeSlash : faEye}
                     />
                   </span>
-                  <div
-                    id="check-old-password-container"
-                    style={{ visibility: "hidden" }}
-                  >
-                    <FontAwesomeIcon
-                      className={cx("icon-xmark")}
-                      icon={faXmark}
-                    />
+                  <div id="check-old-password-container" style={{ visibility: "hidden" }}>
+                    <FontAwesomeIcon className={cx("icon-xmark")} icon={faXmark} />
                     <span className={cx("error-text")}>Wrong password</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <lable className="form-label" htmlFor="password">
+                <label className="form-label" htmlFor="password">
                   New Password
-                </lable>
+                </label>
                 <div className={cx("input-password")}>
                   <input
                     type={showNewPassword ? "text" : "password"}
@@ -191,20 +172,12 @@ export const ChangePassword = () => {
                       icon={showNewPassword ? faEyeSlash : faEye}
                     />
                   </span>
-                  <div
-                    id="check-new-password-container"
-                    style={{ visibility: "hidden" }}
-                  >
+                  <div id="check-new-password-container" style={{ visibility: "hidden" }}>
                     <FontAwesomeIcon
-                      className={
-                        checkNewPassword ? cx("icon-check") : cx("icon-xmark")
-                      }
+                      className={checkNewPassword ? cx("icon-check") : cx("icon-xmark")}
                       icon={checkNewPassword ? faCheck : faXmark}
                     />
-                    <span
-                      className={cx("error-text")}
-                      hidden={checkNewPassword ? "hiden" : ""}
-                    >
+                    <span className={cx("error-text")} hidden={checkNewPassword ? "hiden" : ""}>
                       {newPasswordErrorText}
                     </span>
                   </div>
@@ -212,9 +185,9 @@ export const ChangePassword = () => {
               </div>
 
               <div>
-                <lable className="form-label" htmlFor="password">
+                <label className="form-label" htmlFor="password">
                   Confirm Password
-                </lable>
+                </label>
                 <div className={cx("input-password")}>
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -223,30 +196,23 @@ export const ChangePassword = () => {
                     placeholder="Confirm password"
                     onChange={(e) => {
                       setConfirmPassword(e.target.value);
-                      const checkConfirmPasswordContainer =
-                        document.getElementById(
-                          "check-confirm-password-container"
-                        );
+                      const checkConfirmPasswordContainer = document.getElementById(
+                        "check-confirm-password-container"
+                      );
                       if (e.target.value.length > 0) {
-                        checkConfirmPasswordContainer.style.visibility =
-                          "visible";
+                        checkConfirmPasswordContainer.style.visibility = "visible";
                         if (e.target.value.length < 8) {
                           setCheckConfirmPassword(false);
                           setConfirmPasswordErrorText(newPasswordErrorText);
                         } else {
                           setCheckConfirmPassword(true);
-                          if (
-                            !checkMatchPassword(newPassword, e.target.value)
-                          ) {
+                          if (!checkMatchPassword(newPassword, e.target.value)) {
                             setCheckConfirmPassword(false);
-                            setConfirmPasswordErrorText(
-                              "Confirm password does not match password"
-                            );
+                            setConfirmPasswordErrorText("Confirm password does not match password");
                           }
                         }
                       } else {
-                        checkConfirmPasswordContainer.style.visibility =
-                          "hidden";
+                        checkConfirmPasswordContainer.style.visibility = "hidden";
                       }
                     }}
                   ></input>
@@ -256,22 +222,12 @@ export const ChangePassword = () => {
                       icon={showConfirmPassword ? faEyeSlash : faEye}
                     />
                   </span>
-                  <div
-                    id="check-confirm-password-container"
-                    style={{ visibility: "hidden" }}
-                  >
+                  <div id="check-confirm-password-container" style={{ visibility: "hidden" }}>
                     <FontAwesomeIcon
-                      className={
-                        checkConfirmPassword
-                          ? cx("icon-check")
-                          : cx("icon-xmark")
-                      }
+                      className={checkConfirmPassword ? cx("icon-check") : cx("icon-xmark")}
                       icon={checkConfirmPassword ? faCheck : faXmark}
                     />
-                    <span
-                      className={cx("error-text")}
-                      hidden={checkConfirmPassword ? "hiden" : ""}
-                    >
+                    <span className={cx("error-text")} hidden={checkConfirmPassword ? "hiden" : ""}>
                       {confirmPasswordErrorText}
                     </span>
                   </div>

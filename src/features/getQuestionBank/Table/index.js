@@ -2,6 +2,8 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import styles from "../Table/table.module.scss";
 import className from "classnames/bind";
+import sliceContent from "../../../helpers/sliceContent";
+import dayjs from "dayjs";
 
 const cx = className.bind(styles);
 
@@ -23,19 +25,18 @@ export default function TableQuestion({ questionList, ...props }) {
           </tr>
         </thead>
         <tbody>
-          {questionList.map((question, index) => {
-            // console.log("Question ", questionList);
+          {questionList?.map((question, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={() => props.handleViewDetailQuestion(question.id)}>
                 <td>{index + 1}</td>
                 <td>{question?.content}</td>
-                <td>{question?.answer}</td>
-                <td>{question?.category.name}</td>
-                <td>{question?.level}</td>
-                <td>{question?.createdDate}</td>
-                <td>{question?.author.name}</td>
-                <td>{question?.approver?.name}</td>
-                <td>{question?.approvedDate}</td>
+                <td>{sliceContent(question.answer)}</td>
+                <td>{question.category.name}</td>
+                <td>{question.level}</td>
+                <td>{question.createdDate}</td>
+                <td>{question.author.name}</td>
+                <td>{question.approver?.name}</td>
+                <td>{question.approvedDate}</td>
               </tr>
             );
           })}

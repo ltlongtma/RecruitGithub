@@ -5,9 +5,12 @@ import TableQuestion from "./Table";
 import questionBankApi from "../../../src/services/questionBankApi";
 import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 
 export const Questionbank = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const QuestionList = useSelector((state) => state.questionBank);
   const CategoryList = useSelector((state) => state.filterCategory);
 
@@ -40,10 +43,26 @@ export const Questionbank = () => {
       })
       .catch((error) => {});
   };
+  const handleViewDetailQuestion = (e) => {
+    // console.log("QuestionList: " + e);
+    questionBankApi
+      .getById(e)
+      .then((res) => {
+        // console.log("DetailQuestion >>>", res);
+        dispatch(getDetailQuestion(res));
+      })
+      .catch((error) => {
+        console.log("DetailQuestion ERROR>>>", error);
+      });
+    navigate(`/question/${e}`);
+  };
   return (
     <div>
       <FormFilter onFilterAll={onFilterAll} onFilterCategory={CategoryList} />
-      <TableQuestion questionList={QuestionList} />
+      <TableQuestion
+        questionList={QuestionList}
+        handleViewDetailQuestion={handleViewDetailQuestion}
+      />
     </div>
   );
 };
