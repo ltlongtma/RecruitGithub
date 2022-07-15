@@ -16,7 +16,7 @@ const cx = className.bind(styles);
 export const DetailQuestion = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [showSaveAndBackButton, setShowSaveAndbackButton] = useState(true);
+  const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
   const [showEditAndDeleteButton, setShowEditAndDeleteButton] = useState(false);
 
   const { questionId } = useParams();
@@ -30,44 +30,53 @@ export const DetailQuestion = ({ data }) => {
         console.log("ERROR getDetailQuestion >>>", error);
       });
   }, []);
-  const handleApproveQuestion = () => {
-    questionBankApi
+  const handleApproveQuestion = async () => {
+    await questionBankApi
       .approveQuestion(questionId, data)
       .then((response) => {})
       .catch((error) => {
         console.log("ERROR APPROVE QUESTION >>>", error);
       });
     alert("APPROVE SUCCESSFUL");
+    questionBankApi
+      .getAll()
+
+      .then((res) => {
+        dispatch(getQuestionBank(res.data));
+      })
+      .catch((error) => {
+        console.log("ERROR getQuestionBank >>> " + error);
+      });
     navigate(`../question`);
   };
-  const handleDeleteQuestion = () => {
-    // questionBankApi
-    //   .delete(questionId)
-    //   .then((response) => {
-    //     // console.log("DELETE QUESTION >>>", response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR DELETE QUESTION >>>", error);
-    //   });
-    // alert("DELETE SUCCESSFUL");
-    // questionBankApi
-    //   .getAll()
+  const handleDeleteQuestion = async () => {
+    await questionBankApi
+      .delete(questionId)
+      .then((response) => {
+        // console.log("DELETE QUESTION >>>", response);
+      })
+      .catch((error) => {
+        console.log("ERROR DELETE QUESTION >>>", error);
+      });
+    alert("DELETE SUCCESSFUL");
+    questionBankApi
+      .getAll()
 
-    //   .then((res) => {
-    //     dispatch(getQuestionBank(res.data));
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR getQuestionBank >>> " + error);
-    //   });
+      .then((res) => {
+        dispatch(getQuestionBank(res.data));
+      })
+      .catch((error) => {
+        console.log("ERROR getQuestionBank >>> " + error);
+      });
 
     navigate(`../question`);
   };
   const handleEditQuestion = () => {
-    setShowSaveAndbackButton(false);
+    setShowSaveAndBackButton(false);
     setShowEditAndDeleteButton(true);
   };
   const handleBack = () => {
-    setShowSaveAndbackButton(true);
+    setShowSaveAndBackButton(true);
     setShowEditAndDeleteButton(false);
   };
 
