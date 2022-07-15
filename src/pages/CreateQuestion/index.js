@@ -60,9 +60,9 @@ export const CreateQuestion = () => {
       selectedLevel !== "" &&
       selectedCriteria?.length > 0 &&
       content !== undefined &&
-      content !== "" &&
+      content.trim() !== "" &&
       answer !== undefined &&
-      answer !== ""
+      answer.trim() !== ""
     );
   };
 
