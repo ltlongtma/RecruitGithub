@@ -10,7 +10,7 @@ const cx = className.bind(styles);
 export default function TableQuestion({ questionList, ...props }) {
   return (
     <div>
-      <Table striped bordered hover responsive className={cx("table")}>
+      <Table  bordered hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>Num</th>

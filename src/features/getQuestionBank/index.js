@@ -43,12 +43,10 @@ export const Questionbank = () => {
       })
       .catch((error) => {});
   };
-  const handleViewDetailQuestion = (e) => {
-    // console.log("QuestionList: " + e);
-    questionBankApi
+  const handleViewDetailQuestion = async (e) => {
+    await questionBankApi
       .getById(e)
       .then((res) => {
-        // console.log("DetailQuestion >>>", res);
         dispatch(getDetailQuestion(res));
       })
       .catch((error) => {

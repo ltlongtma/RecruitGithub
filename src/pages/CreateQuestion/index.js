@@ -70,22 +70,18 @@ export const CreateQuestion = () => {
   };
 
   const onSelect = (selectedList, selectedItem) => {
-    console.log(selectedList);
     setSelectedCriteria(selectedList);
   };
 
   const onRemove = (selectedList, removedItem) => {
-    console.log(selectedList);
     setSelectedCriteria(selectedList);
   };
 
   const handleCategoryChangeSelectValue = (e) => {
-    console.log(e.target.value);
     setSelectedCategory(e.target.value);
   };
 
   const handleLevelChangeSelectValue = (e) => {
-    console.log(e.target.value);
     setSelectedLevel(e.target.value);
   };
 
@@ -106,7 +102,6 @@ export const CreateQuestion = () => {
       questionBankApi
         .create(dataInput)
         .then((res) => {
-          console.log(res);
           navigate("/", { replace: true });
         })
         .catch((error) => {

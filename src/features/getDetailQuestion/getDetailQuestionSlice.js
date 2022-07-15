@@ -7,7 +7,6 @@ const getDetailQuestionSlice = createSlice({
   reducers: {
     getDetailQuestion: (state, action) => {
       state = { ...action.payload };
-    //   console.log("STATE >>>", state);
       return state;
     },
   },

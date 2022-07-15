@@ -1,0 +1,25 @@
+.breadcrumb {
+  padding: 1rem;
+
+  & a {
+    color: green;
+  }
+}
+.form {
+  label {
+    font-weight: 600;
+    color: chocolate;
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin: 3px;
+    }
+  }
+  .answer {
+    textarea {
+      height: 17em;
+    }
+  }
+}

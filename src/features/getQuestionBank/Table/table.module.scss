@@ -8,13 +8,19 @@
   .deleteIcon {
     cursor: pointer;
     &:hover {
-      font-size:xx-large;
+      font-size: xx-large;
     }
   }
   .editIcon {
     cursor: pointer;
     &:hover {
-        font-size:xx-large;
-      }
+      font-size: xx-large;
+    }
+  }
+  tr {
+    &:hover {
+      cursor: pointer;
+      background: rgb(218, 235, 218);
+    }
   }
 }

@@ -14,6 +14,10 @@ const questionBankApi = {
     const url = `/question/${id}`;
     return axiosClient.get(url);
   },
+  approveQuestion(id, params) {
+    const url = `/question/${id}/approve`;
+    return axiosClient.post(url, params);
+  },
 
   create(data) {
     const url = "/question";
