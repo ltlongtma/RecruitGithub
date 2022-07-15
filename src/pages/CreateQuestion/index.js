@@ -12,6 +12,7 @@ import questionCriteriaApi from "../../services/questionCriteriaApi";
 import { getFilterCategory } from "../../features/getQuestionBank/FormFilter/getFilterCategorySlice";
 import { getFilterCriteria } from "../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import { Spinner } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 
 const cx = className.bind(styles);
 
@@ -59,9 +60,9 @@ export const CreateQuestion = () => {
       selectedLevel !== "" &&
       selectedCriteria?.length > 0 &&
       content !== undefined &&
-      content !== "" &&
+      content.trim() !== "" &&
       answer !== undefined &&
-      answer !== ""
+      answer.trim() !== ""
     );
   };
 
@@ -125,52 +126,52 @@ export const CreateQuestion = () => {
         </Breadcrumb>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form className={cx("form")} onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Create Question:</legend>
-
-            <div className={cx("form-group")}>
-              <label htmlFor="category">Category</label>
-              <select
-                id="category"
-                className={cx("form-control")}
-                onChange={handleCategoryChangeSelectValue}
-                // options={categoryList}
-              >
-                <option value="">Select category</option>
-                {categoryList.map((item, index) => (
-                  <option value={item?.id} key={index}>
-                    {item?.name}
-                  </option>
-                ))}
-              </select>
+            <legend className={cx("text-center")}>Create Question:</legend>
+            <div className={cx("row")}>
+              <div className={cx("form-group", "col-sm")}>
+                <label htmlFor="category">Category</label>
+                <Form.Select
+                  id="category"
+                  className={cx("form-control")}
+                  onChange={handleCategoryChangeSelectValue}
+                >
+                  <option value="">Select category</option>
+                  {categoryList.map((item, index) => (
+                    <option value={item?.id} key={index}>
+                      {item?.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </div>
+              <div className={cx("form-group", "col-sm")}>
+                <label htmlFor="level">Level</label>
+                <Form.Select
+                  id="level"
+                  className={cx("form-control")}
+                  onChange={handleLevelChangeSelectValue}
+                >
+                  <option value="">Select level</option>
+                  <option value="EASY">Easy</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="HARD">Hard</option>
+                </Form.Select>
+              </div>
             </div>
-
-            <div className={cx("form-group")}>
-              <label htmlFor="level">Level</label>
-              <select
-                id="level"
-                className={cx("form-control")}
-                onChange={handleLevelChangeSelectValue}
-              >
-                <option value="">Select level</option>
-                <option value="EASY">Easy</option>
-                <option value="MEDIUM">Medium</option>
-                <option value="HARD">Hard</option>
-              </select>
-            </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="criteria">Criteria</label>
               <Multiselect
+              className={cx("criteria-multiselect")}
                 options={criteria}
                 selectedValues={criteria.selectedValue}
                 onSelect={onSelect}
                 onRemove={onRemove}
                 displayValue="name"
+                showCheckbox={true}
+                placeholder={"Select criteria"}
               />
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="content">Content</label>
               <TextareaAutosize
@@ -178,7 +179,6 @@ export const CreateQuestion = () => {
                 onChange={(e) => setConent(e.target.value)}
               />
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="answer">Answer</label>
               <TextareaAutosize
@@ -186,8 +186,12 @@ export const CreateQuestion = () => {
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </div>
-
-            <div className={cx("d-flex align-items-center justify-content-center", "div-btn")}>
+            <div
+              className={cx(
+                "d-flex align-items-center justify-content-center",
+                "div-btn"
+              )}
+            >
               <button
                 type="submit"
                 className={cx("btn btn-primary")}
@@ -206,7 +210,6 @@ export const CreateQuestion = () => {
                 ) : null}
                 Submit
               </button>
-
               <button className={cx("btn btn-secondary btnn")} onClick={cancel}>
                 Cancel
               </button>

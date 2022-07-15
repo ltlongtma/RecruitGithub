@@ -11,46 +11,58 @@
 }
 
 .form {
-    display: flex;
-    margin-left: 3rem;
-    margin-bottom: 1rem;
+    // display: flex;
+    // margin-left: 3rem;
+    // margin-bottom: 1rem;
+    border-end-end-radius: 5px;
+    border-end-start-radius: 5px;
+    box-sizing: border-box;
+
+    background-color: #f5f5f5 !important;
 
     .form-group {
-        display: flex;
+        // display: flex;
         height: auto;
-        width: 54rem;
+        width: auto;
+        margin: 20px;
 
         .form-group-input {
-            margin: 0 10px;
+            // margin: 0 10px;
 
             text-align:justify &:focus {
-                border-color: darkgreen;
+                border-color: rgb(0, 100, 0);
                 box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
                 outline: 0 none;
+            }
+
+            .searchWrapper {
+                background-color: goldenrod;
+
             }
 
             &:hover {
                 border-color: darkgreen;
             }
         }
+        .criteria-multiselect{
+            background-color: white;
+        }
     }
-}
-
-fieldset {
-    // background-color: #eeeeee;
 }
 
 legend {
-    background-color: darkgreen;
+    background-color: rgb(152, 197, 152);
     color: white;
     padding: 5px 10px;
+    border-start-start-radius: 5px;
+    border-start-end-radius: 5px;
 }
 
-.div-btn{
+.div-btn {
     button {
         margin: 10px;
     }
-    
+
 }
 
 .error-text {
