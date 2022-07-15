@@ -140,7 +140,6 @@ export const CreateQuestion = () => {
                 id="category"
                 className={cx("form-control")}
                 onChange={handleCategoryChangeSelectValue}
-                // options={categoryList}
               >
                 <option value="">Select category</option>
                 {categoryList.map((item, index) => (
@@ -150,7 +149,6 @@ export const CreateQuestion = () => {
                 ))}
               </select>
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="level">Level</label>
               <select
@@ -164,7 +162,6 @@ export const CreateQuestion = () => {
                 <option value="HARD">Hard</option>
               </select>
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="criteria">Criteria</label>
               <Multiselect
@@ -175,7 +172,6 @@ export const CreateQuestion = () => {
                 displayValue="name"
               />
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="content">Content</label>
               <TextareaAutosize
@@ -183,7 +179,6 @@ export const CreateQuestion = () => {
                 onChange={(e) => setConent(e.target.value)}
               />
             </div>
-
             <div className={cx("form-group")}>
               <label htmlFor="answer">Answer</label>
               <TextareaAutosize
@@ -191,7 +186,6 @@ export const CreateQuestion = () => {
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </div>
-
             <div className={cx("d-flex align-items-center justify-content-center", "div-btn")}>
               <button
                 type="submit"
@@ -211,7 +205,6 @@ export const CreateQuestion = () => {
                 ) : null}
                 Submit
               </button>
-
               <button className={cx("btn btn-secondary btnn")} onClick={cancel}>
                 Cancel
               </button>
