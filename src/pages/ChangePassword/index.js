@@ -55,8 +55,8 @@ export const ChangePassword = () => {
       userApi
         .changePassword(dataInput)
         .then((res) => {
-          sessionStorage.setItem("isRole", res.data.role[0]);
-          sessionStorage.setItem("isToken", res.data.token);
+          sessionStorage.setItem("isRole", res.role[0]);
+          sessionStorage.setItem("isToken", res.token);
 
           const isToken = sessionStorage.getItem("isToken");
 
