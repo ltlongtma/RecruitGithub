@@ -73,7 +73,7 @@ export function UserDetail() {
       >
         <Popover id="popover-contained" className={cx("popover")}>
           <Popover.Header className={cx("popover-header")}>
-            {role != "undefined" ? role : "GUEST"}
+            {role !== "undefined" ? role : "GUEST"}
             <h6>{`Hi, ${profile?.res?.username} `}</h6>
           </Popover.Header>
           <Popover.Body>

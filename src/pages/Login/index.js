@@ -8,14 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
-import axiosClient from "../../services/AxiosClient";
 import { ModalForgotPassword } from "../ForgotPassword/ModalForgotPassword";
 import userApi from "../../services/ManageUserApi";
+import { Spinner } from "react-bootstrap";
 
 const cx = className.bind(styles);
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [checkWaiting, setCheckWaiting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const handleCreateNewAccount = () => {
@@ -47,6 +48,7 @@ export const Login = () => {
   password.current = watch("password");
 
   const handleOnSubmit = () => {
+    setCheckWaiting(true);
     const dataInputLogin = {
       username: username.current,
       password: password.current,
@@ -67,8 +69,13 @@ export const Login = () => {
       })
       .catch((errors) => {
         console.log("ERROR LOGIN " + errors);
-        alert("Your account is not authorized to login. Please create a new account and try again");
+        alert(
+          "Your account is not authorized to login. Please create a new account and try again"
+        );
         // navigate("/register");
+      })
+      .finally((e) => {
+        setCheckWaiting(false);
       });
   };
 
@@ -96,13 +103,18 @@ export const Login = () => {
                   placeholder="Your username"
                   {...register("username", {
                     required: "You have to input your user name",
-                    minLength: { value: 3, message: "User name must be at least 3 characters" },
+                    minLength: {
+                      value: 3,
+                      message: "User name must be at least 3 characters",
+                    },
                   })}
                 ></input>
                 <ErrorMessage
                   errors={errors}
                   name="username"
-                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                  render={({ message }) => (
+                    <p className={cx("text-error")}>{message}</p>
+                  )}
                 />
               </div>
               <div className="mb-3">
@@ -118,7 +130,10 @@ export const Login = () => {
                     id="emailPassword"
                     {...register("password", {
                       required: "You have to input your password",
-                      minLength: { value: 8, message: "Password must be at least 8 characters" },
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
                     })}
                   ></input>
                   <span onClick={handleShowHidePassword}>
@@ -131,26 +146,52 @@ export const Login = () => {
                 <ErrorMessage
                   errors={errors}
                   name="password"
-                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                  render={({ message }) => (
+                    <p className={cx("text-error")}>{message}</p>
+                  )}
                 />
               </div>
               <button
                 type="submit"
-                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
+                className={cx(
+                  "btn",
+                  "btn login btn-success mt-3 col-12 mx-auto"
+                )}
+                disabled={checkWaiting ? true : false}
               >
+                {checkWaiting ? (
+                  <Spinner
+                    className={cx("spinner")}
+                    as="span"
+                    variant="light"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    animation="border"
+                  />
+                ) : null}
                 Login
               </button>
               <span
-                className={cx("forgot-password", "text-center d-block mt-3 mb-3 ")}
+                className={cx(
+                  "forgot-password",
+                  "text-center d-block mt-3 mb-3 "
+                )}
                 onClick={handleForgotPassword}
               >
                 Forgot password?
               </span>
-              <ModalForgotPassword show={modalShow} onHide={() => setModalShow(false)} />
+              <ModalForgotPassword
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
               <hr />
               <button
                 type="button"
-                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
+                className={cx(
+                  "btn",
+                  "btn login btn-success mt-3 col-12 mx-auto"
+                )}
                 onClick={handleCreateNewAccount}
               >
                 Create a new account
