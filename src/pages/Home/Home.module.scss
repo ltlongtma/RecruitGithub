@@ -2,14 +2,7 @@
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  & Button {
-    cursor: pointer;
-    margin-right: 3rem;
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
-    &:hover {
-      color: #fff;
-    }
-  }
+  
 
   & a {
     color: green;

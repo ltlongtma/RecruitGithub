@@ -9,6 +9,7 @@ import { UserDetail } from "../UserDetail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Badge from "@mui/material/Badge";
 import { NavLink } from "react-router-dom";
+import NavDropdown from "react-bootstrap/NavDropdown";
 const cx = className.bind(styles);
 
 export const Navigation = () => {
@@ -27,7 +28,19 @@ export const Navigation = () => {
       </Navbar.Brand>
 
       <Nav className={cx("action")}>
-        <NavLink to="/question">Question Bank</NavLink>
+        <NavDropdown title="Question Bank" className={cx("action-dropdown")}>
+          <NavDropdown.Item href="/question">
+            {/* <NavLink to="/question">View All</NavLink> */}
+            View All
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="/question-category">
+            {/* <NavLink to="/question-category">Manage Category</NavLink> */}Manage Category
+          </NavDropdown.Item>
+          <NavDropdown.Item href="/question-criteria">
+            {/* <NavLink to="/question-criteria">Manage Criteria</NavLink> */} Manage Criteria
+          </NavDropdown.Item>
+        </NavDropdown>
         <NavLink to="/interview">Interview</NavLink>
         {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}
 

@@ -6,3 +6,6 @@ export * from "./ResetPassword";
 export * from "./ChangePassword";
 export * from "./ViewDetailQuestion";
 export * from "./CreateQuestion";
+export * from "./ManageCategory";
+
+

@@ -4,10 +4,14 @@ import Button from "react-bootstrap/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import className from "classnames/bind";
 import styles from "./form.module.scss";
+import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
 
 export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
+  const navigate = useNavigate();
+
   const [paramStatus, setParamStatus] = useState({
     page: 1,
     pageSize: 5,
@@ -22,11 +26,13 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
     setParamStatus(newParamStatus);
     onFilterAll(newParamStatus);
   };
+  const handleCreateQuestion = () => {
+    navigate("/question/create");
+  };
 
   return (
-    <div>
-      {" "}
-      <Form className={cx("form")}>
+    <div className={cx("form")}>
+      <Form className={cx("form-filter")}>
         <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
           <Form.Select
             className={cx("form-group-input")}
@@ -59,7 +65,6 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
           >
             <option value="APPROVED">Approved</option>
             <option value="PENDING">Pending</option>
-            <option value="REJECTED">Rejected</option>
           </Form.Select>
           <Form.Control
             className={cx("form-group-input")}
@@ -73,6 +78,9 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
           <SearchIcon />
         </Button>
       </Form>
+      <Button variant="success" size="sm" onClick={handleCreateQuestion}>
+        <AddIcon /> Create New Question
+      </Button>
     </div>
   );
 };

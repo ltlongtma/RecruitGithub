@@ -4,6 +4,7 @@ import getQuestionBankReducer from "../features/getQuestionBank/getQuestionBankS
 import getFilterCategoryReducer from "../features/getQuestionBank/FormFilter/getFilterCategorySlice";
 import getDetailQuestion from "../features/getDetailQuestion/getDetailQuestionSlice";
 import getFilterCriteriaReducer from "../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
+import getCategoryReducer from "../features/getCategoryQuestion/getCategorySlice";
 
 const rootReducer = {
   user: getUsersReducer,
@@ -11,6 +12,7 @@ const rootReducer = {
   filterCategory: getFilterCategoryReducer,
   getDetailQuestion: getDetailQuestion,
   filterCriteria: getFilterCriteriaReducer,
+  getCategoryQuestion: getCategoryReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

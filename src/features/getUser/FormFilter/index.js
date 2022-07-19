@@ -4,10 +4,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import className from "classnames/bind";
 import styles from "./FormFilter.module.scss";
 import Button from "react-bootstrap/Button";
+import AddIcon from "@mui/icons-material/Add";
+import { ModalAddNewUser } from "../Modal/ModalAddNewUser";
 
 const cx = className.bind(styles);
 
 export default function FormFilterUser({ onFilterAll }) {
+  const [showModalAddNewUser, toggleModalAddNewUser] = useState(false);
+
   const [paramFilter, setParamFilter] = useState({
     page: 1,
     pageSize: 5,
@@ -24,8 +28,8 @@ export default function FormFilterUser({ onFilterAll }) {
     onFilterAll(newParamFilter);
   };
   return (
-    <div>
-      <Form className={cx("form")}>
+    <div className={cx("form")}>
+      <Form className={cx("form-filter")}>
         <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
           <Form.Control
             className={cx("form-group-input")}
@@ -59,6 +63,19 @@ export default function FormFilterUser({ onFilterAll }) {
           <SearchIcon />
         </Button>
       </Form>
+      <Button
+      className={cx("btn-addNewUser")}
+        variant="success"
+        size="sm"
+        onClick={() => toggleModalAddNewUser(!showModalAddNewUser)}
+      >
+        <AddIcon /> Add new user
+      </Button>
+      <ModalAddNewUser
+        show={showModalAddNewUser}
+        onHide={() => toggleModalAddNewUser(!showModalAddNewUser)}
+        closeModal={() => toggleModalAddNewUser(!showModalAddNewUser)}
+      />
     </div>
   );
 }

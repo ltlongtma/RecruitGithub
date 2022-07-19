@@ -5,7 +5,7 @@ import TableQuestion from "./Table";
 import questionBankApi from "../../../src/services/questionBankApi";
 import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 
 export const Questionbank = () => {
@@ -35,6 +35,7 @@ export const Questionbank = () => {
   }, [dispatch]);
   //Create a callback function to recieve value from children (FormFilter) and pass it as query params
   const onFilterAll = (val) => {
+    // console.log("onFilterAll", val);
     questionBankApi
       .getAll(val)
 
@@ -57,6 +58,7 @@ export const Questionbank = () => {
   return (
     <div>
       <FormFilter onFilterAll={onFilterAll} onFilterCategory={CategoryList} />
+
       <TableQuestion
         questionList={QuestionList}
         handleViewDetailQuestion={handleViewDetailQuestion}

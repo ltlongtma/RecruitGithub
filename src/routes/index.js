@@ -7,6 +7,7 @@ import {
   ChangePassword,
   ViewDetailQuestion,
   CreateQuestion,
+  ManageCategory
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
 
@@ -21,6 +22,9 @@ export const adminRoute = [
   { path: "/", component: Home },
 
   { path: "/question", component: Home },
+  { path: "/question-category", component: ManageCategory },
+  // { path: "/question-criteria", component: Home },
+
   { path: "/question/:questionId", component: ViewDetailQuestion },
   { path: "/user", component: User },
   { path: "/question/create", component: CreateQuestion },

@@ -2,15 +2,12 @@ import React from "react";
 import className from "classnames/bind";
 import styles from "./ViewDetailQuestion.module.scss";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { useSelector } from "react-redux";
 
 import { DetailQuestion } from "../../features/getDetailQuestion";
 
 const cx = className.bind(styles);
 
 export const ViewDetailQuestion = () => {
-  const data = useSelector((state) => state.getDetailQuestion);
-
   return (
     <div>
       <div className={cx("breadcrumb")}>
@@ -21,7 +18,7 @@ export const ViewDetailQuestion = () => {
         </Breadcrumb>
       </div>
       <div>
-        <DetailQuestion data={data} />
+        <DetailQuestion />
       </div>
     </div>
   );

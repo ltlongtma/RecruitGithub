@@ -1,0 +1,30 @@
+.breadcrumb {
+  padding: 1rem;
+
+  & a {
+    color: green;
+  }
+}
+.form {
+  label {
+    font-weight: 600;
+    color: chocolate;
+  }
+  input,
+  textarea {
+    background-color: transparent !important;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin: 3px;
+    }
+  }
+  .answer {
+    textarea {
+      height: 17em;
+    }
+  }
+}

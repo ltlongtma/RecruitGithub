@@ -10,7 +10,7 @@ const cx = className.bind(styles);
 export default function TableQuestion({ questionList, ...props }) {
   return (
     <div>
-      <Table  bordered hover responsive className={cx("table")}>
+      <Table bordered hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>Num</th>
@@ -18,14 +18,19 @@ export default function TableQuestion({ questionList, ...props }) {
             <th>Answer</th>
             <th>Category</th>
             <th>Level</th>
-            <th>Dated_added</th>
+            <th>Dated Added</th>
             <th>Author</th>
-            <th>Approver</th>
-            <th>Date_approved</th>
+            {questionList[0]?.status === "APPROVED" && (
+              <>
+                <th>Approver</th>
+                <th>Date Approved</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>
           {questionList?.map((question, index) => {
+            // console.log("questionList", questionList.status);
             return (
               <tr key={index} onClick={() => props.handleViewDetailQuestion(question.id)}>
                 <td>{index + 1}</td>
@@ -35,8 +40,12 @@ export default function TableQuestion({ questionList, ...props }) {
                 <td>{question.level}</td>
                 <td>{question.createdDate}</td>
                 <td>{question.author.name}</td>
-                <td>{question.approver?.name}</td>
-                <td>{question.approvedDate}</td>
+                {question.status === "APPROVED" && (
+                  <>
+                    <td>{question.approver?.name}</td>
+                    <td>{question.approvedDate}</td>
+                  </>
+                )}
               </tr>
             );
           })}
