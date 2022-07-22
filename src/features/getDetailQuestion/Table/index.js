@@ -10,7 +10,13 @@ import Multiselect from "multiselect-react-dropdown";
 
 const cx = className.bind(styles);
 
+
 export const TableDetailQuestion = ({ data, ...props }) => {
+  const criteria = [];
+  data.criteria?.forEach((element) => {
+    criteria.push(element);
+  });
+  // console.log(criteria);
   return (
     <div>
       {" "}
@@ -18,7 +24,11 @@ export const TableDetailQuestion = ({ data, ...props }) => {
         <Row className={cx("basicInfo", "mb-3")}>
           <Form.Group as={Col}>
             <Form.Label>Category</Form.Label>
-            <Form.Control type="text" placeholder={data?.category?.name} readOnly />
+            <Form.Control
+              type="text"
+              placeholder={data?.category?.name}
+              readOnly
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Status</Form.Label>
@@ -26,7 +36,11 @@ export const TableDetailQuestion = ({ data, ...props }) => {
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Author</Form.Label>
-            <Form.Control type="text" placeholder={data?.author?.name} readOnly />
+            <Form.Control
+              type="text"
+              placeholder={data?.author?.name}
+              readOnly
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Level</Form.Label>
@@ -36,21 +50,39 @@ export const TableDetailQuestion = ({ data, ...props }) => {
         <Row className={cx("dateInfo", "mb-3")}>
           <Form.Group as={Col}>
             <Form.Label>Criteria</Form.Label>
-            {/* <Form.Control type="input" placeholder={data?.criteria?.name} readOnly></Form.Control> */}
-            
-   
+            <Multiselect
+              className={cx("criteria-multiselect")}
+              options={props.criteria}
+              selectedValues={criteria}
+              disable={true}
+              displayValue="name"
+              showCheckbox={true}
+              placeholder={null}
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Create date</Form.Label>
-            <Form.Control type="text" placeholder={data?.createdDate} readOnly />
+            <Form.Control
+              type="text"
+              placeholder={data?.createdDate}
+              readOnly
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Approve date</Form.Label>
-            <Form.Control type="text" placeholder={data?.approvedDate} readOnly />
+            <Form.Control
+              type="text"
+              placeholder={data?.approvedDate}
+              readOnly
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Update date</Form.Label>
-            <Form.Control type="text" placeholder={data?.updatedDate} readOnly />
+            <Form.Control
+              type="text"
+              placeholder={data?.updatedDate}
+              readOnly
+            />
           </Form.Group>
         </Row>
         <Row className={cx("content", "mb-3")}>
@@ -62,7 +94,12 @@ export const TableDetailQuestion = ({ data, ...props }) => {
         <Row className={cx("answer", "mb-3")}>
           <Form.Group as={Col}>
             <Form.Label>Answer</Form.Label>
-            <Form.Control as="textarea" type="text" placeholder={data?.answer} readOnly />
+            <Form.Control
+              as="textarea"
+              type="text"
+              placeholder={data?.answer}
+              readOnly
+            />
           </Form.Group>
         </Row>
         <Row className="mb-3">
@@ -102,7 +139,11 @@ export const TableDetailQuestion = ({ data, ...props }) => {
               >
                 Back
               </Button>
-              <Button variant="success" hidden={props.showSaveAndBackButton} size="lg">
+              <Button
+                variant="success"
+                hidden={props.showSaveAndBackButton}
+                size="lg"
+              >
                 Save
               </Button>
             </Form.Group>
