@@ -30,11 +30,13 @@ export const DetailQuestion = () => {
   const handleApproveQuestion = async () => {
     await questionBankApi
       .approveQuestion(questionId, data)
-      .then((response) => {})
+      .then((response) => {
+        alert("APPROVE SUCCESSFUL");
+      })
       .catch((error) => {
         console.log("ERROR APPROVE QUESTION >>>", error);
       });
-    alert("APPROVE SUCCESSFUL");
+
     questionBankApi
       .getAll()
 

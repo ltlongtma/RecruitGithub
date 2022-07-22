@@ -17,7 +17,6 @@ function App() {
 
     setIsLogined(true);
   }, [isToken]);
-
   return (
     <div className="App">
       {/* <Test /> */}

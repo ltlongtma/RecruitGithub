@@ -29,17 +29,14 @@ export const Navigation = () => {
 
       <Nav className={cx("action")}>
         <NavDropdown title="Question Bank" className={cx("action-dropdown")}>
-          <NavDropdown.Item href="/question">
-            {/* <NavLink to="/question">View All</NavLink> */}
-            View All
-          </NavDropdown.Item>
+          <div className={cx("inside-dropdown")}>
+
+          <NavLink to="/question">View All</NavLink>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="/question-category">
-            {/* <NavLink to="/question-category">Manage Category</NavLink> */}Manage Category
-          </NavDropdown.Item>
-          <NavDropdown.Item href="/question-criteria">
-            {/* <NavLink to="/question-criteria">Manage Criteria</NavLink> */} Manage Criteria
-          </NavDropdown.Item>
+          <NavLink to="/question-category">Manage Category</NavLink>
+          <NavLink to="/question-criteria">Manage Criteria</NavLink>
+          </div>
+          
         </NavDropdown>
         <NavLink to="/interview">Interview</NavLink>
         {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}

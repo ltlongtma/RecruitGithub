@@ -10,7 +10,15 @@ export const getCategorySlice = createSlice({
       state = [...action.payload];
       return state;
     },
+    editCategoryStatus: (state, action) => {
+      const newState = [...state];
+      newState.map((item) => {
+        if (item.id === action.payload.id) return action.payload;
+        else return item;
+      });
+      return newState
+    },
   },
 });
-export const { getCategory } = getCategorySlice.actions;
+export const { getCategory, editCategoryStatus } = getCategorySlice.actions;
 export default getCategorySlice.reducer;

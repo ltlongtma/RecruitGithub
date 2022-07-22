@@ -27,8 +27,7 @@
       color: darkgreen;
       font-weight: 700;
       &:hover {
-        color: green;
-        font-size: large;
+        color: black;
       }
     }
 
@@ -46,10 +45,15 @@
       padding: 7px;
     }
     .action-dropdown {
-      a{
-
-        color: darkgreen!important;
+      .inside-dropdown {
+        display: flex;
+        flex-direction: column;
+        margin-left: 12px;
+        line-height: 34px;
       }
+      // a {
+      //   color: darkgreen !important;
+      // }
     }
   }
 }

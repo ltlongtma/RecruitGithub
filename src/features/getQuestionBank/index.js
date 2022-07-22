@@ -32,7 +32,7 @@ export const Questionbank = () => {
       .catch((error) => {
         console.log("ERROR getFilterCategory >>> " + error);
       });
-  }, [dispatch]);
+  }, []);
   //Create a callback function to recieve value from children (FormFilter) and pass it as query params
   const onFilterAll = (val) => {
     // console.log("onFilterAll", val);

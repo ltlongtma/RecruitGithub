@@ -2,8 +2,12 @@ import axiosClient from "./AxiosClient";
 
 const questionCategoryApi = {
   getAll() {
-    const url = `/question-category`;
+    const url = `/question-category?showDisabled=true`;
     return axiosClient.get(url);
+  },
+  getFilter(params) {
+    const url = `/question-category/filter`;
+    return axiosClient.get(url, { params: params });
   },
 
   getById(id) {
@@ -15,16 +19,24 @@ const questionCategoryApi = {
     const url = "/question-category";
     return axiosClient.post(url, data);
   },
-
-  delete(id) {
+  changeName(id, name) {
     const url = `/question-category/${id}`;
-    return axiosClient.delete(url);
+    return axiosClient.put(url, { name: name });
+  },
+  //Switch statusCategory
+  update(id, params) {
+    const url = `/question-category/update-enable/${id}`;
+    return axiosClient.put(url, params);
   },
 
-  update(data) {
-    const url = `/question-category/${data.id}`;
-    return axiosClient.put(url, data);
-  },
+  // disable(id) {
+  //   const url = `/question-category/${id}`;
+  //   return axiosClient.delete(url);
+  // },
+  // enable(id) {
+  //   const url = `/question-category/enable/${id}`;
+  //   return axiosClient.put(url);
+  // },
 };
 
 export default questionCategoryApi;
