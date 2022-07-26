@@ -1,15 +1,13 @@
-.user-list-breadcrumb {
-    display: flex;
-    justify-content: space-between;
-    // margin-left: 3rem;
-    padding: 1rem;
-    
-    & a {
-      color: green;
-    }
+.category-breadcrumb {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  & a {
+    color: green;
   }
-  
-  .table {
-    text-align: center;
-  }
-  
+}
+
+.table {
+  text-align: center;
+}

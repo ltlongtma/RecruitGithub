@@ -2,7 +2,7 @@ import axiosClient from "./AxiosClient";
 
 const questionCriteriaApi = {
   getAll() {
-    const url = `/question-criteria`;
+    const url = `/question-criteria?showDisabled=true`;
     return axiosClient.get(url);
   },
 
@@ -24,6 +24,19 @@ const questionCriteriaApi = {
   update(data) {
     const url = `/question-criteria/${data.id}`;
     return axiosClient.put(url, data);
+  },
+  getFilter(params) {
+    const url = `/question-criteria/filter`;
+    return axiosClient.get(url, { params: params });
+  },
+  changeName(id, name) {
+    const url = `/question-criteria/${id}`;
+    return axiosClient.put(url, { name: name });
+  },
+  //Switch statusCriteria
+  updateStatus(id, params) {
+    const url = `/question-criteria/update-enable/${id}`;
+    return axiosClient.put(url, params);
   },
 };
 

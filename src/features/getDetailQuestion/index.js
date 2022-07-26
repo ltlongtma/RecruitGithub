@@ -7,8 +7,10 @@ import { getDetailQuestion } from "./getDetailQuestionSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { getQuestionBank } from "../getQuestionBank/getQuestionBankSlice";
 import { TableDetailQuestion } from "./Table";
-import { ModalDeletQuestion } from "./Modal";
+import { ModalDeletQuestion } from "./Modal/ModalDelete";
 import { getFilterCriteria } from "../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
+import { ModalApproveQuestion } from "./Modal/ModalApprove";
+import { ModalRejectQuestion } from "./Modal/ModalReject";
 
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
@@ -18,6 +20,9 @@ export const DetailQuestion = () => {
   const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
   const [showEditAndDeleteButton, setShowEditAndDeleteButton] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalApprove, setShowModalApprove] = useState(false);
+  const [showModalReject, setShowModalReject] = useState(false);
+
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
   useEffect(() => {
@@ -29,7 +34,7 @@ export const DetailQuestion = () => {
       .catch((error) => {
         console.log("ERROR getDetailQuestion >>>", error);
       });
-      questionCriteriaApi
+    questionCriteriaApi
       .getAll()
       .then((res) => {
         dispatch(getFilterCriteria(res));
@@ -62,8 +67,17 @@ export const DetailQuestion = () => {
   const handleCloseModalDelete = () => setShowModalDelete(false);
   const handleShowModalDelete = (item) => {
     setShowModalDelete(true);
-    // setUser(item);
   };
+  const handleCloseModalApprove = () => setShowModalApprove(false);
+  const handleShowModalApprove = (item) => {
+    setShowModalApprove(true);
+  };
+  const handleShowModalReject = () => {
+    setShowModalReject(true);
+  };
+  const handleCloseModalReject = () => setShowModalReject(false);
+ 
+
   const handleDeleteQuestion = async () => {
     await questionBankApi
       .delete(questionId)
@@ -84,6 +98,7 @@ export const DetailQuestion = () => {
 
     navigate(`../question`);
   };
+
   const handleEditQuestion = () => {
     setShowSaveAndBackButton(false);
     setShowEditAndDeleteButton(true);
@@ -104,6 +119,8 @@ export const DetailQuestion = () => {
         handleBack={handleBack}
         showSaveAndBackButton={showSaveAndBackButton}
         handleShowModalDelete={handleShowModalDelete}
+        handleShowModalApprove={handleShowModalApprove}
+        handleShowModalReject={handleShowModalReject}
       />
       <ModalDeletQuestion
         centered
@@ -111,6 +128,20 @@ export const DetailQuestion = () => {
         onHide={handleCloseModalDelete}
         closeModal={handleCloseModalDelete}
         onDelete={handleDeleteQuestion}
+      />
+      <ModalApproveQuestion
+        centered
+        show={showModalApprove}
+        onHide={handleCloseModalApprove}
+        closeModal={handleCloseModalApprove}
+        onApprove={handleApproveQuestion}
+      />
+      <ModalRejectQuestion
+        centered
+        show={showModalReject}
+        onHide={handleCloseModalReject}
+        closeModal={handleCloseModalReject}
+        onReject={handleDeleteQuestion}
       />
     </div>
   );

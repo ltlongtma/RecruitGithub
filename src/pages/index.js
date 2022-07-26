@@ -7,5 +7,4 @@ export * from "./ChangePassword";
 export * from "./ViewDetailQuestion";
 export * from "./CreateQuestion";
 export * from "./ManageCategory";
-
-
+export * from "./ManageCriteria";
