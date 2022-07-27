@@ -13,8 +13,8 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
   const navigate = useNavigate();
 
   const [paramStatus, setParamStatus] = useState({
-    page: 1,
-    pageSize: 10,
+    // page: 1,
+    // pageSize: 5,
     status: "APPROVED",
   });
 
@@ -23,6 +23,7 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
     const name = e.target.name;
 
     const newParamStatus = { ...paramStatus, [name]: value };
+    // console.log("newParamStatus >>>", newParamStatus);
     setParamStatus(newParamStatus);
     onFilterAll(newParamStatus);
   };
@@ -33,7 +34,7 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
-        <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
+        <Form.Group className={cx("form-group")}>
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}

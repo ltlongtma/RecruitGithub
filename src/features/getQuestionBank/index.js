@@ -8,10 +8,10 @@ import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import { useNavigate } from "react-router-dom";
 import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 
-export const Questionbank = () => {
+export const Questionbank = ({QuestionList}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const QuestionList = useSelector((state) => state.questionBank);
+  // const QuestionList = useSelector((state) => state.questionBank);
   const CategoryList = useSelector((state) => state.filterCategory);
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import className from "classnames/bind";
 import styles from "./Home.module.scss";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { PaginationQuestionBank } from "../../components/Pagination";
+import PaginatedItems from "../../components/Paginate";
 
 const cx = className.bind(styles);
 
@@ -17,8 +18,8 @@ export const Home = () => {
         </Breadcrumb>
       </div>
       <div className={cx("table")}>
-        <Questionbank />
-        <PaginationQuestionBank className={cx("pagination")} />
+        {/* <Questionbank /> */}
+        <PaginatedItems itemsPerPage={5}/>
       </div>
     </div>
   );
