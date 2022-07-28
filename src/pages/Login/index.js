@@ -70,6 +70,7 @@ export const Login = () => {
       .catch((errors) => {
         console.log("ERROR LOGIN " + errors);
         alert("Your account is not authorized to login. Please create a new account and try again");
+        setCheckWaiting(false);
         // navigate("/register");
       });
   };

@@ -18,36 +18,6 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
     padding: 10px;
 }
 
-.notification-container {
-    position: absolute;
-    right: 0px;
-    width: 400px;
-    border: 0.5px solid #8080803d;
-    min-height: 100px;
-    z-index: 99999;
-    top: 72px;
-    background: white;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    box-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
-}
-
-.notification-bar {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-
-    .notification-header {
-        display: flex;
-    }
-}
-
-.item-container {
-    overflow-y: auto;
-    max-height: 500px;
-    border-radius: 0.5rem;
-}
-
 .line-itmes {
     background: white;
     padding: 5px;
@@ -76,15 +46,13 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
     }
 }
 
-.mark-read {
-    // position:absolute;
+
+.view-more {
+    text-align: right;
     right: 0px;
     padding-bottom: 0px;
-    color: black;
+    color: darkgreen;
     cursor: pointer;
-    font-size: 12px;
-    //   margin: "5px 0",
-    text-align: right;
 
     &:hover {
         color: darkgreen;
@@ -93,22 +61,80 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
 }
 
 
-    .view-more {
-        text-align: right;
-        right: 0px;
-        padding-bottom: 0px;
-        color: black;
-        cursor: pointer;
-        &:hover {
-            color: darkgreen;
-            font-weight: bold;
-        }
-    }
-
-
-.x-icon{
+.x-icon {
     cursor: pointer;
+
     &:hover {
         color: darkgreen;
+        font-size: 1.2em;
     }
+}
+
+.notification-content {
+    border: 0.5px solid #8080803d;
+    display: block;
+    z-index: 10;
+    opacity: 1;
+    width: 500px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 20px 0 rgb(54 54 54 / 20%);
+    background-color: #fff;
+    right: 0px;
+    top: 72px;
+    position: absolute !important;
+    // box-sizing: border-box;
+}
+
+.notification-header {
+    padding: 12px 24px;
+    border-bottom: 1px solid #e1e1e1;
+    align-items: center !important;
+    -webkit-box-align: center !important;
+    -webkit-box-pack: justify !important;
+    justify-content: space-between !important;
+    display: flex !important;
+    // box-sizing: border-box;
+}
+
+.notification-title {
+    font-family: 'Segoe UI';
+    font-size: 18px;
+    font-weight: normal;
+    box-sizing: border-box;
+    position: relative;
+    // background-color: #f5f5f5;
+    overflow-y: auto !important;
+}
+
+.align-items-center{
+    display: flex;
+    align-items: center;
+}
+
+.notification-mark-read {
+    background: white;
+    border: none;
+    outline: none;
+    color: darkgreen;
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+
+    &:hover {
+        // color: black;
+        font-weight: bold;
+    }
+}
+
+.notification-close {
+    background: white;
+    border: none;
+    outline: none;
+    display: inline-block;
+}
+
+.notification-body {
+    overflow-y: auto;
+    max-height: 500px;
+    border-radius: 0.5rem;
 }

@@ -112,10 +112,10 @@ export const Notifications = () => {
   };
 
   const handleReadNotification = (item) => {
+    notificationApi.getById(item.id).then(() => {
+      getNotification();
+    });
     if (item.notificationType.toLowerCase() === "question") {
-      notificationApi.getById(item.id).then(() => {
-        getNotification();
-      });
       navigate(`/question/${item.questionBank.id}`);
     }
   };
@@ -138,31 +138,37 @@ export const Notifications = () => {
         <NotificationsIcon />
       </Badge>
       {isShowNotificationList && (
-        <div className={cx("notification-container")}>
-          <div className={cx("notification-bar")}>
-            <div className={cx("notification-header")}>
-              <p style={{ fontSize: "18px", textAlign: "left", width: "93%" }}>
-                Notifications
-              </p>
-              <FontAwesomeIcon
-                className={cx("x-icon")}
-                icon={faX}
-                onClick={handleCloseNotification}
-              />
+        <div className={cx("notification-content")}>
+          <div className={cx("notification-header")}>
+            <span className={cx("notification-title")}> NOTIFICATION</span>
+            <div className={cx(" align-items-center")}>
+              <button
+                className={cx(
+                  "mark-read position-relative",
+                  "notification-mark-read"
+                )}
+              >
+                Mark all as read
+              </button>
+              <button className={cx("notification-close")}>
+                <FontAwesomeIcon
+                  className={cx("x-icon")}
+                  icon={faX}
+                  onClick={handleCloseNotification}
+                />
+              </button>
             </div>
-            <p className={cx("mark-read")} onClick={handleReadAll}>
-              <b>Mark all as read</b>
-            </p>
           </div>
 
-          <div className={cx("item-container")}>
+          <div className={cx("notification-body")}>
             {notificationList.map((item, index) => {
               return (
                 <div
                   className={cx("line-itmes")}
+                  style={{ fontWeight: item.read ? "normal" : "bold" }}
                   onClick={() => handleReadNotification(item)}
                 >
-                  <div>
+                  <div >
                     <p className={cx("author")}>
                       {item.user.username}
                       <span className={cx("date")}>
@@ -170,12 +176,7 @@ export const Notifications = () => {
                       </span>
                     </p>
                   </div>
-                  <span
-                    className={cx("content")}
-                    style={{ fontWeight: item.read ? "normal" : "bold" }}
-                  >
-                    {item.content}
-                  </span>
+                  <span className={cx("content")}>{item.content}</span>
                 </div>
               );
             })}
