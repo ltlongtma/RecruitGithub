@@ -69,10 +69,7 @@ export const Login = () => {
       })
       .catch((errors) => {
         console.log("ERROR LOGIN " + errors);
-        alert(
-          "Your account is not authorized to login. Please create a new account and try again"
-        );
-        setCheckWaiting(false);
+        alert("Your account is not authorized to login. Please create a new account and try again");
         // navigate("/register");
       });
   };
@@ -110,9 +107,7 @@ export const Login = () => {
                 <ErrorMessage
                   errors={errors}
                   name="username"
-                  render={({ message }) => (
-                    <p className={cx("text-error")}>{message}</p>
-                  )}
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>
               <div className="mb-3">
@@ -144,17 +139,12 @@ export const Login = () => {
                 <ErrorMessage
                   errors={errors}
                   name="password"
-                  render={({ message }) => (
-                    <p className={cx("text-error")}>{message}</p>
-                  )}
+                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                 />
               </div>
               <button
                 type="submit"
-                className={cx(
-                  "btn",
-                  "btn login btn-success mt-3 col-12 mx-auto"
-                )}
+                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
                 disabled={checkWaiting ? true : false}
               >
                 {checkWaiting ? (
@@ -171,25 +161,16 @@ export const Login = () => {
                 Login
               </button>
               <span
-                className={cx(
-                  "forgot-password",
-                  "text-center d-block mt-3 mb-3 "
-                )}
+                className={cx("forgot-password", "text-center d-block mt-3 mb-3 ")}
                 onClick={handleForgotPassword}
               >
                 Forgot password?
               </span>
-              <ModalForgotPassword
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+              <ModalForgotPassword show={modalShow} onHide={() => setModalShow(false)} />
               <hr />
               <button
                 type="button"
-                className={cx(
-                  "btn",
-                  "btn login btn-success mt-3 col-12 mx-auto"
-                )}
+                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
                 onClick={handleCreateNewAccount}
               >
                 Create a new account

@@ -1,21 +1,21 @@
 import Table from "react-bootstrap/Table";
 import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTone";
 import className from "classnames/bind";
-import styles from "./TableCategory.module.scss";
+import styles from "./TableCriteria.module.scss";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
-
-import questionCategoryApi from "../../../services/questionCategoryApi";
+import questionCriteriaApi from "../../../services/questionCriteriaApi";
 
 const cx = className.bind(styles);
 
-export const TableCategory = ({ data, ...props }) => {
-
-  const handleChangeSwitchButton = async (item) => {
+export const TableCriteria = ({ data, handleOpenModalEditCriteria }) => {
+  const handleChangeSwitchButton = (item) => {
     const id = item?.id;
     const enable = item?.enable;
-    await questionCategoryApi
-      .update(id, { enable: !enable })
-      .then((res) => {})
+    questionCriteriaApi
+      .updateStatus(id, { enable: !enable })
+      .then((result) => {
+        console.log("STATUS >>>", result);
+      })
       .catch((err) => {
         console.log("ERROR UPDATE STATUS >>>", err);
       });
@@ -27,7 +27,7 @@ export const TableCategory = ({ data, ...props }) => {
         <thead className={cx("table-head")}>
           <tr>
             <th>Num</th>
-            <th>Category name</th>
+            <th>Criteria name</th>
             <th>Number of Approved</th>
             <th>Status</th>
             <th>Edit</th>
@@ -57,7 +57,7 @@ export const TableCategory = ({ data, ...props }) => {
                   <ModeEditOutlineTwoToneIcon
                     color="outline-success"
                     className={cx("editIcon")}
-                    onClick={() => props.handleOpenModalEditCategory(item)}
+                    onClick={() => handleOpenModalEditCriteria(item)}
                   />
                 </td>
               </tr>

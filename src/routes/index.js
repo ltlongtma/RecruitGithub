@@ -10,6 +10,7 @@ import {
   ManageCategory
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
+import { ManageCriteria } from "../pages/ManageCriteria";
 
 export const publicRoute = [
   { path: "/login", component: Login, layout: LoginLayout },
@@ -23,7 +24,7 @@ export const adminRoute = [
 
   { path: "/question", component: Home },
   { path: "/question-category", component: ManageCategory },
-  // { path: "/question-criteria", component: Home },
+  { path: "/question-criteria", component: ManageCriteria },
 
   { path: "/question/:questionId", component: ViewDetailQuestion },
   { path: "/user", component: User },

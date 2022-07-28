@@ -16,7 +16,7 @@ export const TableDetailQuestion = ({ data, ...props }) => {
   data.criteria?.forEach((element) => {
     criteria.push(element);
   });
-  // console.log(criteria);
+  // console.log("WTF >>>",criteria);
   return (
     <div>
       {" "}
@@ -107,8 +107,8 @@ export const TableDetailQuestion = ({ data, ...props }) => {
             <Form.Group as={Col} className={cx("buttons")}>
               <Button variant="warning">Edit</Button>
 
-              <Button variant="danger">Reject</Button>
-              <Button variant="success" onClick={props.handleApproveQuestion}>
+              <Button variant="danger" onClick={props.handleShowModalReject}>Reject</Button>
+              <Button variant="success" onClick={props.handleShowModalApprove}>
                 Approve
               </Button>
             </Form.Group>

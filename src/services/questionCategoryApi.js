@@ -29,14 +29,7 @@ const questionCategoryApi = {
     return axiosClient.put(url, params);
   },
 
-  // disable(id) {
-  //   const url = `/question-category/${id}`;
-  //   return axiosClient.delete(url);
-  // },
-  // enable(id) {
-  //   const url = `/question-category/enable/${id}`;
-  //   return axiosClient.put(url);
-  // },
+
 };
 
 export default questionCategoryApi;

@@ -5,14 +5,15 @@ import { TableCategory } from "./Table";
 import { getCategory } from "./getCategorySlice";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import { ModalEditCategory } from "./Modal/modalEdit";
+import { useDebounce } from "../../hooks";
 
 export const CategoryQuestion = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.getCategoryQuestion);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [oldNameCategory, setOldNameCategory] = useState();
-
   const [idCategory, setIdCategory] = useState();
+
 
   useEffect(() => {
     questionCategoryApi.getAll().then((res) => {

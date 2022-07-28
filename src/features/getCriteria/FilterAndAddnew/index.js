@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import className from "classnames/bind";
@@ -6,9 +6,9 @@ import styles from "./filter.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { Form } from "react-bootstrap";
 import { FormGroup } from "@mui/material";
-import { ModalAddNewCategory } from "../Modal/modalAddNew";
-import questionCategoryApi from "../../../services/questionCategoryApi";
-import { useDebounce } from "../../../hooks";
+
+import { ModalAddNewCriteria } from "../Modal/AddNewCriteria";
+import questionCriteriaApi from "../../../services/questionCriteriaApi";
 
 const cx = className.bind(styles);
 
@@ -29,20 +29,19 @@ export const FilterAndAddNew = ({ data, onFilterStatus }) => {
     const value = e.target.value;
     const name = e.target.name;
     const newParamStatus = { ...paramStatus, [name]: value };
-    // console.log("newParamStatus >>>", newParamStatus);
     setParamStatus(newParamStatus);
     onFilterStatus(newParamStatus);
   };
-  const handleModalAddNewCategory = (e) => {
+  const handleModalAddNewCriteria = (e) => {
     if (e !== "") {
-      questionCategoryApi
+        questionCriteriaApi
         .create(e)
         .then(() => {
-          alert("New category added successfully");
+          alert("New criteria added successfully");
         })
 
         .catch((e) => {
-          console.log("ERROR in addNewCategory ", e);
+          console.log("ERROR in addNewCriteria ", e);
         });
     } else return;
   };
@@ -74,14 +73,14 @@ export const FilterAndAddNew = ({ data, onFilterStatus }) => {
           setShowModal(true);
         }}
       >
-        <AddIcon /> New category
+        <AddIcon /> New Criteria
       </Button>
-      <ModalAddNewCategory
+      <ModalAddNewCriteria
         show={showModal}
         handleClose={() => {
           setShowModal(!showModal);
         }}
-        handleModalAddNewCategory={handleModalAddNewCategory}
+        handleModalAddNewCriteria={handleModalAddNewCriteria}
       />
     </div>
   );

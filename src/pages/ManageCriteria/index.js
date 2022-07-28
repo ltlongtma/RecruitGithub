@@ -1,27 +1,25 @@
 import React from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { CategoryQuestion } from "../../features/getCategoryQuestion";
 import className from "classnames/bind";
-import styles from "./category.module.scss";
+import styles from "./criteria.module.scss";
 import { PaginationQuestionBank } from "../../components/Pagination";
+import { GetCriteria } from "../../features/getCriteria";
 
 const cx = className.bind(styles);
 
-
-export const ManageCategory = () => {
+export const ManageCriteria = () => {
   return (
     <div>
-      <div className={cx("category-breadcrumb")}>
+      <div className={cx("criteria-breadcrumb")}>
         <Breadcrumb>
           <Breadcrumb.Item href="/question">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/question">Question bank</Breadcrumb.Item>
-          <Breadcrumb.Item active>Manage Category </Breadcrumb.Item>
+          <Breadcrumb.Item active>Manage Criteria </Breadcrumb.Item>
         </Breadcrumb>
       </div>
       <div>
-        <CategoryQuestion />
+        <GetCriteria/>
         <PaginationQuestionBank className={cx("pagination")} />
-
       </div>
     </div>
   );
