@@ -13,7 +13,6 @@ import Moment from "moment";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../services/AxiosClient";
 
-
 const cx = className.bind(styles);
 const SOCKET_URL = "http://localhost:8080/ws";
 
@@ -25,28 +24,24 @@ export const Notifications = () => {
   const [notificationList, setNotificationList] = useState([]);
   const [profile, setProfile] = useState({});
 
-  const role = sessionStorage.getItem("isRole");
   Moment.locale("en");
 
   const [paramStatus, setParamStatus] = useState({
-    // page: 1,
     pageSize: 10,
   });
 
   useEffect(() => {
     getUnreadNotificationNumber();
 
-
-        axiosClient
-          .get(`user/profile`)
-          .then((res) => {
-            const newProfile = { ...profile, res };
-            setProfile(newProfile);
-          })
-          .catch((err) => {
-            console.log("ERROR axios profile >>> ", err);
-          });
-
+    axiosClient
+      .get(`user/profile`)
+      .then((res) => {
+        const newProfile = { ...profile, res };
+        setProfile(newProfile);
+      })
+      .catch((err) => {
+        console.log("ERROR axios profile >>> ", err);
+      });
   });
 
   const handleShowNotification = () => {
@@ -69,7 +64,6 @@ export const Notifications = () => {
   };
 
   const showNotification = (msg) => {
-    console.log(msg.content);
     toast(msg.content, {
       autoClose: 3000,
     });
@@ -113,18 +107,16 @@ export const Notifications = () => {
   };
 
   const handleViewMore = () => {
-    // alert("view more");
     setParamStatus({ pageSize: paramStatus.pageSize + 10 });
     getNotification();
-    console.log(paramStatus);
   };
 
   const handleReadNotification = (item) => {
-    if(item.notificationType.toLowerCase() === "question"){
-        notificationApi.getById(item.id).then(()=>{
-            getNotification();
-        });
-        navigate(`/question/${item.questionBank.id}`)
+    if (item.notificationType.toLowerCase() === "question") {
+      notificationApi.getById(item.id).then(() => {
+        getNotification();
+      });
+      navigate(`/question/${item.questionBank.id}`);
     }
   };
 
@@ -133,7 +125,6 @@ export const Notifications = () => {
       <SockJsClient
         url={SOCKET_URL}
         topics={[`/user/${profile?.res?.username}/queue/notification`]}
-        onDisconnect={console.log("app.js Disconnected!")}
         onMessage={(msg) => onMessageReceived(msg)}
         debug={false}
       />
