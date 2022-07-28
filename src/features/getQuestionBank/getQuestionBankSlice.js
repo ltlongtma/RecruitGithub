@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = { data: [], pagination: {} };
 
 export const getQuestionBankSlice = createSlice({
   name: "getQuestionBank",
   initialState,
   reducers: {
     getQuestionBank: (state, action) => {
-      state = [...action.payload];
+      state = { ...action.payload };
+
       return state;
     },
   },

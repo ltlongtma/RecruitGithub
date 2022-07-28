@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuestionBank } from "./getQuestionBankSlice";
 import TableQuestion from "./Table";
@@ -7,19 +7,23 @@ import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import { useNavigate } from "react-router-dom";
 import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
+import PaginatedItems from "../../components/Pagination";
 
-export const Questionbank = ({QuestionList}) => {
+export const Questionbank = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const QuestionList = useSelector((state) => state.questionBank);
+  const QuestionList = useSelector((state) => state.questionBank);
   const CategoryList = useSelector((state) => state.filterCategory);
+  const [paramStatus, setParamStatus] = useState({
+    status: "APPROVED",
+  });
 
   useEffect(() => {
     questionBankApi
       .getAll()
 
       .then((res) => {
-        dispatch(getQuestionBank(res.data));
+        dispatch(getQuestionBank(res));
       })
       .catch((error) => {
         console.log("ERROR getQuestionBank >>> " + error);
@@ -35,15 +39,18 @@ export const Questionbank = ({QuestionList}) => {
   }, []);
   //Create a callback function to recieve value from children (FormFilter) and pass it as query params
   const onFilterAll = (val) => {
-    // console.log("onFilterAll", val);
+    const newParamStatus = { ...paramStatus, ...val, page: 1 };
+    setParamStatus(newParamStatus);
+
     questionBankApi
-      .getAll(val)
+      .getAll(newParamStatus)
 
       .then((res) => {
-        dispatch(getQuestionBank(res.data));
+        dispatch(getQuestionBank(res));
       })
       .catch((error) => {});
   };
+
   const handleViewDetailQuestion = async (e) => {
     await questionBankApi
       .getById(e)
@@ -55,14 +62,30 @@ export const Questionbank = ({QuestionList}) => {
       });
     navigate(`/question/${e}`);
   };
+  const onPageChange = (page) => {
+    const newParamStatus = { ...paramStatus, page };
+    setParamStatus(newParamStatus);
+    questionBankApi
+      .getAll(newParamStatus)
+      .then((res) => {
+        dispatch(getQuestionBank(res));
+      })
+      .catch((error) => {});
+  };
+
   return (
     <div>
-      <FormFilter onFilterAll={onFilterAll} onFilterCategory={CategoryList} />
+      <FormFilter
+        paramStatus={paramStatus}
+        onFilterAll={onFilterAll}
+        onFilterCategory={CategoryList}
+      />
 
       <TableQuestion
         questionList={QuestionList}
         handleViewDetailQuestion={handleViewDetailQuestion}
       />
+      <PaginatedItems pagination={QuestionList?.pagination} onPageChange={onPageChange} />
     </div>
   );
 };

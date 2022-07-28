@@ -57,7 +57,7 @@ export const DetailQuestion = () => {
       .getAll()
 
       .then((res) => {
-        dispatch(getQuestionBank(res.data));
+        dispatch(getQuestionBank(res));
       })
       .catch((error) => {
         console.log("ERROR getQuestionBank >>> " + error);
@@ -76,7 +76,6 @@ export const DetailQuestion = () => {
     setShowModalReject(true);
   };
   const handleCloseModalReject = () => setShowModalReject(false);
- 
 
   const handleDeleteQuestion = async () => {
     await questionBankApi
@@ -90,7 +89,7 @@ export const DetailQuestion = () => {
       .getAll()
 
       .then((res) => {
-        dispatch(getQuestionBank(res.data));
+        dispatch(getQuestionBank(res));
       })
       .catch((error) => {
         console.log("ERROR getQuestionBank >>> " + error);

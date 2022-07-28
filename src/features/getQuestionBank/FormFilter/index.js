@@ -9,22 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
 
-export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
+export const FormFilter = ({ onFilterAll, onFilterCategory, paramStatus }) => {
   const navigate = useNavigate();
-
-  const [paramStatus, setParamStatus] = useState({
-    // page: 1,
-    // pageSize: 5,
-    status: "APPROVED",
-  });
 
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
     const newParamStatus = { ...paramStatus, [name]: value };
-    // console.log("newParamStatus >>>", newParamStatus);
-    setParamStatus(newParamStatus);
     onFilterAll(newParamStatus);
   };
   const handleCreateQuestion = () => {

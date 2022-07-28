@@ -6,6 +6,7 @@ import { getCategory } from "./getCategorySlice";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import { ModalEditCategory } from "./Modal/modalEdit";
 import { useDebounce } from "../../hooks";
+import PaginatedItems from "../../components/Pagination";
 
 export const CategoryQuestion = () => {
   const dispatch = useDispatch();
@@ -13,17 +14,22 @@ export const CategoryQuestion = () => {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [oldNameCategory, setOldNameCategory] = useState();
   const [idCategory, setIdCategory] = useState();
-
+  const [paramStatus, setParamStatus] = useState({
+    enable: "",
+    keyword: "",
+    // page: "",
+    // pageSize: "",
+  });
 
   useEffect(() => {
-    questionCategoryApi.getAll().then((res) => {
+    questionCategoryApi.getFilter().then((res) => {
       dispatch(getCategory(res));
     });
   }, []);
 
   const onFilterStatus = async (e) => {
     await questionCategoryApi.getFilter(e).then((res) => {
-      dispatch(getCategory(res.data));
+      dispatch(getCategory(res));
     });
   };
   const handleOpenModalEditCategory = (item) => {
@@ -34,15 +40,22 @@ export const CategoryQuestion = () => {
   const handleSubmitEditCategory = (id, name) => {
     id = idCategory;
     questionCategoryApi.changeName(id, name).then(() => {
-      questionCategoryApi.getAll().then((res) => {
+      questionCategoryApi.getFilter().then((res) => {
         dispatch(getCategory(res));
       });
+    });
+  };
+  const onPageChange = (page) => {
+    const newParamStatus = { ...paramStatus, page };
+    setParamStatus(newParamStatus);
+    questionCategoryApi.getFilter(newParamStatus).then((res) => {
+      dispatch(getCategory(res));
     });
   };
 
   return (
     <div>
-      <FilterAndAddNew data={data} onFilterStatus={onFilterStatus} />
+      <FilterAndAddNew data={data} onFilterStatus={onFilterStatus} paramStatus={paramStatus} />
       <TableCategory data={data} handleOpenModalEditCategory={handleOpenModalEditCategory} />
       <ModalEditCategory
         show={showModalEdit}
@@ -50,6 +63,7 @@ export const CategoryQuestion = () => {
         handleSubmitEditCategory={handleSubmitEditCategory}
         name={oldNameCategory}
       />
+      <PaginatedItems pagination={data?.pagination} onPageChange={onPageChange} />
     </div>
   );
 };
