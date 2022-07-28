@@ -72,10 +72,8 @@ export const Login = () => {
         alert(
           "Your account is not authorized to login. Please create a new account and try again"
         );
-        // navigate("/register");
-      })
-      .finally((e) => {
         setCheckWaiting(false);
+        // navigate("/register");
       });
   };
 

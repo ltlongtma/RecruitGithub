@@ -1,0 +1,114 @@
+$h-gutter: 2rem;
+$v-gutter: .75rem;
+$container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
+
+.badge-container {
+    cursor: pointer;
+
+    &:hover {
+        color: darkgreen;
+    }
+}
+
+.toast-container {
+    position: absolute;
+    margin-top: 50px;
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+}
+
+.notification-container {
+    position: absolute;
+    right: 0px;
+    width: 400px;
+    border: 0.5px solid #8080803d;
+    min-height: 100px;
+    z-index: 99999;
+    top: 72px;
+    background: white;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    box-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
+}
+
+.notification-bar {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    .notification-header {
+        display: flex;
+    }
+}
+
+.item-container {
+    overflow-y: auto;
+    max-height: 500px;
+    border-radius: 0.5rem;
+}
+
+.line-itmes {
+    background: white;
+    padding: 5px;
+    color: black;
+    font-weight: normal;
+
+    &:hover {
+        color: darkgreen;
+        border: 0.5px solid #8080803d;
+        background: rgba(230, 242, 250, 255);
+    }
+
+    .author {
+        font-size: 10px;
+    }
+
+    .date {
+        font-size: 10px;
+        font-weight: 700;
+        color: #747474;
+        float: right;
+    }
+
+    .content {
+        font-size: 13px;
+    }
+}
+
+.mark-read {
+    // position:absolute;
+    right: 0px;
+    padding-bottom: 0px;
+    color: black;
+    cursor: pointer;
+    font-size: 12px;
+    //   margin: "5px 0",
+    text-align: right;
+
+    &:hover {
+        color: darkgreen;
+        font-weight: bold;
+    }
+}
+
+
+    .view-more {
+        text-align: right;
+        right: 0px;
+        padding-bottom: 0px;
+        color: black;
+        cursor: pointer;
+        &:hover {
+            color: darkgreen;
+            font-weight: bold;
+        }
+    }
+
+
+.x-icon{
+    cursor: pointer;
+    &:hover {
+        color: darkgreen;
+    }
+}
