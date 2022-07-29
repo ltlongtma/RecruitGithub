@@ -1,6 +1,6 @@
 import ReactPaginate from "react-paginate";
 import className from "classnames/bind";
-import styles from "./Pagination.module.scss";
+import styles from "./pagination.module.scss";
 const cx = className.bind(styles);
 
 function PaginatedItems({ pagination, onPageChange }) {
