@@ -12,24 +12,24 @@ import questionCriteriaApi from "../../../services/questionCriteriaApi";
 
 const cx = className.bind(styles);
 
-export const FilterAndAddNew = ({ data, onFilterStatus }) => {
+export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
   const [showModal, setShowModal] = useState(false);
-  const [paramStatus, setParamStatus] = useState({
-    enable: "",
-    keyword: "",
-    page: 1,
-    pageSize: 10,
-  });
+  // const [paramStatus, setParamStatus] = useState({
+  //   enable: "",
+  //   keyword: "",
+  //   // page: 1,
+  //   // pageSize: 10,
+  // });
 
   const options = [];
-  data?.map((item, index) => {
+  data?.data.map((item, index) => {
     options.push({ label: item.name, value: index });
   });
   const handleChangeSelectValueStatus = (e) => {
     const value = e.target.value;
     const name = e.target.name;
     const newParamStatus = { ...paramStatus, [name]: value };
-    setParamStatus(newParamStatus);
+    // setParamStatus(newParamStatus);
     onFilterStatus(newParamStatus);
   };
   const handleModalAddNewCriteria = (e) => {

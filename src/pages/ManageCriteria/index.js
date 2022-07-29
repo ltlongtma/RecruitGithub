@@ -2,7 +2,6 @@ import React from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import className from "classnames/bind";
 import styles from "./criteria.module.scss";
-import { PaginationQuestionBank } from "../../components/Pagination";
 import { GetCriteria } from "../../features/getCriteria";
 
 const cx = className.bind(styles);
@@ -19,7 +18,6 @@ export const ManageCriteria = () => {
       </div>
       <div>
         <GetCriteria/>
-        <PaginationQuestionBank className={cx("pagination")} />
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = [];
+const initialState = { data: [], pagination: {} };
 
 export const getCriteriaSlice = createSlice({
   name: "getCriteria",
   initialState,
   reducers: {
     getCriteria: (state, action) => {
-      state = [...action.payload];
+      state = { ...action.payload };
       return state;
     },
   },

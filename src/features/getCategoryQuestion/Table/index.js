@@ -9,7 +9,6 @@ import questionCategoryApi from "../../../services/questionCategoryApi";
 const cx = className.bind(styles);
 
 export const TableCategory = ({ data, ...props }) => {
-
   const handleChangeSwitchButton = async (item) => {
     const id = item?.id;
     const enable = item?.enable;
@@ -34,7 +33,7 @@ export const TableCategory = ({ data, ...props }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item, index) => {
+          {data?.data.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>

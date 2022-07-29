@@ -14,7 +14,7 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria }) => {
     questionCriteriaApi
       .updateStatus(id, { enable: !enable })
       .then((result) => {
-        console.log("STATUS >>>", result);
+        // console.log("STATUS >>>", result);
       })
       .catch((err) => {
         console.log("ERROR UPDATE STATUS >>>", err);
@@ -34,7 +34,7 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item, index) => {
+          {data?.data.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>

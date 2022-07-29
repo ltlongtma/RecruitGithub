@@ -3,7 +3,7 @@ import { Questionbank } from "../../features/getQuestionBank";
 import className from "classnames/bind";
 import styles from "./Home.module.scss";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { PaginationQuestionBank } from "../../components/Pagination";
+
 
 const cx = className.bind(styles);
 
@@ -18,7 +18,6 @@ export const Home = () => {
       </div>
       <div className={cx("table")}>
         <Questionbank />
-        <PaginationQuestionBank className={cx("pagination")} />
       </div>
     </div>
   );

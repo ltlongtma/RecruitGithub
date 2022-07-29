@@ -9,21 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
 
-export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
+export const FormFilter = ({ onFilterAll, onFilterCategory, paramStatus }) => {
   const navigate = useNavigate();
-
-  const [paramStatus, setParamStatus] = useState({
-    page: 1,
-    pageSize: 10,
-    status: "APPROVED",
-  });
 
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
     const newParamStatus = { ...paramStatus, [name]: value };
-    setParamStatus(newParamStatus);
     onFilterAll(newParamStatus);
   };
   const handleCreateQuestion = () => {
@@ -33,7 +26,7 @@ export const FormFilter = ({ onFilterAll, onFilterCategory }) => {
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
-        <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
+        <Form.Group className={cx("form-group")}>
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}

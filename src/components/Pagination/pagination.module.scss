@@ -1,12 +1,6 @@
 .pagination {
   display: flex;
-  justify-content: flex-end;
-  ul {
-    li {
-      a {
-        color: green;
-      }
-    }
-  }
+  justify-content: right;
+  list-style-type: none;
 }
 

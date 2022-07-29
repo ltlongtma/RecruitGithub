@@ -20,7 +20,7 @@ export default function TableQuestion({ questionList, ...props }) {
             <th>Level</th>
             <th>Dated Added</th>
             <th>Author</th>
-            {questionList[0]?.status === "APPROVED" && (
+            {questionList?.data.length > 0 && questionList?.data[0]?.status === "APPROVED" && (
               <>
                 <th>Approver</th>
                 <th>Date Approved</th>
@@ -29,7 +29,7 @@ export default function TableQuestion({ questionList, ...props }) {
           </tr>
         </thead>
         <tbody>
-          {questionList?.map((question, index) => {
+          {questionList?.data.map((question, index) => {
             // console.log("questionList", questionList.status);
             return (
               <tr key={index} onClick={() => props.handleViewDetailQuestion(question.id)}>

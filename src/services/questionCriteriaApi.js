@@ -3,6 +3,7 @@ import axiosClient from "./AxiosClient";
 const questionCriteriaApi = {
   getAll() {
     const url = `/question-criteria?showDisabled=true`;
+
     return axiosClient.get(url);
   },
 
