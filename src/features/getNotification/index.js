@@ -12,7 +12,6 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../services/AxiosClient";
-import { NavLink } from "react-router-dom";
 
 const cx = className.bind(styles);
 const SOCKET_URL = "http://localhost:8080/ws";
@@ -123,12 +122,6 @@ export const Notifications = () => {
       navigate(`/question/${item.questionBank.id}`);
     }
   };
-
-  const CustomToastWithLink = () => (
-    <>
-      <NavLink to="/question-category">Interview</NavLink>
-    </>
-  );
 
   return (
     <div>
