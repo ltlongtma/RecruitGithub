@@ -12,6 +12,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../../services/AxiosClient";
+import { NavLink } from "react-router-dom";
 
 const cx = className.bind(styles);
 const SOCKET_URL = "http://localhost:8080/ws";
@@ -66,6 +67,9 @@ export const Notifications = () => {
   const showNotification = (msg) => {
     toast(msg.content, {
       autoClose: 3000,
+      onClick: () => {
+        handleReadNotification(msg);
+      },
     });
   };
 
@@ -120,6 +124,12 @@ export const Notifications = () => {
     }
   };
 
+  const CustomToastWithLink = () => (
+    <>
+      <NavLink to="/question-category">Interview</NavLink>
+    </>
+  );
+
   return (
     <div>
       <SockJsClient
@@ -147,6 +157,7 @@ export const Notifications = () => {
                   "mark-read position-relative",
                   "notification-mark-read"
                 )}
+                onClick={handleReadAll}
               >
                 Mark all as read
               </button>
@@ -161,14 +172,14 @@ export const Notifications = () => {
           </div>
 
           <div className={cx("notification-body")}>
-            {notificationList.map((item, index) => {
+            {notificationList.map((item) => {
               return (
                 <div
                   className={cx("line-itmes")}
                   style={{ fontWeight: item.read ? "normal" : "bold" }}
                   onClick={() => handleReadNotification(item)}
                 >
-                  <div >
+                  <div>
                     <p className={cx("author")}>
                       {item.user.username}
                       <span className={cx("date")}>

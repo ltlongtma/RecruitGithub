@@ -16,6 +16,7 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
     right: 0px;
     width: 300px;
     padding: 10px;
+
 }
 
 .line-itmes {
@@ -76,7 +77,7 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
     z-index: 10;
     opacity: 1;
     width: 500px;
-    border-radius: 2px;
+    border-radius: 0.5rem;
     box-shadow: 0px 2px 20px 0 rgb(54 54 54 / 20%);
     background-color: #fff;
     right: 0px;
