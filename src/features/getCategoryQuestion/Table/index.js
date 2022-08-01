@@ -10,7 +10,7 @@ import { IconButton } from "@mui/material";
 
 const cx = className.bind(styles);
 
-export const TableCategory = ({ data, ...props }) => {
+export const TableCategory = ({ data, handleOpenModalDelete, ...props }) => {
   const handleChangeSwitchButton = async (item) => {
     const id = item?.id;
     const active = item?.active;
@@ -75,12 +75,12 @@ export const TableCategory = ({ data, ...props }) => {
                   <IconButton
                     aria-label="delete"
                     color="error"
-                    // onClick={() => {}}
+                    onClick={() => handleOpenModalDelete(item)}
                     disabled={
                       item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
                     }
                   >
-                    <DeleteRoundedIcon  className={cx("deleteIcon")} />
+                    <DeleteRoundedIcon className={cx("deleteIcon")} />
                   </IconButton>
                 </td>
               </tr>

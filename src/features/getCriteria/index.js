@@ -39,19 +39,19 @@ export const GetCriteria = () => {
     setShowModalDelete(!showModalDelete);
     setIdCriteria(item?.id);
   };
-  // const handleDelete = () => {
-  //   questionCriteriaApi
-  //     .delete(idCriteria)
-  //     .then((res) => {})
-  //     .catch((err) => {
-  //       console.log("ERROR DELETE >>>", err);
-  //     });
-  //   questionCriteriaApi.getAll().then((res) => {
-  //     dispatch(getCriteria(res.data));
-  //   });
-  //   setShowModalDelete(false);
-  //   // navigate(`/question-criteria?`);
-  // };
+  const handleDelete = async () => {
+    await questionCriteriaApi
+      .delete(idCriteria)
+      .then((res) => {})
+      .catch((err) => {
+        console.log("ERROR DELETE >>>", err);
+      });
+    await questionCriteriaApi.getFilter().then((res) => {
+      dispatch(getCriteria(res));
+    });
+    setShowModalDelete(false);
+    navigate(`/question-criteria`);
+  };
   const handleSubmitEditCriteria = (id, name) => {
     id = idCriteria;
     questionCriteriaApi.changeName(id, name).then(() => {
@@ -94,7 +94,7 @@ export const GetCriteria = () => {
       <ModalDeleteCriteria
         show={showModalDelete}
         handleClose={() => setShowModalDelete(!showModalDelete)}
-        // onDelete={handleDelete}
+        onDelete={handleDelete}
       />
       <PaginatedItems pagination={data?.pagination} onPageChange={onPageChange} />
     </div>

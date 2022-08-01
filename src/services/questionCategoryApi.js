@@ -14,6 +14,10 @@ const questionCategoryApi = {
     const url = `/question-category/${id}`;
     return axiosClient.get(url);
   },
+  delete(id) {
+    const url = `/question-category/${id}`;
+    return axiosClient.delete(url);
+  },
 
   create(data) {
     const url = "/question-category";
@@ -28,8 +32,6 @@ const questionCategoryApi = {
     const url = `/question-category/update-active/${id}`;
     return axiosClient.put(url, params);
   },
-
-
 };
 
 export default questionCategoryApi;

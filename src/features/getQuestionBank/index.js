@@ -23,6 +23,7 @@ export const Questionbank = () => {
       .getAll()
 
       .then((res) => {
+        console.log("RES 1", res);
         dispatch(getQuestionBank(res));
       })
       .catch((error) => {
@@ -31,6 +32,8 @@ export const Questionbank = () => {
     questionBankApi
       .getFilterCategory()
       .then((res) => {
+        console.log("RES 2", res);
+
         dispatch(getFilterCategory(res));
       })
       .catch((error) => {

@@ -42,7 +42,7 @@ export const Notifications = () => {
       .catch((err) => {
         console.log("ERROR axios profile >>> ", err);
       });
-  });
+  }, []);
 
   const handleShowNotification = () => {
     setShowNotificationList(!isShowNotificationList);
@@ -146,10 +146,7 @@ export const Notifications = () => {
             <span className={cx("notification-title")}> NOTIFICATION</span>
             <div className={cx(" align-items-center")}>
               <button
-                className={cx(
-                  "mark-read position-relative",
-                  "notification-mark-read"
-                )}
+                className={cx("mark-read position-relative", "notification-mark-read")}
                 onClick={handleReadAll}
               >
                 Mark all as read
