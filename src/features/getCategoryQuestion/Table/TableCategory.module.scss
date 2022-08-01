@@ -9,7 +9,6 @@
 
   .editIcon {
     cursor: pointer;
-    color: green;
     &:hover {
       font-size: xx-large;
     }
@@ -22,9 +21,14 @@
   }
   td {
     .switchButton {
-     .switch-group{
-
-     }
+      .switch-group {
+      }
+    }
+  }
+  .deleteIcon {
+    cursor: pointer;
+    &:hover {
+      font-size: xx-large;
     }
   }
 }

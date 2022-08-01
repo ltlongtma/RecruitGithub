@@ -25,7 +25,7 @@ const questionCategoryApi = {
   },
   //Switch statusCategory
   update(id, params) {
-    const url = `/question-category/update-enable/${id}`;
+    const url = `/question-category/update-active/${id}`;
     return axiosClient.put(url, params);
   },
 

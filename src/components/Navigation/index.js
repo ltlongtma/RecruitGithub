@@ -16,10 +16,9 @@ const cx = className.bind(styles);
 
 export const Navigation = () => {
   const role = sessionStorage.getItem("isRole");
-  
+
   return (
     <Navbar className={cx("navbar")}>
-      
       <Navbar.Brand href="#home" className={cx("brand")}>
         <img
           alt="tma-logo"
@@ -31,8 +30,8 @@ export const Navigation = () => {
         <span className={cx("text-brand")}>Recruitment Tool</span>
       </Navbar.Brand>
 
-      <Nav className={cx("action")}>
-        <NavDropdown title="Question Bank" className={cx("action-dropdown")}>
+      <Nav className={cx("action")} >
+        <NavDropdown title="Question Bank" className={cx("action-dropdown")} >
           <div className={cx("inside-dropdown")}>
             <NavLink to="/question">View All</NavLink>
             <NavDropdown.Divider />
@@ -44,19 +43,14 @@ export const Navigation = () => {
         {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}
 
         <Form className={cx("search", "d-flex")}>
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            size="sm"
-          />
+          <Form.Control type="search" placeholder="Search" aria-label="Search" size="sm" />
           <Button size="sm" variant="success">
             Search
           </Button>
         </Form>
 
         <Notifications />
-        
+
         <UserDetail />
       </Nav>
     </Navbar>

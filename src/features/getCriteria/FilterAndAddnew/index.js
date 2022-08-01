@@ -14,12 +14,6 @@ const cx = className.bind(styles);
 
 export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
   const [showModal, setShowModal] = useState(false);
-  // const [paramStatus, setParamStatus] = useState({
-  //   enable: "",
-  //   keyword: "",
-  //   // page: 1,
-  //   // pageSize: 10,
-  // });
 
   const options = [];
   data?.data.map((item, index) => {
@@ -34,7 +28,7 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
   };
   const handleModalAddNewCriteria = (e) => {
     if (e !== "") {
-        questionCriteriaApi
+      questionCriteriaApi
         .create(e)
         .then(() => {
           alert("New criteria added successfully");
@@ -50,10 +44,10 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
         <FormGroup className={cx("form-group")}>
-          <Form.Select name="enable" onChange={handleChangeSelectValueStatus}>
+          <Form.Select name="active" onChange={handleChangeSelectValueStatus}>
             <option value="">Status - All</option>
-            <option value="true">Enable</option>
-            <option value="false">Disable</option>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
           </Form.Select>
         </FormGroup>
         <FormGroup className={cx("form-group")}>

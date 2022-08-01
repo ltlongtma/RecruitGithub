@@ -6,16 +6,21 @@ import { getCriteria } from "./getCriteriaSlice";
 import { ModalEditCriteria } from "./Modal/ModalEdit";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import PaginatedItems from "../../components/Pagination";
+import { ModalDeleteCriteria } from "./Modal/ModalDelete";
+import { useNavigate } from "react-router-dom";
 
 export const GetCriteria = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const data = useSelector((state) => state.getCriteria);
-  // console.log("DATA >>>", data);
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
   const [oldNameCriteria, setOldNameCriteria] = useState();
   const [idCriteria, setIdCriteria] = useState();
   const [paramStatus, setParamStatus] = useState({
-    enable: "",
+    active: "",
     keyword: "",
   });
 
@@ -30,6 +35,23 @@ export const GetCriteria = () => {
     setOldNameCriteria(item?.name);
     setIdCriteria(item?.id);
   };
+  const handleOpenModalDelete = (item) => {
+    setShowModalDelete(!showModalDelete);
+    setIdCriteria(item?.id);
+  };
+  // const handleDelete = () => {
+  //   questionCriteriaApi
+  //     .delete(idCriteria)
+  //     .then((res) => {})
+  //     .catch((err) => {
+  //       console.log("ERROR DELETE >>>", err);
+  //     });
+  //   questionCriteriaApi.getAll().then((res) => {
+  //     dispatch(getCriteria(res.data));
+  //   });
+  //   setShowModalDelete(false);
+  //   // navigate(`/question-criteria?`);
+  // };
   const handleSubmitEditCriteria = (id, name) => {
     id = idCriteria;
     questionCriteriaApi.changeName(id, name).then(() => {
@@ -58,12 +80,21 @@ export const GetCriteria = () => {
     <div>
       <FilterAndAddNew data={data} onFilterStatus={onFilterStatus} paramStatus={paramStatus} />
 
-      <TableCriteria data={data} handleOpenModalEditCriteria={handleOpenModalEditCriteria} />
+      <TableCriteria
+        data={data}
+        handleOpenModalEditCriteria={handleOpenModalEditCriteria}
+        handleOpenModalDelete={handleOpenModalDelete}
+      />
       <ModalEditCriteria
         show={showModalEdit}
         handleClose={() => setShowModalEdit(!showModalEdit)}
         handleSubmitEditCriteria={handleSubmitEditCriteria}
         name={oldNameCriteria}
+      />
+      <ModalDeleteCriteria
+        show={showModalDelete}
+        handleClose={() => setShowModalDelete(!showModalDelete)}
+        // onDelete={handleDelete}
       />
       <PaginatedItems pagination={data?.pagination} onPageChange={onPageChange} />
     </div>

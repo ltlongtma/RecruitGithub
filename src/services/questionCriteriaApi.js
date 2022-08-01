@@ -36,7 +36,7 @@ const questionCriteriaApi = {
   },
   //Switch statusCriteria
   updateStatus(id, params) {
-    const url = `/question-criteria/update-enable/${id}`;
+    const url = `/question-criteria/update-active/${id}`;
     return axiosClient.put(url, params);
   },
 };

@@ -1,31 +1,34 @@
 .table {
-    text-align: center;
-    tr:hover {
-      color: darkgreen;
+  text-align: center;
+  tr:hover {
+    color: darkgreen;
+  }
+  .table-head {
+    background: rgb(152, 197, 152);
+  }
+
+  .editIcon {
+    cursor: pointer;
+    &:hover {
+      font-size: xx-large;
     }
-    .table-head {
-      background: rgb(152, 197, 152);
-    }
-  
-    .editIcon {
+  }
+  tr {
+    &:hover {
       cursor: pointer;
-      color: green;
-      &:hover {
-        font-size: xx-large;
-      }
+      background: rgb(218, 235, 218);
     }
-    tr {
-      &:hover {
-        cursor: pointer;
-        background: rgb(218, 235, 218);
-      }
-    }
-    td {
-      .switchButton {
-       .switch-group{
-  
-       }
+  }
+  td {
+    .switchButton {
+      .switch-group {
       }
     }
   }
-  
+  .deleteIcon {
+    cursor: pointer;
+    &:hover {
+      font-size: xx-large;
+    }
+  }
+}

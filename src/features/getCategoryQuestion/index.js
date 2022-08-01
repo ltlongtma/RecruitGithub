@@ -15,7 +15,7 @@ export const CategoryQuestion = () => {
   const [oldNameCategory, setOldNameCategory] = useState();
   const [idCategory, setIdCategory] = useState();
   const [paramStatus, setParamStatus] = useState({
-    enable: "",
+    active: "",
     keyword: "",
     // page: "",
     // pageSize: "",
