@@ -13,7 +13,7 @@ export default function TableQuestion({ questionList, ...props }) {
       <Table bordered hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
-            <th>Num</th>
+            <th>No.</th>
             <th>Content</th>
             <th>Answer</th>
             <th>Category</th>
@@ -29,7 +29,7 @@ export default function TableQuestion({ questionList, ...props }) {
           </tr>
         </thead>
         <tbody>
-          {questionList?.data.map((question, index) => {
+          {questionList?.data?.map((question, index) => {
             // console.log("questionList", questionList.status);
             return (
               <tr key={index} onClick={() => props.handleViewDetailQuestion(question.id)}>

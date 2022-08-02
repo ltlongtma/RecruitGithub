@@ -8,6 +8,7 @@ import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import { useNavigate } from "react-router-dom";
 import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 import PaginatedItems from "../../components/Pagination";
+import useDebounce from "../../hooks/useDebounce";
 
 export const Questionbank = () => {
   const dispatch = useDispatch();
@@ -17,24 +18,24 @@ export const Questionbank = () => {
   const [paramStatus, setParamStatus] = useState({
     status: "APPROVED",
   });
+  // const debounce = useDebounce(paramStatus, 500);
 
-  useEffect(() => {
-    questionBankApi
+  useEffect(  () => {
+     questionBankApi
       .getAll()
 
       .then((res) => {
-        console.log("RES 1", res);
+        // console.log("RES 1", res);
         dispatch(getQuestionBank(res));
       })
       .catch((error) => {
         console.log("ERROR getQuestionBank >>> " + error);
       });
-    questionBankApi
+     questionBankApi
       .getFilterCategory()
-      .then((res) => {
-        console.log("RES 2", res);
+      .then( (res) => {
 
-        dispatch(getFilterCategory(res));
+         dispatch(getFilterCategory(res));
       })
       .catch((error) => {
         console.log("ERROR getFilterCategory >>> " + error);

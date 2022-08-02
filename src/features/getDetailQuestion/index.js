@@ -22,6 +22,11 @@ export const DetailQuestion = () => {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalApprove, setShowModalApprove] = useState(false);
   const [showModalReject, setShowModalReject] = useState(false);
+  const [readOnly, setReadOnly] = useState(true);
+  const [valueInput, setValueInput] = useState({
+    content: "",
+    answer: "",
+  });
 
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
@@ -99,9 +104,15 @@ export const DetailQuestion = () => {
   };
 
   const handleEditQuestion = () => {
+    setReadOnly(!readOnly);
     setShowSaveAndBackButton(false);
     setShowEditAndDeleteButton(true);
   };
+
+  const handleSave = (value) => {
+    console.log("VAL >>>", value);
+  };
+
   const handleBack = () => {
     setShowSaveAndBackButton(true);
     setShowEditAndDeleteButton(false);
@@ -111,6 +122,7 @@ export const DetailQuestion = () => {
     <div>
       <TableDetailQuestion
         data={data}
+        readOnly={readOnly}
         criteria={criteria}
         handleApproveQuestion={handleApproveQuestion}
         handleEditQuestion={handleEditQuestion}
@@ -120,6 +132,8 @@ export const DetailQuestion = () => {
         handleShowModalDelete={handleShowModalDelete}
         handleShowModalApprove={handleShowModalApprove}
         handleShowModalReject={handleShowModalReject}
+        valueInput={valueInput}
+        handleSave={handleSave}
       />
       <ModalDeletQuestion
         centered

@@ -5,7 +5,7 @@ const questionBankApi = {
     const url = `/question/filter`;
     return axiosClient.get(url, { params: params });
   },
-  
+
   getFilterCategory() {
     const url = `/question-category`;
     return axiosClient.get(url);
@@ -15,7 +15,7 @@ const questionBankApi = {
     const url = `/question/${id}`;
     return axiosClient.get(url);
   },
-  
+
   approveQuestion(id, params) {
     const url = `/question/${id}/approve`;
     return axiosClient.post(url, params);
@@ -31,8 +31,8 @@ const questionBankApi = {
     return axiosClient.delete(url);
   },
 
-  update(data) {
-    const url = `/question/${data.id}`;
+  update(id, data) {
+    const url = `/question/${id}`;
     return axiosClient.put(url, data);
   },
 };

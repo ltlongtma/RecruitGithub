@@ -12,7 +12,7 @@ export const TableData = (props) => {
       <Table bordered hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
-            <th>Num</th>
+            <th>No.</th>
             <th>Id Badge</th>
             <th>Username</th>
             <th>Full Name</th>

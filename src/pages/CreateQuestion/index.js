@@ -50,7 +50,7 @@ export const CreateQuestion = () => {
       .catch((error) => {
         console.log("ERROR getFilterCriteria >>> " + error);
       });
-  }, [dispatch]);
+  }, []);
 
   const validateForm = () => {
     return (
