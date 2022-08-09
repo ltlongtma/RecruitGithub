@@ -9,26 +9,22 @@ import Multiselect from "multiselect-react-dropdown";
 
 const cx = className.bind(styles);
 
-export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ...props }) => {
+export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) => {
   const refContent = useRef();
   const refAnswer = useRef();
+  const [disabledSaveButton, setDisableSaveButton] = useState(false);
 
-  // console.log("VAL ", value);
-
-  // console.log("refContent >>>", refContent?.current?.value);
-  const val = {
-    content: refContent?.current?.value,
-    answer: refAnswer?.current?.value,
+  const handleDisableSaveButton = (e) => {
+    const value = e.target.value;
+    console.log("E >>>", value);
+    setDisableSaveButton(value !== "" && value.length > 0 ? false : true);
   };
- 
-  // console.log("VAL ", val);
 
   const criteria = [];
   data.criteria?.forEach((element) => {
     criteria.push(element);
   });
 
-  // console.log("REF >>>", refContent?.current?.value);
   return (
     <div>
       {" "}
@@ -36,19 +32,19 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
         <Row className={cx("basicInfo", "mb-3")}>
           <Form.Group as={Col}>
             <Form.Label>Category</Form.Label>
-            <Form.Control type="text" defaultValue={data?.category?.name} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.category?.name} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Status</Form.Label>
-            <Form.Control type="text" defaultValue={data.status} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data.status} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Author</Form.Label>
-            <Form.Control type="text" defaultValue={data?.author?.name} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.author?.name} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Level</Form.Label>
-            <Form.Control type="text" defaultValue={data?.level} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.level} readOnly />
           </Form.Group>
         </Row>
         <Row className={cx("dateInfo", "mb-3")}>
@@ -66,15 +62,15 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Create date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.createdDate} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.createdDate} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Approve date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.approvedDate} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.approvedDate} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Update date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.updatedDate} readOnly={readOnly} />
+            <Form.Control type="text" defaultValue={data?.updatedDate} readOnly />
           </Form.Group>
         </Row>
         <Row className={cx("content", "mb-3")}>
@@ -85,8 +81,8 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
               name="content"
               defaultValue={data?.content}
               readOnly={readOnly}
-              autoFocus={true}
               ref={refContent}
+              onChange={handleDisableSaveButton}
             />
           </Form.Group>
         </Row>
@@ -97,22 +93,58 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
               as="textarea"
               name="answer"
               type="text"
-              defaultValue={data?.answer}A
+              defaultValue={data?.answer}
               readOnly={readOnly}
               ref={refAnswer}
+              onChange={handleDisableSaveButton}
             />
           </Form.Group>
         </Row>
-        <Row className="mb-3">
+
+        <Row className="mb-3" >
           {data.status === "PENDING" && (
             <Form.Group as={Col} className={cx("buttons")}>
-              <Button variant="warning">Edit</Button>
+              <Button
+                size="lg"
+                variant="warning"
+                onClick={() => props.handleEditQuestionPending()}
+                hidden={props.showRejectAndApproveButton}
+              >
+                Edit
+              </Button>
 
-              <Button variant="danger" onClick={props.handleShowModalReject}>
+              <Button
+                size="lg"
+                variant="danger"
+                onClick={props.handleShowModalReject}
+                hidden={props.showRejectAndApproveButton}
+              >
                 Reject
               </Button>
-              <Button variant="success" onClick={props.handleShowModalApprove}>
+              <Button
+                size="lg"
+                variant="success"
+                onClick={props.handleShowModalApprove}
+                hidden={props.showRejectAndApproveButton}
+              >
                 Approve
+              </Button>
+              <Button
+                variant="secondary"
+                hidden={props.showSaveAndBackButton}
+                size="lg"
+                onClick={props.handleBackPending}
+              >
+                Cancer
+              </Button>
+              <Button
+                variant="success"
+                hidden={props.showSaveAndBackButton}
+                size="lg"
+                onClick={() => handleSave(refContent?.current?.value, refAnswer?.current?.value)}
+                disabled={disabledSaveButton}
+              >
+                Save
               </Button>
             </Form.Group>
           )}
@@ -120,7 +152,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
             <Form.Group as={Col} className={cx("buttons")}>
               <Button
                 variant="warning"
-                onClick={props.handleEditQuestion}
+                onClick={props.handleEditQuestionApproved}
                 hidden={props.showEditAndDeleteButton}
                 size="lg"
               >
@@ -138,7 +170,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
                 variant="secondary"
                 hidden={props.showSaveAndBackButton}
                 size="lg"
-                onClick={props.handleBack}
+                onClick={props.handleBackApproved}
               >
                 Cancer
               </Button>
@@ -146,7 +178,8 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, valueInput, ..
                 variant="success"
                 hidden={props.showSaveAndBackButton}
                 size="lg"
-                onClick={() => handleSave(val)}
+                onClick={() => handleSave(refContent?.current?.value, refAnswer?.current?.value)}
+                disabled={disabledSaveButton}
               >
                 Save
               </Button>

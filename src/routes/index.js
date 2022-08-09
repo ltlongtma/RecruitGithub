@@ -7,7 +7,9 @@ import {
   ChangePassword,
   ViewDetailQuestion,
   CreateQuestion,
-  ManageCategory
+  ManageCategory,
+  ManageTemplates,
+  Interview,
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
 import { ManageCriteria } from "../pages/ManageCriteria";
@@ -21,14 +23,15 @@ export const publicRoute = [
 
 export const adminRoute = [
   { path: "/", component: Home },
-
   { path: "/question", component: Home },
   { path: "/question-category", component: ManageCategory },
   { path: "/question-criteria", component: ManageCriteria },
-
   { path: "/question/:questionId", component: ViewDetailQuestion },
   { path: "/user", component: User },
   { path: "/question/create", component: CreateQuestion },
+  { path: "/interview", component: Interview },
+
+  { path: "/interview/templates", component: ManageTemplates },
 ];
 
 export const userRoute = [

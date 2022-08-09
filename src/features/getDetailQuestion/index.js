@@ -19,14 +19,12 @@ export const DetailQuestion = () => {
   const dispatch = useDispatch();
   const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
   const [showEditAndDeleteButton, setShowEditAndDeleteButton] = useState(false);
+  const [showRejectAndApproveButton, setShowRejectAndApproveButton] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalApprove, setShowModalApprove] = useState(false);
   const [showModalReject, setShowModalReject] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
-  const [valueInput, setValueInput] = useState({
-    content: "",
-    answer: "",
-  });
+  
 
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
@@ -103,19 +101,50 @@ export const DetailQuestion = () => {
     navigate(`../question`);
   };
 
-  const handleEditQuestion = () => {
+  const handleEditQuestionApproved = () => {
     setReadOnly(!readOnly);
     setShowSaveAndBackButton(false);
     setShowEditAndDeleteButton(true);
   };
-
-  const handleSave = (value) => {
-    console.log("VAL >>>", value);
+  const handleEditQuestionPending = () => {
+    setReadOnly(!readOnly);
+    setShowRejectAndApproveButton(true);
+    setShowSaveAndBackButton(false);
   };
 
-  const handleBack = () => {
+  const handleSave = async (refContent, refAnswer) => {
+    const data = {
+      content: refContent,
+      answer: refAnswer,
+    };
+    await questionBankApi
+      .update(questionId, data)
+      .then((result) => {
+        alert("updated successfully!");
+      })
+      .catch((err) => {
+        console.log("ERROR Update >>> " + err);
+      });
+    await questionBankApi
+      .getAll()
+
+      .then((res) => {
+        dispatch(getQuestionBank(res));
+      })
+      .catch((error) => {
+        console.log("ERROR getQuestionBank >>> " + error);
+      });
+
+    navigate(`../question`);
+  };
+
+  const handleBackApproved = () => {
     setShowSaveAndBackButton(true);
     setShowEditAndDeleteButton(false);
+  };
+  const handleBackPending = () => {
+    setShowRejectAndApproveButton(false);
+    setShowSaveAndBackButton(true);
   };
 
   return (
@@ -125,15 +154,17 @@ export const DetailQuestion = () => {
         readOnly={readOnly}
         criteria={criteria}
         handleApproveQuestion={handleApproveQuestion}
-        handleEditQuestion={handleEditQuestion}
+        handleEditQuestionApproved={handleEditQuestionApproved}
+        handleEditQuestionPending={handleEditQuestionPending}
         showEditAndDeleteButton={showEditAndDeleteButton}
-        handleBack={handleBack}
+        handleBackApproved={handleBackApproved}
         showSaveAndBackButton={showSaveAndBackButton}
         handleShowModalDelete={handleShowModalDelete}
         handleShowModalApprove={handleShowModalApprove}
         handleShowModalReject={handleShowModalReject}
-        valueInput={valueInput}
         handleSave={handleSave}
+        handleBackPending={handleBackPending}
+        showRejectAndApproveButton={showRejectAndApproveButton}
       />
       <ModalDeletQuestion
         centered

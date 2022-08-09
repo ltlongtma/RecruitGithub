@@ -5,12 +5,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import className from "classnames/bind";
 import styles from "./form.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const cx = className.bind(styles);
 
-export const FormFilter = ({ onFilterAll, onFilterCategory, paramStatus }) => {
+export const FormFilter = ({
+  onFilterAll,
+  onFilterCategory,
+  paramStatus,
+  hiddenCreateButton,
+  hiddenSelectStatusQuestion,
+}) => {
   const navigate = useNavigate();
+  // const currentUrl = window.location.pathname;
 
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;
@@ -50,15 +57,17 @@ export const FormFilter = ({ onFilterAll, onFilterCategory, paramStatus }) => {
               </option>
             ))}
           </Form.Select>
-
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}
             name="status"
+            hidden={hiddenSelectStatusQuestion}
           >
             <option value="APPROVED">Approved</option>
+
             <option value="PENDING">Pending</option>
           </Form.Select>
+
           <Form.Control
             className={cx("form-group-input")}
             type="text"
@@ -71,7 +80,12 @@ export const FormFilter = ({ onFilterAll, onFilterCategory, paramStatus }) => {
           <SearchIcon />
         </Button>
       </Form>
-      <Button variant="success" size="sm" onClick={handleCreateQuestion}>
+      <Button
+        variant="success"
+        size="sm"
+        onClick={handleCreateQuestion}
+        hidden={hiddenCreateButton}
+      >
         <AddIcon /> Create New Question
       </Button>
     </div>

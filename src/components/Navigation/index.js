@@ -30,8 +30,8 @@ export const Navigation = () => {
         <span className={cx("text-brand")}>Recruitment Tool</span>
       </Navbar.Brand>
 
-      <Nav className={cx("action")} >
-        <NavDropdown title="Question Bank" className={cx("action-dropdown")} >
+      <Nav className={cx("action")}>
+        <NavDropdown title="Question Bank" className={cx("action-dropdown")}>
           <div className={cx("inside-dropdown")}>
             <NavLink to="/question">View All</NavLink>
             <NavDropdown.Divider />
@@ -39,7 +39,14 @@ export const Navigation = () => {
             <NavLink to="/question-criteria">Manage Criteria</NavLink>
           </div>
         </NavDropdown>
-        <NavLink to="/interview">Interview</NavLink>
+        <NavDropdown title="interview" className={cx("action-dropdown")}>
+          <div className={cx("inside-dropdown")}>
+            <NavLink to="/interview">Interview</NavLink>
+            <NavDropdown.Divider />
+            <NavLink to="/interview/templates">Templates</NavLink>
+          </div>
+        </NavDropdown>
+        {/* <NavLink to="/interview">Interview</NavLink> */}
         {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}
 
         <Form className={cx("search", "d-flex")}>

@@ -10,7 +10,7 @@ import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 
-export const Questionbank = () => {
+export const Questionbank = ({ hiddenCreateButton, hiddenSelectStatusQuestion }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const QuestionList = useSelector((state) => state.questionBank);
@@ -20,8 +20,8 @@ export const Questionbank = () => {
   });
   // const debounce = useDebounce(paramStatus, 500);
 
-  useEffect(  () => {
-     questionBankApi
+  useEffect(() => {
+    questionBankApi
       .getAll()
 
       .then((res) => {
@@ -31,11 +31,10 @@ export const Questionbank = () => {
       .catch((error) => {
         console.log("ERROR getQuestionBank >>> " + error);
       });
-     questionBankApi
+    questionBankApi
       .getFilterCategory()
-      .then( (res) => {
-
-         dispatch(getFilterCategory(res));
+      .then((res) => {
+        dispatch(getFilterCategory(res));
       })
       .catch((error) => {
         console.log("ERROR getFilterCategory >>> " + error);
@@ -83,13 +82,18 @@ export const Questionbank = () => {
         paramStatus={paramStatus}
         onFilterAll={onFilterAll}
         onFilterCategory={CategoryList}
+        hiddenCreateButton={hiddenCreateButton}
+        hiddenSelectStatusQuestion={hiddenSelectStatusQuestion}
       />
 
       <TableQuestion
         questionList={QuestionList}
         handleViewDetailQuestion={handleViewDetailQuestion}
       />
-      <PaginatedItems pagination={QuestionList?.pagination} onPageChange={onPageChange} />
+      <PaginatedItems
+        pagination={QuestionList?.pagination}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };

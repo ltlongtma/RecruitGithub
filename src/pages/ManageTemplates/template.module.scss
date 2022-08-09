@@ -1,0 +1,21 @@
+.input-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2em;
+}
+.button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem;
+  button {
+    margin-left: 10px;
+  }
+}
+.table {
+  text-align: center;
+
+  .table-head {
+    background-color: rgb(161, 224, 145);
+  }
+}

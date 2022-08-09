@@ -8,3 +8,5 @@ export * from "./ViewDetailQuestion";
 export * from "./CreateQuestion";
 export * from "./ManageCategory";
 export * from "./ManageCriteria";
+export * from "./ManageTemplates";
+export * from "./Interview";

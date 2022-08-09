@@ -162,7 +162,7 @@ export const CreateQuestion = () => {
             <div className={cx("form-group")}>
               <label htmlFor="criteria">Criteria</label>
               <Multiselect
-              className={cx("criteria-multiselect")}
+                className={cx("criteria-multiselect")}
                 options={criteria}
                 selectedValues={criteria.selectedValue}
                 onSelect={onSelect}
@@ -186,12 +186,7 @@ export const CreateQuestion = () => {
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </div>
-            <div
-              className={cx(
-                "d-flex align-items-center justify-content-center",
-                "div-btn"
-              )}
-            >
+            <div className={cx("d-flex align-items-center justify-content-center", "div-btn")}>
               <button
                 type="submit"
                 className={cx("btn btn-primary")}
@@ -210,7 +205,7 @@ export const CreateQuestion = () => {
                 ) : null}
                 Submit
               </button>
-              <button className={cx("btn btn-secondary btnn")} onClick={cancel}>
+              <button className={cx("btn btn-secondary btnn")} onClick={() => cancel()}>
                 Cancel
               </button>
             </div>
