@@ -82,7 +82,11 @@ export const ManageTemplates = () => {
             <ShowAllTemplate></ShowAllTemplate>
           </TabPanel>
           <TabPanel value="2">
-            <Questionbank hiddenCreateButton={true} hiddenSelectStatusQuestion={true} />
+            <Questionbank
+              hiddenCreateButton={true}
+              hiddenSelectStatusQuestion={true}
+              showSelectColumn={true}
+            />
 
             <Box sx={{ borderBottom: 3, borderColor: "block", m: 5 }}></Box>
 

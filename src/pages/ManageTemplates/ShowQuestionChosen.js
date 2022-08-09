@@ -12,9 +12,9 @@ const cx = className.bind(styles);
 
 export const ShowQuestionChosen = ({ QuestionChosen, dataTemplate, handleSubmitTemplate }) => {
   const [valueInput, setValueInput] = useState({
-    description: "",
     name: "",
-    public: true,
+    description: "",
+    public: "",
   });
 
   const dispatch = useDispatch();
@@ -23,10 +23,11 @@ export const ShowQuestionChosen = ({ QuestionChosen, dataTemplate, handleSubmitT
     dispatch(removeQuestionFromTemplate(data));
   };
   const handleChangePublic = (e) => {
+    // console.log("e >>>", e.target)
     const value = e.target.value;
     const name = e.target.name;
     setValueInput({ ...valueInput, [name]: value });
-    dataTemplate(valueInput);
+    dataTemplate({ ...valueInput, [name]: value });
   };
 
   return (
@@ -60,6 +61,7 @@ export const ShowQuestionChosen = ({ QuestionChosen, dataTemplate, handleSubmitT
               label="Age"
               defaultValue={true}
               onChange={handleChangePublic}
+              name="public"
             >
               <MenuItem value={true}>True</MenuItem>
               <MenuItem value={false}>False</MenuItem>

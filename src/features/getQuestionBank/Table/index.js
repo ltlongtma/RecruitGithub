@@ -13,8 +13,7 @@ import {
 
 const cx = className.bind(styles);
 
-export default function TableQuestion({ questionList, ...props }) {
-  const currentUrlPathname = window.location.pathname;
+export default function TableQuestion({ questionList, showSelectColumn, ...props }) {
   const dispatch = useDispatch();
 
   const handleChangeCheckbox = (e, data) => {
@@ -40,7 +39,7 @@ export default function TableQuestion({ questionList, ...props }) {
                 <th>Date Approved</th>
               </>
             )}
-            {currentUrlPathname === "/interview/templates" && <th>Select</th>}
+            {showSelectColumn && <th>Select</th>}
           </tr>
         </thead>
         <tbody>
@@ -64,7 +63,7 @@ export default function TableQuestion({ questionList, ...props }) {
                     <td>{question.approvedDate}</td>
                   </>
                 )}
-                {currentUrlPathname === "/interview/templates" && (
+                {showSelectColumn && (
                   <td>
                     <Checkbox onChange={(e) => handleChangeCheckbox(e, question)} />
                   </td>

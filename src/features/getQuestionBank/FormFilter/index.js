@@ -17,7 +17,6 @@ export const FormFilter = ({
   hiddenSelectStatusQuestion,
 }) => {
   const navigate = useNavigate();
-  // const currentUrl = window.location.pathname;
 
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;

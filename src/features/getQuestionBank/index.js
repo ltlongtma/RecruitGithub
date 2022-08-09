@@ -10,19 +10,24 @@ import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 
-export const Questionbank = ({ hiddenCreateButton, hiddenSelectStatusQuestion }) => {
+export const Questionbank = ({
+  hiddenCreateButton,
+  hiddenSelectStatusQuestion,
+  showSelectColumn,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const QuestionList = useSelector((state) => state.questionBank);
   const CategoryList = useSelector((state) => state.filterCategory);
   const [paramStatus, setParamStatus] = useState({
     status: "APPROVED",
+    pageSize: 5,
   });
   // const debounce = useDebounce(paramStatus, 500);
 
   useEffect(() => {
     questionBankApi
-      .getAll()
+      .getAll(paramStatus)
 
       .then((res) => {
         // console.log("RES 1", res);
@@ -89,11 +94,9 @@ export const Questionbank = ({ hiddenCreateButton, hiddenSelectStatusQuestion })
       <TableQuestion
         questionList={QuestionList}
         handleViewDetailQuestion={handleViewDetailQuestion}
+        showSelectColumn={showSelectColumn}
       />
-      <PaginatedItems
-        pagination={QuestionList?.pagination}
-        onPageChange={onPageChange}
-      />
+      <PaginatedItems pagination={QuestionList?.pagination} onPageChange={onPageChange} />
     </div>
   );
 };
