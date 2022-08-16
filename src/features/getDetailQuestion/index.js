@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../services/questionBankApi";
 import questionCriteriaApi from "../../services/questionCriteriaApi";
 import { getDetailQuestion } from "./getDetailQuestionSlice";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getQuestionBank } from "../getQuestionBank/getQuestionBankSlice";
 import { TableDetailQuestion } from "./Table";
 import { ModalDeletQuestion } from "./Modal/ModalDelete";
@@ -14,7 +14,7 @@ import { ModalRejectQuestion } from "./Modal/ModalReject";
 
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
-
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
@@ -24,10 +24,10 @@ export const DetailQuestion = () => {
   const [showModalApprove, setShowModalApprove] = useState(false);
   const [showModalReject, setShowModalReject] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
-  
 
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
+
   useEffect(() => {
     questionBankApi
       .getById(questionId)
@@ -37,6 +37,8 @@ export const DetailQuestion = () => {
       .catch((error) => {
         console.log("ERROR getDetailQuestion >>>", error);
       });
+    setShowEditAndDeleteButton(JSON.parse(location.state.toLowerCase()));
+
     questionCriteriaApi
       .getAll()
       .then((res) => {
@@ -45,7 +47,7 @@ export const DetailQuestion = () => {
       .catch((error) => {
         console.log("ERROR getFilterCriteria >>> " + error);
       });
-  }, []);
+  }, [location]);
   const handleApproveQuestion = async () => {
     await questionBankApi
       .approveQuestion(questionId, data)

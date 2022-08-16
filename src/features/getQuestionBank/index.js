@@ -68,7 +68,7 @@ export const Questionbank = ({
       .catch((error) => {
         console.log("DetailQuestion ERROR>>>", error);
       });
-    navigate(`/question/${e}`);
+    navigate(`/question/${e}`, { state: "true" });
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };

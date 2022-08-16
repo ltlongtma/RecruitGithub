@@ -3,18 +3,19 @@ import Table from "react-bootstrap/Table";
 import styles from "../Table/table.module.scss";
 import className from "classnames/bind";
 import sliceContent from "../../../helpers/sliceContent";
-import dayjs from "dayjs";
 import { Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestionToTemplate,
   removeQuestionFromTemplate,
-} from "../../Templates/createTemplateSlice";
+} from "../../getTemplates/createTemplateSlice";
+import moment from "moment";
 
 const cx = className.bind(styles);
 
 export default function TableQuestion({ questionList, showSelectColumn, ...props }) {
   const dispatch = useDispatch();
+  const questionChosen = useSelector((state) => state.createTemplate);
 
   const handleChangeCheckbox = (e, data) => {
     e.target.checked === true
@@ -55,17 +56,20 @@ export default function TableQuestion({ questionList, showSelectColumn, ...props
                 </td>
                 <td>{question.category.name}</td>
                 <td>{question.level}</td>
-                <td>{question.createdDate}</td>
+                <td>{moment(question?.createdDate).format("DD/MM/YYYY h:mm:ss")}</td>
                 <td>{question.author.name}</td>
                 {question.status === "APPROVED" && (
                   <>
                     <td>{question.approver?.name}</td>
-                    <td>{question.approvedDate}</td>
+                    <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
                   </>
                 )}
                 {showSelectColumn && (
                   <td>
-                    <Checkbox onChange={(e) => handleChangeCheckbox(e, question)} />
+                    <Checkbox
+                      checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
+                      onChange={(e) => handleChangeCheckbox(e, question)}
+                    />
                   </td>
                 )}
               </tr>

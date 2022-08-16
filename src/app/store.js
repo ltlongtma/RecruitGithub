@@ -6,7 +6,7 @@ import getDetailQuestion from "../features/getDetailQuestion/getDetailQuestionSl
 import getFilterCriteriaReducer from "../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import getCategoryReducer from "../features/getCategoryQuestion/getCategorySlice";
 import getCriteriaReducer from "../features/getCriteria/getCriteriaSlice";
-import createTemplateReducer from "../features/Templates/createTemplateSlice";
+import createTemplateReducer from "../features/getTemplates/createTemplateSlice";
 import getTemplateListReducer from "../features/getTemplates/getTemplateListSlice";
 
 const rootReducer = {
