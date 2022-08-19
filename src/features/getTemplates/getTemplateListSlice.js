@@ -14,9 +14,7 @@ export const getTemplateList = createAsyncThunk(
 export const getTemplateListSlice = createSlice({
   name: "getTemplateListSlice",
   initialState,
-  reducers: {
-    
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -25,7 +23,9 @@ export const getTemplateListSlice = createSlice({
       state = { ...action.payload };
       return state;
     });
+    builder.addCase(getTemplateList.rejected, (state, action) => {
+      console.log("Rejected getTemplateList", action.error);
+    });
   },
 });
 export default getTemplateListSlice.reducer;
-

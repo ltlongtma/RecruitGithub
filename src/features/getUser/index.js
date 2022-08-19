@@ -24,7 +24,7 @@ export const UserList = () => {
     email: "",
     roleId: "",
   });
-const debounce = useDebounce(params, 500);
+  const debounce = useDebounce(params, 500);
   useEffect(() => {
     userApi
       .filterUser(debounce)

@@ -3,11 +3,13 @@ import { Questionbank } from "../../features/getQuestionBank";
 import className from "classnames/bind";
 import styles from "./Home.module.scss";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-
+import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
 
 export const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className={cx("question-bank-breadcrumb")}>
@@ -17,7 +19,11 @@ export const Home = () => {
         </Breadcrumb>
       </div>
       <div className={cx("table")}>
-        <Questionbank />
+        <Questionbank
+          navigateWithState={(e) => {
+            navigate(`/question/${e}`);
+          }}
+        />
       </div>
     </div>
   );

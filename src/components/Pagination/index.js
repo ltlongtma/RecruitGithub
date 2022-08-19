@@ -14,7 +14,7 @@ function PaginatedItems({ pagination, onPageChange }) {
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
-        pageCount={pagination?.lastPage}
+        pageCount={pagination?.lastPage || 0}
         previousLabel="< previous"
         pageClassName="page-item"
         pageLinkClassName="page-link"

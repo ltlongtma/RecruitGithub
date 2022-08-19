@@ -42,7 +42,7 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria, handleOpenMod
           {dataSortStatus?.map((item, index) => {
             return (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td>{data?.pagination?.pageSize * (data?.pagination?.page - 1) + 1 + index}</td>
                 <td>{item.name}</td>
                 <td>{item.approvedQuantity}</td>
                 <td>{item.pendingQuantity}</td>

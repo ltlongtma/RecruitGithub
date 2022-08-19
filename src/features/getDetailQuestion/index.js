@@ -28,24 +28,27 @@ export const DetailQuestion = () => {
   const criteria = useSelector((state) => state.filterCriteria);
 
   useEffect(() => {
-    questionBankApi
-      .getById(questionId)
-      .then((response) => {
-        dispatch(getDetailQuestion(response));
-      })
-      .catch((error) => {
-        console.log("ERROR getDetailQuestion >>>", error);
-      });
+    // questionBankApi
+    //   .getById(questionId)
+    //   .then((response) => {
+    //     dispatch(getDetailQuestion(response));
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERROR getDetailQuestion >>>", error);
+    //   });
+    dispatch(getDetailQuestion(questionId));
+
     setShowEditAndDeleteButton(location.state);
 
-    questionCriteriaApi
-      .getAll()
-      .then((res) => {
-        dispatch(getFilterCriteria(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getFilterCriteria >>> " + error);
-      });
+    // questionCriteriaApi
+    //   .getAll()
+    //   .then((res) => {
+    //     dispatch(getFilterCriteria(res));
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERROR getFilterCriteria >>> " + error);
+    //   });
+    dispatch(getFilterCriteria());
   }, [location]);
   const handleApproveQuestion = async () => {
     await questionBankApi

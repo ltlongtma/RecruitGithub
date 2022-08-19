@@ -51,7 +51,11 @@ export default function TableQuestion({
           {questionList?.data?.map((question, index) => {
             return (
               <tr key={index} onClick={() => handleViewDetailQuestion(question.id)}>
-                <td>{index + 1}</td>
+                <td>
+                  {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
+                    1 +
+                    index}
+                </td>
                 <td>{question?.content}</td>
                 <td>{sliceContent(question.answer)}</td>
                 <td>{question.category.name}</td>

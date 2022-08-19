@@ -67,12 +67,12 @@ export const GetCriteria = () => {
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
-    questionCriteriaApi
-      .getFilter(newParamStatus)
-      .then((res) => {
-        dispatch(getCriteria(res.data));
-      })
-      .catch((error) => {});
+    // questionCriteriaApi
+    //   .getFilter(newParamStatus)
+    //   .then((res) => {
+    //     dispatch(getCriteria(res.data));
+    //   })
+    //   .catch((error) => {});
   };
 
   return (

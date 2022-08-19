@@ -6,13 +6,15 @@ import questionTemplate from "../../services/questionTemplates";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../services/questionBankApi";
 import { getFilterCategory } from "../../features/getQuestionBank/FormFilter/getFilterCategorySlice";
+import { useNavigate } from "react-router-dom";
 
 export const NewTemplate = () => {
   const questionChosen = useSelector((state) => state.createTemplate);
-  const CategoryList = useSelector((state) => state.filterCategory);
-
+  const categoryList = useSelector((state) => state.filterCategory);
+  const navigate = useNavigate();
   const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({});
   const dispatch = useDispatch();
+
 
   const handleSetValueInput = async (data) => {
     await setValueInputSubmitTemplate({
@@ -40,33 +42,25 @@ export const NewTemplate = () => {
     alert("Your Template has been created successfully");
     window.location.reload(false);
   };
-  React.useEffect(() => {
-    questionBankApi
-      .getFilterCategory()
-      .then((res) => {
-        dispatch(getFilterCategory(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getFilterCategory >>> " + error);
-      });
-  }, []);
+
   return (
     <div>
       <Questionbank
         hiddenCreateButton={true}
         hiddenSelectStatusQuestion={true}
         showSelectColumn={true}
-        onFilterCategory={CategoryList}
-        navigateWithState={true}
+        navigateWithState={(e) => {
+          navigate(`/question/${e}`, { state: true });
+        }}
       />
 
       <Box sx={{ borderBottom: 3, borderColor: "block", m: 5 }}></Box>
 
       <ShowQuestionChosen
-        QuestionChosen={questionChosen}
+        questionChosen={questionChosen}
         dataTemplate={(data) => handleSetValueInput(data)}
         handleSubmitTemplate={handleSubmitTemplate}
-        onFilterCategory={CategoryList}
+        filterCategory={categoryList}
       />
     </div>
   );

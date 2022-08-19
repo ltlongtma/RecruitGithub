@@ -17,8 +17,8 @@ export const Questionbank = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const QuestionList = useSelector((state) => state.questionBank);
-  const CategoryList = useSelector((state) => state.filterCategory);
+  const questionList = useSelector((state) => state.questionBank);
+  const categoryList = useSelector((state) => state.filterCategory);
   const [paramStatus, setParamStatus] = useState({
     status: "APPROVED",
     pageSize: 5,
@@ -27,42 +27,38 @@ export const Questionbank = ({
   const debounce = useDebounce(paramStatus, 500);
 
   useEffect(() => {
-    questionBankApi
-      .getAll(debounce)
+    dispatch(getQuestionBank(debounce));
 
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getQuestionBank >>> " + error);
-      });
-    questionBankApi
-      .getFilterCategory()
-      .then((res) => {
-        dispatch(getFilterCategory(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getFilterCategory >>> " + error);
-      });
+    // questionBankApi
+    //   .getAll(debounce)
+
+    //   .then((res) => {
+    //     dispatch(getQuestionBank(res));
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERROR getQuestionBank >>> " + error);
+    //   });
+    // questionBankApi
+    //   .getFilterCategory()
+    //   .then((res) => {
+    //     dispatch(getFilterCategory(res));
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERROR getFilterCategory >>> " + error);
+    //   });
+    dispatch(getFilterCategory());
   }, [debounce]);
 
   const onFilterAll = (val) => {
     const newParamStatus = { ...paramStatus, ...val, page: 1 };
     setParamStatus(newParamStatus);
   };
-
   const handleViewDetailQuestion = (e) => {
-    navigate(`/question/${e}`, { state: navigateWithState });
+    navigateWithState && navigateWithState(e);
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
-    questionBankApi
-      .getAll(newParamStatus)
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {});
   };
 
   return (
@@ -70,17 +66,17 @@ export const Questionbank = ({
       <FormFilter
         paramStatus={paramStatus}
         onFilterAll={onFilterAll}
-        onFilterCategory={CategoryList}
+        onFilterCategory={categoryList}
         hiddenCreateButton={hiddenCreateButton}
         hiddenSelectStatusQuestion={hiddenSelectStatusQuestion}
       />
 
       <TableQuestion
-        questionList={QuestionList}
+        questionList={questionList}
         handleViewDetailQuestion={handleViewDetailQuestion}
         showSelectColumn={showSelectColumn}
       />
-      <PaginatedItems pagination={QuestionList?.pagination} onPageChange={onPageChange} />
+      <PaginatedItems pagination={questionList?.pagination} onPageChange={onPageChange} />
     </div>
   );
 };

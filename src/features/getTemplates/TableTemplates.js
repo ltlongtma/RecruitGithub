@@ -33,7 +33,12 @@ export const TableTemplates = ({
             {templateList?.data?.map((item, index) => {
               return (
                 <tr key={index} onClick={() => handleViewDetailTemplate(item.id)}>
-                  <td>{index + 1}</td>
+                  <td>
+                    {" "}
+                    {templateList.pagination.pageSize * (templateList.pagination.page - 1) +
+                      1 +
+                      index}
+                  </td>
                   <td>{item?.name}</td>
                   <td>{item?.description}</td>
                   <td>Not yet</td>

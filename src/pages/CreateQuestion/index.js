@@ -33,23 +33,7 @@ export const CreateQuestion = () => {
   const [checkValidationError, setCheckValidationError] = useState(true);
 
   useEffect(() => {
-    questionCategoryApi
-      .getAll()
-      .then((res) => {
-        dispatch(getFilterCategory(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getFilterCategory >>> " + error);
-      });
-
-    questionCriteriaApi
-      .getAll()
-      .then((res) => {
-        dispatch(getFilterCriteria(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getFilterCriteria >>> " + error);
-      });
+    dispatch(getFilterCriteria());
   }, []);
 
   const validateForm = () => {

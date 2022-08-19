@@ -10,7 +10,6 @@ import Multiselect from "multiselect-react-dropdown";
 const cx = className.bind(styles);
 
 export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) => {
-  console.log("PROPS />>>", props);
   const refContent = useRef();
   const refAnswer = useRef();
   const [disabledSaveButton, setDisableSaveButton] = useState(false);

@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];
+
 export const createTemplateSlice = createSlice({
   name: "createTemplate",
   initialState,

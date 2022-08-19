@@ -17,10 +17,10 @@ import moment from "moment";
 const cx = className.bind(styles);
 
 export const ShowQuestionChosen = ({
-  QuestionChosen,
+  questionChosen,
   dataTemplate,
   handleSubmitTemplate,
-  onFilterCategory,
+  filterCategory,
 }) => {
   const [valueInput, setValueInput] = useState({
     category: {
@@ -34,8 +34,8 @@ export const ShowQuestionChosen = ({
     dispatch(removeQuestionFromTemplate(data));
   };
   useEffect(() => {
-    QuestionChosen !== null &&
-    QuestionChosen.length > 0 &&
+    questionChosen !== null &&
+    questionChosen.length > 0 &&
     valueInput?.name &&
     valueInput?.name !== "" &&
     valueInput?.description &&
@@ -44,7 +44,7 @@ export const ShowQuestionChosen = ({
     valueInput?.category.id !== ""
       ? setDisableButtonSubmit(false)
       : setDisableButtonSubmit(true);
-  }, [valueInput, QuestionChosen]);
+  }, [valueInput, questionChosen]);
   const handleChangeinputvalue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -85,7 +85,7 @@ export const ShowQuestionChosen = ({
   });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    const newQuestionChosen = arrayMoveImmutable(QuestionChosen, oldIndex, newIndex);
+    const newQuestionChosen = arrayMoveImmutable(questionChosen, oldIndex, newIndex);
     dispatch(sortableChosenTemplate(newQuestionChosen));
   };
   return (
@@ -123,7 +123,7 @@ export const ShowQuestionChosen = ({
               name="category"
               defaultValue=""
             >
-              {onFilterCategory?.map((item, index) => (
+              {filterCategory?.map((item, index) => (
                 <MenuItem value={item.id} key={index}>
                   {item.name}
                 </MenuItem>
@@ -157,8 +157,8 @@ export const ShowQuestionChosen = ({
             </tr>
           </thead>
           <SortableContainer onSortEnd={onSortEnd}>
-            {QuestionChosen &&
-              QuestionChosen?.map((question, index) => (
+            {questionChosen &&
+              questionChosen?.map((question, index) => (
                 <SortableItem
                   key={question.id}
                   index={index}

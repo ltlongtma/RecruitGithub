@@ -28,6 +28,7 @@ export const TemplatesContent = () => {
 
   const [params, setParams] = useState({
     keyword: "",
+    pageSize: 5,
   });
 
   useEffect(() => {
@@ -40,7 +41,9 @@ export const TemplatesContent = () => {
     //   .catch((error) => {
     //     console.log("ERROR getTemplateList >>> " + error);
     //   });
+
     dispatch(getTemplateList());
+    // dispatch(getDetailQuestion());
   }, []);
   const valueSearch = (e) => {
     setParams({ keyword: e });
@@ -56,14 +59,14 @@ export const TemplatesContent = () => {
   };
   const onPageChange = (page) => {
     const newParams = { ...params, page };
-    questionTemplate
-      .getFilter(newParams)
-      .then((res) => {
-        dispatch(getTemplateList(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getTemplateList >>> " + error);
-      });
+    // questionTemplate
+    //   .getFilter(newParams)
+    //   .then((res) => {
+    //     dispatch(getTemplateList(res));
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERROR getTemplateList >>> " + error);
+    //   });
   };
   const handleShowModalDeleteTemplate = (item) => {
     setShowModalDelete(true);
@@ -86,18 +89,18 @@ export const TemplatesContent = () => {
     setShowModalDelete(false);
   };
   const handleViewDetailTemplate = (id) => {
-    questionTemplate
-      .getById(id)
-      .then((result) => {
-        dispatch(getDetailTemplate(result));
-      })
-      .catch((err) => {
-        console.log("ERROR getDetailTemplate >>> " + err);
-      });
+    // questionTemplate
+    //   .getById(id)
+    //   .then((result) => {
+    //     dispatch(getDetailTemplate(result));
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERROR getDetailTemplate >>> " + err);
+    //   });
+    dispatch(getDetailTemplate(id));
   };
   const handleModalViewDetailQuestionEachTemplate = async (data) => {
-    await dispatch(getDetailQuestion(data));
-
+    await dispatch(getDetailQuestion(data.id));
     setShowModalViewDetailQuestion(true);
   };
   return (

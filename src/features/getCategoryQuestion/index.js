@@ -40,11 +40,8 @@ export const CategoryQuestion = () => {
   };
   const handleSubmitEditCategory = (id, name) => {
     id = idCategory;
-    questionCategoryApi.changeName(id, name).then(() => {
-      questionCategoryApi.getFilter().then((res) => {
-        dispatch(getCategory(res));
-      });
-    });
+    questionCategoryApi.changeName(id, name);
+    
   };
   const handleOpenModalDelete = (item) => {
     setShowModalDelete(!showModalDelete);
@@ -66,9 +63,7 @@ export const CategoryQuestion = () => {
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
-    questionCategoryApi.getFilter(newParamStatus).then((res) => {
-      dispatch(getCategory(res));
-    });
+   
   };
 
   return (
