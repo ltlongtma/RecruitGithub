@@ -8,6 +8,7 @@ import getCategoryReducer from "../features/getCategoryQuestion/getCategorySlice
 import getCriteriaReducer from "../features/getCriteria/getCriteriaSlice";
 import createTemplateReducer from "../features/getTemplates/createTemplateSlice";
 import getTemplateListReducer from "../features/getTemplates/getTemplateListSlice";
+import getDetailTemplateReducer from "../features/getTemplates/getDetailTemplateSlice";
 
 const rootReducer = {
   user: getUsersReducer,
@@ -19,6 +20,7 @@ const rootReducer = {
   getCriteria: getCriteriaReducer,
   createTemplate: createTemplateReducer,
   getTemplateList: getTemplateListReducer,
+  getDetailTemplate: getDetailTemplateReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

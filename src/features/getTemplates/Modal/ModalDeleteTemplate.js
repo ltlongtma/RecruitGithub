@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import styles from "./Modal.module.scss";
+import styles from "../templates.module.scss";
 import className from "classnames/bind";
 
 const cx = className.bind(styles);

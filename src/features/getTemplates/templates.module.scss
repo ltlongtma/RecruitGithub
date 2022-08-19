@@ -8,8 +8,53 @@
 }
 .table-list {
   text-align: center;
+  cursor: pointer;
   .table-head {
     background-color: darkolivegreen;
     color: white;
+  }
+}
+//Modal
+.modal {
+  .modal-title-lg {
+    margin-left: 20rem;
+    color: cadetblue;
+  }
+  .modal-title {
+    margin-left: 10rem;
+    color: cadetblue;
+  }
+  .modal-body-title {
+    text-align: center;
+  }
+  label {
+    font-weight: 600;
+    color: chocolate;
+  }
+  .input-password {
+    position: relative;
+    .icon-eye {
+      position: absolute;
+      top: 28%;
+      right: 1rem;
+      cursor: pointer;
+    }
+  }
+  .text-error {
+    color: #bf1650;
+  }
+  p::before {
+    display: inline;
+    content: "⚠ ";
+  }
+}
+//DetailTemmplate
+
+.table {
+  margin-top: 5em;
+  text-align: center;
+cursor: pointer;
+  .table-head {
+    background-color: rgb(161, 224, 145);
   }
 }

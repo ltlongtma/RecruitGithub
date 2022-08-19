@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import questionBankApi from "../../services/questionBankApi";
 import questionCriteriaApi from "../../services/questionCriteriaApi";
 import { getDetailQuestion } from "./getDetailQuestionSlice";
@@ -37,7 +36,7 @@ export const DetailQuestion = () => {
       .catch((error) => {
         console.log("ERROR getDetailQuestion >>>", error);
       });
-    setShowEditAndDeleteButton(JSON.parse(location.state.toLowerCase()));
+    setShowEditAndDeleteButton(location.state);
 
     questionCriteriaApi
       .getAll()

@@ -4,7 +4,6 @@ import { Questionbank } from "../../features/getQuestionBank";
 import { ShowQuestionChosen } from "../../components/ShowQuestionChosenToTemPlate/index.js";
 import questionTemplate from "../../services/questionTemplates";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
 import questionBankApi from "../../services/questionBankApi";
 import { getFilterCategory } from "../../features/getQuestionBank/FormFilter/getFilterCategorySlice";
 
@@ -12,7 +11,6 @@ export const NewTemplate = () => {
   const questionChosen = useSelector((state) => state.createTemplate);
   const CategoryList = useSelector((state) => state.filterCategory);
 
-  let navigate = useNavigate();
   const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({});
   const dispatch = useDispatch();
 
@@ -43,7 +41,6 @@ export const NewTemplate = () => {
     window.location.reload(false);
   };
   React.useEffect(() => {
-    
     questionBankApi
       .getFilterCategory()
       .then((res) => {
@@ -60,7 +57,7 @@ export const NewTemplate = () => {
         hiddenSelectStatusQuestion={true}
         showSelectColumn={true}
         onFilterCategory={CategoryList}
-
+        navigateWithState={true}
       />
 
       <Box sx={{ borderBottom: 3, borderColor: "block", m: 5 }}></Box>

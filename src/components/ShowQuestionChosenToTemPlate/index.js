@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import styles from "./showQuestionChosen.module.scss";
 import className from "classnames/bind";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import sliceContent from "../../helpers/sliceContent";
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
@@ -10,10 +10,7 @@ import {
   removeQuestionFromTemplate,
   sortableChosenTemplate,
 } from "../../features/getTemplates/createTemplateSlice";
-import Form from "react-bootstrap/Form";
-
 import { sortableContainer, sortableElement } from "react-sortable-hoc";
-
 import { arrayMoveImmutable } from "array-move";
 import moment from "moment";
 
@@ -30,58 +27,62 @@ export const ShowQuestionChosen = ({
       id: "",
     },
   });
-  // console.log("Value: ", { ...valueInput });
 
   const [disableButtonSubmit, setDisableButtonSubmit] = useState(true);
   const dispatch = useDispatch();
-  const handleRemoveChosenQuestion = async (data) => {
-    // console.log("data", data);
+  const handleRemoveChosenQuestion = async (data, e) => {
     dispatch(removeQuestionFromTemplate(data));
   };
-
+  useEffect(() => {
+    QuestionChosen !== null &&
+    QuestionChosen.length > 0 &&
+    valueInput?.name &&
+    valueInput?.name !== "" &&
+    valueInput?.description &&
+    valueInput?.description !== "" &&
+    valueInput?.category.id &&
+    valueInput?.category.id !== ""
+      ? setDisableButtonSubmit(false)
+      : setDisableButtonSubmit(true);
+  }, [valueInput, QuestionChosen]);
   const handleChangeinputvalue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    setValueInput({ ...valueInput, [name]: value });
-    const newValueInput = { ...valueInput, [name]: value };
-    console.log("newValueInput", newValueInput);
+    let newValueInput = { ...valueInput, [name]: value };
+    if (name === "category") newValueInput = { ...valueInput, category: { id: value } };
+    setValueInput(newValueInput);
     dataTemplate(newValueInput);
-    QuestionChosen !== null &&
-    QuestionChosen.length > 0 &&
-    newValueInput.name &&
-    newValueInput.name !== "" &&
-    newValueInput.description &&
-    newValueInput.description !== ""
-      ? setDisableButtonSubmit(false)
-      : setDisableButtonSubmit(true);
   };
 
   const SortableContainer = sortableContainer(({ children }) => {
     return <tbody>{children}</tbody>;
   });
 
-  const SortableItem = sortableElement(({ index, question }) => (
-    <tr key={index}>
-      <td>{index}</td>
-      <td>{question?.content}</td>
-      <td>{sliceContent(question.answer)}</td>
-      <td>{question?.category?.name}</td>
-      <td>{question?.level}</td>
-      <td>{moment(question?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
-      <td>{question?.author?.name}</td>
-      <td>{question?.approver?.name}</td>
-      <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
+  const SortableItem = sortableElement(({ question, sortIndex, handleRemoveChosenQuestion }) => {
+    return (
+      <tr key={sortIndex}>
+        <td>{sortIndex + 1}</td>
+        <td>{question?.content}</td>
+        <td>{sliceContent(question.answer)}</td>
+        <td>{question?.category?.name}</td>
+        <td>{question?.level}</td>
+        <td>{moment(question?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
+        <td>{question?.author?.name}</td>
+        <td>{question?.approver?.name}</td>
+        <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
 
-      <td>
-        <DoDisturbOnIcon
-          color="error"
-          onClick={() => {
-            handleRemoveChosenQuestion(question);
-          }}
-        />
-      </td>
-    </tr>
-  ));
+        <td>
+          <Button
+            onClick={() => {
+              handleRemoveChosenQuestion(question);
+            }}
+          >
+            <DoDisturbOnIcon color="error" className={cx("buttonRemove")} />
+          </Button>
+        </td>
+      </tr>
+    );
+  });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const newQuestionChosen = arrayMoveImmutable(QuestionChosen, oldIndex, newIndex);
@@ -110,12 +111,18 @@ export const ShowQuestionChosen = ({
             color="warning"
             sx={{ ml: 7, width: 1 / 3 }}
             onChange={handleChangeinputvalue}
+            required
           />
 
           <FormControl sx={{ width: 110, ml: 7 }} color="warning">
             <InputLabel>Category</InputLabel>
 
-            <Select label="category" onChange={handleChangeinputvalue} name="category">
+            <Select
+              label="category"
+              onChange={handleChangeinputvalue}
+              name="category"
+              defaultValue=""
+            >
               {onFilterCategory?.map((item, index) => (
                 <MenuItem value={item.id} key={index}>
                   {item.name}
@@ -152,7 +159,13 @@ export const ShowQuestionChosen = ({
           <SortableContainer onSortEnd={onSortEnd}>
             {QuestionChosen &&
               QuestionChosen?.map((question, index) => (
-                <SortableItem key={question.id} index={index} question={question} />
+                <SortableItem
+                  key={question.id}
+                  index={index}
+                  question={question}
+                  sortIndex={index}
+                  handleRemoveChosenQuestion={handleRemoveChosenQuestion}
+                />
               ))}
           </SortableContainer>
         </Table>

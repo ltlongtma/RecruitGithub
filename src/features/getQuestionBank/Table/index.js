@@ -13,7 +13,11 @@ import moment from "moment";
 
 const cx = className.bind(styles);
 
-export default function TableQuestion({ questionList, showSelectColumn, ...props }) {
+export default function TableQuestion({
+  questionList,
+  showSelectColumn,
+  handleViewDetailQuestion,
+}) {
   const dispatch = useDispatch();
   const questionChosen = useSelector((state) => state.createTemplate);
 
@@ -46,14 +50,10 @@ export default function TableQuestion({ questionList, showSelectColumn, ...props
         <tbody>
           {questionList?.data?.map((question, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} onClick={() => handleViewDetailQuestion(question.id)}>
                 <td>{index + 1}</td>
-                <td onClick={() => props.handleViewDetailQuestion(question.id)}>
-                  {question?.content}
-                </td>
-                <td onClick={() => props.handleViewDetailQuestion(question.id)}>
-                  {sliceContent(question.answer)}
-                </td>
+                <td>{question?.content}</td>
+                <td>{sliceContent(question.answer)}</td>
                 <td>{question.category.name}</td>
                 <td>{question.level}</td>
                 <td>{moment(question?.createdDate).format("DD/MM/YYYY h:mm:ss")}</td>
@@ -65,7 +65,7 @@ export default function TableQuestion({ questionList, showSelectColumn, ...props
                   </>
                 )}
                 {showSelectColumn && (
-                  <td>
+                  <td onClick={(e) => e.stopPropagation()}>
                     <Checkbox
                       checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
                       onChange={(e) => handleChangeCheckbox(e, question)}

@@ -10,6 +10,7 @@ import Multiselect from "multiselect-react-dropdown";
 const cx = className.bind(styles);
 
 export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) => {
+  console.log("PROPS />>>", props);
   const refContent = useRef();
   const refAnswer = useRef();
   const [disabledSaveButton, setDisableSaveButton] = useState(false);
@@ -101,7 +102,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
           </Form.Group>
         </Row>
 
-        <Row className="mb-3" >
+        <Row className="mb-3">
           {data.status === "PENDING" && (
             <Form.Group as={Col} className={cx("buttons")}>
               <Button

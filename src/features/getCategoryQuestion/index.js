@@ -5,7 +5,7 @@ import { TableCategory } from "./Table";
 import { getCategory } from "./getCategorySlice";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import { ModalEditCategory } from "./Modal/modalEdit";
-import { useDebounce } from "../../hooks";
+import useDebounce from "../../hooks/useDebounce";
 import PaginatedItems from "../../components/Pagination";
 import { ModalDeleteCategory } from "./Modal/ModalDelete";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 export const CategoryQuestion = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const data = useSelector((state) => state.getCategoryQuestion);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -23,20 +22,16 @@ export const CategoryQuestion = () => {
   const [paramStatus, setParamStatus] = useState({
     active: "",
     keyword: "",
-    // page: "",
-    // pageSize: "",
   });
-
+  const debounce = useDebounce(paramStatus, 500);
   useEffect(() => {
-    questionCategoryApi.getFilter().then((res) => {
+    questionCategoryApi.getFilter(debounce).then((res) => {
       dispatch(getCategory(res));
     });
-  }, []);
+  }, [debounce]);
 
   const onFilterStatus = async (e) => {
-    await questionCategoryApi.getFilter(e).then((res) => {
-      dispatch(getCategory(res));
-    });
+    await setParamStatus(e);
   };
   const handleOpenModalEditCategory = (item) => {
     setShowModalEdit(!showModalEdit);

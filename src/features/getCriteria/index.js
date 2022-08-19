@@ -8,6 +8,7 @@ import { FilterAndAddNew } from "./FilterAndAddnew";
 import PaginatedItems from "../../components/Pagination";
 import { ModalDeleteCriteria } from "./Modal/ModalDelete";
 import { useNavigate } from "react-router-dom";
+import useDebounce from "../../hooks/useDebounce";
 
 export const GetCriteria = () => {
   const dispatch = useDispatch();
@@ -23,12 +24,12 @@ export const GetCriteria = () => {
     active: "",
     keyword: "",
   });
-
+  const debounce = useDebounce(paramStatus, 500);
   useEffect(() => {
-    questionCriteriaApi.getFilter().then((res) => {
+    questionCriteriaApi.getFilter(debounce).then((res) => {
       dispatch(getCriteria(res));
     });
-  }, []);
+  }, [debounce]);
 
   const handleOpenModalEditCriteria = (item) => {
     setShowModalEdit(!showModalEdit);
@@ -61,9 +62,7 @@ export const GetCriteria = () => {
     });
   };
   const onFilterStatus = async (e) => {
-    await questionCriteriaApi.getFilter(e).then((res) => {
-      dispatch(getCriteria(res));
-    });
+    setParamStatus(e);
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };

@@ -9,23 +9,14 @@ import { ModalAddNewUser } from "../Modal/ModalAddNewUser";
 
 const cx = className.bind(styles);
 
-export default function FormFilterUser({ onFilterAll }) {
+export default function FormFilterUser({ onFilterAll, params }) {
   const [showModalAddNewUser, toggleModalAddNewUser] = useState(false);
 
-  const [paramFilter, setParamFilter] = useState({
-    page: 1,
-    pageSize: 5,
-    name: "",
-    username: "",
-    email: "",
-    roleId: "",
-  });
   const handleFilterRole = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    const newParamFilter = { ...paramFilter, [name]: value };
-    setParamFilter({ ...newParamFilter, [name]: value });
-    onFilterAll(newParamFilter);
+    const newPrams = { ...params, [name]: value };
+    onFilterAll(newPrams);
   };
   return (
     <div className={cx("form")}>
@@ -64,7 +55,7 @@ export default function FormFilterUser({ onFilterAll }) {
         </Button>
       </Form>
       <Button
-      className={cx("btn-addNewUser")}
+        className={cx("btn-addNewUser")}
         variant="success"
         size="sm"
         onClick={() => toggleModalAddNewUser(!showModalAddNewUser)}

@@ -6,7 +6,6 @@ import questionBankApi from "../../../src/services/questionBankApi";
 import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import { useNavigate } from "react-router-dom";
-import { getDetailQuestion } from "../getDetailQuestion/getDetailQuestionSlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 
@@ -14,6 +13,7 @@ export const Questionbank = ({
   hiddenCreateButton,
   hiddenSelectStatusQuestion,
   showSelectColumn,
+  navigateWithState,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,15 +22,15 @@ export const Questionbank = ({
   const [paramStatus, setParamStatus] = useState({
     status: "APPROVED",
     pageSize: 5,
+    keyword: "",
   });
-  // const debounce = useDebounce(paramStatus, 500);
+  const debounce = useDebounce(paramStatus, 500);
 
   useEffect(() => {
     questionBankApi
-      .getAll(paramStatus)
+      .getAll(debounce)
 
       .then((res) => {
-        // console.log("RES 1", res);
         dispatch(getQuestionBank(res));
       })
       .catch((error) => {
@@ -44,31 +44,15 @@ export const Questionbank = ({
       .catch((error) => {
         console.log("ERROR getFilterCategory >>> " + error);
       });
-  }, []);
-  //Create a callback function to recieve value from children (FormFilter) and pass it as query params
+  }, [debounce]);
+
   const onFilterAll = (val) => {
     const newParamStatus = { ...paramStatus, ...val, page: 1 };
     setParamStatus(newParamStatus);
-
-    questionBankApi
-      .getAll(newParamStatus)
-
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {});
   };
 
-  const handleViewDetailQuestion = async (e) => {
-    await questionBankApi
-      .getById(e)
-      .then((res) => {
-        dispatch(getDetailQuestion(res));
-      })
-      .catch((error) => {
-        console.log("DetailQuestion ERROR>>>", error);
-      });
-    navigate(`/question/${e}`, { state: "true" });
+  const handleViewDetailQuestion = (e) => {
+    navigate(`/question/${e}`, { state: navigateWithState });
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };

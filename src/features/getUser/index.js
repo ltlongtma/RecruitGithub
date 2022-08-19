@@ -7,28 +7,36 @@ import { ModalEditRole } from "./Modal/ModalEditRole";
 import { TableData } from "./Table";
 import FormFilterUser from "../../features/getUser/FormFilter";
 import userApi from "../../services/ManageUserApi";
+import useDebounce from "../../hooks/useDebounce";
 
 export const UserList = () => {
   const dispatch = useDispatch();
+  const userList = useSelector((state) => state.user);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [user, setUser] = useState();
   const [role, setRole] = useState();
-
-  const userList = useSelector((state) => state.user);
-
+  const [params, setParams] = useState({
+    page: 1,
+    pageSize: 5,
+    name: "",
+    username: "",
+    email: "",
+    roleId: "",
+  });
+const debounce = useDebounce(params, 500);
   useEffect(() => {
     userApi
-      .getAllUsers()
+      .filterUser(debounce)
       .then((response) => {
-        dispatch(getUsers(response));
+        dispatch(getUsers(response.data));
       })
-      .catch((error) => {});
-  }, [dispatch]);
+      .catch((error) => {
+        console.log("ERROR FILTER USER >>> " + error);
+      });
+  }, [debounce]);
 
   const handleDelete = (e) => {
-    // const id = e;
-
     userApi
       .deleteUser(e)
       .then((response) => {
@@ -70,18 +78,11 @@ export const UserList = () => {
   };
   //Filter data, accept data from children FormFilterUser
   const onFilterAll = (e) => {
-    userApi
-      .filterUser(e)
-      .then((response) => {
-        dispatch(getUsers(response.data));
-      })
-      .catch((error) => {
-        console.log("ERROR FILTER USER >>> " + error);
-      });
+    setParams(e);
   };
   return (
     <div>
-      <FormFilterUser onFilterAll={onFilterAll} />
+      <FormFilterUser onFilterAll={onFilterAll} params={params} />
 
       <TableData
         userList={userList}
