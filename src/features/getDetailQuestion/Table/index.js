@@ -16,7 +16,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
 
   const handleDisableSaveButton = (e) => {
     const value = e.target.value;
-    console.log("E >>>", value);
+    // console.log("E >>>", value);
     setDisableSaveButton(value !== "" && value.length > 0 ? false : true);
   };
 

@@ -7,10 +7,11 @@
     background: rgb(152, 197, 152);
   }
 
-  .editIcon {
+  .editIcon,
+  .deleteIcon {
     cursor: pointer;
     &:hover {
-      font-size: xx-large;
+      // transform: scale(1.5);
     }
   }
   tr {
@@ -25,10 +26,5 @@
       }
     }
   }
-  .deleteIcon {
-    cursor: pointer;
-    &:hover {
-      font-size: xx-large;
-    }
-  }
+ 
 }

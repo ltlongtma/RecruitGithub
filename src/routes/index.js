@@ -13,6 +13,7 @@ import {
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
 import { ManageCriteria } from "../pages/ManageCriteria";
+import TemplateDetail from "../features/getTemplates/ExploreTemplates/TemplateDetail";
 
 export const publicRoute = [
   { path: "/login", component: Login, layout: LoginLayout },
@@ -32,6 +33,7 @@ export const adminRoute = [
   { path: "/interview", component: Interview },
 
   { path: "/interview/templates", component: ManageTemplates },
+  // { path: "/interview/templates/:templateId", component: TemplateDetail },
 ];
 
 export const userRoute = [

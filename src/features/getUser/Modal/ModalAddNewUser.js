@@ -11,7 +11,7 @@ import Form from "react-bootstrap/Form";
 // import axios from "axios";
 import axiosClient from "../../../services/AxiosClient";
 import { useDispatch } from "react-redux";
-import { createNewUser } from "../../../features/getUser/getUsersSlice";
+import { createNewUser } from "../Slice";
 import styles from "../Modal/Modal.module.scss";
 import userApi from "../../../services/ManageUserApi";
 

@@ -50,7 +50,7 @@ export default function TableQuestion({
         <tbody>
           {questionList?.data?.map((question, index) => {
             return (
-              <tr key={index} onClick={() => handleViewDetailQuestion(question.id)}>
+              <tr key={index} onClick={() => handleViewDetailQuestion(question.id)} className={cx("tableBody")}>
                 <td>
                   {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
                     1 +

@@ -10,6 +10,13 @@ export const getTemplateList = createAsyncThunk(
     return response;
   }
 );
+export const templatesFilterByAdmin = createAsyncThunk(
+  "getTemplateListSlice/templatesFilterByAdmin",
+  async (params) => {
+    const response = await questionTemplate.filterByAdmin(params);
+    return response;
+  }
+);
 
 export const getTemplateListSlice = createSlice({
   name: "getTemplateListSlice",
@@ -25,6 +32,13 @@ export const getTemplateListSlice = createSlice({
     });
     builder.addCase(getTemplateList.rejected, (state, action) => {
       console.log("Rejected getTemplateList", action.error);
+    });
+    builder.addCase(templatesFilterByAdmin.fulfilled, (state, action) => {
+      state = { ...action.payload };
+      return state;
+    });
+    builder.addCase(templatesFilterByAdmin.rejected, (state, action) => {
+      console.log("Rejected templatesFilterByAdmin", action.error);
     });
   },
 });

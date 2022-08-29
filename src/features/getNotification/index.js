@@ -16,13 +16,13 @@ import axiosClient from "../../services/AxiosClient";
 const cx = className.bind(styles);
 const SOCKET_URL = "http://localhost:8080/ws";
 
-export const Notifications = () => {
+export const Notifications = ({profile}) => {
   const navigate = useNavigate();
   const [unreadNotificationNumber, setUnreadNotificationNumber] = useState(0);
   const [isShowNotificationList, setShowNotificationList] = useState(false);
   const [isNextNotification, setNextNotification] = useState(true);
   const [notificationList, setNotificationList] = useState([]);
-  const [profile, setProfile] = useState({});
+  // const [profile, setProfile] = useState({});
 
   Moment.locale("en");
 
@@ -32,16 +32,6 @@ export const Notifications = () => {
 
   useEffect(() => {
     getUnreadNotificationNumber();
-
-    axiosClient
-      .get(`user/profile`)
-      .then((res) => {
-        const newProfile = { ...profile, res };
-        setProfile(newProfile);
-      })
-      .catch((err) => {
-        console.log("ERROR axios profile >>> ", err);
-      });
   }, []);
 
   const handleShowNotification = () => {

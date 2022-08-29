@@ -21,19 +21,41 @@ export const ShowQuestionChosen = ({
   dataTemplate,
   handleSubmitTemplate,
   filterCategory,
+  defaultValue,
+  hiddenSaveButton,
+  handleSaveChangeTemplate,
+  handleCancerButton,
 }) => {
+  const [defaultQuestionIds, setDefaultQuestionIds] = useState([]);
   const [valueInput, setValueInput] = useState({
+    name: "" || defaultValue?.name,
+    description: "" || defaultValue?.description,
     category: {
-      id: "",
+      id: defaultValue?.category?.id === undefined ? "" : String(defaultValue?.category?.id),
     },
+    public: defaultValue?.public === undefined ? true : defaultValue?.public,
   });
 
   const [disableButtonSubmit, setDisableButtonSubmit] = useState(true);
+  const [statusSaveButton, setStatusSaveButton] = useState(hiddenSaveButton);
   const dispatch = useDispatch();
   const handleRemoveChosenQuestion = async (data, e) => {
     dispatch(removeQuestionFromTemplate(data));
   };
   useEffect(() => {
+    const idArray = defaultValue?.questionBankTemplates?.map((data) => {
+      return `${data.questionNo}_${data.question.id}`;
+    });
+    setDefaultQuestionIds(idArray);
+  }, [defaultValue]);
+  useEffect(() => {
+    //An new array obtain question list from the default value
+    const newQuestionChosen = questionChosen?.filter((question, index) =>
+      defaultQuestionIds?.includes(`${index + 1}_${question.id}`)
+    );
+    // console.log("NEWQUESTCHosen: ", newQuestionChosen);
+    // console.log("questionChosen: >>>>", questionChosen);
+
     questionChosen !== null &&
     questionChosen.length > 0 &&
     valueInput?.name &&
@@ -41,16 +63,24 @@ export const ShowQuestionChosen = ({
     valueInput?.description &&
     valueInput?.description !== "" &&
     valueInput?.category.id &&
-    valueInput?.category.id !== ""
+    valueInput?.category.id !== "" &&
+    (valueInput.name != defaultValue?.name ||
+      valueInput.description != defaultValue?.description ||
+      valueInput.category.id != defaultValue?.category.id ||
+      valueInput.public != defaultValue?.public ||
+      newQuestionChosen.length !== defaultQuestionIds.length ||
+      questionChosen.length !== defaultValue.questionBankTemplates.length)
       ? setDisableButtonSubmit(false)
       : setDisableButtonSubmit(true);
   }, [valueInput, questionChosen]);
+
   const handleChangeinputvalue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
     let newValueInput = { ...valueInput, [name]: value };
     if (name === "category") newValueInput = { ...valueInput, category: { id: value } };
     setValueInput(newValueInput);
+    // console.log("VAL >>>", valueInput);
     dataTemplate(newValueInput);
   };
 
@@ -63,7 +93,7 @@ export const ShowQuestionChosen = ({
       <tr key={sortIndex}>
         <td>{sortIndex + 1}</td>
         <td>{question?.content}</td>
-        <td>{sliceContent(question.answer)}</td>
+        <td>{sliceContent(question?.answer)}</td>
         <td>{question?.category?.name}</td>
         <td>{question?.level}</td>
         <td>{moment(question?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
@@ -102,6 +132,7 @@ export const ShowQuestionChosen = ({
             sx={{ ml: 7 }}
             onChange={handleChangeinputvalue}
             required
+            defaultValue={valueInput?.name}
           />
 
           <TextField
@@ -112,6 +143,7 @@ export const ShowQuestionChosen = ({
             sx={{ ml: 7, width: 1 / 3 }}
             onChange={handleChangeinputvalue}
             required
+            defaultValue={valueInput?.description}
           />
 
           <FormControl sx={{ width: 110, ml: 7 }} color="warning">
@@ -121,7 +153,7 @@ export const ShowQuestionChosen = ({
               label="category"
               onChange={handleChangeinputvalue}
               name="category"
-              defaultValue=""
+              defaultValue={valueInput?.category.id}
             >
               {filterCategory?.map((item, index) => (
                 <MenuItem value={item.id} key={index}>
@@ -133,7 +165,12 @@ export const ShowQuestionChosen = ({
 
           <FormControl sx={{ width: 90, ml: 7 }} color="warning">
             <InputLabel>Public</InputLabel>
-            <Select label="Age" defaultValue={true} onChange={handleChangeinputvalue} name="public">
+            <Select
+              label="Age"
+              onChange={handleChangeinputvalue}
+              name="public"
+              defaultValue={valueInput?.public}
+            >
               <MenuItem value={true}>True</MenuItem>
               <MenuItem value={false}>False</MenuItem>
             </Select>
@@ -160,7 +197,7 @@ export const ShowQuestionChosen = ({
             {questionChosen &&
               questionChosen?.map((question, index) => (
                 <SortableItem
-                  key={question.id}
+                  key={question?.id}
                   index={index}
                   question={question}
                   sortIndex={index}
@@ -171,7 +208,7 @@ export const ShowQuestionChosen = ({
         </Table>
       </div>
       <div className={cx("button")}>
-        <Button variant="contained" color="inherit" onClick={() => window.location.reload()}>
+        <Button variant="contained" color="inherit" onClick={handleCancerButton}>
           Cancer
         </Button>
         <Button
@@ -179,8 +216,18 @@ export const ShowQuestionChosen = ({
           color="success"
           onClick={handleSubmitTemplate}
           disabled={disableButtonSubmit}
+          hidden={!statusSaveButton}
         >
           Submit
+        </Button>
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={handleSaveChangeTemplate}
+          disabled={disableButtonSubmit}
+          hidden={statusSaveButton}
+        >
+          Save
         </Button>
       </div>
     </div>

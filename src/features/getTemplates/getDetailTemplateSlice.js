@@ -14,10 +14,10 @@ export const getDetailTemplateSlice = createSlice({
   name: "getDetailTemplate",
   initialState,
   reducers: {
-    // getDetailTemplate: (state, action) => {
-    //   state = { ...action.payload };
-    //   return state;
-    // },
+    removeOldDetailTemplate: (state) => {
+      state = {};
+      return state;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getDetailTemplate.fulfilled, (state, action) => {
@@ -29,5 +29,5 @@ export const getDetailTemplateSlice = createSlice({
     });
   },
 });
-// export const { getDetailTemplate } = getDetailTemplateSlice.actions;
+export const { removeOldDetailTemplate } = getDetailTemplateSlice.actions;
 export default getDetailTemplateSlice.reducer;

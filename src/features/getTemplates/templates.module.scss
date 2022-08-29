@@ -13,6 +13,19 @@
     background-color: darkolivegreen;
     color: white;
   }
+  .editIcon,
+  .deleteIcon,
+  .shareIcon {
+    margin-right: 10px;
+    &:hover {
+      // transform: scale(1.5);
+    }
+  }
+  .tableBody {
+    .selectedRow {
+      background-color: brown;
+    }
+  }
 }
 //Modal
 .modal {
@@ -53,8 +66,16 @@
 .table {
   margin-top: 5em;
   text-align: center;
-cursor: pointer;
+  cursor: pointer;
   .table-head {
     background-color: rgb(161, 224, 145);
+  }
+  .button {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+    button {
+      margin-left: 8px;
+    }
   }
 }

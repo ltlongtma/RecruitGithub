@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axiosClient from "../../services/AxiosClient";
-import { getUsers, editUser } from "./getUsersSlice";
+import { getUsers, editUser } from "./Slice";
 import { ModalDeleteUser } from "./Modal/ModalDeleteUser";
 import { ModalEditRole } from "./Modal/ModalEditRole";
 import { TableData } from "./Table";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestionBank } from "./getQuestionBankSlice";
+import { getQuestionBank } from "./Slice";
 import TableQuestion from "./Table";
 import questionBankApi from "../../../src/services/questionBankApi";
 import { FormFilter } from "./FormFilter";
@@ -16,7 +16,6 @@ export const Questionbank = ({
   navigateWithState,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const questionList = useSelector((state) => state.questionBank);
   const categoryList = useSelector((state) => state.filterCategory);
   const [paramStatus, setParamStatus] = useState({
@@ -28,24 +27,6 @@ export const Questionbank = ({
 
   useEffect(() => {
     dispatch(getQuestionBank(debounce));
-
-    // questionBankApi
-    //   .getAll(debounce)
-
-    //   .then((res) => {
-    //     dispatch(getQuestionBank(res));
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR getQuestionBank >>> " + error);
-    //   });
-    // questionBankApi
-    //   .getFilterCategory()
-    //   .then((res) => {
-    //     dispatch(getFilterCategory(res));
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR getFilterCategory >>> " + error);
-    //   });
     dispatch(getFilterCategory());
   }, [debounce]);
 
@@ -69,6 +50,7 @@ export const Questionbank = ({
         onFilterCategory={categoryList}
         hiddenCreateButton={hiddenCreateButton}
         hiddenSelectStatusQuestion={hiddenSelectStatusQuestion}
+        // propDataToFilter={propDataToFilter}
       />
 
       <TableQuestion

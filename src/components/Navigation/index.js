@@ -5,18 +5,31 @@ import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { UserDetail } from "../UserDetail";
-import React, { useState } from "react";
+import { UserInfor } from "../UserInfor";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { Notifications } from "../../features/getNotification";
+import axiosClient from "../../services/AxiosClient";
 
 const cx = className.bind(styles);
 
 export const Navigation = () => {
-  const role = sessionStorage.getItem("isRole");
+  const [profile, setProfile] = useState({});
 
+  const role = sessionStorage.getItem("isRole");
+  useEffect(() => {
+    axiosClient
+      .get(`user/profile`)
+      .then((res) => {
+        // const newProfile = { ...profile, res };
+        setProfile(res);
+      })
+      .catch((err) => {
+        console.log("ERROR axios profile >>> ", err);
+      });
+  }, []);
   return (
     <Navbar className={cx("navbar")}>
       <Navbar.Brand href="#home" className={cx("brand")}>
@@ -56,9 +69,9 @@ export const Navigation = () => {
           </Button>
         </Form>
 
-        <Notifications />
+        <Notifications profile={profile} />
 
-        <UserDetail />
+        <UserInfor profile={profile} />
       </Nav>
     </Navbar>
   );

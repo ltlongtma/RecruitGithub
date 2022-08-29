@@ -3,46 +3,61 @@ import Box from "@mui/material/Box";
 import { Questionbank } from "../../features/getQuestionBank";
 import { ShowQuestionChosen } from "../../components/ShowQuestionChosenToTemPlate/index.js";
 import questionTemplate from "../../services/questionTemplates";
-import { useDispatch, useSelector } from "react-redux";
-import questionBankApi from "../../services/questionBankApi";
-import { getFilterCategory } from "../../features/getQuestionBank/FormFilter/getFilterCategorySlice";
+import { useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 
-export const NewTemplate = () => {
+export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton }) => {
   const questionChosen = useSelector((state) => state.createTemplate);
   const categoryList = useSelector((state) => state.filterCategory);
   const navigate = useNavigate();
-  const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({});
-  const dispatch = useDispatch();
-
+  const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({
+    ...defaultValue,
+  });
 
   const handleSetValueInput = async (data) => {
-    await setValueInputSubmitTemplate({
+    const newData = await {
       ...valueInputSubmitTemPlate,
       ...data,
-    });
+    };
+    setValueInputSubmitTemplate(newData);
+    // console.log("data >>>", newData);
   };
-  const handleSubmitTemplate = () => {
+  const handleSubmitTemplate = async () => {
     const data = questionChosen?.map((item, index) => {
       return { questionId: item.id };
     });
     const payload = {
       ...valueInputSubmitTemPlate,
       questionBankTemplates: data,
-      category: {
-        id: questionChosen[0]?.category.id,
-      },
     };
-    questionTemplate
+     questionTemplate
       .create(payload)
-      .then((res) => {
-        console.log("RES >>>", res);
-      })
-      .catch((error) => {});
-    alert("Your Template has been created successfully");
-    window.location.reload(false);
-  };
 
+      .catch((error) => {});
+      await alert("Your Template has been created successfully");
+    handleCancerButton();
+  };
+  const handleSaveChangeTemplate = async () => {
+    const data = questionChosen?.map((item, index) => {
+      return { questionId: item.id };
+    });
+    const newData = {
+      ...valueInputSubmitTemPlate,
+      questionBankTemplates: data,
+    };
+    setValueInputSubmitTemplate(newData);
+    await questionTemplate
+      .upDate(newData.id, newData)
+      .then((result) => {
+        alert("Your Template was updated successfully");
+      })
+      .catch((err) => {
+        console.log("ERROR Update Template >>>", err);
+      });
+    // window.location.reload();
+    handleCancerButton();
+  };
   return (
     <div>
       <Questionbank
@@ -61,6 +76,10 @@ export const NewTemplate = () => {
         dataTemplate={(data) => handleSetValueInput(data)}
         handleSubmitTemplate={handleSubmitTemplate}
         filterCategory={categoryList}
+        defaultValue={defaultValue}
+        hiddenSaveButton={hiddenSaveButton}
+        handleSaveChangeTemplate={handleSaveChangeTemplate}
+        handleCancerButton={handleCancerButton}
       />
     </div>
   );

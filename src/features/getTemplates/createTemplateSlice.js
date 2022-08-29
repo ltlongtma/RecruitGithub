@@ -17,8 +17,15 @@ export const createTemplateSlice = createSlice({
     sortableChosenTemplate: (state, action) => {
       return action.payload;
     },
+    clearQuestionFromTemplate: (state, action) => {
+      return (state = []);
+    },
   },
 });
-export const { addQuestionToTemplate, removeQuestionFromTemplate, sortableChosenTemplate } =
-  createTemplateSlice.actions;
+export const {
+  addQuestionToTemplate,
+  removeQuestionFromTemplate,
+  sortableChosenTemplate,
+  clearQuestionFromTemplate,
+} = createTemplateSlice.actions;
 export default createTemplateSlice.reducer;

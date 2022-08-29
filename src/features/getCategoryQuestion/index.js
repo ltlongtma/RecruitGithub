@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import questionCategoryApi from "../../services/questionCategoryApi";
 import { TableCategory } from "./Table";
-import { getCategory } from "./getCategorySlice";
+import { getCategory } from "./Slice";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import { ModalEditCategory } from "./Modal/modalEdit";
 import useDebounce from "../../hooks/useDebounce";

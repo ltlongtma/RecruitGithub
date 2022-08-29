@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TableCriteria } from "./Table";
 import { useDispatch, useSelector } from "react-redux";
 import questionCriteriaApi from "../../services/questionCriteriaApi";
-import { getCriteria } from "./getCriteriaSlice";
+import { getCriteria } from "./Slice";
 import { ModalEditCriteria } from "./Modal/ModalEdit";
 import { FilterAndAddNew } from "./FilterAndAddnew";
 import PaginatedItems from "../../components/Pagination";

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 import className from "classnames/bind";
-import styles from "./UserDetail.module.scss";
+import styles from "./UserInfor.module.scss";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
@@ -13,21 +13,7 @@ import axiosClient from "../../services/AxiosClient";
 
 const cx = className.bind(styles);
 
-export function UserDetail() {
-  const [profile, setProfile] = useState({});
-
-  useEffect(() => {
-    axiosClient
-      .get(`user/profile`)
-      .then((res) => {
-        const newProfile = { ...profile, res };
-        setProfile(newProfile);
-      })
-      .catch((err) => {
-        console.log("ERROR axios profile >>> ", err);
-      });
-  }, []);
-
+export function UserInfor({ profile }) {
   const navigate = useNavigate();
   const ref = useRef(null);
 

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import getUsersReducer from "../features/getUser/getUsersSlice";
-import getQuestionBankReducer from "../features/getQuestionBank/getQuestionBankSlice";
+import getUsersReducer from "../features/getUser/Slice";
+import getQuestionBankReducer from "../features/getQuestionBank/Slice";
 import getFilterCategoryReducer from "../features/getQuestionBank/FormFilter/getFilterCategorySlice";
-import getDetailQuestion from "../features/getDetailQuestion/getDetailQuestionSlice";
+import getDetailQuestion from "../features/getDetailQuestion/Slice";
 import getFilterCriteriaReducer from "../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
-import getCategoryReducer from "../features/getCategoryQuestion/getCategorySlice";
-import getCriteriaReducer from "../features/getCriteria/getCriteriaSlice";
+import getCategoryReducer from "../features/getCategoryQuestion/Slice";
+import getCriteriaReducer from "../features/getCriteria/Slice";
 import createTemplateReducer from "../features/getTemplates/createTemplateSlice";
 import getTemplateListReducer from "../features/getTemplates/getTemplateListSlice";
 import getDetailTemplateReducer from "../features/getTemplates/getDetailTemplateSlice";

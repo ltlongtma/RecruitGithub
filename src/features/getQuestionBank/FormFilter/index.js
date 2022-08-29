@@ -15,9 +15,10 @@ export const FormFilter = ({
   paramStatus,
   hiddenCreateButton,
   hiddenSelectStatusQuestion,
+  // propDataToFilter,
 }) => {
   const navigate = useNavigate();
-
+ 
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;
     const name = e.target.name;

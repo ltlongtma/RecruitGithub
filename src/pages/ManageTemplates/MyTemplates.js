@@ -1,10 +1,10 @@
 import React from "react";
-import {  TemplatesContent } from "../../features/getTemplates";
+import { TemplatesContent } from "../../features/getTemplates/MyTemplates";
 
-export const MyTemplates = () => {
+export const MyTemplates = ({ handleEditTemplate }) => {
   return (
     <div>
-      <TemplatesContent />
+      <TemplatesContent handleEditTemplate={handleEditTemplate} />
     </div>
   );
 };
