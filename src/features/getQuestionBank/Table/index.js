@@ -5,10 +5,7 @@ import className from "classnames/bind";
 import sliceContent from "../../../helpers/sliceContent";
 import { Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addQuestionToTemplate,
-  removeQuestionFromTemplate,
-} from "../../getTemplates/createTemplateSlice";
+import { addQuestionToTemplate, removeQuestionFromTemplate } from "../../getTemplates/Slice";
 import moment from "moment";
 
 const cx = className.bind(styles);
@@ -19,8 +16,7 @@ export default function TableQuestion({
   handleViewDetailQuestion,
 }) {
   const dispatch = useDispatch();
-  const questionChosen = useSelector((state) => state.createTemplate);
-
+  const questionChosen = useSelector((state) => state.template.createTemplate);
   const handleChangeCheckbox = (e, data) => {
     e.target.checked === true
       ? dispatch(addQuestionToTemplate(data))
@@ -50,7 +46,11 @@ export default function TableQuestion({
         <tbody>
           {questionList?.data?.map((question, index) => {
             return (
-              <tr key={index} onClick={() => handleViewDetailQuestion(question.id)} className={cx("tableBody")}>
+              <tr
+                key={index}
+                onClick={() => handleViewDetailQuestion(question.id)}
+                className={cx("tableBody")}
+              >
                 <td>
                   {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
                     1 +

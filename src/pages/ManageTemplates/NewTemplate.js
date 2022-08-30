@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton }) => {
-  const questionChosen = useSelector((state) => state.createTemplate);
+  const questionChosen = useSelector((state) => state.template.createTemplate);
   const categoryList = useSelector((state) => state.filterCategory);
   const navigate = useNavigate();
   const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({
@@ -31,11 +31,11 @@ export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton
       ...valueInputSubmitTemPlate,
       questionBankTemplates: data,
     };
-     questionTemplate
+    questionTemplate
       .create(payload)
 
       .catch((error) => {});
-      await alert("Your Template has been created successfully");
+    await alert("Your Template has been created successfully");
     handleCancerButton();
   };
   const handleSaveChangeTemplate = async () => {

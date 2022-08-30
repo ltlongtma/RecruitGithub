@@ -25,7 +25,7 @@ export const ModalEditCriteria = ({ show, handleClose, name, id, handleSubmitEdi
             <Form.Group className="mb-3">
               <Form.Label>Old Name</Form.Label> <Form.Control placeholder={name} disabled />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="ModalEditCriteria">
               <Form.Label>New Name</Form.Label>
               <Form.Control
                 type="text"

@@ -3,15 +3,16 @@ import styles from "./Navigation.module.scss";
 import logo from "../../assets/logo-tma.png";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { UserInfor } from "../UserInfor";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-
 import { Notifications } from "../../features/getNotification";
 import axiosClient from "../../services/AxiosClient";
+import Button from "@mui/material/Button";
+
 
 const cx = className.bind(styles);
 
@@ -23,13 +24,13 @@ export const Navigation = () => {
     axiosClient
       .get(`user/profile`)
       .then((res) => {
-        // const newProfile = { ...profile, res };
         setProfile(res);
       })
       .catch((err) => {
         console.log("ERROR axios profile >>> ", err);
       });
   }, []);
+
   return (
     <Navbar className={cx("navbar")}>
       <Navbar.Brand href="#home" className={cx("brand")}>
@@ -59,7 +60,6 @@ export const Navigation = () => {
             <NavLink to="/interview/templates">Templates</NavLink>
           </div>
         </NavDropdown>
-        {/* <NavLink to="/interview">Interview</NavLink> */}
         {role === "ADMIN" && <NavLink to="/user">Manage User</NavLink>}
 
         <Form className={cx("search", "d-flex")}>

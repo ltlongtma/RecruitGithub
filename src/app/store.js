@@ -6,9 +6,7 @@ import getDetailQuestion from "../features/getDetailQuestion/Slice";
 import getFilterCriteriaReducer from "../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import getCategoryReducer from "../features/getCategoryQuestion/Slice";
 import getCriteriaReducer from "../features/getCriteria/Slice";
-import createTemplateReducer from "../features/getTemplates/createTemplateSlice";
-import getTemplateListReducer from "../features/getTemplates/getTemplateListSlice";
-import getDetailTemplateReducer from "../features/getTemplates/getDetailTemplateSlice";
+import templateSliceReducer from "../features/getTemplates/Slice";
 
 const rootReducer = {
   user: getUsersReducer,
@@ -18,9 +16,8 @@ const rootReducer = {
   filterCriteria: getFilterCriteriaReducer,
   getCategoryQuestion: getCategoryReducer,
   getCriteria: getCriteriaReducer,
-  createTemplate: createTemplateReducer,
-  getTemplateList: getTemplateListReducer,
-  getDetailTemplate: getDetailTemplateReducer,
+  template: templateSliceReducer,
+
 };
 const store = configureStore({
   reducer: rootReducer,

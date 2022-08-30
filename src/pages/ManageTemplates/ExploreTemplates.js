@@ -9,7 +9,7 @@ import styles from "./module.scss";
 import { PendingTemplates } from "../../features/getTemplates/ExploreTemplates/Pending";
 import { useDispatch } from "react-redux";
 import { FormFilterTemplates } from "../../features/getTemplates/FormFilter";
-import { templatesFilterByAdmin } from "../../features/getTemplates/getTemplateListSlice";
+import { templatesFilterByAdmin } from "../../features/getTemplates/Slice";
 import { ApprovedTemplates } from "../../features/getTemplates/ExploreTemplates/Approved";
 
 const cx = className.bind(styles);

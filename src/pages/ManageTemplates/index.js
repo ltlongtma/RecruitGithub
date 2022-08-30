@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import {
   addQuestionToTemplate,
   clearQuestionFromTemplate,
-} from "../../features/getTemplates/createTemplateSlice";
+} from "../../features/getTemplates/Slice";
 
 export const ManageTemplates = () => {
   const [valueRoute, setValueRoute] = React.useState("1");

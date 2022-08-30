@@ -9,7 +9,7 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } fro
 import {
   removeQuestionFromTemplate,
   sortableChosenTemplate,
-} from "../../features/getTemplates/createTemplateSlice";
+} from "../../features/getTemplates/Slice";
 import { sortableContainer, sortableElement } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
 import moment from "moment";
@@ -53,8 +53,6 @@ export const ShowQuestionChosen = ({
     const newQuestionChosen = questionChosen?.filter((question, index) =>
       defaultQuestionIds?.includes(`${index + 1}_${question.id}`)
     );
-    // console.log("NEWQUESTCHosen: ", newQuestionChosen);
-    // console.log("questionChosen: >>>>", questionChosen);
 
     questionChosen !== null &&
     questionChosen.length > 0 &&
@@ -153,7 +151,8 @@ export const ShowQuestionChosen = ({
               label="category"
               onChange={handleChangeinputvalue}
               name="category"
-              defaultValue={valueInput?.category.id}
+              defaultValue={""}
+              required
             >
               {filterCategory?.map((item, index) => (
                 <MenuItem value={item.id} key={index}>
@@ -165,12 +164,7 @@ export const ShowQuestionChosen = ({
 
           <FormControl sx={{ width: 90, ml: 7 }} color="warning">
             <InputLabel>Public</InputLabel>
-            <Select
-              label="Age"
-              onChange={handleChangeinputvalue}
-              name="public"
-              defaultValue={valueInput?.public}
-            >
+            <Select label="Age" onChange={handleChangeinputvalue} name="public" defaultValue={true}>
               <MenuItem value={true}>True</MenuItem>
               <MenuItem value={false}>False</MenuItem>
             </Select>

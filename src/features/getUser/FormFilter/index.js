@@ -21,7 +21,7 @@ export default function FormFilterUser({ onFilterAll, params }) {
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
-        <Form.Group className={cx("form-group")} controlId="exampleForm.ControlInput1">
+        <Form.Group className={cx("form-group")} controlId="FormFilterUser">
           <Form.Control
             className={cx("form-group-input")}
             type="text"

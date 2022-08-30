@@ -17,6 +17,7 @@ export const TableTemplates = ({
   handleModalSharing,
   selectedRow,
 }) => {
+
   return (
     <div>
       <div>

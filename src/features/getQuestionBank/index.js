@@ -50,7 +50,6 @@ export const Questionbank = ({
         onFilterCategory={categoryList}
         hiddenCreateButton={hiddenCreateButton}
         hiddenSelectStatusQuestion={hiddenSelectStatusQuestion}
-        // propDataToFilter={propDataToFilter}
       />
 
       <TableQuestion

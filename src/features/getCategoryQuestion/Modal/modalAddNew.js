@@ -24,7 +24,7 @@ export const ModalAddNewCategory = ({ show, handleClose, handleModalAddNewCatego
 
         <form onSubmit={async () => await handleModalAddNewCategory(valueInput)}>
           <Modal.Body>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="ModalAddNewCategory">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"

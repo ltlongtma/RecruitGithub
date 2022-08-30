@@ -3,8 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import PaginatedItems from "../../../../components/Pagination";
 import questionTemplate from "../../../../services/questionTemplates";
 import { getDetailQuestion } from "../../../getDetailQuestion/Slice";
-import { getDetailTemplate, removeOldDetailTemplate } from "../../getDetailTemplateSlice";
-import { getTemplateList, templatesFilterByAdmin } from "../../getTemplateListSlice";
+import {
+  getDetailTemplate,
+  getTemplateList,
+  removeOldDetailTemplate,
+  templatesFilterByAdmin,
+} from "../../Slice";
 import { ModalApproveTemplate } from "../../Modal/ModalApprovedTemplate ";
 import { ModalDeleteTemplate } from "../../Modal/ModalDeleteTemplate";
 import { ModalViewDetailQuestion } from "../../Modal/ModalViewDetailQuestion";
@@ -12,8 +16,8 @@ import TemplateDetail from "../TemplateDetail";
 import { TemplatesList } from "./TemplatesList";
 
 export const PendingTemplates = ({ onPageChange, params }) => {
-  const templateList = useSelector((state) => state.getTemplateList);
-  const dataInDetailtemplate = useSelector((state) => state.getDetailTemplate);
+  const templateList = useSelector((state) => state.template.templateList);
+  const dataInDetailtemplate = useSelector((state) => state.template.detailTemplate);
   const dataDetaiQuestion = useSelector((state) => state.getDetailQuestion);
   const [showModalViewDetailQuestion, setShowModalViewDetailQuestion] = useState(false);
   const [showModalApprove, setShowModalApprove] = useState(false);

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PaginatedItems from "../../../../components/Pagination";
-import { templatesFilterByAdmin, templatesPending } from "../../getTemplateListSlice";
+import { templatesFilterByAdmin, templatesPending } from "../../Slice";
 import { TemplatesList } from "../Pending/TemplatesList";
 
 export const ApprovedTemplates = ({ onPageChange, params }) => {
-  const templateList = useSelector((state) => state.getTemplateList);
+  const templateList = useSelector((state) => state.template.templateList);
 
   const dispatch = useDispatch();
 
@@ -18,10 +18,7 @@ export const ApprovedTemplates = ({ onPageChange, params }) => {
 
   return (
     <div>
-      <TemplatesList
-        templateList={templateList}
-        ViewDetailTemplate={ViewDetailTemplate}
-      />
+      <TemplatesList templateList={templateList} ViewDetailTemplate={ViewDetailTemplate} />
       <PaginatedItems pagination={templateList?.pagination} onPageChange={onPageChange} />
     </div>
   );
