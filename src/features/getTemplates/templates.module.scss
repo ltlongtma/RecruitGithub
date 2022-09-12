@@ -10,20 +10,13 @@
   text-align: center;
   cursor: pointer;
   .table-head {
-    background-color: darkolivegreen;
-    color: white;
+    // background-color: rgb(175, 218, 232);
+    // color: white;
   }
-  .editIcon,
-  .deleteIcon,
-  .shareIcon {
-    margin-right: 10px;
-    &:hover {
-      // transform: scale(1.5);
-    }
-  }
+ 
   .tableBody {
     .selectedRow {
-      background-color: brown;
+      background-color: rgb(177, 224, 240);
     }
   }
 }
@@ -68,7 +61,7 @@
   text-align: center;
   cursor: pointer;
   .table-head {
-    background-color: rgb(161, 224, 145);
+    // background-color: rgb(241, 206, 171);
   }
   .button {
     display: flex;

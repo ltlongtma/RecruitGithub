@@ -53,7 +53,7 @@ export const ModalEditRole = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={() => handleEditNewRole(user?.id)}>
+        <Button variant="primary" onClick={() => handleEditNewRole(user?.id)}>
           Save
         </Button>
         <Button variant="secondary" onClick={handleCloseModalEdit}>

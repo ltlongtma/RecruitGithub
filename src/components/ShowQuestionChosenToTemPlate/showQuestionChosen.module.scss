@@ -16,10 +16,18 @@
   text-align: center;
 
   .table-head {
-    background-color: rgb(161, 224, 145);
+    // background-color: rgb(236, 208, 177);
+  }
+  tr {
+    cursor: pointer;
   }
   .buttonRemove {
     pointer-events: none;
   }
-  
+}
+.guideTip {
+  color: red;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1em;
 }

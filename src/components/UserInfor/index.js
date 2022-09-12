@@ -67,7 +67,7 @@ export function UserInfor({ profile }) {
             </span>
           </Popover.Body>
           <Popover.Body>
-            <LogoutIcon fontSize="small" color="success" />
+            <LogoutIcon fontSize="small" color="primary" />
             <span className={cx("popover-body")} onClick={handleShow}>
               Log Out
             </span>
@@ -80,7 +80,7 @@ export function UserInfor({ profile }) {
           <Modal.Title>Are you sure want to log out?</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="success" onClick={handleLogout}>
+          <Button variant="primary" onClick={handleLogout}>
             Yes
           </Button>
           <Button variant="secondary" onClick={handleClose}>

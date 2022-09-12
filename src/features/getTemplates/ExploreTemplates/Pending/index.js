@@ -3,19 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import PaginatedItems from "../../../../components/Pagination";
 import questionTemplate from "../../../../services/questionTemplates";
 import { getDetailQuestion } from "../../../getDetailQuestion/Slice";
-import {
-  getDetailTemplate,
-  getTemplateList,
-  removeOldDetailTemplate,
-  templatesFilterByAdmin,
-} from "../../Slice";
+import { getDetailTemplate, removeOldDetailTemplate, templatesFilterByAdmin } from "../../Slice";
 import { ModalApproveTemplate } from "../../Modal/ModalApprovedTemplate ";
 import { ModalDeleteTemplate } from "../../Modal/ModalDeleteTemplate";
 import { ModalViewDetailQuestion } from "../../Modal/ModalViewDetailQuestion";
 import TemplateDetail from "../TemplateDetail";
 import { TemplatesList } from "./TemplatesList";
+import AlertSuccess from "../../../../components/Alert";
 
-export const PendingTemplates = ({ onPageChange, params }) => {
+export const PendingTemplates = ({ onPageChange, paramStatus, onChangePageSize }) => {
   const templateList = useSelector((state) => state.template.templateList);
   const dataInDetailtemplate = useSelector((state) => state.template.detailTemplate);
   const dataDetaiQuestion = useSelector((state) => state.getDetailQuestion);
@@ -33,7 +29,7 @@ export const PendingTemplates = ({ onPageChange, params }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(templatesFilterByAdmin(params));
+    dispatch(templatesFilterByAdmin(paramStatus));
   }, []);
   const ViewDetailTemplate = (item) => {
     dispatch(getDetailTemplate(item.id));
@@ -56,10 +52,11 @@ export const PendingTemplates = ({ onPageChange, params }) => {
       .reject(id)
 
       .then((response) => {
-        dispatch(removeOldDetailTemplate(params));
-        dispatch(templatesFilterByAdmin(params));
+        dispatch(removeOldDetailTemplate(paramStatus));
+        dispatch(templatesFilterByAdmin(paramStatus));
 
-        alert("Reject successfully");
+        setTileAlert("Rejected successfully");
+        setOpenAlert(true);
       })
       .catch((error) => {
         console.log("ERROR ", error);
@@ -72,10 +69,11 @@ export const PendingTemplates = ({ onPageChange, params }) => {
       .approve(id)
 
       .then((response) => {
-        dispatch(removeOldDetailTemplate(params));
-        dispatch(templatesFilterByAdmin(params));
+        dispatch(removeOldDetailTemplate(paramStatus));
+        dispatch(templatesFilterByAdmin(paramStatus));
 
-        alert("Template was approved successfully");
+        setTileAlert(" Template was approved successfully");
+        setOpenAlert(true);
       })
       .catch((error) => {
         console.log("ERROR ", error);
@@ -83,10 +81,30 @@ export const PendingTemplates = ({ onPageChange, params }) => {
 
     setShowModalApprove(false);
   };
+  //handle alert dialog
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [titleAlert, setTileAlert] = React.useState("");
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
   return (
     <div>
-      <TemplatesList templateList={templateList} ViewDetailTemplate={ViewDetailTemplate} />
-      <PaginatedItems pagination={templateList?.pagination} onPageChange={onPageChange} />
+      <TemplatesList
+        templateList={templateList}
+        ViewDetailTemplate={ViewDetailTemplate}
+        showActionColumn={false}
+      />
+      <PaginatedItems
+        pagination={templateList?.pagination}
+        onPageChange={onPageChange}
+        pageSize={paramStatus.pageSize}
+        onChangePageSize={onChangePageSize}
+      />
 
       <TemplateDetail
         dataInDetailtemplate={dataInDetailtemplate}
@@ -115,6 +133,7 @@ export const PendingTemplates = ({ onPageChange, params }) => {
         closeModal={handleCloseModalApprove}
         handleApprove={() => handleApprove(idTemplate)}
       />
+      <AlertSuccess title={titleAlert} openAlert={openAlert} closeAlert={handleCloseAlert} />
     </div>
   );
 };

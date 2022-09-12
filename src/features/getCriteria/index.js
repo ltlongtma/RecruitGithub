@@ -23,6 +23,7 @@ export const GetCriteria = () => {
   const [paramStatus, setParamStatus] = useState({
     active: "",
     keyword: "",
+    pageSize: 5,
   });
   const debounce = useDebounce(paramStatus, 500);
   useEffect(() => {
@@ -67,14 +68,10 @@ export const GetCriteria = () => {
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
-    // questionCriteriaApi
-    //   .getFilter(newParamStatus)
-    //   .then((res) => {
-    //     dispatch(getCriteria(res.data));
-    //   })
-    //   .catch((error) => {});
   };
-
+  const onChangePageSize = (e) => {
+    setParamStatus({ ...paramStatus, pageSize: e });
+  };
   return (
     <div>
       <FilterAndAddNew data={data} onFilterStatus={onFilterStatus} paramStatus={paramStatus} />
@@ -95,7 +92,12 @@ export const GetCriteria = () => {
         handleClose={() => setShowModalDelete(!showModalDelete)}
         onDelete={handleDelete}
       />
-      <PaginatedItems pagination={data?.pagination} onPageChange={onPageChange} />
+      <PaginatedItems
+        pagination={data?.pagination}
+        onPageChange={onPageChange}
+        pageSize={paramStatus.pageSize}
+        onChangePageSize={onChangePageSize}
+      />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import className from "classnames/bind";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -13,6 +12,7 @@ import {
   addQuestionToTemplate,
   clearQuestionFromTemplate,
 } from "../../features/getTemplates/Slice";
+import AlertSuccess from "../../components/Alert";
 
 export const ManageTemplates = () => {
   const [valueRoute, setValueRoute] = React.useState("1");
@@ -40,7 +40,24 @@ export const ManageTemplates = () => {
     dispatch(clearQuestionFromTemplate());
     setDefaultValue({});
   };
+  //handle alert dialog
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [titleAlert, setTileAlert] = React.useState("");
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
+  const alertOpen = (e) => {
+    setOpenAlert(e);
+  };
+  const tileAlert = (e) => {
+    setTileAlert(e);
+  };
   return (
     <div>
       <Box sx={{ width: "100%", typography: "body1" }}>
@@ -60,6 +77,8 @@ export const ManageTemplates = () => {
               defaultValue={defaultValue}
               hiddenSaveButton={hiddenSaveButton}
               handleCancerButton={handleCancerButton}
+              setOpenAlert={alertOpen}
+              setTileAlert={tileAlert}
             />
           </TabPanel>
           <TabPanel value="3">
@@ -67,6 +86,9 @@ export const ManageTemplates = () => {
           </TabPanel>
         </TabContext>
       </Box>
+      <div>
+        <AlertSuccess title={titleAlert} openAlert={openAlert} closeAlert={handleCloseAlert} />
+      </div>
     </div>
   );
 };

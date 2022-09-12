@@ -1,12 +1,7 @@
-.user-list-breadcrumb {
+.question-bank-breadcrumb {
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
-  // margin-left: 3rem;
-  padding: 1rem;
-  
-  & a {
-    color: green;
-  }
 }
 
 .table {

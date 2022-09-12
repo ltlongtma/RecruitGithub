@@ -1,12 +1,7 @@
 .question-bank-breadcrumb {
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
-  
-
-  & a {
-    color: green;
-  }
 }
 .table {
   text-align: center;
@@ -15,6 +10,7 @@
   display: flex;
   margin-left: 3rem;
   margin-bottom: 1rem;
+  padding: 1rem;
   .form-group {
     display: flex;
     height: auto;

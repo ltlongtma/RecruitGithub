@@ -39,7 +39,7 @@ export const ModalAddNewCriteria = ({ show, handleClose, handleModalAddNewCriter
             <Button variant="secondary" onClick={handleClose}>
               Cancer
             </Button>
-            <Button variant="success" type="submit" disabled={disableButtonSaveChange}>
+            <Button variant="primary" type="submit" disabled={disableButtonSaveChange}>
               Save Changes
             </Button>
           </Modal.Footer>

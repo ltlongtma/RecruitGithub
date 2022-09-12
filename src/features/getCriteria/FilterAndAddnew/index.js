@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-
-import Button from "react-bootstrap/Button";
 import className from "classnames/bind";
 import styles from "./filter.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { Form } from "react-bootstrap";
-import { FormGroup } from "@mui/material";
-
+import { Button, FormGroup } from "@mui/material";
 import { ModalAddNewCriteria } from "../Modal/AddNewCriteria";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
+import AlertSuccess from "../../../components/Alert";
 
 const cx = className.bind(styles);
 
@@ -26,20 +24,25 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     // setParamStatus(newParamStatus);
     onFilterStatus(newParamStatus);
   };
-  const handleModalAddNewCriteria = (e) => {
+  const handleModalAddNewCriteria = async (e) => {
     if (e !== "") {
       questionCriteriaApi
         .create(e)
-        .then(() => {
-          alert("New criteria added successfully");
-        })
+        .then( await setOpenAlert(true))
 
         .catch((e) => {
           console.log("ERROR in addNewCriteria ", e);
         });
     } else return;
   };
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenAlert(false);
+  };
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
@@ -61,13 +64,12 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
         </FormGroup>
       </Form>
       <Button
-        className={cx("btn-addNewCategory")}
-        variant="success"
+        variant="outlined"
         onClick={() => {
           setShowModal(true);
         }}
       >
-        <AddIcon /> New Criteria
+        <AddIcon /> New
       </Button>
       <ModalAddNewCriteria
         show={showModal}
@@ -76,6 +78,13 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
         }}
         handleModalAddNewCriteria={handleModalAddNewCriteria}
       />
+      <div>
+        <AlertSuccess
+          title="A new criteria was added successfully"
+          openAlert={openAlert}
+          closeAlert={handleCloseAlert}
+        />
+      </div>
     </div>
   );
 };

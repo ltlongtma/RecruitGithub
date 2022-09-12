@@ -22,6 +22,7 @@ export const CategoryQuestion = () => {
   const [paramStatus, setParamStatus] = useState({
     active: "",
     keyword: "",
+    pageSize: 5,
   });
   const debounce = useDebounce(paramStatus, 500);
   useEffect(() => {
@@ -41,7 +42,6 @@ export const CategoryQuestion = () => {
   const handleSubmitEditCategory = (id, name) => {
     id = idCategory;
     questionCategoryApi.changeName(id, name);
-    
   };
   const handleOpenModalDelete = (item) => {
     setShowModalDelete(!showModalDelete);
@@ -63,9 +63,10 @@ export const CategoryQuestion = () => {
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
-   
   };
-
+  const onChangePageSize = (e) => {
+    setParamStatus({ ...paramStatus, pageSize: e });
+  };
   return (
     <div>
       <FilterAndAddNew data={data} onFilterStatus={onFilterStatus} paramStatus={paramStatus} />
@@ -85,7 +86,12 @@ export const CategoryQuestion = () => {
         handleClose={() => setShowModalDelete(!showModalDelete)}
         onDelete={handleDelete}
       />
-      <PaginatedItems pagination={data?.pagination} onPageChange={onPageChange} />
+      <PaginatedItems
+        pagination={data?.pagination}
+        onPageChange={onPageChange}
+        pageSize={paramStatus.pageSize}
+        onChangePageSize={onChangePageSize}
+      />
     </div>
   );
 };

@@ -97,7 +97,7 @@ export const ModalViewDetailQuestion = ({ data, closeModal, ...props }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={closeModal}>
+          <Button variant="primary" onClick={closeModal}>
             Close
           </Button>
         </Modal.Footer>

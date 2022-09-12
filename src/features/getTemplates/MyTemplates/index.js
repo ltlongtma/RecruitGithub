@@ -28,22 +28,26 @@ export const TemplatesContent = ({ handleEditTemplate }) => {
 
   const [idTemplate, setIdTemplate] = useState();
 
-  const [params, setParams] = useState({
+  const [paramStatus, setParamStatus] = useState({
     keyword: "",
     pageSize: 5,
   });
 
   useEffect(() => {
-    dispatch(getTemplateList(params));
-  }, []);
+    dispatch(getTemplateList(paramStatus));
+  }, [paramStatus]);
   const onValueSearch = (e) => {
-    const newParams = { ...params, keyword: e };
-    setParams(newParams);
+    const newParams = { ...paramStatus, keyword: e };
+    setParamStatus(newParams);
     dispatch(getTemplateList(newParams));
   };
   const onPageChange = (page) => {
-    const newParams = { ...params, page };
+    const newParams = { ...paramStatus, page };
     dispatch(getTemplateList(newParams));
+  };
+  const onChangePageSize = async (e) => {
+    const newParams = { ...paramStatus, pageSize: e };
+    setParamStatus({ ...newParams });
   };
   const handleShowModalDeleteTemplate = (item) => {
     setShowModalDelete(true);
@@ -57,7 +61,7 @@ export const TemplatesContent = ({ handleEditTemplate }) => {
     await questionTemplate
       .delete(id)
 
-      .then((response) => alert("Delete successfully"))
+      .then((response) => alert("Delete primaryfully"))
       .catch((error) => {
         console.log("ERROR ", error);
       });
@@ -69,7 +73,7 @@ export const TemplatesContent = ({ handleEditTemplate }) => {
   const handleSharing = (id) => {
     // console.log("Sharing", id);
     questionTemplate.subMitToQueue(id);
-    alert("Sharing successfully! Please waiting for aprroved from Admin");
+    alert("Sharing primaryfully! Please waiting for aprroved from Admin");
     setShowModalSharing(false);
   };
   const handleViewDetailTemplate = (id) => {
@@ -99,11 +103,17 @@ export const TemplatesContent = ({ handleEditTemplate }) => {
           handleModalSharing={handleModalSharing}
           selectedRow={selectedRow}
         />
-        <PaginatedItems pagination={templatesList?.pagination} onPageChange={onPageChange} />
+        <PaginatedItems
+          pagination={templatesList?.pagination}
+          onPageChange={onPageChange}
+          pageSize={paramStatus.pageSize}
+          onChangePageSize={onChangePageSize}
+        />
         <ViewDetailTemplate
           dataInDetailtemplate={dataInDetailtemplate}
           handleModalViewDetailQuestionEachTemplate={handleModalViewDetailQuestionEachTemplate}
         />
+
         <ModalDeleteTemplate
           centered
           show={showModalDelete}

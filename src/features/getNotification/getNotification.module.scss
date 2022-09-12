@@ -1,141 +1,138 @@
 $h-gutter: 2rem;
-$v-gutter: .75rem;
+$v-gutter: 0.75rem;
 $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
 
 .badge-container {
-    cursor: pointer;
-
-    &:hover {
-        color: darkgreen;
-    }
+  cursor: pointer;
+  padding: 10px;
+  &:hover {
+    color: white;
+  }
 }
 
 .toast-container {
-    position: absolute;
-    margin-top: 50px;
-    right: 0px;
-    width: 300px;
-    padding: 10px;
-
+  position: absolute;
+  margin-top: 50px;
+  right: 0px;
+  width: 300px;
+  padding: 10px;
 }
 
 .line-itmes {
-    background: white;
-    padding: 5px;
-    color: black;
-    font-weight: normal;
+  background: white;
+  padding: 5px;
+  color: black;
+  font-weight: normal;
 
-    &:hover {
-        color: darkgreen;
-        border: 0.5px solid #8080803d;
-        background: rgba(230, 242, 250, 255);
-    }
+  &:hover {
+    color: darkgreen;
+    border: 0.5px solid #8080803d;
+    background: rgba(230, 242, 250, 255);
+  }
 
-    .author {
-        font-size: 10px;
-    }
+  .author {
+    font-size: 10px;
+  }
 
-    .date {
-        font-size: 10px;
-        font-weight: 700;
-        color: #747474;
-        float: right;
-    }
+  .date {
+    font-size: 10px;
+    font-weight: 700;
+    color: #747474;
+    float: right;
+  }
 
-    .content {
-        font-size: 13px;
-    }
+  .content {
+    font-size: 13px;
+  }
 }
-
 
 .view-more {
-    text-align: right;
-    right: 0px;
-    padding-bottom: 0px;
-    color: darkgreen;
-    cursor: pointer;
+  text-align: right;
+  right: 0px;
+  padding-bottom: 0px;
+  color: darkgreen;
+  cursor: pointer;
 
-    &:hover {
-        color: darkgreen;
-        font-weight: bold;
-    }
+  &:hover {
+    color: darkgreen;
+    font-weight: bold;
+  }
 }
 
-
 .x-icon {
-    cursor: pointer;
+  cursor: pointer;
 
-    &:hover {
-        color: darkgreen;
-        font-size: 1.2em;
-    }
+  &:hover {
+    color: darkgreen;
+    font-size: 1.2em;
+  }
 }
 
 .notification-content {
-    border: 0.5px solid #8080803d;
-    display: block;
-    z-index: 10;
-    opacity: 1;
-    width: 500px;
-    border-radius: 0.5rem;
-    box-shadow: 0px 2px 20px 0 rgb(54 54 54 / 20%);
-    background-color: #fff;
-    right: 0px;
-    top: 72px;
-    position: absolute !important;
-    // box-sizing: border-box;
+  border: 0.5px solid #8080803d;
+  display: block;
+  z-index: 10;
+  opacity: 1;
+  width: 500px;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 20px 0 rgb(54 54 54 / 20%);
+  background-color: #fff;
+  right: 0px;
+  top: 72px;
+  position: absolute !important;
+  // box-sizing: border-box;
 }
 
 .notification-header {
-    padding: 12px 24px;
-    border-bottom: 1px solid #e1e1e1;
-    align-items: center !important;
-    -webkit-box-align: center !important;
-    -webkit-box-pack: justify !important;
-    justify-content: space-between !important;
-    display: flex !important;
-    // box-sizing: border-box;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e1e1e1;
+  align-items: center !important;
+  -webkit-box-align: center !important;
+  -webkit-box-pack: justify !important;
+  justify-content: space-between !important;
+  display: flex !important;
+  // box-sizing: border-box;
 }
 
 .notification-title {
-    font-family: 'Segoe UI';
-    font-size: 18px;
-    font-weight: normal;
-    box-sizing: border-box;
-    position: relative;
-    // background-color: #f5f5f5;
-    overflow-y: auto !important;
+  font-family: "Segoe UI";
+  font-size: 18px;
+  font-weight: normal;
+  box-sizing: border-box;
+  position: relative;
+  // background-color: #f5f5f5;
+  overflow-y: auto !important;
 }
 
-.align-items-center{
-    display: flex;
-    align-items: center;
+.align-items-center {
+  display: flex;
+  align-items: center;
 }
 
 .notification-mark-read {
-    background: white;
-    border: none;
-    outline: none;
-    color: darkgreen;
-    display: inline-block;
-    margin-right: 20px;
-    cursor: pointer;
+  background: white;
+  border: none;
+  outline: none;
+  color: darkgreen;
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
 
-    &:hover {
-        // color: black;
-        font-weight: bold;
-    }
+  &:hover {
+    // color: black;
+    font-weight: bold;
+  }
 }
 
 .notification-close {
-    background: white;
-    border: none;
-    outline: none;
-    display: inline-block;
+  background: white;
+  border: none;
+  outline: none;
+  display: inline-block;
 }
 
 .notification-body {
-    overflow-y: auto;
-    max-height: 500px;
-    border-radius: 0.5rem;
+  overflow-y: auto;
+  max-height: 500px;
+  border-radius: 0.5rem;
 }

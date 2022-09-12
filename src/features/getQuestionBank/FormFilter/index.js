@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import SearchIcon from "@mui/icons-material/Search";
 import className from "classnames/bind";
 import styles from "./form.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import Fab from "@mui/material/Fab";
 
 const cx = className.bind(styles);
 
@@ -15,10 +15,9 @@ export const FormFilter = ({
   paramStatus,
   hiddenCreateButton,
   hiddenSelectStatusQuestion,
-  // propDataToFilter,
 }) => {
   const navigate = useNavigate();
- 
+
   const handleChangeSelectValue = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -76,18 +75,19 @@ export const FormFilter = ({
             onChange={handleChangeSelectValue}
           />
         </Form.Group>
-        <Button variant="outline-success" size="sm">
-          <SearchIcon />
-        </Button>
       </Form>
-      <Button
-        variant="success"
-        size="sm"
+
+      <Fab
+        size="medium"
+        color="info"
+        aria-label="add"
+        variant="extended"
         onClick={handleCreateQuestion}
         hidden={hiddenCreateButton}
       >
-        <AddIcon /> Create New Question
-      </Button>
+        <AddIcon sx={{ mr: 1 }} />
+        new
+      </Fab>
     </div>
   );
 };

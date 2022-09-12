@@ -1,14 +1,34 @@
 import ReactPaginate from "react-paginate";
 import className from "classnames/bind";
 import styles from "./pagination.module.scss";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 const cx = className.bind(styles);
 
-function PaginatedItems({ pagination, onPageChange }) {
+function PaginatedItems({ pagination, onPageChange, pageSize, onChangePageSize }) {
   const handlePageClick = (event) => {
     onPageChange(event.selected + 1);
   };
+  const handleChangePageSize = (e) => {
+    onChangePageSize(e.target.value);
+  };
   return (
-    <>
+    <div className={cx("wrapper")}>
+      <FormControl sx={{ width: 150, ml: 7 }} color="primary">
+        <InputLabel>Rows per page</InputLabel>
+
+        <Select
+          label="rowPerPage"
+          name="rowPerPage"
+          defaultValue={5}
+          onChange={handleChangePageSize}
+          className={cx("rowPerPage")}
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={20}>20</MenuItem>
+        </Select>
+      </FormControl>
       <ReactPaginate
         nextLabel="next >"
         onPageChange={handlePageClick}
@@ -31,7 +51,7 @@ function PaginatedItems({ pagination, onPageChange }) {
         forcePage={pagination.page - 1}
         className={cx("pagination")}
       />
-    </>
+    </div>
   );
 }
 export default PaginatedItems;

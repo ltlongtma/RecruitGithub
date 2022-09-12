@@ -20,7 +20,7 @@ export const ResetPassword = () => {
   };
   const handleSubmitForm = (e) => {
     // e.preventDefault();
-    alert("Your password has been reset successfully.");
+    alert("Your password has been reset primaryfully.");
     navigate("/login");
   };
 
@@ -136,7 +136,7 @@ export const ResetPassword = () => {
               </div>
               <button
                 type="submit"
-                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
+                className={cx("btn", "btn login btn-primary mt-3 col-12 mx-auto")}
               >
                 Reset Password
               </button>

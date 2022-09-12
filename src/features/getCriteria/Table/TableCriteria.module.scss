@@ -1,34 +1,10 @@
 .table {
   text-align: center;
-  tr:hover {
-    color: darkgreen;
-  }
-  .table-head {
-    background: rgb(152, 197, 152);
-  }
-
-  .editIcon {
-    cursor: pointer;
-    &:hover {
-      font-size: xx-large;
-    }
-  }
-  tr {
-    &:hover {
-      cursor: pointer;
-      background: rgb(218, 235, 218);
-    }
-  }
-  td {
-    .switchButton {
-      .switch-group {
+  tbody {
+    tr {
+      &:hover {
+        cursor: pointer;
       }
-    }
-  }
-  .deleteIcon {
-    cursor: pointer;
-    &:hover {
-      // transform: scale(1.5);
     }
   }
 }

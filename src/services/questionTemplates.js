@@ -46,6 +46,10 @@ const questionTemplate = {
     const url = `/question-template/submit-to-queue/${id}`;
     return axiosClient.post(url);
   },
+  cloneToMyTemplate(id) {
+    const url = `/question-template/clone/${id}`;
+    return axiosClient.post(url);
+  },
   
 };
 

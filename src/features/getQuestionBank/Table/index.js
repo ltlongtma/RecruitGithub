@@ -7,6 +7,8 @@ import { Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestionToTemplate, removeQuestionFromTemplate } from "../../getTemplates/Slice";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpZA } from "@fortawesome/free-solid-svg-icons";
 
 const cx = className.bind(styles);
 
@@ -24,11 +26,14 @@ export default function TableQuestion({
   };
   return (
     <div>
-      <Table bordered hover responsive className={cx("table")}>
+      <Table hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>No.</th>
-            <th>Content</th>
+            <th className={cx("headContext")}>
+              Content
+              <FontAwesomeIcon icon={faArrowUpZA} className={cx("tableIconSort")} />
+            </th>
             <th>Answer</th>
             <th>Category</th>
             <th>Level</th>

@@ -4,9 +4,9 @@ import className from "classnames/bind";
 import styles from "./TableCategory.module.scss";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import questionCategoryApi from "../../../services/questionCategoryApi";
-import { IconButton } from "@mui/material";
 
 const cx = className.bind(styles);
 
@@ -27,7 +27,7 @@ export const TableCategory = ({ data, handleOpenModalDelete, ...props }) => {
 
   return (
     <div>
-      <Table bordered hover responsive className={cx("table")}>
+      <Table hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>No.</th>
@@ -61,27 +61,34 @@ export const TableCategory = ({ data, handleOpenModalDelete, ...props }) => {
                   />
                 </td>
                 <td>
-                  <IconButton
-                    aria-label="edit"
-                    onClick={() => props.handleOpenModalEditCategory(item)}
-                    disabled={
-                      item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
-                    }
-                    color="success"
-                  >
-                    <ModeEditOutlineTwoToneIcon className={cx("editIcon")} />
-                  </IconButton>
-
-                  <IconButton
-                    aria-label="delete"
-                    color="error"
-                    onClick={() => handleOpenModalDelete(item)}
-                    disabled={
-                      item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
-                    }
-                  >
-                    <DeleteRoundedIcon className={cx("deleteIcon")} />
-                  </IconButton>
+                  <Tooltip title="Edit">
+                    <span>
+                      <IconButton
+                        aria-label="edit"
+                        onClick={() => props.handleOpenModalEditCategory(item)}
+                        disabled={
+                          item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
+                        }
+                        color="warning"
+                      >
+                        <ModeEditOutlineTwoToneIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Clone to my template">
+                    <span>
+                      <IconButton
+                        aria-label="delete"
+                        color="error"
+                        onClick={() => handleOpenModalDelete(item)}
+                        disabled={
+                          item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
+                        }
+                      >
+                        <DeleteRoundedIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
                 </td>
               </tr>
             );

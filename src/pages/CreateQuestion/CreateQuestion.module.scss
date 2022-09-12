@@ -1,19 +1,15 @@
 .question-bank-breadcrumb {
     padding: 1rem;
-
-    & a {
-        color: green;
-    }
-}
+    display: flex;
+    justify-content: space-between;
+  }
+  
 
 .table {
     text-align: center;
 }
 
 .form {
-    // display: flex;
-    // margin-left: 3rem;
-    // margin-bottom: 1rem;
     border-end-end-radius: 5px;
     border-end-start-radius: 5px;
     box-sizing: border-box;
@@ -30,7 +26,7 @@
             // margin: 0 10px;
 
             text-align:justify &:focus {
-                border-color: rgb(0, 100, 0);
+                // border-color: rgb(0, 100, 0);
                 box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(9, 156, 53, 0.6);
                 outline: 0 none;
             }

@@ -2,16 +2,23 @@ import Table from "react-bootstrap/Table";
 import React from "react";
 import moment from "moment";
 import styles from "../../templates.module.scss";
-
+import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import className from "classnames/bind";
 
 const cx = className.bind(styles);
 
-export const TemplatesList = ({ templateList, ViewDetailTemplate }) => {
+export const TemplatesList = ({
+  templateList,
+  ViewDetailTemplate,
+  showActionColumn,
+  handleModalCloneTemplate,
+}) => {
   return (
     <div>
       <div>
-        <Table bordered hover responsive className={cx("table-list")}>
+        <Table hover responsive className={cx("table-list")}>
           <thead className={cx("table-head")}>
             <tr>
               <th>No.</th>
@@ -21,6 +28,7 @@ export const TemplatesList = ({ templateList, ViewDetailTemplate }) => {
               <th>Author</th>
               <th>Num of Question</th>
               <th>Created_date</th>
+              {showActionColumn && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -39,6 +47,18 @@ export const TemplatesList = ({ templateList, ViewDetailTemplate }) => {
                   <td>{item?.author.name}</td>
                   <td>{item?.questionBankTemplates?.length}</td>
                   <td>{moment(item.createdDate).format("DD/MM/YYYY h:mm:ss a")}</td>
+                  {showActionColumn && (
+                    <td onClick={(e) => e.stopPropagation()}>
+                      <Tooltip title="Clone to my template">
+                        <IconButton
+                          color="secondary"
+                          onClick={() => handleModalCloneTemplate(item)}
+                        >
+                          <SimCardDownloadIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </td>
+                  )}
                 </tr>
               );
             })}

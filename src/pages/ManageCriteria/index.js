@@ -1,23 +1,27 @@
 import React from "react";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import className from "classnames/bind";
 import styles from "./criteria.module.scss";
 import { GetCriteria } from "../../features/getCriteria";
-
+import { Breadcrumbs, Typography, Link } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const cx = className.bind(styles);
 
 export const ManageCriteria = () => {
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="primary" href="/question">
+      Question Bank
+    </Link>,
+    <Typography key="2">Manage Criteria</Typography>,
+  ];
   return (
     <div>
-      <div className={cx("criteria-breadcrumb")}>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/question">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/question">Question bank</Breadcrumb.Item>
-          <Breadcrumb.Item active>Manage Criteria </Breadcrumb.Item>
-        </Breadcrumb>
+      <div className={cx("question-bank-breadcrumb")}>
+        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+          {breadcrumbs}
+        </Breadcrumbs>
       </div>
       <div>
-        <GetCriteria/>
+        <GetCriteria />
       </div>
     </div>
   );

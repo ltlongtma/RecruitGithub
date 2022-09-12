@@ -25,7 +25,10 @@ export const getDetailTemplate = createAsyncThunk("Slice/getDetailTemplate", asy
   const response = await questionTemplate.getById(params);
   return response;
 });
-
+export const cloneTemplate = createAsyncThunk("Slice/cloneTemplate", async (params) => {
+  const response = await questionTemplate.cloneToMyTemplate(params);
+  return response;
+});
 export const templateSlice = createSlice({
   name: "Slice",
   initialState,
@@ -46,7 +49,8 @@ export const templateSlice = createSlice({
       return (state = { ...state, createTemplate: [...action.payload] });
     },
     clearQuestionFromTemplate: (state, action) => {
-      return (state.createTemplate = []);
+      state.createTemplate = [];
+      return state;
     },
   },
 
@@ -74,6 +78,13 @@ export const templateSlice = createSlice({
     });
     builder.addCase(getDetailTemplate.rejected, (state, action) => {
       console.log("rejected getDetailTemplate", action.error);
+    });
+
+    builder.addCase(cloneTemplate.fulfilled, (state, action) => {
+      alert("This template was cloned successfully");
+    });
+    builder.addCase(cloneTemplate.rejected, (state, action) => {
+      console.log("Cloning was failed. Please try again later", action.error);
     });
   },
 });

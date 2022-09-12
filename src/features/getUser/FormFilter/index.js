@@ -3,9 +3,10 @@ import Form from "react-bootstrap/Form";
 import SearchIcon from "@mui/icons-material/Search";
 import className from "classnames/bind";
 import styles from "./FormFilter.module.scss";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import AddIcon from "@mui/icons-material/Add";
 import { ModalAddNewUser } from "../Modal/ModalAddNewUser";
+import { Button } from "@mui/material";
 
 const cx = className.bind(styles);
 
@@ -21,7 +22,7 @@ export default function FormFilterUser({ onFilterAll, params }) {
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
-        <Form.Group className={cx("form-group")} controlId="FormFilterUser">
+        <Form.Group className={cx("form-group")} >
           <Form.Control
             className={cx("form-group-input")}
             type="text"
@@ -50,17 +51,14 @@ export default function FormFilterUser({ onFilterAll, params }) {
             <option value="3">Guest</option>
           </Form.Select>
         </Form.Group>
-        <Button variant="outline-success" size="sm">
-          <SearchIcon />
-        </Button>
       </Form>
       <Button
         className={cx("btn-addNewUser")}
-        variant="success"
+        variant="outlined"
         size="sm"
         onClick={() => toggleModalAddNewUser(!showModalAddNewUser)}
       >
-        <AddIcon /> Add new user
+        <AddIcon /> new
       </Button>
       <ModalAddNewUser
         show={showModalAddNewUser}

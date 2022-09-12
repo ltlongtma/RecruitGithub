@@ -5,7 +5,8 @@ import styles from "./TableCriteria.module.scss";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
 
 const cx = className.bind(styles);
@@ -27,7 +28,7 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria, handleOpenMod
 
   return (
     <div>
-      <Table bordered hover responsive className={cx("table")}>
+      <Table hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>No.</th>
@@ -35,7 +36,7 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria, handleOpenMod
             <th>Num of Approved</th>
             <th>Num of Pending</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -62,27 +63,34 @@ export const TableCriteria = ({ data, handleOpenModalEditCriteria, handleOpenMod
                 </td>
 
                 <td>
-                  <IconButton
-                    aria-label="edit"
-                    color="success"
-                    onClick={() => handleOpenModalEditCriteria(item)}
-                    disabled={
-                      item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
-                    }
-                  >
-                    <ModeEditOutlineTwoToneIcon className={cx("editIcon")} />
-                  </IconButton>
-
-                  <IconButton
-                    aria-label="delete"
-                    color="error"
-                    disabled={
-                      item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
-                    }
-                    onClick={() => handleOpenModalDelete(item)}
-                  >
-                    <DeleteRoundedIcon className={cx("deleteIcon")} />
-                  </IconButton>
+                  <Tooltip title="Edit">
+                    <span>
+                      <IconButton
+                        aria-label="edit"
+                        color="warning"
+                        onClick={() => handleOpenModalEditCriteria(item)}
+                        disabled={
+                          item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
+                        }
+                      >
+                        <ModeEditOutlineTwoToneIcon className={cx("editIcon")} />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <span>
+                      <IconButton
+                        aria-label="delete"
+                        color="error"
+                        disabled={
+                          item?.approvedQuantity > 0 || item?.pendingQuantity > 1 ? true : false
+                        }
+                        onClick={() => handleOpenModalDelete(item)}
+                      >
+                        <DeleteRoundedIcon className={cx("deleteIcon")} />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
                 </td>
               </tr>
             );

@@ -123,7 +123,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
               </Button>
               <Button
                 size="lg"
-                variant="success"
+                variant="primary"
                 onClick={props.handleShowModalApprove}
                 hidden={props.showRejectAndApproveButton}
               >
@@ -138,7 +138,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
                 Cancer
               </Button>
               <Button
-                variant="success"
+                variant="primary"
                 hidden={props.showSaveAndBackButton}
                 size="lg"
                 onClick={() => handleSave(refContent?.current?.value, refAnswer?.current?.value)}
@@ -175,7 +175,7 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
                 Cancer
               </Button>
               <Button
-                variant="success"
+                variant="primary"
                 hidden={props.showSaveAndBackButton}
                 size="lg"
                 onClick={() => handleSave(refContent?.current?.value, refAnswer?.current?.value)}

@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
-import axiosClient from "../../services/AxiosClient";
 
 const cx = className.bind(styles);
 const SOCKET_URL = "http://localhost:8080/ws";

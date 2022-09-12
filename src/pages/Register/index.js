@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import className from "classnames/bind";
 import styles from "./Register.module.scss";
-import logo from "../../assets/logo-tma.png";
+import logo from "../../assets/logoTma.png";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -30,7 +30,7 @@ export const Register = () => {
 
     userApi
       .signUp(dataRegister)
-      .then((res) => alert(`Your account has been created successfully`), navigate("/login"))
+      .then((res) => alert(`Your account has been created primaryfully`), navigate("/login"))
 
       .catch((err) => console.log("ERROR " + err));
   };
@@ -79,9 +79,9 @@ export const Register = () => {
           <div className={cx("content-right", "col-md-5")}>
             <form onSubmit={handleSubmit(handleCreateNewAccount)}>
               <div className="mb-3">
-                <label className="form-label" htmlFor="emailAddress">
+                <h6 className="form-h6" htmlFor="emailAddress">
                   Email Address
-                </label>
+                </h6>
                 <input
                   type="email"
                   className="form-control"
@@ -103,9 +103,9 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label" htmlFor="emailAddress">
+                <h6 className="form-h6" htmlFor="emailAddress">
                   Id Badge
-                </label>
+                </h6>
                 <input
                   type="number"
                   className="form-control"
@@ -122,9 +122,9 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label" htmlFor="userName">
+                <h6 className="form-h6" htmlFor="userName">
                   User Name
-                </label>
+                </h6>
                 <input
                   type="text"
                   className="form-control"
@@ -146,9 +146,9 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label" htmlFor="name">
+                <h6 className="form-h6" htmlFor="name">
                   Full Name
-                </label>
+                </h6>
                 <input
                   type="text"
                   className="form-control"
@@ -170,9 +170,9 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label" htmlFor="password">
+                <h6 className="form-h6" htmlFor="password">
                   Password
-                </label>
+                </h6>
                 <div className={cx("input-password")}>
                   <input
                     type={showPassword ? "text" : "password"}
@@ -199,9 +199,9 @@ export const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label" htmlFor="passwordConfirm">
+                <h6 className="form-h6" htmlFor="passwordConfirm">
                   Confirm Password
-                </label>
+                </h6>
                 <div className={cx("input-password")}>
                   <input
                     type={showPassword ? "text" : "password"}
@@ -230,13 +230,13 @@ export const Register = () => {
               </div>
               <button
                 type="submit"
-                className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
+                className={cx("btn", "btn btn-primary mt-3 col-12 mx-auto")}
                 // onClick={handleSubmit(handleCreateNewAccount)}
               >
                 Create a new account
               </button>
               <button
-                className={cx("btn", "btn btn-success mt-3 col-12 mx-auto")}
+                className={cx("btn", "btn btn-primary mt-3 col-12 mx-auto")}
                 onClick={handleBackToLogin}
               >
                 Already have an account. Login

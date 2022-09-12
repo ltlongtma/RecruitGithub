@@ -5,6 +5,8 @@ import styles from "../templates.module.scss";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTone";
 import ShareIcon from "@mui/icons-material/Share";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import className from "classnames/bind";
 
 const cx = className.bind(styles);
@@ -17,11 +19,10 @@ export const TableTemplates = ({
   handleModalSharing,
   selectedRow,
 }) => {
-
   return (
     <div>
       <div>
-        <Table bordered hover responsive className={cx("table-list")}>
+        <Table hover responsive className={cx("table-list")}>
           <thead className={cx("table-head")}>
             <tr>
               <th>No.</th>
@@ -55,21 +56,24 @@ export const TableTemplates = ({
                   <td>{item?.questionBankTemplates?.length}</td>
                   <td>{moment(item.createdDate).format("DD/MM/YYYY h:mm:ss a")}</td>
                   <td onClick={(e) => e.stopPropagation()}>
-                    <ModeEditOutlineTwoToneIcon
-                      onClick={() => handleEditTemplate(item)}
-                      color="success"
-                      className={cx("editIcon")}
-                    />
-                    <ShareIcon
-                      color="warning"
-                      className={cx("shareIcon")}
-                      onClick={() => handleModalSharing(item.id)}
-                    />
-                    <DeleteRoundedIcon
-                      color="error"
-                      onClick={() => handleShowModalDeleteTemplate(item.id)}
-                      className={cx("deleteIcon")}
-                    />
+                    <Tooltip title="Edit">
+                      <IconButton color="secondary" onClick={() => handleEditTemplate(item)}>
+                        <ModeEditOutlineTwoToneIcon color="primary" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Sharing to public">
+                      <IconButton color="secondary" onClick={() => handleModalSharing(item.id)}>
+                        <ShareIcon color="warning" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                      <IconButton
+                        color="secondary"
+                        onClick={() => handleShowModalDeleteTemplate(item.id)}
+                      >
+                        <DeleteRoundedIcon color="error" />
+                      </IconButton>
+                    </Tooltip>
                   </td>
                 </tr>
               );

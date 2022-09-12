@@ -9,23 +9,30 @@ import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 // import axios from "axios";
-import axiosClient from "../../../services/AxiosClient";
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../Slice";
 import styles from "../Modal/Modal.module.scss";
 import userApi from "../../../services/ManageUserApi";
-
+import AlertSuccess from "../../../components/Alert";
 const cx = className.bind(styles);
 
-export const ModalAddNewUser = (props) => {
+export const ModalAddNewUser = ({ closeModal, ...props }) => {
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState(1);
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenAlert(false);
+  };
   const handleShowHidePassword = (e) => {
     setShowPassword(!showPassword);
   };
+
   const {
     register,
     handleSubmit,
@@ -66,21 +73,24 @@ export const ModalAddNewUser = (props) => {
       password: password.current,
       roles: [{ id: userRole }],
     };
+
     userApi
       .postNewUser(newUser)
 
       .then((response) => {
         dispatch(createNewUser(response));
-        const closeModal = props.closeModal;
+        setOpenAlert(true);
+
         closeModal();
       })
       .catch((error) => {
         console.log("ERROR ", error);
       });
   };
+
   return (
     <div>
-      <Modal show={props.show} onHide={props.onHide} className={cx("modal")}>
+      <Modal {...props} className={cx("modal")}>
         <Modal.Header closeButton>
           <Modal.Title className={cx("modal-title")}>Add New User</Modal.Title>
         </Modal.Header>
@@ -230,15 +240,20 @@ export const ModalAddNewUser = (props) => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" type="submit">
+            <Button variant="primary" type="submit">
               Save Changes
             </Button>
-            <Button variant="secondary" onClick={props.closeModal}>
+            <Button variant="secondary" onClick={closeModal}>
               Cancer
             </Button>
           </Modal.Footer>
         </form>
       </Modal>
+      <AlertSuccess
+        title="A new account was created successfully"
+        openAlert={openAlert}
+        closeAlert={handleCloseAlert}
+      />
     </div>
   );
 };

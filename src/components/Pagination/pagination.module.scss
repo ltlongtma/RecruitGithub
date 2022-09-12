@@ -1,5 +1,15 @@
-.pagination {
+.wrapper {
   display: flex;
   justify-content: right;
-  list-style-type: none;
+  height: auto;
+  .rowPerPage {
+    height: 38px;
+    width: 7em;
+    text-align: center;
+  }
+  .pagination {
+    display: flex;
+    padding-left: 0;
+    list-style-type: none;
+  }
 }

@@ -37,6 +37,8 @@ export const ShowQuestionChosen = ({
   });
 
   const [disableButtonSubmit, setDisableButtonSubmit] = useState(true);
+  const [hiddenGuideTip, setHiddenGuideTip] = useState(true);
+
   const [statusSaveButton, setStatusSaveButton] = useState(hiddenSaveButton);
   const dispatch = useDispatch();
   const handleRemoveChosenQuestion = async (data, e) => {
@@ -53,7 +55,7 @@ export const ShowQuestionChosen = ({
     const newQuestionChosen = questionChosen?.filter((question, index) =>
       defaultQuestionIds?.includes(`${index + 1}_${question.id}`)
     );
-
+    questionChosen.length > 0 ? setHiddenGuideTip(false) : setHiddenGuideTip(true);
     questionChosen !== null &&
     questionChosen.length > 0 &&
     valueInput?.name &&
@@ -172,7 +174,10 @@ export const ShowQuestionChosen = ({
         </Box>
       </div>
       <div>
-        <Table bordered hover responsive className={cx("table")}>
+        <i hidden={hiddenGuideTip} className={cx("guideTip")}>
+          *Drag and drop to sort items*
+        </i>
+        <Table hover responsive className={cx("table")}>
           <thead className={cx("table-head")}>
             <tr>
               <th>No.</th>
@@ -207,7 +212,7 @@ export const ShowQuestionChosen = ({
         </Button>
         <Button
           variant="contained"
-          color="success"
+          color="primary"
           onClick={handleSubmitTemplate}
           disabled={disableButtonSubmit}
           hidden={!statusSaveButton}

@@ -6,8 +6,15 @@ import questionTemplate from "../../services/questionTemplates";
 import { useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
+import { Divider } from "@mui/material";
 
-export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton }) => {
+export const NewTemplate = ({
+  defaultValue,
+  hiddenSaveButton,
+  handleCancerButton,
+  setTileAlert,
+  setOpenAlert,
+}) => {
   const questionChosen = useSelector((state) => state.template.createTemplate);
   const categoryList = useSelector((state) => state.filterCategory);
   const navigate = useNavigate();
@@ -33,9 +40,13 @@ export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton
     };
     questionTemplate
       .create(payload)
+      .then(
+        await setTileAlert("Your Template has been created successfully"),
+        await setOpenAlert(true)
+      )
 
       .catch((error) => {});
-    await alert("Your Template has been created successfully");
+
     handleCancerButton();
   };
   const handleSaveChangeTemplate = async () => {
@@ -50,14 +61,14 @@ export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton
     await questionTemplate
       .upDate(newData.id, newData)
       .then((result) => {
-        alert("Your Template was updated successfully");
+        alert("Your Template was updated successfully.");
       })
       .catch((err) => {
         console.log("ERROR Update Template >>>", err);
       });
-    // window.location.reload();
     handleCancerButton();
   };
+
   return (
     <div>
       <Questionbank
@@ -69,7 +80,7 @@ export const NewTemplate = ({ defaultValue, hiddenSaveButton, handleCancerButton
         }}
       />
 
-      <Box sx={{ borderBottom: 3, borderColor: "block", m: 5 }}></Box>
+      <Box sx={{ borderBottom: 3, borderColor: "orange", m: 5 }}></Box>
 
       <ShowQuestionChosen
         questionChosen={questionChosen}

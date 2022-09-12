@@ -9,11 +9,11 @@ import {
   CreateQuestion,
   ManageCategory,
   ManageTemplates,
-  Interview,
+  InterviewProcess,
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
 import { ManageCriteria } from "../pages/ManageCriteria";
-import TemplateDetail from "../features/getTemplates/ExploreTemplates/TemplateDetail";
+
 
 export const publicRoute = [
   { path: "/login", component: Login, layout: LoginLayout },
@@ -30,7 +30,7 @@ export const adminRoute = [
   { path: "/question/:questionId", component: ViewDetailQuestion },
   { path: "/user", component: User },
   { path: "/question/create", component: CreateQuestion },
-  { path: "/interview", component: Interview },
+  { path: "/interview", component: InterviewProcess },
 
   { path: "/interview/templates", component: ManageTemplates },
   // { path: "/interview/templates/:templateId", component: TemplateDetail },

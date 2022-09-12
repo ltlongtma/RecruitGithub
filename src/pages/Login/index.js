@@ -1,6 +1,6 @@
 import className from "classnames/bind";
 import styles from "./Login.module.scss";
-import logo from "../../assets/logo-tma.png";
+import logo from "../../assets/logoTma.png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import React, { useRef, useState } from "react";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { ModalForgotPassword } from "../ForgotPassword/ModalForgotPassword";
 import userApi from "../../services/ManageUserApi";
 import { Spinner } from "react-bootstrap";
+import { Button, Input, TextField } from "@mui/material";
 
 const cx = className.bind(styles);
 
@@ -78,48 +79,47 @@ export const Login = () => {
   return (
     <div className={cx("container-fluid", "login-container")}>
       <div className={cx("container", "container-content")}>
-        <div className={cx("row")}>
-          <div className={cx("content-left col-md-7")}>
-            <div className={cx("brand")}>
-              <img src={logo} alt="TMA-s Logo" />
-              <div className={cx("title")}>DC22's RECRUITMENT TOOL V1.0</div>
-            </div>
-          </div>
-          <div className={cx("content-right", "col-md-5")}>
-            <form onSubmit={handleSubmit(handleOnSubmit)}>
-              <div className="mb-3">
-                <label className="form-label" htmlFor="username">
+        <div className={cx("brand")}>
+          <img src={logo} alt="TMA-s Logo" />
+          <div className={cx("title")}>DC22's RECRUITMENT TOOL V1.0</div>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit(handleOnSubmit)}>
+            <div className={cx("body")}>
+              <div className={cx("row mt-5")}>
+                <h6 className={cx("col-md-3 ml-2")} htmlFor="username">
                   User Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  autoFocus
-                  id="username"
-                  placeholder="Your username"
-                  {...register("username", {
-                    required: "You have to input your user name",
-                    minLength: {
-                      value: 3,
-                      message: "User name must be at least 3 characters",
-                    },
-                  })}
-                ></input>
-                <ErrorMessage
-                  errors={errors}
-                  name="username"
-                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
-                />
+                </h6>
+                <div className={cx("col-md-8 mb-5")}>
+                  <Input
+                    type="text"
+                    fullWidth
+                    autoFocus
+                    id="username"
+                    placeholder="Your username"
+                    {...register("username", {
+                      required: "You have to input your user name",
+                      minLength: {
+                        value: 3,
+                        message: "User name must be at least 3 characters",
+                      },
+                    })}
+                  ></Input>
+                  <ErrorMessage
+                    errors={errors}
+                    name="username"
+                    render={({ message }) => <p className={cx("text-error")}>{message}</p>}
+                  />
+                </div>
               </div>
-              <div className="mb-3">
-                <label className="form-label" htmlFor="emailPassword">
+              <div className={cx("row")}>
+                <h6 className={cx("col-md-3")} htmlFor="emailPassword">
                   Password
-                </label>
-                <div className={cx("form-password")}>
-                  <input
+                </h6>
+                <div className={cx("col-md-8 mb-3", "form-password")}>
+                  <Input
+                    fullWidth
                     type={showPassword ? "text" : "password"}
-                    className="form-control"
-                    // name="password"
                     placeholder="Your password"
                     id="emailPassword"
                     {...register("password", {
@@ -129,57 +129,69 @@ export const Login = () => {
                         message: "Password must be at least 8 characters",
                       },
                     })}
-                  ></input>
-                  <span onClick={handleShowHidePassword}>
-                    <FontAwesomeIcon
-                      icon={showPassword ? faEyeSlash : faEye}
-                      className={cx("icon-eye")}
-                    ></FontAwesomeIcon>
+                  ></Input>
+                  <span onClick={handleShowHidePassword} className={cx("icon-eye")}>
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}></FontAwesomeIcon>
                   </span>
-                </div>
-                <ErrorMessage
-                  errors={errors}
-                  name="password"
-                  render={({ message }) => <p className={cx("text-error")}>{message}</p>}
-                />
-              </div>
-              <button
-                type="submit"
-                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
-                disabled={checkWaiting ? true : false}
-              >
-                {checkWaiting ? (
-                  <Spinner
-                    className={cx("spinner")}
-                    as="span"
-                    variant="light"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    animation="border"
+                  <ErrorMessage
+                    errors={errors}
+                    name="password"
+                    render={({ message }) => <p className={cx("text-error")}>{message}</p>}
                   />
-                ) : null}
-                Login
-              </button>
+                </div>
+              </div>
+            </div>
+
+            <div className={cx("footer")}>
+              <div>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className={cx("btn text-center d-block login btn-primary mt-3 col-8 mx-auto")}
+                  disabled={checkWaiting ? true : false}
+                  size="medium"
+                  color="warning"
+                >
+                  {checkWaiting ? (
+                    <Spinner
+                      className={cx("spinner")}
+                      as="span"
+                      variant="light"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                      animation="border"
+                    />
+                  ) : null}
+                  Login
+                </Button>
+              </div>
               <span
                 className={cx("forgot-password", "text-center d-block mt-3 mb-3 ")}
                 onClick={handleForgotPassword}
               >
                 Forgot password?
               </span>
-              <ModalForgotPassword show={modalShow} onHide={() => setModalShow(false)} />
+
               <hr />
-              <button
-                type="button"
-                className={cx("btn", "btn login btn-success mt-3 col-12 mx-auto")}
-                onClick={handleCreateNewAccount}
-              >
-                Create a new account
-              </button>
-            </form>
-          </div>
+              <div>
+                <Button
+                  color="warning"
+                  variant="contained"
+                  size="medium"
+                  type="button"
+                  className={cx("btn login text-center d-block btn-primary mt-3 col-8 m-auto")}
+                  onClick={handleCreateNewAccount}
+                >
+                  Create a new account
+                </Button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+      <ModalForgotPassword show={modalShow} onHide={() => setModalShow(false)} />
     </div>
+    // </div>
   );
 };

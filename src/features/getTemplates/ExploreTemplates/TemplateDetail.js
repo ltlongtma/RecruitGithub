@@ -11,13 +11,14 @@ const TemplateDetail = ({
   dataInDetailtemplate,
   handleModalViewDetailQuestionEachTemplate,
   handleShowModalDelete,
-  handleShowModalApprove
+  handleShowModalApprove,
+  setHiddenBtn,
 }) => {
   return (
     <div className={cx("table")}>
       {dataInDetailtemplate?.questionBankTemplates?.length > 0 ? (
         <div>
-          <Table bordered hover responsive>
+          <Table hover responsive>
             <thead className={cx("table-head")}>
               <tr>
                 <th>No.</th>
@@ -55,13 +56,15 @@ const TemplateDetail = ({
               variant="contained"
               color="error"
               onClick={() => handleShowModalDelete(dataInDetailtemplate.id)}
+              hidden={setHiddenBtn}
             >
               Reject
             </Button>
             <Button
               variant="contained"
-              color="success"
+              color="primary"
               onClick={() => handleShowModalApprove(dataInDetailtemplate.id)}
+              hidden={setHiddenBtn}
             >
               Approve
             </Button>

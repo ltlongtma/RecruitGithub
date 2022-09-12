@@ -16,7 +16,7 @@ export const ModalApproveTemplate = ({ closeModal, handleApprove, ...props }) =>
           <h5>Are you sure want to approve this template ?</h5>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleApprove}>
+          <Button variant="primary" onClick={handleApprove}>
             Yes
           </Button>
           <Button variant="secondary" onClick={closeModal}>

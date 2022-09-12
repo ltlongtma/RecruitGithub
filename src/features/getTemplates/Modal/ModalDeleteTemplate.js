@@ -16,7 +16,7 @@ export const ModalDeleteTemplate = ({ closeModal, onDelete, ...props }) => {
           <h5>Are you sure want to delete this template?</h5>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={onDelete}>
+          <Button variant="primary" onClick={onDelete}>
             Yes
           </Button>
           <Button variant="secondary" onClick={closeModal}>

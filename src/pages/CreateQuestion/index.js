@@ -1,19 +1,16 @@
 import className from "classnames/bind";
 import React, { useEffect, useState } from "react";
 import styles from "./CreateQuestion.module.scss";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import TextareaAutosize from "react-autosize-textarea";
 import Multiselect from "multiselect-react-dropdown";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../../src/services/questionBankApi";
-import questionCategoryApi from "../../services/questionCategoryApi";
-import questionCriteriaApi from "../../services/questionCriteriaApi";
-import { getFilterCategory } from "../../features/getQuestionBank/FormFilter/getFilterCategorySlice";
 import { getFilterCriteria } from "../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import { Spinner } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-
+import { Breadcrumbs, Typography, Link } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const cx = className.bind(styles);
 
 export const CreateQuestion = () => {
@@ -31,7 +28,12 @@ export const CreateQuestion = () => {
 
   const [checkWaiting, setCheckWaiting] = useState(false);
   const [checkValidationError, setCheckValidationError] = useState(true);
-
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="primary" href="/question">
+      Question Bank
+    </Link>,
+    <Typography key="2">Create new question</Typography>,
+  ];
   useEffect(() => {
     dispatch(getFilterCriteria());
   }, []);
@@ -103,16 +105,14 @@ export const CreateQuestion = () => {
   return (
     <div>
       <div className={cx("question-bank-breadcrumb")}>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/">Question bank</Breadcrumb.Item>
-          <Breadcrumb.Item active>Create</Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+          {breadcrumbs}
+        </Breadcrumbs>
       </div>
       <div>
         <form className={cx("form")} onSubmit={handleSubmit}>
           <fieldset>
-            <legend className={cx("text-center")}>Create Question:</legend>
+            <legend className={cx("text-center")}>Create Question</legend>
             <div className={cx("row")}>
               <div className={cx("form-group", "col-sm")}>
                 <label htmlFor="category">Category</label>

@@ -1,27 +1,29 @@
 .table {
   tr:hover {
-    color: darkgreen;
+    // color: darkgreen;
   }
   .table-head {
-    background: rgb(152, 197, 152);
+    // background-color: #fff0b3;
+    // border-bottom: 3px solid #a44b01;
+    .headContext {
+      // display: flex;
+      // justify-content: space-between;
+    }
   }
   .deleteIcon,
   .editIcon {
     cursor: pointer;
     &:hover {
-      // transform: scale(1.5);
     }
   }
-  // .editIcon {
-  //   cursor: pointer;
-  //   &:hover {
-  //     font-size: xx-large;
-  //   }
-  // }
-  tr {
-    &:hover {
-      cursor: pointer;
-      background: rgb(218, 235, 218);
+  tbody {
+    // border-left: 2px solid #ffcc00;
+    // border-right: 2px solid #ffcc00;
+
+    tr {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

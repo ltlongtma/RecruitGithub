@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-
-import Button from "react-bootstrap/Button";
 import className from "classnames/bind";
 import styles from "./filter.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { Form } from "react-bootstrap";
-import { FormGroup } from "@mui/material";
+import { Button, FormGroup } from "@mui/material";
 import { ModalAddNewCategory } from "../Modal/modalAddNew";
 import questionCategoryApi from "../../../services/questionCategoryApi";
-import { useDebounce } from "../../../hooks";
+import AlertSuccess from "../../../components/Alert";
 
 const cx = className.bind(styles);
 
-export const FilterAndAddNew = ({ data, onFilterStatus,paramStatus }) => {
+export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
   const [showModal, setShowModal] = useState(false);
-
 
   const options = [];
   data?.data.map((item, index) => {
@@ -24,23 +21,28 @@ export const FilterAndAddNew = ({ data, onFilterStatus,paramStatus }) => {
     const value = e.target.value;
     const name = e.target.name;
     const newParamStatus = { ...paramStatus, [name]: value };
- 
+
     onFilterStatus(newParamStatus);
   };
-  const handleModalAddNewCategory = (e) => {
+  const handleModalAddNewCategory = async (e) => {
     if (e !== "") {
       questionCategoryApi
         .create(e)
-        .then(() => {
-          alert("New category added successfully");
-        })
+        .then( await setOpenAlert(true))
 
         .catch((e) => {
           console.log("ERROR in addNewCategory ", e);
         });
-    } else return;
+    }
   };
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpenAlert(false);
+  };
   return (
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
@@ -61,14 +63,14 @@ export const FilterAndAddNew = ({ data, onFilterStatus,paramStatus }) => {
           />
         </FormGroup>
       </Form>
+
       <Button
-        className={cx("btn-addNewCategory")}
-        variant="success"
+        variant="outlined"
         onClick={() => {
           setShowModal(true);
         }}
       >
-        <AddIcon /> New category
+        <AddIcon /> New
       </Button>
       <ModalAddNewCategory
         show={showModal}
@@ -77,6 +79,13 @@ export const FilterAndAddNew = ({ data, onFilterStatus,paramStatus }) => {
         }}
         handleModalAddNewCategory={handleModalAddNewCategory}
       />
+      <div>
+        <AlertSuccess
+          title="A new category was added successfully"
+          openAlert={openAlert}
+          closeAlert={handleCloseAlert}
+        />
+      </div>
     </div>
   );
 };

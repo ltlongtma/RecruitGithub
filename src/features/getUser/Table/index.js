@@ -2,6 +2,8 @@ import Table from "react-bootstrap/Table";
 import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTone";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import className from "classnames/bind";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import styles from "../Table/table.module.scss";
 
 const cx = className.bind(styles);
@@ -9,7 +11,7 @@ const cx = className.bind(styles);
 export const TableData = (props) => {
   return (
     <div>
-      <Table bordered hover responsive className={cx("table")}>
+      <Table hover responsive className={cx("table")}>
         <thead className={cx("table-head")}>
           <tr>
             <th>No.</th>
@@ -33,16 +35,27 @@ export const TableData = (props) => {
                   <td>{item?.email}</td>
                   <td>{item?.roles[0].name}</td>
                   <td>
-                    <ModeEditOutlineTwoToneIcon
-                      onClick={() => props.handleShowModalEdit(item)}
-                      color="success"
-                      className={cx("editIcon")}
-                    />
-                    <DeleteRoundedIcon
-                      color="error"
-                      onClick={() => props.handleShowModalDelete(item)}
-                      className={cx("deleteIcon")}
-                    />
+                    <Tooltip title="Edit">
+                      <span>
+                        <IconButton
+                          color="secondary"
+                          onClick={() => props.handleShowModalEdit(item)}
+                        >
+                          <ModeEditOutlineTwoToneIcon color="primary" className={cx("editIcon")} />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+
+                    <Tooltip title="Delete">
+                      <span>
+                        <IconButton
+                          color="secondary"
+                          onClick={() => props.handleShowModalDelete(item)}
+                        >
+                          <DeleteRoundedIcon color="error" className={cx("deleteIcon")} />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
                   </td>
                 </tr>
               );

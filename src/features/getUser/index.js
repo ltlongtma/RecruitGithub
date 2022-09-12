@@ -8,6 +8,7 @@ import { TableData } from "./Table";
 import FormFilterUser from "../../features/getUser/FormFilter";
 import userApi from "../../services/ManageUserApi";
 import useDebounce from "../../hooks/useDebounce";
+import { ModalAddNewUser } from "./Modal/ModalAddNewUser";
 
 export const UserList = () => {
   const dispatch = useDispatch();

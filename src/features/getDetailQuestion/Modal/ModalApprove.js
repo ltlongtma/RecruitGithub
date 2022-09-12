@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import styles from "./Modal.module.scss"
+import styles from "./Modal.module.scss";
 import className from "classnames/bind";
 
 const cx = className.bind(styles);
@@ -16,7 +16,7 @@ export const ModalApproveQuestion = ({ closeModal, onApprove, ...props }) => {
           <h5>Are you sure want to approve this question?</h5>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={onApprove}>
+          <Button variant="primary" onClick={onApprove}>
             Yes
           </Button>
           <Button variant="secondary" onClick={closeModal}>

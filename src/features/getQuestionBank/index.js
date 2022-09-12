@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuestionBank } from "./Slice";
 import TableQuestion from "./Table";
-import questionBankApi from "../../../src/services/questionBankApi";
 import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
-import { useNavigate } from "react-router-dom";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 
@@ -41,6 +39,9 @@ export const Questionbank = ({
     const newParamStatus = { ...paramStatus, page };
     setParamStatus(newParamStatus);
   };
+  const onChangePageSize = (e) => {
+    setParamStatus({ ...paramStatus, pageSize: e });
+  };
 
   return (
     <div>
@@ -57,7 +58,12 @@ export const Questionbank = ({
         handleViewDetailQuestion={handleViewDetailQuestion}
         showSelectColumn={showSelectColumn}
       />
-      <PaginatedItems pagination={questionList?.pagination} onPageChange={onPageChange} />
+      <PaginatedItems
+        pagination={questionList?.pagination}
+        onPageChange={onPageChange}
+        pageSize={paramStatus.pageSize}
+        onChangePageSize={onChangePageSize}
+      />
     </div>
   );
 };

@@ -13,10 +13,10 @@ export const ModalSharingTemplate = ({ closeModal, handleSharing, ...props }) =>
           <Modal.Title className={cx("modal-title")}>Sharing Template</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h5>Are you sure want to sharing this template for public?</h5>
+          <h5>Are you sure want to share this template for public?</h5>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleSharing}>
+          <Button variant="primary" onClick={handleSharing}>
             Yes
           </Button>
           <Button variant="secondary" onClick={closeModal}>

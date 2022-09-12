@@ -10,6 +10,7 @@ import { ModalDeletQuestion } from "./Modal/ModalDelete";
 import { getFilterCriteria } from "../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import { ModalApproveQuestion } from "./Modal/ModalApprove";
 import { ModalRejectQuestion } from "./Modal/ModalReject";
+import AlertSuccess from "../../components/Alert";
 
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
@@ -28,34 +29,16 @@ export const DetailQuestion = () => {
   const criteria = useSelector((state) => state.filterCriteria);
 
   useEffect(() => {
-    // questionBankApi
-    //   .getById(questionId)
-    //   .then((response) => {
-    //     dispatch(getDetailQuestion(response));
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR getDetailQuestion >>>", error);
-    //   });
     dispatch(getDetailQuestion(questionId));
 
     setShowEditAndDeleteButton(location.state);
 
-    // questionCriteriaApi
-    //   .getAll()
-    //   .then((res) => {
-    //     dispatch(getFilterCriteria(res));
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERROR getFilterCriteria >>> " + error);
-    //   });
     dispatch(getFilterCriteria());
   }, [location]);
   const handleApproveQuestion = async () => {
     await questionBankApi
       .approveQuestion(questionId, data)
-      .then((response) => {
-        alert("APPROVE SUCCESSFUL");
-      })
+      .then(await setTileAlert("Approved successfully"), await setOpenAlert(true))
       .catch((error) => {
         console.log("ERROR APPROVE QUESTION >>>", error);
       });
@@ -87,11 +70,11 @@ export const DetailQuestion = () => {
   const handleDeleteQuestion = async () => {
     await questionBankApi
       .delete(questionId)
-      .then((response) => {})
+      .then(await setTileAlert("Deleted successfully"), await setOpenAlert(true))
       .catch((error) => {
         console.log("ERROR DELETE QUESTION >>>", error);
       });
-    alert("DELETE SUCCESSFUL");
+
     questionBankApi
       .getAll()
 
@@ -123,9 +106,7 @@ export const DetailQuestion = () => {
     };
     await questionBankApi
       .update(questionId, data)
-      .then((result) => {
-        alert("updated successfully!");
-      })
+      .then(await setTileAlert("Updated successfully"), await setOpenAlert(true))
       .catch((err) => {
         console.log("ERROR Update >>> " + err);
       });
@@ -150,7 +131,17 @@ export const DetailQuestion = () => {
     setShowRejectAndApproveButton(false);
     setShowSaveAndBackButton(true);
   };
+  //handle alert dialog
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [titleAlert, setTileAlert] = React.useState("");
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
   return (
     <div>
       <TableDetailQuestion
@@ -191,6 +182,7 @@ export const DetailQuestion = () => {
         closeModal={handleCloseModalReject}
         onReject={handleDeleteQuestion}
       />
+      <AlertSuccess title={titleAlert} openAlert={openAlert} closeAlert={handleCloseAlert} />
     </div>
   );
 };
