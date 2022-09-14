@@ -17,7 +17,7 @@ import className from "classnames/bind";
 
 const cx = className.bind(styles);
 
-const steps = ["General information", "Interview", "Total result"];
+const steps = ["General information", "Chose Template", "Interview", "Total result"];
 
 export const InterviewProcess = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -67,6 +67,27 @@ export const InterviewProcess = () => {
               handleNext={handleNext}
             />
           ) : activeStep === 1 ? (
+            <>
+              <h1>hello</h1>
+              <div>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 9 }}>
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                  <Box sx={{ flex: "1 1 auto" }} />
+
+                  <Button onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
+                </Box>
+              </div>
+            </>
+          ) : activeStep === 2 ? (
             <Interview
               steps={steps}
               activeStep={activeStep}

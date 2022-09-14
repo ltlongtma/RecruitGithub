@@ -3,10 +3,12 @@ import Box from "@mui/material/Box";
 import { Questionbank } from "../../features/getQuestionBank";
 import { ShowQuestionChosen } from "../../components/ShowQuestionChosenToTemPlate/index.js";
 import questionTemplate from "../../services/questionTemplates";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
+import { ModalViewDetailQuestion } from "../../features/getTemplates/Modal/ModalViewDetailQuestion";
+import { getDetailQuestion } from "../../features/getDetailQuestion/Slice";
 
 export const NewTemplate = ({
   defaultValue,
@@ -21,6 +23,10 @@ export const NewTemplate = ({
   const [valueInputSubmitTemPlate, setValueInputSubmitTemplate] = React.useState({
     ...defaultValue,
   });
+  const dataDetaiQuestion = useSelector((state) => state.getDetailQuestion);
+
+  const [showModalViewDetailQuestion, setShowModalViewDetailQuestion] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleSetValueInput = async (data) => {
     const newData = await {
@@ -68,16 +74,20 @@ export const NewTemplate = ({
       });
     handleCancerButton();
   };
-
+  //Handle ModalViewDetailQuestion
+  const handleCloseModalViewDetailQuestion = () => setShowModalViewDetailQuestion(false);
+  const hanldeModalDetailQuestion = async (data) => {
+    console.log("E >>", data);
+    await dispatch(getDetailQuestion(data));
+    setShowModalViewDetailQuestion(true);
+  };
   return (
     <div>
       <Questionbank
         hiddenCreateButton={true}
         hiddenSelectStatusQuestion={true}
         showSelectColumn={true}
-        navigateWithState={(e) => {
-          navigate(`/question/${e}`, { state: true });
-        }}
+        hanldeModalDetailQuestion={hanldeModalDetailQuestion}
       />
 
       <Box sx={{ borderBottom: 3, borderColor: "orange", m: 5 }}></Box>
@@ -91,6 +101,13 @@ export const NewTemplate = ({
         hiddenSaveButton={hiddenSaveButton}
         handleSaveChangeTemplate={handleSaveChangeTemplate}
         handleCancerButton={handleCancerButton}
+      />
+      <ModalViewDetailQuestion
+        centered
+        show={showModalViewDetailQuestion}
+        onHide={handleCloseModalViewDetailQuestion}
+        closeModal={handleCloseModalViewDetailQuestion}
+        data={dataDetaiQuestion}
       />
     </div>
   );

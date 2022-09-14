@@ -12,6 +12,7 @@ export const Questionbank = ({
   hiddenSelectStatusQuestion,
   showSelectColumn,
   navigateWithState,
+  hanldeModalDetailQuestion
 }) => {
   const dispatch = useDispatch();
   const questionList = useSelector((state) => state.questionBank);
@@ -34,6 +35,7 @@ export const Questionbank = ({
   };
   const handleViewDetailQuestion = (e) => {
     navigateWithState && navigateWithState(e);
+    hanldeModalDetailQuestion(e)
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };

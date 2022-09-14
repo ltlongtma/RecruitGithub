@@ -9,6 +9,7 @@ import { addQuestionToTemplate, removeQuestionFromTemplate } from "../../getTemp
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpZA } from "@fortawesome/free-solid-svg-icons";
+import { Tooltip } from "@material-ui/core";
 
 const cx = className.bind(styles);
 
@@ -51,37 +52,37 @@ export default function TableQuestion({
         <tbody>
           {questionList?.data?.map((question, index) => {
             return (
-              <tr
-                key={index}
-                onClick={() => handleViewDetailQuestion(question.id)}
-                className={cx("tableBody")}
-              >
-                <td>
-                  {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
-                    1 +
-                    index}
-                </td>
-                <td>{question?.content}</td>
-                <td>{sliceContent(question.answer)}</td>
-                <td>{question.category.name}</td>
-                <td>{question.level}</td>
-                <td>{moment(question?.createdDate).format("DD/MM/YYYY h:mm:ss")}</td>
-                <td>{question.author.name}</td>
-                {question.status === "APPROVED" && (
-                  <>
-                    <td>{question.approver?.name}</td>
-                    <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
-                  </>
-                )}
-                {showSelectColumn && (
-                  <td onClick={(e) => e.stopPropagation()}>
-                    <Checkbox
-                      checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
-                      onChange={(e) => handleChangeCheckbox(e, question)}
-                    />
+                <tr
+                  key={index}
+                  onClick={() => handleViewDetailQuestion(question.id)}
+                  className={cx("tableBody")}
+                >
+                  <td>
+                    {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
+                      1 +
+                      index}
                   </td>
-                )}
-              </tr>
+                  <td>{question?.content}</td>
+                  <td>{sliceContent(question.answer)}</td>
+                  <td>{question.category.name}</td>
+                  <td>{question.level}</td>
+                  <td>{moment(question?.createdDate).format("DD/MM/YYYY h:mm:ss")}</td>
+                  <td>{question.author.name}</td>
+                  {question.status === "APPROVED" && (
+                    <>
+                      <td>{question.approver?.name}</td>
+                      <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
+                    </>
+                  )}
+                  {showSelectColumn && (
+                    <td onClick={(e) => e.stopPropagation()}>
+                      <Checkbox
+                        checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
+                        onChange={(e) => handleChangeCheckbox(e, question)}
+                      />
+                    </td>
+                  )}
+                </tr>
             );
           })}
         </tbody>

@@ -31,7 +31,7 @@ export const DetailQuestion = () => {
   useEffect(() => {
     dispatch(getDetailQuestion(questionId));
 
-    setShowEditAndDeleteButton(location.state);
+    // setShowEditAndDeleteButton(location.state);
 
     dispatch(getFilterCriteria());
   }, [location]);

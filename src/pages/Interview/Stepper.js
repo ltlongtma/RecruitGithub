@@ -33,8 +33,9 @@ export const ColorlibStepIcon = (props) => {
 
   const icons = {
     1: <PermContactCalendarIcon />,
-    2: <PsychologyAltIcon />,
-    3: <AutoStoriesIcon />,
+    2: <PermContactCalendarIcon />,
+    3: <PsychologyAltIcon />,
+    4: <AutoStoriesIcon />,
   };
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
