@@ -5,7 +5,16 @@ import className from "classnames/bind";
 import { useDispatch } from "react-redux";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import sliceContent from "../../helpers/sliceContent";
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import {
   removeQuestionFromTemplate,
   sortableChosenTemplate,
@@ -95,11 +104,23 @@ export const ShowQuestionChosen = ({
         <td>{question?.content}</td>
         <td>{sliceContent(question?.answer)}</td>
         <td>{question?.category?.name}</td>
-        <td>{question?.level}</td>
-        <td>{moment(question?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
+        <td>
+          <Chip
+            label={question?.level}
+            variant="outlined"
+            color={
+              question?.level === "MEDIUM"
+                ? "info"
+                : question?.level === "EASY"
+                ? "success"
+                : "secondary"
+            }
+          />
+        </td>
+        <td>{moment(question?.createDate).fromNow()}</td>
+        <td>{moment(question?.approvedDate).fromNow()}</td>
         <td>{question?.author?.name}</td>
         <td>{question?.approver?.name}</td>
-        <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
 
         <td>
           <Button
@@ -186,9 +207,9 @@ export const ShowQuestionChosen = ({
               <th>Category</th>
               <th>Level</th>
               <th>Dated Added</th>
+              <th>Date Approved</th>
               <th>Author</th>
               <th>Approver</th>
-              <th>Date Approved</th>
               <th>Remove</th>
             </tr>
           </thead>

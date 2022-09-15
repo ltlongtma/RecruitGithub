@@ -1,18 +1,17 @@
 import React from "react";
-import { CategoryQuestion } from "../../features/getCategoryQuestion";
 import className from "classnames/bind";
-import styles from "./category.module.scss";
+import styles from "./criteria.module.scss";
+import { GetCriteria } from "../../../features/getCriteria";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-
 const cx = className.bind(styles);
 
-export const ManageCategory = () => {
+export const ManageCriteria = () => {
   const breadcrumbs = [
     <Link underline="hover" key="1" color="primary" href="/question">
       Question Bank
     </Link>,
-    <Typography key="2">Manage Category</Typography>,
+    <Typography key="2">Manage Criteria</Typography>,
   ];
   return (
     <div>
@@ -22,7 +21,7 @@ export const ManageCategory = () => {
         </Breadcrumbs>
       </div>
       <div>
-        <CategoryQuestion />
+        <GetCriteria />
       </div>
     </div>
   );

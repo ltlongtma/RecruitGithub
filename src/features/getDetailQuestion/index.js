@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../services/questionBankApi";
-import questionCriteriaApi from "../../services/questionCriteriaApi";
-import { getDetailQuestion } from "./Slice";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getQuestionBank } from "../getQuestionBank/Slice";
 import { TableDetailQuestion } from "./Table";
 import { ModalDeletQuestion } from "./Modal/ModalDelete";
-import { getFilterCriteria } from "../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import { ModalApproveQuestion } from "./Modal/ModalApprove";
 import { ModalRejectQuestion } from "./Modal/ModalReject";
 import AlertSuccess from "../../components/Alert";
+import { getFilterCriteria } from "../getQuestionBank/FormFilter/getFilterCriteriaSlice";
 
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
@@ -29,12 +27,8 @@ export const DetailQuestion = () => {
   const criteria = useSelector((state) => state.filterCriteria);
 
   useEffect(() => {
-    dispatch(getDetailQuestion(questionId));
-
-    // setShowEditAndDeleteButton(location.state);
-
     dispatch(getFilterCriteria());
-  }, [location]);
+  }, []);
   const handleApproveQuestion = async () => {
     await questionBankApi
       .approveQuestion(questionId, data)

@@ -21,10 +21,10 @@ const ViewDetailTemplate = ({
               <th>Answer</th>
               <th>Category</th>
               <th>Level</th>
-              <th>Dated Added</th>
               <th>Author</th>
-              <th>Approver</th>
+              <th>Dated Added</th>
               <th>Date Approved</th>
+              <th>Approver</th>
             </tr>
           </thead>
           <tbody>
@@ -39,10 +39,10 @@ const ViewDetailTemplate = ({
                   <td>{sliceContent(data.question.answer)}</td>
                   <td>{data?.question.category.name}</td>
                   <td>{data?.question.level}</td>
-                  <td>{moment(data?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
                   <td>{data?.question.author?.name}</td>
+                  <td>{moment(data?.createDate).fromNow()}</td>
+                  <td>{moment(data?.question.approvedDate).fromNow()}</td>
                   <td>{data?.approver}</td>
-                  <td>{moment(data?.question.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
                 </tr>
               );
             })}

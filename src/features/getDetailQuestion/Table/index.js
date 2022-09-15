@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import className from "classnames/bind";
 import styles from "./table.module.scss";
 import Multiselect from "multiselect-react-dropdown";
+import moment from "moment";
 
 const cx = className.bind(styles);
 
@@ -62,15 +63,19 @@ export const TableDetailQuestion = ({ data, readOnly, handleSave, ...props }) =>
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Create date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.createdDate} readOnly />
+            <Form.Control type="text" defaultValue={moment(data?.createdDate).fromNow()} readOnly />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Approve date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.approvedDate} readOnly />
+            <Form.Control
+              type="text"
+              defaultValue={moment(data?.approvedDate).fromNow()}
+              readOnly
+            />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>Update date</Form.Label>
-            <Form.Control type="text" defaultValue={data?.updatedDate} readOnly />
+            <Form.Control type="text" defaultValue={moment(data?.updatedDate).fromNow()} readOnly />
           </Form.Group>
         </Row>
         <Row className={cx("content", "mb-3")}>

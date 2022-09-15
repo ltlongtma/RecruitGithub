@@ -54,7 +54,7 @@ export const TableTemplates = ({
                   <td>{item?.category.name}</td>
                   <td>{item?.author.name}</td>
                   <td>{item?.questionBankTemplates?.length}</td>
-                  <td>{moment(item.createdDate).format("DD/MM/YYYY h:mm:ss a")}</td>
+                  <td>{moment(item.createdDate).fromNow()}</td>
                   <td onClick={(e) => e.stopPropagation()}>
                     <Tooltip title="Edit">
                       <IconButton color="secondary" onClick={() => handleEditTemplate(item)}>

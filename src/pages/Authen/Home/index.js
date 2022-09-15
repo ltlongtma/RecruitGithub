@@ -1,18 +1,19 @@
-import React from "react";
+import * as React from "react";
+import { Questionbank } from "../../../features/getQuestionBank";
 import className from "classnames/bind";
-import styles from "./ViewDetailQuestion.module.scss";
+import styles from "./Home.module.scss";
+import { useNavigate } from "react-router-dom";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { DetailQuestion } from "../../features/getDetailQuestion";
-
 const cx = className.bind(styles);
 
-export const ViewDetailQuestion = () => {
+export const Home = () => {
+  const navigate = useNavigate();
   const breadcrumbs = [
     <Link underline="hover" key="1" color="primary" href="/question">
       Question Bank
     </Link>,
-    <Typography key="2">Detail Question</Typography>,
+    <Typography key="2">View All</Typography>,
   ];
   return (
     <div>
@@ -21,8 +22,12 @@ export const ViewDetailQuestion = () => {
           {breadcrumbs}
         </Breadcrumbs>
       </div>
-      <div>
-        <DetailQuestion />
+      <div className={cx("table")}>
+        <Questionbank
+          navigateWithState={(e) => {
+            navigate(`/question/${e}`);
+          }}
+        />
       </div>
     </div>
   );

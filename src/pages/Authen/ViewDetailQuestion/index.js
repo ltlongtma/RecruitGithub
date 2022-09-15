@@ -1,17 +1,18 @@
 import React from "react";
 import className from "classnames/bind";
-import styles from "./criteria.module.scss";
-import { GetCriteria } from "../../features/getCriteria";
+import styles from "./ViewDetailQuestion.module.scss";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { DetailQuestion } from "../../../features/getDetailQuestion";
+
 const cx = className.bind(styles);
 
-export const ManageCriteria = () => {
+export const ViewDetailQuestion = () => {
   const breadcrumbs = [
     <Link underline="hover" key="1" color="primary" href="/question">
       Question Bank
     </Link>,
-    <Typography key="2">Manage Criteria</Typography>,
+    <Typography key="2">Detail Question</Typography>,
   ];
   return (
     <div>
@@ -21,7 +22,7 @@ export const ManageCriteria = () => {
         </Breadcrumbs>
       </div>
       <div>
-        <GetCriteria />
+        <DetailQuestion />
       </div>
     </div>
   );

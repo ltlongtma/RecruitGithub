@@ -11,8 +11,8 @@ import { useDispatch } from "react-redux";
 import {
   addQuestionToTemplate,
   clearQuestionFromTemplate,
-} from "../../features/getTemplates/Slice";
-import AlertSuccess from "../../components/Alert";
+} from "../../../features/getTemplates/Slice";
+import AlertSuccess from "../../../components/Alert";
 
 export const ManageTemplates = () => {
   const [valueRoute, setValueRoute] = React.useState("1");

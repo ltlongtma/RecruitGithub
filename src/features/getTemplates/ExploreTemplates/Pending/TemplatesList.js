@@ -46,7 +46,7 @@ export const TemplatesList = ({
                   <td>{item?.category.name}</td>
                   <td>{item?.author.name}</td>
                   <td>{item?.questionBankTemplates?.length}</td>
-                  <td>{moment(item.createdDate).format("DD/MM/YYYY h:mm:ss a")}</td>
+                  <td>{moment(item.createdDate).fromNow()}</td>
                   {showActionColumn && (
                     <td onClick={(e) => e.stopPropagation()}>
                       <Tooltip title="Clone to my template">

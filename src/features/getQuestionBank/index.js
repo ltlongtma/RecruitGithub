@@ -6,13 +6,15 @@ import { FormFilter } from "./FormFilter";
 import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
+import { getDetailQuestion } from "../getDetailQuestion/Slice";
+import PropTypes from "prop-types";
 
 export const Questionbank = ({
   hiddenCreateButton,
   hiddenSelectStatusQuestion,
   showSelectColumn,
   navigateWithState,
-  hanldeModalDetailQuestion
+  getIdQuestion,
 }) => {
   const dispatch = useDispatch();
   const questionList = useSelector((state) => state.questionBank);
@@ -33,9 +35,10 @@ export const Questionbank = ({
     const newParamStatus = { ...paramStatus, ...val, page: 1 };
     setParamStatus(newParamStatus);
   };
-  const handleViewDetailQuestion = (e) => {
+  const handleViewDetailQuestion = async (e) => {
+    await dispatch(getDetailQuestion(e));
     navigateWithState && navigateWithState(e);
-    hanldeModalDetailQuestion(e)
+    getIdQuestion(e);
   };
   const onPageChange = (page) => {
     const newParamStatus = { ...paramStatus, page };
@@ -68,4 +71,7 @@ export const Questionbank = ({
       />
     </div>
   );
+};
+Questionbank.propTypes = {
+  getIdQuestion: PropTypes.func,
 };

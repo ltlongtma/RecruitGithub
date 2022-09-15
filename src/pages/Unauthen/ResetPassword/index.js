@@ -1,6 +1,6 @@
 import className from "classnames/bind";
 import styles from "./reset.module.scss";
-import logo from "../../assets/logo-tma.png";
+import logo from "../../../assets/logo-tma.png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import React, { useRef, useState } from "react";

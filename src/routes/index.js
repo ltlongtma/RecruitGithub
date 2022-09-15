@@ -12,8 +12,7 @@ import {
   InterviewProcess,
 } from "../pages";
 import { LoginLayout } from "../components/Layout/LoginLayout";
-import { ManageCriteria } from "../pages/ManageCriteria";
-
+import { ManageCriteria } from "../pages/Authen/ManageCriteria";
 
 export const publicRoute = [
   { path: "/login", component: Login, layout: LoginLayout },

@@ -55,7 +55,7 @@ export const ModalViewDetailQuestion = ({ data, closeModal, ...props }) => {
                 <Form.Label>Create date</Form.Label>
                 <Form.Control
                   type="text"
-                  defaultValue={moment(data?.createdDate).format("DD/MM/YYYY h:mm:ss")}
+                  defaultValue={moment(data?.createdDate).fromNow()}
                   readOnly
                 />
               </Form.Group>
@@ -63,7 +63,7 @@ export const ModalViewDetailQuestion = ({ data, closeModal, ...props }) => {
                 <Form.Label>Approve date</Form.Label>
                 <Form.Control
                   type="text"
-                  defaultValue={moment(data?.approvedDate).format("DD/MM/YYYY h:mm:ss")}
+                  defaultValue={moment(data?.approvedDate).fromNow()}
                   readOnly
                 />
               </Form.Group>
@@ -71,7 +71,7 @@ export const ModalViewDetailQuestion = ({ data, closeModal, ...props }) => {
                 <Form.Label>Update date</Form.Label>
                 <Form.Control
                   type="text"
-                  defaultValue={moment(data?.updatedDate).format("DD/MM/YYYY h:mm:ss")}
+                  defaultValue={moment(data?.updatedDate).fromNow()}
                   readOnly
                 />
               </Form.Group>

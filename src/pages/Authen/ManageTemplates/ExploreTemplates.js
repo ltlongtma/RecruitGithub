@@ -6,11 +6,11 @@ import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import className from "classnames/bind";
 import styles from "./module.scss";
-import { PendingTemplates } from "../../features/getTemplates/ExploreTemplates/Pending";
+import { PendingTemplates } from "../../../features/getTemplates/ExploreTemplates/Pending";
 import { useDispatch } from "react-redux";
-import { FormFilterTemplates } from "../../features/getTemplates/FormFilter";
-import { templatesFilterByAdmin } from "../../features/getTemplates/Slice";
-import { ApprovedTemplates } from "../../features/getTemplates/ExploreTemplates/Approved";
+import { FormFilterTemplates } from "../../../features/getTemplates/FormFilter";
+import { templatesFilterByAdmin } from "../../../features/getTemplates/Slice";
+import { ApprovedTemplates } from "../../../features/getTemplates/ExploreTemplates/Approved";
 
 const cx = className.bind(styles);
 export const ExploreTemplates = () => {

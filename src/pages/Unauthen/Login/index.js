@@ -1,6 +1,6 @@
 import className from "classnames/bind";
 import styles from "./Login.module.scss";
-import logo from "../../assets/logoTma.png";
+import logo from "../../../assets/logoTma.png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import React, { useRef, useState } from "react";
@@ -9,14 +9,17 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ModalForgotPassword } from "../ForgotPassword/ModalForgotPassword";
-import userApi from "../../services/ManageUserApi";
 import { Spinner } from "react-bootstrap";
-import { Button, Input, TextField } from "@mui/material";
+import { Button, Input } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { login } from "../../../features/getUser/Slice";
 
 const cx = className.bind(styles);
 
 export const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [checkWaiting, setCheckWaiting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [modalShow, setModalShow] = useState(false);
@@ -48,32 +51,18 @@ export const Login = () => {
   const password = useRef({});
   password.current = watch("password");
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     setCheckWaiting(true);
     const dataInputLogin = {
       username: username.current,
       password: password.current,
     };
+    await dispatch(login(dataInputLogin));
+    const isToken = sessionStorage.getItem("isToken");
 
-    userApi
-      .login(dataInputLogin)
-      .then((res) => {
-        // console.log("RES ", res);
-        sessionStorage.setItem("isRole", res.role[0]);
-        sessionStorage.setItem("isToken", res.token);
-
-        const isToken = sessionStorage.getItem("isToken");
-
-        if (isToken) {
-          navigate("/question");
-        }
-      })
-      .catch((errors) => {
-        console.log("ERROR LOGIN " + errors);
-        alert("Your account is not authorized to login. Please create a new account and try again");
-        setCheckWaiting(false);
-        // navigate("/register");
-      });
+    if (isToken) {
+      navigate("/question");
+    } else setCheckWaiting(false);
   };
 
   return (
@@ -112,11 +101,11 @@ export const Login = () => {
                   />
                 </div>
               </div>
-              <div className={cx("form-password")}> 
+              <div className={cx("form-password")}>
                 <h6 className={cx("col-md-3")} htmlFor="emailPassword">
                   Password
                 </h6>
-                <div >
+                <div>
                   <Input
                     sx={{ width: "80%" }}
                     type={showPassword ? "text" : "password"}

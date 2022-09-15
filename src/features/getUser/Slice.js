@@ -1,6 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Alert, Snackbar } from "@mui/material";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+import userApi from "../../services/ManageUserApi";
 
 const initialState = [];
+
+export const login = createAsyncThunk("Slice/getUser", async (params) => {
+  const response = await userApi.login(params);
+  return response;
+});
 
 export const getUsersSlice = createSlice({
   name: "getUsers",
@@ -24,6 +32,16 @@ export const getUsersSlice = createSlice({
     createNewUser: (state, action) => {
       state.push(action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      sessionStorage.setItem("isRole", action.payload.role[0]);
+      sessionStorage.setItem("isToken", action.payload.token);
+    });
+    builder.addCase(login.rejected, (state, action) => {
+      alert("Your account is not authorized to login. Please create a new account and try again");
+ ;
+    });
   },
 });
 

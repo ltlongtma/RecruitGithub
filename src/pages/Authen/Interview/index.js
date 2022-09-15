@@ -4,14 +4,14 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FillInfo from "../../features/interview/FillInfo";
+import FillInfo from "../../../features/interview/FillInfo";
 import { ColorlibConnector, ColorlibStepIcon } from "./Stepper";
 import { useState } from "react";
-import Interview from "../../features/interview/Interview";
-import TotalResult from "../../features/interview/TotalResult";
+import Interview from "../../../features/interview/Interview";
+import TotalResult from "../../../features/interview/TotalResult";
 import { Breadcrumbs, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import styles from "../../pages/User/user.module.scss";
+import styles from "../../../pages/Authen/User/user.module.scss";
 
 import className from "classnames/bind";
 

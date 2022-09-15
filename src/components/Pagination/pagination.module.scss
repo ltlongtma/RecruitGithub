@@ -2,6 +2,8 @@
   display: flex;
   justify-content: right;
   height: auto;
+  position: relative;
+
   .rowPerPage {
     height: 38px;
     width: 7em;
@@ -11,5 +13,10 @@
     display: flex;
     padding-left: 0;
     list-style-type: none;
+  }
+  .labelTotal {
+    position: absolute;
+    left: 0rem;
+    padding: 8px;
   }
 }

@@ -3,7 +3,7 @@ import styles from "../templates.module.scss";
 import className from "classnames/bind";
 import sliceContent from "../../../helpers/sliceContent";
 import moment from "moment";
-import { Button } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 
 const cx = className.bind(styles);
 
@@ -27,8 +27,8 @@ const TemplateDetail = ({
                 <th>Category</th>
                 <th>Level</th>
                 <th>Dated Added</th>
-                <th>Author</th>
                 <th>Date Approved</th>
+                <th>Author</th>
               </tr>
             </thead>
             <tbody>
@@ -42,10 +42,22 @@ const TemplateDetail = ({
                     <td>{data?.question?.content}</td>
                     <td>{sliceContent(data.question.answer)}</td>
                     <td>{data?.question.category.name}</td>
-                    <td>{data?.question.level}</td>
-                    <td>{moment(data?.createDate).format("DD/MM/YYYY h:mm:ss")}</td>
+                    <td>
+                      <Chip
+                        label={data?.question.level}
+                        variant="outlined"
+                        color={
+                          data?.question.level === "MEDIUM"
+                            ? "info"
+                            : data?.question.level === "EASY"
+                            ? "success"
+                            : "secondary"
+                        }
+                      />
+                    </td>
+                    <td>{moment(data?.createDate).fromNow()}</td>
+                    <td>{moment(data?.question.approvedDate).fromNow()}</td>
                     <td>{data?.question.author?.name}</td>
-                    <td>{moment(data?.question.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
                   </tr>
                 );
               })}

@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import className from "classnames/bind";
-import logo from "../../assets/logo-tma.png";
+import logo from "../../../assets/logo-tma.png";
 import styles from "./ChangePassword.module.scss";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faEye, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "react-bootstrap";
-import userApi from "../../services/ManageUserApi";
+import userApi from "../../../services/ManageUserApi";
 
 export const ChangePassword = () => {
   const navigate = useNavigate();

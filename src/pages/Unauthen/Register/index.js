@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";
 import className from "classnames/bind";
 import styles from "./Register.module.scss";
-import logo from "../../assets/logoTma.png";
+import logo from "../../../assets/logoTma.png";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import userApi from "../../services/ManageUserApi";
+import userApi from "../../../services/ManageUserApi";
 
 const cx = className.bind(styles);
 

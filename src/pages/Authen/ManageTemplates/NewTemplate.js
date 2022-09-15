@@ -1,14 +1,14 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Questionbank } from "../../features/getQuestionBank";
-import { ShowQuestionChosen } from "../../components/ShowQuestionChosenToTemPlate/index.js";
-import questionTemplate from "../../services/questionTemplates";
+import { Questionbank } from "../../../features/getQuestionBank";
+import { ShowQuestionChosen } from "../../../components/ShowQuestionChosenToTemPlate/index.js";
+import questionTemplate from "../../../services/questionTemplates";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
-import { ModalViewDetailQuestion } from "../../features/getTemplates/Modal/ModalViewDetailQuestion";
-import { getDetailQuestion } from "../../features/getDetailQuestion/Slice";
+import { ModalViewDetailQuestion } from "../../../features/getTemplates/Modal/ModalViewDetailQuestion";
+import { getDetailQuestion } from "../../../features/getDetailQuestion/Slice";
 
 export const NewTemplate = ({
   defaultValue,
@@ -76,9 +76,8 @@ export const NewTemplate = ({
   };
   //Handle ModalViewDetailQuestion
   const handleCloseModalViewDetailQuestion = () => setShowModalViewDetailQuestion(false);
-  const hanldeModalDetailQuestion = async (data) => {
-    console.log("E >>", data);
-    await dispatch(getDetailQuestion(data));
+  const handleModalDetailQuestion = async (id) => {
+    await dispatch(getDetailQuestion(id));
     setShowModalViewDetailQuestion(true);
   };
   return (
@@ -87,7 +86,7 @@ export const NewTemplate = ({
         hiddenCreateButton={true}
         hiddenSelectStatusQuestion={true}
         showSelectColumn={true}
-        hanldeModalDetailQuestion={hanldeModalDetailQuestion}
+        getIdQuestion={(id) => handleModalDetailQuestion(id)}
       />
 
       <Box sx={{ borderBottom: 3, borderColor: "orange", m: 5 }}></Box>

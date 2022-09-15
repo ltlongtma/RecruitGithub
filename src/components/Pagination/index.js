@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import className from "classnames/bind";
 import styles from "./pagination.module.scss";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 
 const cx = className.bind(styles);
 
@@ -14,6 +14,10 @@ function PaginatedItems({ pagination, onPageChange, pageSize, onChangePageSize }
   };
   return (
     <div className={cx("wrapper")}>
+      <Typography variant="string" className={cx("labelTotal")}>
+        Total: {pagination?.total}
+      </Typography>
+
       <FormControl sx={{ width: 150, ml: 7 }} color="primary">
         <InputLabel>Rows per page</InputLabel>
 

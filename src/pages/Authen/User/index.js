@@ -1,6 +1,6 @@
 import className from "classnames/bind";
 import styles from "./user.module.scss";
-import { UserList } from "../../features/getUser";
+import { UserList } from "../../../features/getUser";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 

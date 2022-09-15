@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import styles from "../Table/table.module.scss";
 import className from "classnames/bind";
 import sliceContent from "../../../helpers/sliceContent";
-import { Checkbox } from "@mui/material";
+import { Checkbox, Chip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestionToTemplate, removeQuestionFromTemplate } from "../../getTemplates/Slice";
 import moment from "moment";
@@ -38,12 +38,12 @@ export default function TableQuestion({
             <th>Answer</th>
             <th>Category</th>
             <th>Level</th>
-            <th>Dated Added</th>
             <th>Author</th>
+            <th>Dated Added</th>
             {questionList?.data?.length > 0 && questionList?.data[0]?.status === "APPROVED" && (
               <>
-                <th>Approver</th>
                 <th>Date Approved</th>
+                <th>Approver</th>
               </>
             )}
             {showSelectColumn && <th>Select</th>}
@@ -52,37 +52,49 @@ export default function TableQuestion({
         <tbody>
           {questionList?.data?.map((question, index) => {
             return (
-                <tr
-                  key={index}
-                  onClick={() => handleViewDetailQuestion(question.id)}
-                  className={cx("tableBody")}
-                >
-                  <td>
-                    {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
-                      1 +
-                      index}
+              <tr
+                key={index}
+                onClick={() => handleViewDetailQuestion(question.id)}
+                className={cx("tableBody")}
+              >
+                <td>
+                  {questionList.pagination.pageSize * (questionList.pagination.page - 1) +
+                    1 +
+                    index}
+                </td>
+                <td>{question?.content}</td>
+                <td>{sliceContent(question.answer)}</td>
+                <td>{question.category.name}</td>
+                <td>
+                  <Chip
+                    label={question?.level}
+                    variant="outlined"
+                    color={
+                      question?.level === "MEDIUM"
+                        ? "info"
+                        : question?.level === "EASY"
+                        ? "success"
+                        : "secondary"
+                    }
+                  />
+                </td>
+                <td>{question.author.name}</td>
+                <td>{moment(question?.createdDate).fromNow()}</td>
+                {question.status === "APPROVED" && (
+                  <>
+                    <td>{moment(question?.approvedDate).fromNow()}</td>
+                    <td>{question.approver?.name}</td>
+                  </>
+                )}
+                {showSelectColumn && (
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <Checkbox
+                      checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
+                      onChange={(e) => handleChangeCheckbox(e, question)}
+                    />
                   </td>
-                  <td>{question?.content}</td>
-                  <td>{sliceContent(question.answer)}</td>
-                  <td>{question.category.name}</td>
-                  <td>{question.level}</td>
-                  <td>{moment(question?.createdDate).format("DD/MM/YYYY h:mm:ss")}</td>
-                  <td>{question.author.name}</td>
-                  {question.status === "APPROVED" && (
-                    <>
-                      <td>{question.approver?.name}</td>
-                      <td>{moment(question?.approvedDate).format("DD/MM/YYYY h:mm:ss")}</td>
-                    </>
-                  )}
-                  {showSelectColumn && (
-                    <td onClick={(e) => e.stopPropagation()}>
-                      <Checkbox
-                        checked={questionChosen.findIndex((item) => item.id === question.id) >= 0}
-                        onChange={(e) => handleChangeCheckbox(e, question)}
-                      />
-                    </td>
-                  )}
-                </tr>
+                )}
+              </tr>
             );
           })}
         </tbody>

@@ -13,9 +13,9 @@ import Moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
-const SOCKET_URL = "http://localhost:8080/ws";
+const SOCKET_URL = "http://13.212.157.124:8080/ws";
 
-export const Notifications = ({profile}) => {
+export const Notifications = ({ profile }) => {
   const navigate = useNavigate();
   const [unreadNotificationNumber, setUnreadNotificationNumber] = useState(0);
   const [isShowNotificationList, setShowNotificationList] = useState(false);
@@ -161,9 +161,7 @@ export const Notifications = ({profile}) => {
                   <div>
                     <p className={cx("author")}>
                       {item.user.username}
-                      <span className={cx("date")}>
-                        {Moment(item.createdDate).format("HH:mm DD/MM/YYYY")}
-                      </span>
+                      <span className={cx("date")}>{Moment(item.createdDate).fromNow()}</span>
                     </p>
                   </div>
                   <span className={cx("content")}>{item.content}</span>

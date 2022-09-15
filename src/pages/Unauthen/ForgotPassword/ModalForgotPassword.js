@@ -7,7 +7,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import Button from "react-bootstrap/Button";
 import className from "classnames/bind";
 import styles from "../Login/Login.module.scss";
-import AlertSuccess from "../../components/Alert";
+import AlertSuccess from "../../../components/Alert";
 
 const cx = className.bind(styles);
 
