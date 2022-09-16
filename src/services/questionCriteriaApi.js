@@ -1,10 +1,15 @@
 import axiosClient from "./AxiosClient";
 
+
+
 const questionCriteriaApi = {
-  getAll() {
+  getAll(params) {
     const url = `/question-criteria?showDisabled=true`;
 
-    return axiosClient.get(url);
+    return axiosClient.get(url,
+      { params: params },
+     
+      );
   },
 
   getById(id) {

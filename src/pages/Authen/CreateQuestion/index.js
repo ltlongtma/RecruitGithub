@@ -1,12 +1,11 @@
 import className from "classnames/bind";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import styles from "./CreateQuestion.module.scss";
 import TextareaAutosize from "react-autosize-textarea";
 import Multiselect from "multiselect-react-dropdown";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../../../src/services/questionBankApi";
-import { getFilterCriteria } from "../../../features/getQuestionBank/FormFilter/getFilterCriteriaSlice";
 import { Spinner } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Breadcrumbs, Typography, Link } from "@mui/material";
@@ -34,9 +33,7 @@ export const CreateQuestion = () => {
     </Link>,
     <Typography key="2">Create new question</Typography>,
   ];
-  useEffect(() => {
-    dispatch(getFilterCriteria());
-  }, []);
+  
 
   const validateForm = () => {
     return (

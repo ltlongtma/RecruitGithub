@@ -32,7 +32,6 @@ export const adminRoute = [
   { path: "/interview", component: InterviewProcess },
 
   { path: "/interview/templates", component: ManageTemplates },
-  // { path: "/interview/templates/:templateId", component: TemplateDetail },
 ];
 
 export const userRoute = [

@@ -9,15 +9,14 @@ import { ColorlibConnector, ColorlibStepIcon } from "./Stepper";
 import { useState } from "react";
 import Interview from "../../../features/interview/Interview";
 import TotalResult from "../../../features/interview/TotalResult";
-import { Breadcrumbs, Link } from "@mui/material";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import styles from "../../../pages/Authen/User/user.module.scss";
 
 import className from "classnames/bind";
+import { Breadcrumb } from "../../../components/Breadcrumb";
 
 const cx = className.bind(styles);
 
-const steps = ["General information", "Chose Template", "Interview", "Total result"];
+const steps = ["General information", "Choose Template", "Interview", "Total result"];
 
 export const InterviewProcess = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -33,19 +32,10 @@ export const InterviewProcess = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
-  const breadcrumbs = [
-    <Link underline="hover" key="1" color="primary" href="/question">
-      Home
-    </Link>,
-    <Typography key="2">Interview</Typography>,
-  ];
+
   return (
     <>
-      <div className={cx("question-bank-breadcrumb")}>
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          {breadcrumbs}
-        </Breadcrumbs>
-      </div>
+      <Breadcrumb firstTitle={"Home"} secondTitle={"Interview"} href={"/question"} />
       <Box sx={({ width: "100%" }, { mt: 5 })}>
         <div>
           <Stepper activeStep={activeStep} connector={<ColorlibConnector />}>

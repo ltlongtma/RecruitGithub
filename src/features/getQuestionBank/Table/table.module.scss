@@ -1,15 +1,4 @@
 .table {
-  tr:hover {
-    // color: darkgreen;
-  }
-  .table-head {
-    // background-color: #fff0b3;
-    // border-bottom: 3px solid #a44b01;
-    .headContext {
-      // display: flex;
-      // justify-content: space-between;
-    }
-  }
   .deleteIcon,
   .editIcon {
     cursor: pointer;
@@ -17,10 +6,6 @@
     }
   }
   tbody {
-    // border-left: 2px solid #ffcc00;
-    // border-right: 2px solid #ffcc00;
-    
-
     tr {
       &:hover {
         cursor: pointer;

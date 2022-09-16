@@ -22,7 +22,7 @@ const TemplateDetail = ({
             <thead className={cx("table-head")}>
               <tr>
                 <th>No.</th>
-                <th>Content</th>
+                <th>Question</th>
                 <th>Answer</th>
                 <th>Category</th>
                 <th>Level</th>

@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import questionBankApi from "../../services/questionBankApi";
 
 const initialState = { data: [], pagination: {} };
 
+export const ourRequest = axios.CancelToken.source();
+
 export const getQuestionBank = createAsyncThunk(
   "getQuestionBankSlice/getQuestionBank",
   async (params) => {
-    const response = await questionBankApi.getAll(params);
+    const response = await questionBankApi.getAll(params, {
+      cancelToken: ourRequest.token,
+    });
+
     return response;
   }
 );

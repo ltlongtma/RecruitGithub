@@ -9,14 +9,18 @@ export const getDetailQuestion = createAsyncThunk(
     return response;
   }
 );
+export const ApproveQuestion = createAsyncThunk(
+  "getDetailQuestionSlice/ApproveQuestion",
+  async (params) => {
+    const response = await questionBankApi.approveQuestion(params);
+    return response;
+  }
+);
 const getDetailQuestionSlice = createSlice({
   name: "getDetailQuestion",
   initialState,
   reducers: {
-    // getDetailQuestion: (state, action) => {
-    //   state = { ...action.payload };
-    //   return state;
-    // },
+  
   },
   extraReducers: (builder) => {
     builder.addCase(getDetailQuestion.fulfilled, (state, action) => {
@@ -26,7 +30,12 @@ const getDetailQuestionSlice = createSlice({
     builder.addCase(getDetailQuestion.rejected, (state, action) => {
       console.log("rejected getDetailQuestion", action.error);
     });
+    builder.addCase(ApproveQuestion.fulfilled, (state, action) => {
+      return;
+    });
+    builder.addCase(ApproveQuestion.rejected, (state, action) => {
+      console.log("rejected ApproveQuestion", action.error);
+    });
   },
 });
-// export const { getDetailQuestion } = getDetailQuestionSlice.actions;
 export default getDetailQuestionSlice.reducer;

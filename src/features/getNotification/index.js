@@ -29,9 +29,13 @@ export const Notifications = ({ profile }) => {
     pageSize: 10,
   });
 
-  useEffect(() => {
-    getUnreadNotificationNumber();
-  }, []);
+  // useEffect(() => {
+  //   getUnreadNotificationNumber();
+
+  //   //Need to cleanup
+
+   
+  // }, []);
 
   const handleShowNotification = () => {
     setShowNotificationList(!isShowNotificationList);

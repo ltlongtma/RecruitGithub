@@ -31,10 +31,7 @@ export default function TableQuestion({
         <thead className={cx("table-head")}>
           <tr>
             <th>No.</th>
-            <th className={cx("headContext")}>
-              Content
-              <FontAwesomeIcon icon={faArrowUpZA} className={cx("tableIconSort")} />
-            </th>
+            <th>Question</th>
             <th>Answer</th>
             <th>Category</th>
             <th>Level</th>

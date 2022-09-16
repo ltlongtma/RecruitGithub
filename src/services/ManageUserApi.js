@@ -43,6 +43,10 @@ const userApi = {
     const url = `user/${id}`;
     return axiosClient.put(url, data);
   },
+  getProfile(){
+    const url = `user/profile`
+    return axiosClient.get(url);
+  }
 };
 
 export default userApi;

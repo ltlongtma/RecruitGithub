@@ -58,7 +58,7 @@ export function UserInfor({ profile }) {
         <Popover id="popover-contained" className={cx("popover")}>
           <Popover.Header className={cx("popover-header")}>
             {role !== "undefined" ? role : "GUEST"}
-            <h6>{`Hi, ${profile?.res?.username} `}</h6>
+            <h6>{`Hi, ${profile?.username} `}</h6>
           </Popover.Header>
           <Popover.Body>
             <VpnKeyIcon fontSize="small" color="warning" />

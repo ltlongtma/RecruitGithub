@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../services/questionBankApi";
 import { useParams, useNavigate } from "react-router-dom";
-import { getQuestionBank } from "../getQuestionBank/Slice";
 import { TableDetailQuestion } from "./Table";
 import { ModalDeletQuestion } from "./Modal/ModalDelete";
 import { ModalApproveQuestion } from "./Modal/ModalApprove";
 import { ModalRejectQuestion } from "./Modal/ModalReject";
 import AlertSuccess from "../../components/Alert";
-import { getFilterCriteria } from "../getQuestionBank/FormFilter/getFilterCriteriaSlice";
+import { ApproveQuestion } from "./Slice";
 
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
@@ -26,26 +25,14 @@ export const DetailQuestion = () => {
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
 
-  useEffect(() => {
-    dispatch(getFilterCriteria());
-  }, []);
+
   const handleApproveQuestion = async () => {
-    await questionBankApi
-      .approveQuestion(questionId, data)
-      .then(await setTileAlert("Approved successfully"), await setOpenAlert(true))
-      .catch((error) => {
-        console.log("ERROR APPROVE QUESTION >>>", error);
-      });
+   
+    await dispatch(ApproveQuestion(questionId)).then(
+      await setOpenAlert(true),
+      await setTileAlert("Approved successfully")
+    );
 
-    questionBankApi
-      .getAll()
-
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getQuestionBank >>> " + error);
-      });
     navigate(`../question`);
   };
   const handleCloseModalDelete = () => setShowModalDelete(false);
@@ -67,16 +54,6 @@ export const DetailQuestion = () => {
       .then(await setTileAlert("Deleted successfully"), await setOpenAlert(true))
       .catch((error) => {
         console.log("ERROR DELETE QUESTION >>>", error);
-      });
-
-    questionBankApi
-      .getAll()
-
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getQuestionBank >>> " + error);
       });
 
     navigate(`../question`);
@@ -103,15 +80,6 @@ export const DetailQuestion = () => {
       .then(await setTileAlert("Updated successfully"), await setOpenAlert(true))
       .catch((err) => {
         console.log("ERROR Update >>> " + err);
-      });
-    await questionBankApi
-      .getAll()
-
-      .then((res) => {
-        dispatch(getQuestionBank(res));
-      })
-      .catch((error) => {
-        console.log("ERROR getQuestionBank >>> " + error);
       });
 
     navigate(`../question`);

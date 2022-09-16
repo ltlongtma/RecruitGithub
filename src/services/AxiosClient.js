@@ -25,10 +25,10 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   function (response) {
     // console.log("configResponse >>>", response);
-    return response.data;
+    return response?.data;
   },
   function (error) {
-    if (error.response.data === "INVALID JWT") {
+    if (error?.response?.data === "INVALID JWT") {
       sessionStorage.clear();
       //dispatch a DeleteAction to the store to redirect back to the login pages//
     }

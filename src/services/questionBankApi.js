@@ -6,9 +6,9 @@ const questionBankApi = {
     return axiosClient.get(url, { params: params });
   },
 
-  getFilterCategory() {
+  getFilterCategory(params) {
     const url = `/question-category`;
-    return axiosClient.get(url);
+    return axiosClient.get(url,{ params: params });
   },
 
   getById(id) {

@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
+import { ourRequest } from "../Slice";
 
 const initialState = [];
 
 export const getFilterCriteria = createAsyncThunk(
   "getFilterCriteriaSlice/getFilterCriteria",
   async (params) => {
-    const response = await questionCriteriaApi.getAll(params);
+    const response = await questionCriteriaApi.getAll(params, {
+      cancelToken: ourRequest.token,
+    });
     return response;
   }
 );
@@ -25,7 +28,7 @@ export const getFilterCriteriaSlice = createSlice({
       return state;
     });
     builder.addCase(getFilterCriteria.rejected, (state, action) => {
-    console.log("rejected getFilterCriteria",action.error)
+      console.log("rejected getFilterCriteria", action.error);
     });
   },
 });

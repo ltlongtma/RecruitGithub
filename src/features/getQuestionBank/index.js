@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestionBank } from "./Slice";
+import { getQuestionBank, ourRequest } from "./Slice";
 import TableQuestion from "./Table";
 import { FormFilter } from "./FormFilter";
-import { getFilterCategory } from "./FormFilter/getFilterCategorySlice";
+import {
+  getFilterCategory,
+} from "./FormFilter/getFilterCategorySlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 import { getDetailQuestion } from "../getDetailQuestion/Slice";
 import PropTypes from "prop-types";
+import { getFilterCriteria } from "./FormFilter/getFilterCriteriaSlice";
+
 
 export const Questionbank = ({
   hiddenCreateButton,
@@ -25,10 +29,13 @@ export const Questionbank = ({
     keyword: "",
   });
   const debounce = useDebounce(paramStatus, 500);
-
   useEffect(() => {
     dispatch(getQuestionBank(debounce));
-    dispatch(getFilterCategory());
+    // dispatch(getFilterCategory());
+    dispatch(getFilterCriteria());
+    return () => {
+      ourRequest.cancel();
+    };
   }, [debounce]);
 
   const onFilterAll = (val) => {

@@ -5,19 +5,18 @@ import Navbar from "react-bootstrap/Navbar";
 import { UserInfor } from "../UserInfor";
 import React, { useEffect, useState } from "react";
 import { Notifications } from "../../features/getNotification";
-import axiosClient from "../../services/AxiosClient";
 import MenuSidebar from "./MenuSidebar";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search, SearchIconWrapper, StyledInputBase } from "./SearchBar";
+import userApi from "../../services/ManageUserApi";
 const cx = className.bind(styles);
 
 export const Navigation = () => {
   const [profile, setProfile] = useState({});
 
-  const role = sessionStorage.getItem("isRole");
   useEffect(() => {
-    axiosClient
-      .get(`user/profile`)
+    userApi
+      .getProfile()
       .then((res) => {
         setProfile(res);
       })

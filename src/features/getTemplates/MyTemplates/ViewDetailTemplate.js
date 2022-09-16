@@ -13,11 +13,11 @@ const ViewDetailTemplate = ({
   return (
     <div>
       {dataInDetailtemplate?.questionBankTemplates?.length > 0 ? (
-        <Table bordered hover responsive className={cx("table")}>
+        <Table hover responsive className={cx("table")}>
           <thead className={cx("table-head")}>
             <tr>
               <th>No.</th>
-              <th>Content</th>
+              <th>Question</th>
               <th>Answer</th>
               <th>Category</th>
               <th>Level</th>
