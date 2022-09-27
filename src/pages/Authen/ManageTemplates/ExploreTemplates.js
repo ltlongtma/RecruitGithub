@@ -8,9 +8,9 @@ import className from "classnames/bind";
 import styles from "./module.scss";
 import { PendingTemplates } from "../../../features/getTemplates/ExploreTemplates/Pending";
 import { useDispatch } from "react-redux";
-import { FormFilterTemplates } from "../../../features/getTemplates/FormFilter";
 import { templatesFilterByAdmin } from "../../../features/getTemplates/Slice";
 import { ApprovedTemplates } from "../../../features/getTemplates/ExploreTemplates/Approved";
+import { SearchForm } from "../../../components/SearchForm";
 
 const cx = className.bind(styles);
 export const ExploreTemplates = () => {
@@ -70,13 +70,12 @@ export const ExploreTemplates = () => {
               aria-label="Explore"
               textColor="secondary"
               indicatorColor="secondary"
-              
             >
               <Tab label="Approved" value="1" />
               <Tab label="Pending" value="2" />
             </TabList>
             <div className={cx("form-filter")}>
-              <FormFilterTemplates onValueSearch={onValueSearch} />
+              <SearchForm onValueSearch={onValueSearch} />
             </div>
           </Box>
           <TabPanel value="1">

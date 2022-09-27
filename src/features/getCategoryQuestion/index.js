@@ -9,6 +9,7 @@ import useDebounce from "../../hooks/useDebounce";
 import PaginatedItems from "../../components/Pagination";
 import { ModalDeleteCategory } from "./Modal/ModalDelete";
 import { useNavigate } from "react-router-dom";
+import { ourRequest } from "../getQuestionBank/Slice";
 
 export const CategoryQuestion = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ export const CategoryQuestion = () => {
   useEffect(() => {
     questionCategoryApi.getFilter(debounce).then((res) => {
       dispatch(getCategory(res));
+      return () => {
+        ourRequest.cancel();
+      };
     });
   }, [debounce]);
 

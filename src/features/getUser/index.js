@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axiosClient from "../../services/AxiosClient";
-import { getUsers, editUser } from "./Slice";
-import { ModalDeleteUser } from "./Modal/ModalDeleteUser";
+import { deleteUser, editUser, getUsersByAdmin } from "./Slice";
 import { ModalEditRole } from "./Modal/ModalEditRole";
 import { TableData } from "./Table";
 import FormFilterUser from "../../features/getUser/FormFilter";
 import userApi from "../../services/ManageUserApi";
 import useDebounce from "../../hooks/useDebounce";
-import { ModalAddNewUser } from "./Modal/ModalAddNewUser";
+import { ModalConfirm } from "../../components/Modal";
 
 export const UserList = () => {
   const dispatch = useDispatch();
@@ -27,28 +26,12 @@ export const UserList = () => {
   });
   const debounce = useDebounce(params, 500);
   useEffect(() => {
-    userApi
-      .filterUser(debounce)
-      .then((response) => {
-        dispatch(getUsers(response.data));
-      })
-      .catch((error) => {
-        console.log("ERROR FILTER USER >>> " + error);
-      });
+    dispatch(getUsersByAdmin(debounce));
   }, [debounce]);
 
-  const handleDelete = (e) => {
-    userApi
-      .deleteUser(e)
-      .then((response) => {
-        return axiosClient.get(`user`);
-      })
-      .then((response) => {
-        dispatch(getUsers(response));
-      })
-      .catch((error) => {
-        console.log("ERROR ", error);
-      });
+  const handleDelete = async (e) => {
+    await dispatch(deleteUser(e));
+    dispatch(getUsersByAdmin());
 
     setShowModalDelete(false);
   };
@@ -62,21 +45,18 @@ export const UserList = () => {
     setUser(item);
   };
   const handleCloseModalEdit = () => setShowModalEdit(false);
-  const handleEditNewRole = (id) => {
-    userApi
-      .changeRoleUser(id, role)
-      .then((response) => {
-        dispatch(editUser(response));
-      })
-      .catch((error) => {
-        console.log("ERROR Edit User >>>", error);
-      });
+  const handleChangeRoleId = async (e) => {
+    const value = e.target.id;
+    await setRole(value);
+  };
+  const handleEditNewRole = async (id) => {
+    // console.log("E >>", id, role);
+    await dispatch(editUser(id, role));
+    dispatch(getUsersByAdmin());
+
     setShowModalEdit(false);
   };
-  const handleChangeRoleId = (e) => {
-    const value = e.target.id;
-    setRole(value);
-  };
+
   //Filter data, accept data from children FormFilterUser
   const onFilterAll = (e) => {
     setParams(e);
@@ -91,12 +71,14 @@ export const UserList = () => {
         handleShowModalDelete={handleShowModalDelete}
       />
       {/* Modal delete */}
-      <ModalDeleteUser
+      <ModalConfirm
         centered
+        title={`DELETE USER`}
+        content={`Are you sure want to delete this user?`}
         show={showModalDelete}
         onHide={handleCloseModalDelete}
-        closeModal={handleCloseModalDelete}
-        onDelete={() => handleDelete(user?.id)}
+        handleNoModal={handleCloseModalDelete}
+        handleYesModal={() => handleDelete(user?.id)}
       />
       {/* Modal Edit Role */}
       <ModalEditRole

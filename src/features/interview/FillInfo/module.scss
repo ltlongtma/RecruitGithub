@@ -6,3 +6,70 @@
 .text-error {
   color: red;
 }
+.cardContainer {
+  border: none !important;
+  display: flex;
+  .cardNew {
+    border-radius: 10px;
+    background-color: #b0eadc;
+    // margin-top: 5rem;
+    color: #387450;
+    text-align: center;
+    padding: 1em;
+    margin: 5em;
+    margin-right: 0em;
+  }
+  .cardPending {
+    text-align: center;
+    border-radius: 10px;
+    background-color: #e6d4a3;
+    color: #a55f36;
+    padding: 1em;
+    margin: 5em;
+  }
+}
+//PendingCandidateTable
+.table-list {
+  position: relative;
+  margin-top: 6em;
+  text-align: center;
+  .formSearch {
+    position: absolute;
+    width: 17%;
+    top: -3rem;
+    right: 1rem;
+  }
+ 
+  .btnBack {
+    position: absolute;
+    bottom: -4em;
+    left: 0;
+  }
+  .tableBody {
+    tr:hover {
+      cursor: pointer;
+    }
+  }
+}
+//ModalDetailPendingCandidate
+.modal {
+  .modalHeader {
+    display: initial;
+    position: relative;
+    button {
+      position: absolute;
+      right: 26px;
+      top: 26px;
+    }
+    .modalTitle {
+      color: cadetblue;
+      text-align: center;
+    }
+  }
+
+  label {
+    font-weight: 600;
+    color: chocolate;
+    display: flex;
+  }
+}

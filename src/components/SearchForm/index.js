@@ -2,8 +2,9 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
+
 let timeOut;
-export const FormFilterTemplates = ({ onValueSearch }) => {
+export const SearchForm = ({ onValueSearch }) => {
   const handelChangeInputSearch = (e) => {
     if (timeOut) {
       clearTimeout(timeOut);
@@ -20,10 +21,10 @@ export const FormFilterTemplates = ({ onValueSearch }) => {
         placeholder="Search..."
         name="keyword"
         onChange={handelChangeInputSearch}
-      />
+      ></Form.Control>
     </div>
   );
 };
-FormFilterTemplates.propTypes = {
+SearchForm.propTypes = {
   onValueSearch: PropTypes.func.isRequired,
 };

@@ -10,9 +10,9 @@ import { useState } from "react";
 import Interview from "../../../features/interview/Interview";
 import TotalResult from "../../../features/interview/TotalResult";
 import styles from "../../../pages/Authen/User/user.module.scss";
-
 import className from "classnames/bind";
 import { Breadcrumb } from "../../../components/Breadcrumb";
+import ChooseTemplate from "../../../features/interview/ChooseTemplate";
 
 const cx = className.bind(styles);
 
@@ -24,11 +24,9 @@ export const InterviewProcess = () => {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -57,26 +55,12 @@ export const InterviewProcess = () => {
               handleNext={handleNext}
             />
           ) : activeStep === 1 ? (
-            <>
-              <h1>hello</h1>
-              <div>
-                <Box sx={{ display: "flex", flexDirection: "row", pt: 9 }}>
-                  <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Box sx={{ flex: "1 1 auto" }} />
-
-                  <Button onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
-                </Box>
-              </div>
-            </>
+            <ChooseTemplate
+              steps={steps}
+              activeStep={activeStep}
+              handleBack={handleBack}
+              handleNext={handleNext}
+            />
           ) : activeStep === 2 ? (
             <Interview
               steps={steps}
@@ -103,18 +87,6 @@ export const InterviewProcess = () => {
             />
           )}
         </div>
-        {/* <div>
-        <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-          <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-            Back
-          </Button>
-          <Box sx={{ flex: "1 1 auto" }} />
-
-          <Button onClick={handleNext}>
-            {activeStep === steps.length - 1 ? "Finish" : "Next"}
-          </Button>
-        </Box>
-      </div> */}
       </Box>
     </>
   );

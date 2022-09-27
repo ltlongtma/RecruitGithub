@@ -1,7 +1,7 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import questionBankApi from "../../services/questionBankApi";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { TableDetailQuestion } from "./Table";
 import { ModalDeletQuestion } from "./Modal/ModalDelete";
 import { ModalApproveQuestion } from "./Modal/ModalApprove";
@@ -12,6 +12,7 @@ import { ApproveQuestion } from "./Slice";
 export const DetailQuestion = () => {
   const data = useSelector((state) => state.getDetailQuestion);
   // const location = useLocation();
+  // console.log("LOCALTION >>>", location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showSaveAndBackButton, setShowSaveAndBackButton] = useState(true);
@@ -25,9 +26,7 @@ export const DetailQuestion = () => {
   const { questionId } = useParams();
   const criteria = useSelector((state) => state.filterCriteria);
 
-
   const handleApproveQuestion = async () => {
-   
     await dispatch(ApproveQuestion(questionId)).then(
       await setOpenAlert(true),
       await setTileAlert("Approved successfully")

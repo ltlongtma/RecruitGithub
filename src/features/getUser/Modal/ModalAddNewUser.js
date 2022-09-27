@@ -10,7 +10,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Form from "react-bootstrap/Form";
 // import axios from "axios";
 import { useDispatch } from "react-redux";
-import { createNewUser } from "../Slice";
+import { createNewUser, getUsersByAdmin } from "../Slice";
 import styles from "../Modal/Modal.module.scss";
 import userApi from "../../../services/ManageUserApi";
 import AlertSuccess from "../../../components/Alert";
@@ -59,33 +59,24 @@ export const ModalAddNewUser = ({ closeModal, ...props }) => {
   name.current = watch("name");
   const password = useRef({});
   password.current = watch("password");
-
+  const newUser = {
+    email: email.current,
+    badgeId: badgeId.current,
+    username: username.current,
+    name: name.current,
+    password: password.current,
+    roles: [{ id: userRole }],
+  };
   const handleChangeRole = (role) => {
     setUserRole(role);
   };
 
-  const handleCreateNewUser = (e) => {
-    const newUser = {
-      email: email.current,
-      badgeId: badgeId.current,
-      username: username.current,
-      name: name.current,
-      password: password.current,
-      roles: [{ id: userRole }],
-    };
+  const handleCreateNewUser = async (e) => {
+    await dispatch(createNewUser(newUser));
+    await dispatch(getUsersByAdmin());
+    closeModal();
 
-    userApi
-      .postNewUser(newUser)
-
-      .then((response) => {
-        dispatch(createNewUser(response));
-        setOpenAlert(true);
-
-        closeModal();
-      })
-      .catch((error) => {
-        console.log("ERROR ", error);
-      });
+    setOpenAlert(true);
   };
 
   return (
@@ -94,9 +85,9 @@ export const ModalAddNewUser = ({ closeModal, ...props }) => {
         <Modal.Header closeButton>
           <Modal.Title className={cx("modal-title")}>Add New User</Modal.Title>
         </Modal.Header>
-        <form onSubmit={handleSubmit(handleCreateNewUser)}>
-          <Modal.Body>
-            <div className="mb-3">
+        <form>
+          <Modal.Body >
+            <div className="mb-3 ml-1 ">
               <label className="form-label" htmlFor="emailAddress">
                 Email Address
               </label>
@@ -240,7 +231,7 @@ export const ModalAddNewUser = ({ closeModal, ...props }) => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={handleSubmit(handleCreateNewUser)}>
               Save Changes
             </Button>
             <Button variant="secondary" onClick={closeModal}>

@@ -13,7 +13,8 @@ import Moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 const cx = className.bind(styles);
-const SOCKET_URL = "http://13.212.157.124:8080/ws";
+// const SOCKET_URL = "http://13.212.157.124:8080/ws";
+const SOCKET_URL = "http://localhost:8080/ws";
 
 export const Notifications = ({ profile }) => {
   const navigate = useNavigate();
@@ -34,7 +35,6 @@ export const Notifications = ({ profile }) => {
 
   //   //Need to cleanup
 
-   
   // }, []);
 
   const handleShowNotification = () => {

@@ -15,7 +15,7 @@
     margin-top: auto;
     h6 {
       color: blue;
-      margin-left: 1rem;
+      margin-left: 2rem;
     }
     .brand {
       margin-top: 3em;
@@ -35,11 +35,34 @@
     .body {
       position: relative;
       top: 2em;
-      align-items: center;
+      text-align: center;
+
+      .form-username {
+        position: relative;
+      }
+      .form-password {
+        position: relative;
+
+        .icon-eye {
+          position: absolute;
+          right: 4em;
+          top: 29px;
+          cursor: pointer;
+        }
+      }
+      .text-error {
+        color: #bf1650;
+        position: absolute;
+        margin-left: 4rem;
+        top: 4rem;
+      }
+      p::before {
+        display: inline;
+        content: "⚠ ";
+      }
     }
     .footer {
-      position: relative;
-      top: 5em;
+      margin-top: 5em;
     }
   }
 }
@@ -60,24 +83,7 @@
     font-weight: bold;
   }
 }
-.text-error {
-  color: #bf1650;
-}
-// p::before {
-//   display: inline;
-//   content: "⚠ ";
-// }
 
-.form-password {
-  position: relative;
-
-  .icon-eye {
-    position: absolute;
-    right: 28px;
-    top: 5px;
-    cursor: pointer;
-  }
-}
 .modal-body {
   .text-error {
     color: #bf1650;

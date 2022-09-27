@@ -7,7 +7,6 @@ import { ModalCloneTemplate } from "../../Modal/ModalCloneTemplate";
 import { cloneTemplate, getDetailTemplate, templatesFilterByAdmin } from "../../Slice";
 import { TemplatesList } from "../Pending/TemplatesList";
 import TemplateDetail from "../TemplateDetail";
-import questionTemplate from "../../../../services/questionTemplates";
 
 export const ApprovedTemplates = ({ onPageChange, onChangePageSize, paramStatus }) => {
   const templateList = useSelector((state) => state.template.templateList);
@@ -36,8 +35,6 @@ export const ApprovedTemplates = ({ onPageChange, onChangePageSize, paramStatus 
     setShowModalCloneTemplate(true);
   };
   const handleCloneTemplate = async (id) => {
-    // console.log("E >>", id);
-    // questionTemplate.cloneToMyTemplate(id);
     await dispatch(cloneTemplate(id));
     setShowModalCloneTemplate(false);
   };
@@ -47,7 +44,7 @@ export const ApprovedTemplates = ({ onPageChange, onChangePageSize, paramStatus 
       <TemplatesList
         templateList={templateList}
         ViewDetailTemplate={ViewDetailTemplate}
-        showActionColumn={true}
+        showActionColumn={false}
         handleModalCloneTemplate={handleModalCloneTemplate}
       />
       <PaginatedItems

@@ -6,9 +6,14 @@
   .modal-body-title {
     text-align: center;
   }
-  label {
-    font-weight: 600;
-    color: teal;
+  .form {
+    position: relative;
+    // label {
+    //   position: absolute;
+    //   left: 2em;
+    //   font-weight: 600;
+    //   color: teal;
+    // }
   }
   .input-password {
     position: relative;

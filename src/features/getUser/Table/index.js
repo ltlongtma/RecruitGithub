@@ -24,8 +24,8 @@ export const TableData = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.userList.length > 0 &&
-            props.userList?.map((item, index) => {
+          {props.userList?.data.length > 0 &&
+            props.userList?.data.map((item, index) => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>

@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestionBank, ourRequest } from "./Slice";
+import { getQuestionBank, ourRequest, requestGetQuestionBank } from "./Slice";
 import TableQuestion from "./Table";
 import { FormFilter } from "./FormFilter";
-import {
-  getFilterCategory,
-} from "./FormFilter/getFilterCategorySlice";
+import { getFilterCategory, requestGetFilterCategory } from "./FormFilter/getFilterCategorySlice";
 import PaginatedItems from "../../components/Pagination";
 import useDebounce from "../../hooks/useDebounce";
 import { getDetailQuestion } from "../getDetailQuestion/Slice";
 import PropTypes from "prop-types";
-import { getFilterCriteria } from "./FormFilter/getFilterCriteriaSlice";
-
+import { getFilterCriteria, requestGetFilterCriteria } from "./FormFilter/getFilterCriteriaSlice";
+import { useLocation } from "react-router-dom";
 
 export const Questionbank = ({
   hiddenCreateButton,
@@ -29,9 +27,10 @@ export const Questionbank = ({
     keyword: "",
   });
   const debounce = useDebounce(paramStatus, 500);
+
   useEffect(() => {
     dispatch(getQuestionBank(debounce));
-    // dispatch(getFilterCategory());
+    dispatch(getFilterCategory());
     dispatch(getFilterCriteria());
     return () => {
       ourRequest.cancel();
@@ -73,7 +72,6 @@ export const Questionbank = ({
       <PaginatedItems
         pagination={questionList?.pagination}
         onPageChange={onPageChange}
-        pageSize={paramStatus.pageSize}
         onChangePageSize={onChangePageSize}
       />
     </div>

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import questionBankApi from "../../../services/questionBankApi";
 import { ourRequest } from "../Slice";
+
 
 const initialState = [];
 

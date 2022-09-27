@@ -7,6 +7,7 @@ import getFilterCriteriaReducer from "../features/getQuestionBank/FormFilter/get
 import getCategoryReducer from "../features/getCategoryQuestion/Slice";
 import getCriteriaReducer from "../features/getCriteria/Slice";
 import templateSliceReducer from "../features/getTemplates/Slice";
+import interviewSliceReducer from "../features/interview/FillInfo/Slice";
 
 const rootReducer = {
   user: getUsersReducer,
@@ -17,7 +18,7 @@ const rootReducer = {
   getCategoryQuestion: getCategoryReducer,
   getCriteria: getCriteriaReducer,
   template: templateSliceReducer,
-
+  interview: interviewSliceReducer,
 };
 const store = configureStore({
   reducer: rootReducer,

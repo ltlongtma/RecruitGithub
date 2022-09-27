@@ -21,7 +21,7 @@ export const ModalEditRole = ({
         <h6>
           Edit account {user?.username} with role {user?.roles[0].name}
         </h6>
-        <Form>
+        <Form className={cx("form")}>
           <Form.Text>New Role</Form.Text>
           <Form.Check
             type="radio"

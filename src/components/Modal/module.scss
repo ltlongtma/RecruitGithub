@@ -1,0 +1,18 @@
+.modal {
+  text-align: center;
+  .header {
+    position: relative;
+    .modalTitle {
+      color: cadetblue;
+      margin: 0 auto;
+      position: relative;
+    }
+    button {
+      margin-left: 0 !important;
+    }
+  }
+
+  .modalBody {
+    margin: 1em;
+  }
+}

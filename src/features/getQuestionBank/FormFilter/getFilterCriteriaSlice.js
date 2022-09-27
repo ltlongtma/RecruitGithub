@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
 import { ourRequest } from "../Slice";
 

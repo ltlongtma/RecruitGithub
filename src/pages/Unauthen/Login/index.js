@@ -75,14 +75,12 @@ export const Login = () => {
         <div>
           <form onSubmit={handleSubmit(handleOnSubmit)}>
             <div className={cx("body")}>
-              <div className={cx(" mt-5")}>
-                <h6 className={cx(" ml-2")} htmlFor="username">
-                  User Name
-                </h6>
+              <div className={cx(" form-username", "mt-5")}>
+                <h6 className={cx("col-3 mb-2")}>User Name</h6>
                 <div>
                   <Input
                     type="text"
-                    sx={{ width: "80%" }}
+                    sx={{ width: "80%", mb: 4 }}
                     autoFocus
                     id="username"
                     placeholder="Your username"
@@ -102,7 +100,7 @@ export const Login = () => {
                 </div>
               </div>
               <div className={cx("form-password")}>
-                <h6 className={cx("col-md-3")} htmlFor="emailPassword">
+                <h6 className={cx("col-3")} htmlFor="emailPassword">
                   Password
                 </h6>
                 <div>

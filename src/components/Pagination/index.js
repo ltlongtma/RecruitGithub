@@ -5,7 +5,7 @@ import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/mate
 
 const cx = className.bind(styles);
 
-function PaginatedItems({ pagination, onPageChange, pageSize, onChangePageSize }) {
+function PaginatedItems({ pagination, onPageChange, onChangePageSize, hiddenPagination }) {
   const handlePageClick = (event) => {
     onPageChange(event.selected + 1);
   };
@@ -13,7 +13,7 @@ function PaginatedItems({ pagination, onPageChange, pageSize, onChangePageSize }
     onChangePageSize(e.target.value);
   };
   return (
-    <div className={cx("wrapper")}>
+    <div className={cx("wrapper")} hidden={hiddenPagination}>
       <Typography variant="string" className={cx("labelTotal")}>
         Total: {pagination?.total}
       </Typography>
@@ -52,7 +52,7 @@ function PaginatedItems({ pagination, onPageChange, pageSize, onChangePageSize }
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
-        forcePage={pagination.page - 1}
+        forcePage={pagination?.page - 1}
         className={cx("pagination")}
       />
     </div>

@@ -1,0 +1,13 @@
+.template {
+  margin-top: 6em;
+  position: relative;
+  .formSearch {
+    position: absolute;
+    right: 0;
+    top: -3rem;
+    input {
+      border-radius: 10px;
+      box-shadow: 1px 1px #88882c;
+    }
+  }
+}

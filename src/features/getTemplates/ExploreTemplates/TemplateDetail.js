@@ -26,9 +26,6 @@ const TemplateDetail = ({
                 <th>Answer</th>
                 <th>Category</th>
                 <th>Level</th>
-                <th>Dated Added</th>
-                <th>Date Approved</th>
-                <th>Author</th>
               </tr>
             </thead>
             <tbody>
@@ -55,9 +52,6 @@ const TemplateDetail = ({
                         }
                       />
                     </td>
-                    <td>{moment(data?.createDate).fromNow()}</td>
-                    <td>{moment(data?.question.approvedDate).fromNow()}</td>
-                    <td>{data?.question.author?.name}</td>
                   </tr>
                 );
               })}

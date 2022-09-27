@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import questionTemplate from "../../../services/questionTemplates";
-import { FormFilterTemplates } from "../FormFilter";
 import { TableTemplates } from "./TableTemplates";
 import { getTemplateList } from "../Slice";
 import styles from "../templates.module.scss";
@@ -13,6 +12,7 @@ import { getDetailTemplate } from "../Slice";
 import { ModalViewDetailQuestion } from "../Modal/ModalViewDetailQuestion";
 import { getDetailQuestion } from "../../getDetailQuestion/Slice";
 import { ModalSharingTemplate } from "../Modal/ModalSharingTemplate";
+import { SearchForm } from "../../../components/SearchForm";
 
 const cx = className.bind(styles);
 
@@ -92,7 +92,7 @@ export const TemplatesContent = ({ handleEditTemplate }) => {
   return (
     <div className={cx("templates")}>
       <div className={cx("templates-searchForm")}>
-        <FormFilterTemplates onValueSearch={onValueSearch} />
+        <SearchForm onValueSearch={onValueSearch} />
       </div>
       <div>
         <TableTemplates
