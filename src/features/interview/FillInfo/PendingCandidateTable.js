@@ -7,6 +7,7 @@ import { Button, IconButton, Tooltip } from "@mui/material";
 import PaginatedItems from "../../../components/Pagination";
 import { SearchForm } from "../../../components/SearchForm";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
+import ModeEditOutlineTwoToneIcon from "@mui/icons-material/ModeEditOutlineTwoTone";
 
 const cx = className.bind(styles);
 
@@ -18,7 +19,8 @@ export const PendingCandidateTable = ({
   handleBack,
   onValueSearch,
   handleViewDetailPendingCandidate,
-  handleFillDataIntoFormInput
+  handleFillDataIntoFormInput,
+  handleNext,
 }) => {
   return (
     <div className={cx("table-list")} hidden={hiddenTablePendingcandidate}>
@@ -55,18 +57,23 @@ export const PendingCandidateTable = ({
                 <td>{item?.candidate.gender}</td>
                 <td>{item?.candidate.educationStatus}</td>
                 <td>{item?.candidate.position}</td>
-                <td>{item?.workMode}</td>
+                <td>{item?.candidate?.workMode}</td>
                 <td>{moment(item?.interviewDate).format("DD/MM/YYYY")}</td>
 
                 <td onClick={(e) => e.stopPropagation()}>
                   <Tooltip title="Interview">
-                    <IconButton
-                      color="secondary"
-                      onClick={() =>handleFillDataIntoFormInput (item?.id)}
-                    >
-                      <QuestionAnswerOutlinedIcon color="success" />
+                    <IconButton color="secondary" onClick={handleNext}>
+                      <QuestionAnswerOutlinedIcon color="secondary" />
                     </IconButton>
                   </Tooltip>
+                  {/* <Tooltip title="Edit">
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleFillDataIntoFormInput(item?.id)}
+                    >
+                      <ModeEditOutlineTwoToneIcon color="success" />
+                    </IconButton>
+                  </Tooltip> */}
                 </td>
               </tr>
             );

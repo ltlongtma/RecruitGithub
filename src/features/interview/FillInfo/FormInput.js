@@ -11,19 +11,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Controller, useController, useForm } from "react-hook-form";
 import className from "classnames/bind";
 import style from "./module.scss";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { ModalConfirm } from "../../../components/Modal";
-import moment from "moment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { saveCandidate } from "./Slice";
 import { useDispatch } from "react-redux";
 import AlertSuccess from "../../../components/Alert";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { keys } from "@material-ui/core/styles/createBreakpoints";
 
 const cx = className.bind(style);
 
@@ -36,11 +36,35 @@ export const FormInput = ({
   handleBack,
   dataFromPendingCandidate,
 }) => {
-  const [dateOfbirth, setDateOfBirth] = React.useState();
-  const [dateOfInterview, setDateOfInterview] = React.useState();
   const [showModal, setShowModal] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
   const dispatch = useDispatch();
+
+  const [defaultValueInput, setDefaultValueInput] = useState({
+    candidate: {
+      name: "",
+      birthday: dayjs(),
+      gender: "MALE",
+      phone: "",
+      educationStatus: "",
+      gpa: "",
+      position: "",
+      workMode: "FULL_TIME",
+    },
+    assessments: [
+      {
+        interviewer: {
+          name: null,
+        },
+      },
+      {
+        interviewer: {
+          name: null,
+        },
+      },
+    ],
+    dateOfInterview: dayjs(),
+  });
 
   const {
     register,
@@ -49,78 +73,56 @@ export const FormInput = ({
     formState: { errors },
     reset,
     control,
-  } = useForm({
-    mode: "onBlur",
-  });
-  // const {
-  //   field: { onChange, onBlur, name, value, ref },
-  //   fieldState: { invalid, isTouched, isDirty },
-  //   formState: { touchedFields, dirtyFields }
-  // } = useController({
-  //   name,
-  //   control,
-  //   rules: { required: true },
-  //   defaultValue: "",
-  // });
-  const name = React.useRef({});
-  name.current = watch("name");
-  const gender = React.useRef({});
-  gender.current = watch("gender");
-  const phone = React.useRef({});
-  phone.current = watch("phone");
-  const educationStatus = React.useRef({});
-  educationStatus.current = watch("educationStatus");
-  const gpa = React.useRef({});
-  gpa.current = watch("gpa");
-  const position = React.useRef({});
-  position.current = watch("position");
-  const workMode = React.useRef({});
-  workMode.current = watch("workMode");
-  const interviewer1 = React.useRef({});
-  interviewer1.current = watch("interviewer1");
-  const interviewer2 = React.useRef({});
-  interviewer2.current = watch("interviewer2");
-
-  const dataInput = {
-    candidate: {
-      birthday: moment(dateOfbirth),
-      educationStatus: educationStatus.current,
-      gender: gender.current,
-      gpa: gpa.current,
-      id: 0,
-      name: name.current,
-      phone: phone.current,
-      position: position.current,
-    },
-    interviewDate: moment(dateOfInterview),
-    interviewer1: interviewer1.current,
-    interviewer2: interviewer2?.current?.length > 0 ? interviewer2.current : null,
-    workMode: workMode.current,
-  };
-  const defaultValues = {
-    name: dataFromPendingCandidate?.candidate?.name,
-    birthday: dataFromPendingCandidate?.candidate?.birthday,
-    gender: dataFromPendingCandidate?.candidate?.gender || "MALE",
-    phone: dataFromPendingCandidate?.candidate?.phone,
-    educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
-    gpa: dataFromPendingCandidate?.candidate?.gpa,
-    position: dataFromPendingCandidate?.candidate?.position,
-    workMode: dataFromPendingCandidate?.workMode || "FULL_TIME",
-    interviewer1: dataFromPendingCandidate?.interviewer1?.name,
-    interviewer2: dataFromPendingCandidate?.interviewer2?.name,
-    dateOfInterview: dataFromPendingCandidate?.interviewDate,
-  };
+  } = useForm({});
   useEffect(() => {
-    reset({
-      ...defaultValues,
-    });
+    if (dataFromPendingCandidate.id) {
+      setDefaultValueInput({
+        candidate: {
+          name: dataFromPendingCandidate?.candidate?.name,
+          birthday: dataFromPendingCandidate?.candidate?.birthday,
+          gender: dataFromPendingCandidate?.candidate?.gender,
+          phone: dataFromPendingCandidate?.candidate?.phone,
+          educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
+          gpa: dataFromPendingCandidate?.candidate?.gpa,
+          position: dataFromPendingCandidate?.candidate?.position,
+          workMode: dataFromPendingCandidate?.candidate?.workMode,
+        },
+
+        assessments: [
+          {
+            interviewer: {
+              name: dataFromPendingCandidate?.assessments[0]?.interviewer?.name,
+            },
+          },
+          {
+            interviewer: {} || null,
+          },
+        ],
+
+        dateOfInterview: dataFromPendingCandidate?.interviewDate,
+      });
+    }
   }, [dataFromPendingCandidate]);
-  console.log("E >>>", dataFromPendingCandidate);
   const handleChangeDateOfBirth = (value) => {
-    setDateOfBirth(value.format());
+    const newValue = {
+      ...defaultValueInput,
+      candidate: {
+        ...defaultValueInput.candidate,
+        birthday: value,
+      },
+    };
+    setDefaultValueInput({
+      ...newValue,
+    });
   };
   const handleChangeDateOfInterview = (value) => {
-    setDateOfInterview(value.format());
+    const newValue = {
+      ...defaultValueInput,
+      dateOfInterview: value,
+    };
+    setDefaultValueInput({
+      ...newValue,
+    });
   };
 
   const handleSaveButton = () => {
@@ -128,8 +130,9 @@ export const FormInput = ({
   };
 
   const handleSaveForm = async () => {
-    await dispatch(saveCandidate(dataInput));
-    setShowModal(false);
+    // console.log("defaultValueInput >>>", defaultValueInput);
+    await dispatch(saveCandidate(defaultValueInput));
+    handleCloseModal();
     handleBack();
     setOpenAlert(true);
   };
@@ -143,6 +146,64 @@ export const FormInput = ({
 
     setOpenAlert(false);
   };
+  const handleChangeValueGeneral = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const newValue = {
+      ...defaultValueInput,
+      candidate: {
+        ...defaultValueInput.candidate,
+        [name]: value,
+      },
+    };
+    setDefaultValueInput({
+      ...newValue,
+    });
+    // console.log("WWW >>>", dataInput);
+  };
+
+  const handleChangeInterviewer1 = (e) => {
+    const valueInterviewer = e.target.innerText;
+    const newValue = {
+      ...defaultValueInput,
+      assessments: [
+        {
+          interviewer: {
+            name: valueInterviewer,
+          },
+        },
+        {
+          interviewer: {
+            name: defaultValueInput?.assessments[1]?.interviewer?.name,
+          },
+        },
+      ],
+    };
+    setDefaultValueInput({
+      ...newValue,
+    });
+  };
+  const handleChangeInterviewer2 = (e) => {
+    const valueInterviewer = e.target.innerText;
+    const newValue = {
+      ...defaultValueInput,
+      assessments: [
+        {
+          interviewer: {
+            name: defaultValueInput?.assessments[0]?.interviewer?.name,
+          },
+        },
+        {
+          interviewer: {
+            name: valueInterviewer,
+          },
+        },
+      ],
+    };
+    setDefaultValueInput({
+      ...newValue,
+    });
+  };
 
   return (
     <div>
@@ -153,44 +214,25 @@ export const FormInput = ({
           </Typography>
           <Grid container spacing={7} sx={{ p: 4 }}>
             <Grid item xs={3}>
-              {/* <Controller
-                control={control}
-                name="name"
-                defaultValue={defaultValues?.name}
-                render={({ field}) => (
-                  <TextField
-                    {...field}
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    variant="outlined"
-                    onChange={(e)=>field.onChange(e.target.value)}
-                    {...register("name", {
-                      required: "Invalid input",
-                      minLength: {
-                        value: 3,
-                        message: "Invalid input",
-                      },
-                    })}
-                  />
-                )}
-              /> */}
               <TextField
                 required
                 fullWidth
-                id="name"
+                name="name"
                 label="Name"
                 variant="outlined"
-                defaultValue={defaultValues?.name}
-                {...register("name", {
-                  required: "Invalid input",
-                  minLength: {
-                    value: 3,
-                    message: "Invalid input",
-                  },
-                })}
+                onChange={handleChangeValueGeneral}
+                value={defaultValueInput?.candidate?.name}
+                // defaultValue={defaultValueInput?.candidate?.name}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
+                // {...register("name", {
+                //   required: "Invalid input",
+                //   minLength: {
+                //     value: 3,
+                //     message: "Invalid input",
+                //   },
+                // })}
               />
+
               <ErrorMessage
                 errors={errors}
                 name="name"
@@ -200,16 +242,15 @@ export const FormInput = ({
             <Grid item xs={3}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack spacing={3}>
-                  <DesktopDatePicker
+                  <DatePicker
                     label="Date of Birth"
                     inputFormat="DD/MM/YYYY"
-                    defaultCalendarMonth={defaultValues?.birthday}
-                    value={dateOfbirth}
                     disableFuture
+                    name="birthday"
+                    value={defaultValueInput?.candidate?.birthday}
                     onChange={handleChangeDateOfBirth}
-                    renderInput={(params) => (
-                      <TextField {...params} id="birthday" {...register("birthday")} />
-                    )}
+                    defaultDate={defaultValueInput?.candidate?.birthday}
+                    renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
               </LocalizationProvider>
@@ -225,10 +266,12 @@ export const FormInput = ({
                 <InputLabel id="gender">Gender</InputLabel>
                 <Select
                   labelId="gender"
+                  name="gender"
                   id="gender"
                   label="gender"
-                  defaultValue={defaultValues?.gender}
-                  {...register("gender")}
+                  defaultValue={defaultValueInput?.candidate?.gender || "MALE"}
+                  onChange={handleChangeValueGeneral}
+                  key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
                 >
                   <MenuItem value="MALE">Male</MenuItem>
                   <MenuItem value="FEMALE">Female</MenuItem>
@@ -239,10 +282,12 @@ export const FormInput = ({
               <TextField
                 id="phone"
                 label="Phone"
+                name="phone"
                 variant="outlined"
-                defaultValue={defaultValues?.phone}
+                onChange={handleChangeValueGeneral}
+                value={defaultValueInput?.candidate?.phone}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
                 fullWidth
-                {...register("phone")}
               />
             </Grid>
           </Grid>
@@ -253,16 +298,19 @@ export const FormInput = ({
                 id="educationStatus"
                 label="Graduate"
                 variant="outlined"
-                defaultValue={defaultValues?.educationStatus}
+                name="educationStatus"
+                value={defaultValueInput?.candidate?.educationStatus}
+                onChange={handleChangeValueGeneral}
                 fullWidth
-                required
-                {...register("educationStatus", {
-                  required: "Invalid input",
-                  minLength: {
-                    value: 3,
-                    message: "Invalid input",
-                  },
-                })}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
+
+                // {...register("educationStatus", {
+                //   required: "Invalid input",
+                //   minLength: {
+                //     value: 3,
+                //     message: "Invalid input",
+                //   },
+                // })}
               />
               <ErrorMessage
                 errors={errors}
@@ -271,23 +319,35 @@ export const FormInput = ({
               />
             </Grid>
             <Grid item xs={3}>
-              <TextField id="gpa" label="GPA" variant="outlined" fullWidth {...register("gpa")} />
+              <TextField
+                id="gpa"
+                label="GPA"
+                variant="outlined"
+                fullWidth
+                {...register("gpa")}
+                name="gpa"
+                onChange={handleChangeValueGeneral}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
+              />
             </Grid>
             <Grid item xs={3}>
               <TextField
                 id="position"
                 label="Position"
+                name="position"
+                onChange={handleChangeValueGeneral}
                 variant="outlined"
                 fullWidth
-                defaultValue={defaultValues?.position}
-                required
-                {...register("position", {
-                  required: "Invalid input",
-                  minLength: {
-                    value: 3,
-                    message: "Invalid input",
-                  },
-                })}
+                value={defaultValueInput?.candidate?.position}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
+                // required
+                // {...register("position", {
+                //   required: "Invalid input",
+                //   minLength: {
+                //     value: 3,
+                //     message: "Invalid input",
+                //   },
+                // })}
               />
               <ErrorMessage
                 errors={errors}
@@ -301,9 +361,13 @@ export const FormInput = ({
                 <Select
                   labelId="workMode"
                   id="workMode"
+                  name="workMode"
+                  onChange={handleChangeValueGeneral}
                   label="workMode"
-                  defaultValue={defaultValues?.workMode}
-                  {...register("workMode")}
+                  value={defaultValueInput?.candidate?.workMode || "FULL_TIME"}
+                  // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
+
+                  // {...register("workMode")}
                 >
                   <MenuItem value="PART_TIME_INTERNSHIP">PART_TIME_INTERNSHIP</MenuItem>
                   <MenuItem value="FULL_TIME_INTERNSHIP">FULL_TIME_INTERNSHIP</MenuItem>
@@ -322,17 +386,23 @@ export const FormInput = ({
             <Grid item xs={4}>
               <Autocomplete
                 id="interviewer1"
-                defaultValue={defaultValues?.interviewer1}
+                name="interviewer1"
+                label="Interview 1"
+                onChange={handleChangeInterviewer1}
+                // value={interview1}
+                value={defaultValueInput?.assessments[0]?.interviewer.name || null}
+                // value={defaultValueInput?.interviewer1}
+                isOptionEqualToValue={(option, value) => option.name === value.name}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
                 options={userListSuggest}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="Interview 1"
-                    {...register("interviewer1", {
-                      required: "Invalid input",
 
-                      // validate: (value) => userListSuggest.indexOf(value) >= 0,
-                    })}
+                    // {...register("interviewer1", {
+                    //   required: "Invalid input",
+                    // })}
                   />
                 )}
               />
@@ -345,25 +415,24 @@ export const FormInput = ({
             <Grid item xs={4}>
               <Autocomplete
                 id="interviewer2"
+                name="interviewer2"
                 options={userListSuggest}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    defaultValue={defaultValues?.interviewer2}
-                    label="Interview 2"
-                    {...register("interviewer2")}
-                  />
-                )}
+                value={defaultValueInput?.assessments[1]?.interviewer?.name || null}
+                onChange={handleChangeInterviewer2}
+                isOptionEqualToValue={(option, value) => option.name === value.name}
+                renderInput={(params) => <TextField {...params} label="Interview 2" />}
+                // key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
               />
             </Grid>
             <Grid item xs={4}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack>
-                  <DesktopDatePicker
+                  <DatePicker
                     label="Date of Interview"
+                    name="dateOfInterview"
                     inputFormat="DD/MM/YYYY"
-                    defaultValue={defaultValues?.dateOfInterview}
-                    value={dateOfInterview}
+                    // defaultValue={defaultValueInput?.dateOfInterview}
+                    value={defaultValueInput?.dateOfInterview}
                     onChange={handleChangeDateOfInterview}
                     renderInput={(params) => (
                       <TextField {...params} {...register("interviewDate")} />

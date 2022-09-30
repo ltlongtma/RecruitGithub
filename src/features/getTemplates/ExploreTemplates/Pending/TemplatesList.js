@@ -1,5 +1,5 @@
 import Table from "react-bootstrap/Table";
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import styles from "../../templates.module.scss";
 import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
@@ -15,6 +15,8 @@ export const TemplatesList = ({
   showActionColumn,
   handleModalCloneTemplate,
 }) => {
+  const [selectRow, setSelectRow] = useState(-1);
+
   return (
     <div>
       <div>
@@ -31,10 +33,17 @@ export const TemplatesList = ({
               {showActionColumn && <th>Actions</th>}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={cx("tableBody")}>
             {templateList?.data?.map((item, index) => {
               return (
-                <tr key={index} onClick={() => ViewDetailTemplate(item)}>
+                <tr
+                  key={index}
+                  onClick={() => {
+                    ViewDetailTemplate(item);
+                    setSelectRow(index);
+                  }}
+                  className={cx(`${selectRow === index ? `selected` : null}`)}
+                >
                   <td>
                     {" "}
                     {templateList.pagination.pageSize * (templateList.pagination.page - 1) +

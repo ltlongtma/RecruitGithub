@@ -13,8 +13,11 @@
     // background-color: rgb(175, 218, 232);
     // color: white;
   }
- 
+
   .tableBody {
+    .selected {
+      background-color: rgb(177, 224, 240) !important;
+    }
     .selectedRow {
       background-color: rgb(177, 224, 240);
     }

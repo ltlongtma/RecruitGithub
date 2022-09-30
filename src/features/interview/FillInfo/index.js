@@ -26,7 +26,6 @@ export default function FillInfo({ activeStep, handleNext, steps }) {
     keyword: "",
     pageSize: 5,
   });
-
   React.useEffect(() => {
     dispatch(filterCandidateByAdmin(paramStatus));
     dispatch(getUsersByAdmin());
@@ -97,6 +96,7 @@ export default function FillInfo({ activeStep, handleNext, steps }) {
         onValueSearch={handleSearchValue}
         handleViewDetailPendingCandidate={handleViewDetailPendingCandidate}
         handleFillDataIntoFormInput={handleFillDataIntoFormInput}
+        handleNext={handleNext}
       />
       <ModalViewDetailPendingCandidate
         centered
