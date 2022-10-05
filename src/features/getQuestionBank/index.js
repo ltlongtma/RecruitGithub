@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestionBank, ourRequest, requestGetQuestionBank } from "./Slice";
+import { controller, getQuestionBank, requestGetQuestionBank } from "./Slice";
 import TableQuestion from "./Table";
 import { FormFilter } from "./FormFilter";
 import { getFilterCategory, requestGetFilterCategory } from "./FormFilter/getFilterCategorySlice";
@@ -33,7 +33,8 @@ export const Questionbank = ({
     dispatch(getFilterCategory());
     dispatch(getFilterCriteria());
     return () => {
-      ourRequest.cancel();
+      // ourRequest.cancel();
+      controller.abort();
     };
   }, [debounce]);
 

@@ -4,13 +4,14 @@ import questionBankApi from "../../services/questionBankApi";
 
 const initialState = { data: [], pagination: {} };
 
-export const ourRequest = axios.CancelToken.source();
+// export const ourRequest = axios.CancelToken.source();
+export const controller = new AbortController();
 
 export const getQuestionBank = createAsyncThunk(
   "getQuestionBankSlice/getQuestionBank",
   async (params) => {
     const response = await questionBankApi.getAll(params, {
-      cancelToken: ourRequest.token,
+      signal: controller.signal,
     });
 
     return response;

@@ -4,7 +4,7 @@ import { CandidateCard } from "./CandidateCard";
 import { FormInput } from "./FormInput";
 import { PendingCandidateTable } from "./PendingCandidateTable";
 import { filterCandidateByAdmin, getDetailPendingCandidate } from "./Slice";
-import { ourRequest } from "../../getQuestionBank/Slice";
+import { controller, ourRequest } from "../../getQuestionBank/Slice";
 import { ModalViewDetailPendingCandidate } from "./ModalViewDetailPendingCandidate";
 import { getUsersByAdmin } from "../../getUser/Slice";
 
@@ -30,7 +30,7 @@ export default function FillInfo({ activeStep, handleNext, steps }) {
     dispatch(filterCandidateByAdmin(paramStatus));
     dispatch(getUsersByAdmin());
     return () => {
-      ourRequest.cancel();
+      controller.abort();
     };
   }, [paramStatus]);
 

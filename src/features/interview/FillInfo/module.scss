@@ -9,23 +9,30 @@
 .cardContainer {
   border: none !important;
   display: flex;
+  justify-content: center;
+
   .cardNew {
+    display: flex;
     border-radius: 10px;
     background-color: #b0eadc;
-    // margin-top: 5rem;
     color: #387450;
     text-align: center;
+    align-items: center;
     padding: 1em;
     margin: 5em;
     margin-right: 0em;
+    height: 125px;
   }
   .cardPending {
+    display: flex;
     text-align: center;
     border-radius: 10px;
     background-color: #e6d4a3;
+    align-items: center;
     color: #a55f36;
     padding: 1em;
     margin: 5em;
+    height: 125px;
   }
 }
 //PendingCandidateTable
@@ -39,7 +46,7 @@
     top: -3rem;
     right: 1rem;
   }
- 
+
   .btnBack {
     position: absolute;
     bottom: -4em;

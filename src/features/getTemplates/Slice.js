@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import questionTemplate from "../../services/questionTemplates";
+import { controller } from "../getQuestionBank/Slice";
 
 const initialState = {
   templateList: {
@@ -11,13 +12,17 @@ const initialState = {
 };
 
 export const getTemplateList = createAsyncThunk("Slice/getTemplateList", async (params) => {
-  const response = await questionTemplate.getFilter(params);
+  const response = await questionTemplate.getFilter(params, {
+    signal: controller.signal,
+  });
   return response;
 });
 export const templatesFilterByAdmin = createAsyncThunk(
   "Slice/templatesFilterByAdmin",
   async (params) => {
-    const response = await questionTemplate.filterByAdmin(params);
+    const response = await questionTemplate.filterByAdmin(params, {
+      signal: controller.signal,
+    });
     return response;
   }
 );

@@ -10,7 +10,9 @@ import moment from "moment";
 const cx = className.bind(styles);
 
 export const ModalViewDetailPendingCandidate = ({ data, closeModal, ...props }) => {
-  if (data.id) {
+ 
+
+  if (data?.id) {
     return (
       <div>
         <Modal {...props} className={cx("modal")} size="lg" centered>
@@ -84,7 +86,7 @@ export const ModalViewDetailPendingCandidate = ({ data, closeModal, ...props }) 
                   <Form.Label>INTERVIEW DATE</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={moment(data?.candidate?.interviewDate).format("DD/MM/YYYY")}
+                    defaultValue={moment(data?.interviewDate).format("DD/MM/YYYY")}
                     readOnly
                   />
                 </Form.Group>

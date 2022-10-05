@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../../services/ManageUserApi";
-import { ourRequest } from "../getQuestionBank/Slice";
+import { controller } from "../getQuestionBank/Slice";
 
 const initialState = { data: [], pagination: {} };
 
@@ -9,15 +9,15 @@ export const login = createAsyncThunk("Slice/getUser", async (params) => {
   return response;
 });
 export const getUsersByAdmin = createAsyncThunk("getUsers/getUsersByAdmin", async (params) => {
-  const response = await userApi.filterUser(params, { cancelToken: ourRequest.token });
+  const response = await userApi.filterUser(params, { signal: controller.signal });
   return response;
 });
 export const deleteUser = createAsyncThunk("getUsers/deleteUser", async (params) => {
-  const response = await userApi.deleteUser(params, { cancelToken: ourRequest.token });
+  const response = await userApi.deleteUser(params, { signal: controller.signal });
   return response;
 });
 export const createNewUser = createAsyncThunk("getUsers/createNewUser", async (params) => {
-  const response = await userApi.postNewUser(params, { cancelToken: ourRequest.token });
+  const response = await userApi.postNewUser(params, { signal: controller.signal });
   return response;
 });
 export const editUser = createAsyncThunk("getUsers/editUser", async (id, role) => {

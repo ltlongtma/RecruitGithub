@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
-import { ourRequest } from "../Slice";
+import { controller, ourRequest } from "../Slice";
 
 const initialState = [];
 
@@ -9,7 +9,7 @@ export const getFilterCriteria = createAsyncThunk(
   "getFilterCriteriaSlice/getFilterCriteria",
   async (params) => {
     const response = await questionCriteriaApi.getAll(params, {
-      cancelToken: ourRequest.token,
+      signal: controller.signal,
     });
     return response;
   }

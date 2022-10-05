@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import questionBankApi from "../../../services/questionBankApi";
-import { ourRequest } from "../Slice";
+import { controller, ourRequest } from "../Slice";
 
 
 const initialState = [];
@@ -11,7 +11,9 @@ export const getFilterCategory = createAsyncThunk(
   "getFilterCategorySlice/getFilterCategory",
   async (params) => {
     const response = await questionBankApi.getFilterCategory(params, {
-      cancelToken: ourRequest.token,
+      // cancelToken: ourRequest.token,
+      signal: controller.signal,
+
     });
     return response;
   }

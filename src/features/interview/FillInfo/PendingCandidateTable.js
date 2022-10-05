@@ -66,14 +66,14 @@ export const PendingCandidateTable = ({
                       <QuestionAnswerOutlinedIcon color="secondary" />
                     </IconButton>
                   </Tooltip>
-                  {/* <Tooltip title="Edit">
+                  <Tooltip title="Edit">
                     <IconButton
                       color="secondary"
                       onClick={() => handleFillDataIntoFormInput(item?.id)}
                     >
                       <ModeEditOutlineTwoToneIcon color="success" />
                     </IconButton>
-                  </Tooltip> */}
+                  </Tooltip>
                 </td>
               </tr>
             );

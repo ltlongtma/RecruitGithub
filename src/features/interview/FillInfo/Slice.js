@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import interviewApi from "../../../services/interviewFormApi";
-import { ourRequest } from "../../getQuestionBank/Slice";
+import { controller } from "../../getQuestionBank/Slice";
 
 const initialState = {
   pendingList: {
@@ -14,7 +14,7 @@ export const filterCandidateByAdmin = createAsyncThunk(
   "interview/filterByAdmin",
   async (params) => {
     const response = await interviewApi.filterByAdmin(params, {
-      cancelToken: ourRequest.token,
+      signal: controller.signal,
     });
     return response;
   }
@@ -23,16 +23,26 @@ export const getDetailPendingCandidate = createAsyncThunk(
   "interview/getDetailPendingCandidate",
   async (params) => {
     const response = await interviewApi.getById(params);
+
     return response;
   }
 );
-export const saveCandidate = createAsyncThunk("Interview/saveCandidate", async (params) => {
+export const saveCandidate = createAsyncThunk("interview/saveCandidate", async (params) => {
   const response = await interviewApi.create(params, {
-    cancelToken: ourRequest.token,
+    signal: controller.signal,
   });
 
   return response;
 });
+export const editPendingCandidate = createAsyncThunk(
+  "interview/editPendingCandidate",
+  async (data) => {
+    const response = await interviewApi.updateFormById(data, {
+      signal: controller.signal,
+    });
+    return response;
+  }
+);
 export const interviewSlice = createSlice({
   name: "interview",
   initialState,
@@ -58,6 +68,23 @@ export const interviewSlice = createSlice({
     });
     builder.addCase(getDetailPendingCandidate.rejected, (state, action) => {
       console.log("rejected getDetailPendingCandidate", action.error);
+    });
+    builder.addCase(editPendingCandidate.fulfilled, (state, action) => {
+      const index = state.pendingList.data.findIndex(
+        (can) => can?.candidate.id === action.payload.candidate.id
+      );
+      state.pendingList.data[index] = action.payload;
+      return state;
+      // const newState = [...state.pendingList.data];
+      // const index = newState.findIndex(
+      //   (item) => item?.candidate.id === action.payload.candidate.id
+      // );
+      // newState[index] = action.payload;
+      // console.log("INDEX >>>", index);
+      // return newState;
+    });
+    builder.addCase(editPendingCandidate.rejected, (state, action) => {
+      console.log("rejected editPendingCandidate", action.error);
     });
   },
 });
