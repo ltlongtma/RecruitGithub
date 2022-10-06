@@ -37,6 +37,10 @@ export const FormInput = ({
 }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isValidated, setIsValidated] = useState(false);
+
   const dispatch = useDispatch();
 
   const [defaultValueInput, setDefaultValueInput] = useState({
@@ -53,12 +57,12 @@ export const FormInput = ({
     assessments: [
       {
         interviewer: {
-          username: null,
+          username: "",
         },
       },
       {
         interviewer: {
-          username: null,
+          username: "",
         },
       },
     ],
@@ -67,17 +71,24 @@ export const FormInput = ({
   });
 
   useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmitting) {
+      setShowModal(!showModal);
+    }
+    if (Object.keys(formErrors).length === 0 && isValidated) {
+      handleNext();
+    }
+
     if (dataFromPendingCandidate.id) {
       setDefaultValueInput({
         ...defaultValueInput,
         candidate: {
-          // name: dataFromPendingCandidate?.candidate?.name,
+          name: dataFromPendingCandidate?.candidate?.name,
           birthday: dataFromPendingCandidate?.candidate?.birthday,
           gender: dataFromPendingCandidate?.candidate?.gender,
           phone: dataFromPendingCandidate?.candidate?.phone,
-          // educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
+          educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
           gpa: dataFromPendingCandidate?.candidate?.gpa,
-          // position: dataFromPendingCandidate?.candidate?.position,
+          position: dataFromPendingCandidate?.candidate?.position,
           workMode: dataFromPendingCandidate?.candidate?.workMode,
         },
 
@@ -99,13 +110,8 @@ export const FormInput = ({
 
         interviewDate: dataFromPendingCandidate?.interviewDate,
       });
-      formik.setValues({
-        name: dataFromPendingCandidate?.candidate?.name,
-        educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
-        position: dataFromPendingCandidate?.candidate?.position,
-      });
     }
-  }, [dataFromPendingCandidate]);
+  }, [dataFromPendingCandidate, formErrors]);
   const handleChangeDateOfBirth = (value) => {
     const newValue = {
       ...defaultValueInput,
@@ -128,8 +134,15 @@ export const FormInput = ({
     });
   };
 
-  const handleSaveButton = () => {
-    setShowModal(!showModal);
+  const handleSaveButton = (e) => {
+    e.preventDefault();
+
+    setFormErrors(validate(defaultValueInput));
+    setIsSubmitting(true);
+  };
+  const handleNextWithValidate = () => {
+    setFormErrors(validate(defaultValueInput));
+    setIsValidated(true);
   };
 
   const handleSaveForm = async () => {
@@ -146,7 +159,7 @@ export const FormInput = ({
       setOpenAlert(true);
     }
   };
-  const handleCloseModal = () => {
+  const handleCloseModal = (e) => {
     setShowModal(!showModal);
   };
   const handleCloseAlert = (event, reason) => {
@@ -169,7 +182,6 @@ export const FormInput = ({
     setDefaultValueInput({
       ...newValue,
     });
-    // console.log("WWW >>>", dataInput);
   };
 
   const handleChangeInterviewer1 = (e) => {
@@ -212,41 +224,30 @@ export const FormInput = ({
       ...newValue,
     });
   };
-  const validationSchema = yup.object({
-    name: yup.string().required("Name is required"),
+  const validate = (values) => {
+    let errors = {};
 
-    educationStatus: yup.string().required("Required"),
+    if (!values.candidate.name.length) {
+      errors.name = "Can not be blank!";
+    } else if (values.candidate.name.length < 3) {
+      errors.name = "Invalid input";
+    }
+    if (values.candidate.educationStatus.length < 1) {
+      errors.educationStatus = "Invalid input!";
+    }
+    if (values.candidate.position.length < 1) {
+      errors.position = "Invalid input!";
+    }
+    if (!values.assessments[0].interviewer.username.length) {
+      errors.interviewer1 = "Invalid input!";
+    }
 
-    position: yup.string().required("Required"),
-  });
-  const formik = useFormik({
-    initialValues: {
-      name: defaultValueInput?.candidate?.name,
-      educationStatus: defaultValueInput?.candidate?.educationStatus,
-      position: defaultValueInput?.candidate?.position,
-    },
-    validationSchema: validationSchema,
+    return errors;
+  };
 
-    onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      const newValue = {
-        ...defaultValueInput,
-        candidate: {
-          ...defaultValueInput.candidate,
-          name: values.name,
-          educationStatus: values.educationStatus,
-          position: values.position,
-        },
-      };
-      setDefaultValueInput(newValue);
-      handleSaveButton();
-    },
-    // handleSubmit: () => handleNext,
-  });
-  // console.log("E >>>", formik);
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={handleSaveButton}>
         <Box sx={{ p: 5 }} hidden={hiddenFormInput}>
           <Grid container sx={{ mt: 5 }}>
             <Typography variant="overline" className={cx("typography")}>
@@ -261,13 +262,10 @@ export const FormInput = ({
                   name="name"
                   label="Name"
                   variant="outlined"
-                  // value={defaultValueInput?.candidate?.name}
-                  // onChange={handleChangeValueGeneral}
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  error={formik.touched.name && Boolean(formik.errors.name)}
-                  helperText={formik.touched.name && formik.errors.name}
+                  value={defaultValueInput?.candidate?.name}
+                  onChange={handleChangeValueGeneral}
                 />
+                {formErrors.name && <span className="text-error">{formErrors.name}</span>}
               </Grid>
               <Grid item xs={3}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -297,10 +295,6 @@ export const FormInput = ({
                     defaultValue={defaultValueInput?.candidate?.gender || "MALE"}
                     key={"OKAYG_" + (10000 + Math.random() * (1000000 - 10000))}
                     onChange={handleChangeValueGeneral}
-                    // value={formik.values.gender}
-                    // onChange={formik.handleChange}
-                    // error={formik.touched.gender && Boolean(formik.errors.gender)}
-                    // helperText={formik.touched.gender && formik.errors.gender}
                   >
                     <MenuItem value="MALE">Male</MenuItem>
                     <MenuItem value="FEMALE">Female</MenuItem>
@@ -316,10 +310,6 @@ export const FormInput = ({
                   fullWidth
                   onChange={handleChangeValueGeneral}
                   value={defaultValueInput?.candidate?.phone}
-                  // value={formik.values.phone}
-                  // onChange={formik.handleChange}
-                  // error={formik.touched.phone && Boolean(formik.errors.phone)}
-                  // helperText={formik.touched.phone && formik.errors.phone}
                 />
               </Grid>
             </Grid>
@@ -332,13 +322,12 @@ export const FormInput = ({
                   variant="outlined"
                   name="educationStatus"
                   fullWidth
-                  // value={defaultValueInput?.candidate?.educationStatus}
-                  // onChange={handleChangeValueGeneral}
-                  value={formik.values.educationStatus}
-                  onChange={formik.handleChange}
-                  error={formik.touched.educationStatus && Boolean(formik.errors.educationStatus)}
-                  helperText={formik.touched.educationStatus && formik.errors.educationStatus}
+                  value={defaultValueInput?.candidate?.educationStatus}
+                  onChange={handleChangeValueGeneral}
                 />
+                {formErrors.educationStatus && (
+                  <span className="text-error">{formErrors.educationStatus}</span>
+                )}
               </Grid>
               <Grid item xs={3}>
                 <TextField
@@ -348,8 +337,6 @@ export const FormInput = ({
                   fullWidth
                   name="gpa"
                   onChange={handleChangeValueGeneral}
-                  // value={formik.values.gpa}
-                  // onChange={formik.handleChange}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -359,13 +346,10 @@ export const FormInput = ({
                   name="position"
                   variant="outlined"
                   fullWidth
-                  // onChange={handleChangeValueGeneral}
-                  // value={defaultValueInput?.candidate?.position}
-                  value={formik.values.position}
-                  onChange={formik.handleChange}
-                  error={formik.touched.position && Boolean(formik.errors.position)}
-                  helperText={formik.touched.position && formik.errors.position}
+                  onChange={handleChangeValueGeneral}
+                  value={defaultValueInput?.candidate?.position}
                 />
+                {formErrors.position && <span className="text-error">{formErrors.position}</span>}
               </Grid>
               <Grid item xs={3}>
                 <FormControl fullWidth>
@@ -377,10 +361,6 @@ export const FormInput = ({
                     label="workMode"
                     onChange={handleChangeValueGeneral}
                     value={defaultValueInput?.candidate?.workMode || "FULL_TIME"}
-                    // value={formik.values.workMode}
-                    // onChange={formik.handleChange}
-                    // error={formik.touched.workMode && Boolean(formik.errors.workMode)}
-                    // helperText={formik.touched.workMode && formik.errors.workMode}
                   >
                     <MenuItem value="PART_TIME_INTERNSHIP">PART_TIME_INTERNSHIP</MenuItem>
                     <MenuItem value="FULL_TIME_INTERNSHIP">FULL_TIME_INTERNSHIP</MenuItem>
@@ -405,11 +385,10 @@ export const FormInput = ({
                   renderInput={(params) => <TextField {...params} label="Interview 1" />}
                   onChange={handleChangeInterviewer1}
                   value={defaultValueInput?.assessments[0]?.interviewer.username}
-                  // value={formik.values.interviewer1}
-                  // onChange={formik.handleChange}
-                  // error={formik.touched.interviewer1 && Boolean(formik.errors.interviewer1)}
-                  // helperText={formik.touched.interviewer1 && formik.errors.interviewer1}
                 />
+                {formErrors.interviewer1 && (
+                  <span className="text-error">{formErrors.interviewer1}</span>
+                )}
               </Grid>
               <Grid item xs={4}>
                 <Autocomplete
@@ -420,8 +399,6 @@ export const FormInput = ({
                   renderInput={(params) => <TextField {...params} label="Interview 2" />}
                   onChange={handleChangeInterviewer2}
                   value={defaultValueInput?.assessments[1]?.interviewer?.username || null}
-                  // value={formik.values.interviewer2}
-                  // onChange={formik.handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -435,9 +412,6 @@ export const FormInput = ({
                       renderInput={(params) => <TextField {...params} />}
                       value={defaultValueInput?.interviewDate}
                       onChange={handleChangeDateOfInterview}
-                      // value={formik.values.interviewDate}
-                      // onChange={formik.handleChange}
-                      // error={formik.touched.interviewDate && Boolean(formik.errors.interviewDate)}
                     />
                   </Stack>
                 </LocalizationProvider>
@@ -451,12 +425,10 @@ export const FormInput = ({
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
 
-              {/* <Button onClick={handleSubmit(handleSaveButton)} color="warning"> */}
               <Button type="submit" color="warning">
                 Save
               </Button>
-              {/* <Button onClick={handleSubmit(handleNext)}> */}
-              <Button onClick={formik.handleSubmit}>
+              <Button onClick={handleNextWithValidate}>
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}
               </Button>
             </Box>
