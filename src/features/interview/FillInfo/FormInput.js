@@ -71,47 +71,20 @@ export const FormInput = ({
   });
 
   useEffect(() => {
+    if (dataFromPendingCandidate?.id) {
+      setDefaultValueInput({
+        ...dataFromPendingCandidate,
+      });
+    }
+  }, [dataFromPendingCandidate]);
+  useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitting) {
       setShowModal(!showModal);
     }
     if (Object.keys(formErrors).length === 0 && isValidated) {
       handleNext();
     }
-
-    if (dataFromPendingCandidate.id) {
-      setDefaultValueInput({
-        ...defaultValueInput,
-        candidate: {
-          name: dataFromPendingCandidate?.candidate?.name,
-          birthday: dataFromPendingCandidate?.candidate?.birthday,
-          gender: dataFromPendingCandidate?.candidate?.gender,
-          phone: dataFromPendingCandidate?.candidate?.phone,
-          educationStatus: dataFromPendingCandidate?.candidate?.educationStatus,
-          gpa: dataFromPendingCandidate?.candidate?.gpa,
-          position: dataFromPendingCandidate?.candidate?.position,
-          workMode: dataFromPendingCandidate?.candidate?.workMode,
-        },
-
-        assessments: [
-          {
-            ...dataFromPendingCandidate?.assessments[0],
-
-            interviewer: {
-              username: dataFromPendingCandidate?.assessments[0]?.interviewer?.username,
-            },
-          },
-          {
-            ...dataFromPendingCandidate?.assessments[1],
-            interviewer: {
-              username: dataFromPendingCandidate?.assessments[1]?.interviewer?.username,
-            },
-          },
-        ],
-
-        interviewDate: dataFromPendingCandidate?.interviewDate,
-      });
-    }
-  }, [dataFromPendingCandidate, formErrors]);
+  }, [formErrors]);
   const handleChangeDateOfBirth = (value) => {
     const newValue = {
       ...defaultValueInput,
@@ -145,15 +118,14 @@ export const FormInput = ({
     setIsValidated(true);
   };
 
-  const handleSaveForm = async () => {
-    const id = dataFromPendingCandidate?.candidate?.id;
+  const handleSaveForm = () => {
+    const id = dataFromPendingCandidate?.id;
     if (id) {
-      // console.log("E >>", defaultValueInput);
-      await dispatch(editPendingCandidate({ ...defaultValueInput, id }));
+      dispatch(editPendingCandidate({ ...defaultValueInput, id }));
       handleCloseModal();
       setOpenAlert(true);
     } else {
-      await dispatch(saveCandidate(defaultValueInput));
+      dispatch(saveCandidate(defaultValueInput));
       handleCloseModal();
       handleBack();
       setOpenAlert(true);
@@ -244,10 +216,9 @@ export const FormInput = ({
 
     return errors;
   };
-
   return (
     <div>
-      <form onSubmit={handleSaveButton}>
+      <form>
         <Box sx={{ p: 5 }} hidden={hiddenFormInput}>
           <Grid container sx={{ mt: 5 }}>
             <Typography variant="overline" className={cx("typography")}>
@@ -398,7 +369,7 @@ export const FormInput = ({
                   isOptionEqualToValue={(option, value) => option.name === value.name}
                   renderInput={(params) => <TextField {...params} label="Interview 2" />}
                   onChange={handleChangeInterviewer2}
-                  value={defaultValueInput?.assessments[1]?.interviewer?.username || null}
+                  value={defaultValueInput?.assessments[1]?.interviewer?.username}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -425,7 +396,7 @@ export const FormInput = ({
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
 
-              <Button type="submit" color="warning">
+              <Button onClick={handleSaveButton} color="warning">
                 Save
               </Button>
               <Button onClick={handleNextWithValidate}>
