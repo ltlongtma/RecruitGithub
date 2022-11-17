@@ -6,16 +6,20 @@ import { useEffect, useState } from "react";
 function App() {
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState(false);
-  const role = sessionStorage.getItem("isRole");
+  // const role = sessionStorage.getItem("isRole");
+  const role = "ADMIN";
   const isToken = sessionStorage.getItem("isToken");
- 
-  useEffect(() => {
-    if (!isToken) {
-      navigate("/login");
-    }
 
+  // useEffect(() => {
+  //   if (!isToken) {
+  //     navigate("/login");
+  //   }
+
+  //   setIsLogined(true);
+  // }, []);
+  useEffect(() => {
     setIsLogined(true);
-  }, [isToken]);
+  }, []);
   return (
     <div className="App">
       <Routes>

@@ -1,45 +1,28 @@
 .navbar {
   width: 100%;
   display: flex;
-  // margin: 0;
+  background: white;
   justify-content: space-between !important;
-  .navbarLeft {
-    display: flex;
-    width: 50%;
-    // justify-content: flex-start;
-    align-items: center;
-    margin-left: 8%;
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-
-      .textBrand {
-        color: white;
-
-        font-size: 0.9rem;
-        font-family: serif;
-        font-weight: bolder;
-      }
-    }
+  button {
+    margin-left: 1em;
   }
   .nacbarRight {
     display: flex !important;
-    margin-right: 8%;
+    margin-right: 3%;
     width: 50%;
     justify-content: flex-end;
     align-items: center;
 
-    .search {
-      height: 31px;
-      margin-top: auto;
-      margin-bottom: auto;
-    }
-    .account {
-      margin-left: auto;
-      margin-right: auto;
-      padding: 7px;
-    }
+    // .search {
+    //   height: 31px;
+    //   margin-top: auto;
+    //   margin-bottom: auto;
+    // }
+    // .account {
+    //   margin-left: auto;
+    //   margin-right: auto;
+    //   padding: 7px;
+    // }
     .action-dropdown {
       .inside-dropdown {
         display: flex;
@@ -53,5 +36,10 @@
 .sideBarHeader {
   span {
     font-weight: bold !important;
+  }
+}
+.navbarLeft {
+  .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    background: linear-gradient(213.12deg, #396afc 39.51%, #0094ff 80.26%);
   }
 }

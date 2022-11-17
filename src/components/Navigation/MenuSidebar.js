@@ -22,8 +22,8 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import MessageIcon from "@mui/icons-material/Message";
 import BallotIcon from "@mui/icons-material/Ballot";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import { IconButton } from "@mui/material";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import { Navbar } from "react-bootstrap";
+import logo from "../../assets/logo-tma.png";
 
 const cx = className.bind(styles);
 
@@ -48,9 +48,18 @@ export default function MenuSidebar() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
+
       //   onClick={toggleDrawer}
       //   onKeyDown={toggleDrawer}
     >
+      <div>
+        <Navbar.Brand href="/" className={cx("brand")}>
+          <img alt="tma-logo" src={logo} width="80" height="auto" className={cx("logo")} />
+          <span className={cx("textBrand")}>Recruitment Tool</span>
+        </Navbar.Brand>
+      </div>
+      <Divider />
+
       <div>
         <List>
           <ListItemButton onClick={handleClickQuestionBank}>
@@ -112,7 +121,6 @@ export default function MenuSidebar() {
           </Collapse>
         </List>
       </div>
-      <Divider />
       <div>
         <List>
           <ListItemButton onClick={handleClickInterview}>
@@ -158,7 +166,6 @@ export default function MenuSidebar() {
           </Collapse>
         </List>
       </div>
-      <Divider />
       <div>
         <List
           onClick={() => {
@@ -182,10 +189,16 @@ export default function MenuSidebar() {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleClickMenuIcon}>
+      <Button size="large" onClick={handleClickMenuIcon} >
         <MenuIcon />
       </Button>
-      <Drawer anchor="left" open={stateMenuSideBar} onClose={toggleDrawer}>
+
+      <Drawer
+        anchor="left"
+        open={stateMenuSideBar}
+        onClose={toggleDrawer}
+        className={cx("navbarLeft")}
+      >
         {list()}
       </Drawer>
     </div>

@@ -5,9 +5,7 @@ $container-shadow: 0.5rem 0.5rem 2rem 0 rgba(black, 0.2);
 .badge-container {
   cursor: pointer;
   padding: 10px;
-  &:hover {
-    color: white;
-  }
+ 
 }
 
 .toast-container {
