@@ -1,14 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import MenuIcon from "@mui/icons-material/Menu";
 import className from "classnames/bind";
 import styles from "./Navigation.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -27,8 +25,8 @@ import logo from "../../assets/logo-tma.png";
 
 const cx = className.bind(styles);
 
-export default function MenuSidebar() {
-  const [stateMenuSideBar, setStateMenuSideBar] = React.useState(false);
+const MenuSidebar = ({ stateMenuSideBar }) => {
+  // const [stateMenuSideBar, setStateMenuSideBar] = React.useState(true);
   const [collapseQuestionBank, setCollapseQuestionBank] = React.useState(false);
   const [collapseInterview, setCollapseInterview] = React.useState(false);
 
@@ -40,20 +38,16 @@ export default function MenuSidebar() {
     setCollapseInterview(!collapseInterview);
   };
 
-  const toggleDrawer = (event) => {
-    setStateMenuSideBar(!stateMenuSideBar);
-  };
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-
+      className={cx("sideBar")}
       //   onClick={toggleDrawer}
       //   onKeyDown={toggleDrawer}
     >
-      <div>
-        <Navbar.Brand href="/" className={cx("brand")}>
+      <div className={cx("brand")}>
+        <Navbar.Brand href="/">
           <img alt="tma-logo" src={logo} width="80" height="auto" className={cx("logo")} />
           <span className={cx("textBrand")}>Recruitment Tool</span>
         </Navbar.Brand>
@@ -75,7 +69,6 @@ export default function MenuSidebar() {
               component="div"
               disablePadding
               onClick={() => {
-                toggleDrawer();
                 navigate("/question");
               }}
             >
@@ -90,8 +83,6 @@ export default function MenuSidebar() {
               component="div"
               disablePadding
               onClick={() => {
-                toggleDrawer();
-
                 navigate("/question-category");
               }}
             >
@@ -106,8 +97,6 @@ export default function MenuSidebar() {
               component="div"
               disablePadding
               onClick={() => {
-                toggleDrawer();
-
                 navigate("/question-criteria");
               }}
             >
@@ -135,8 +124,6 @@ export default function MenuSidebar() {
               component="div"
               disablePadding
               onClick={() => {
-                toggleDrawer();
-
                 navigate("/interview");
               }}
             >
@@ -151,8 +138,6 @@ export default function MenuSidebar() {
               component="div"
               disablePadding
               onClick={() => {
-                toggleDrawer();
-
                 navigate("/interview/templates");
               }}
             >
@@ -169,8 +154,6 @@ export default function MenuSidebar() {
       <div>
         <List
           onClick={() => {
-            toggleDrawer();
-
             navigate("/user");
           }}
         >
@@ -184,23 +167,29 @@ export default function MenuSidebar() {
       </div>
     </Box>
   );
-  const handleClickMenuIcon = (anchor) => {
-    toggleDrawer();
-  };
-  return (
-    <div>
-      <Button size="large" onClick={handleClickMenuIcon} >
-        <MenuIcon />
-      </Button>
 
+  return (
+    <aside>
       <Drawer
         anchor="left"
+        // onClose={toggleDrawer}
         open={stateMenuSideBar}
-        onClose={toggleDrawer}
-        className={cx("navbarLeft")}
+        sx={{
+          position: "absolute",
+          zIndex: 0,
+          // width: "13vw",
+          "& .MuiBackdrop-root": {
+            background: "rgba(0, 0, 0, 0)",
+            // width: "13vw",
+          },
+          "& .MuiDrawer-paper": {
+            background: "white",
+          },
+        }}
       >
         {list()}
       </Drawer>
-    </div>
+    </aside>
   );
-}
+};
+export default MenuSidebar;

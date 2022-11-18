@@ -1,28 +1,20 @@
-.navbar {
+.navigate {
   width: 100%;
   display: flex;
   background: white;
-  justify-content: space-between !important;
+  // justify-content: space-between !important;
+  justify-content: right;
+
   button {
     margin-left: 1em;
   }
-  .nacbarRight {
+
+  .header {
     display: flex !important;
     margin-right: 3%;
     width: 50%;
     justify-content: flex-end;
     align-items: center;
-
-    // .search {
-    //   height: 31px;
-    //   margin-top: auto;
-    //   margin-bottom: auto;
-    // }
-    // .account {
-    //   margin-left: auto;
-    //   margin-right: auto;
-    //   padding: 7px;
-    // }
     .action-dropdown {
       .inside-dropdown {
         display: flex;
@@ -33,13 +25,25 @@
     }
   }
 }
-.sideBarHeader {
-  span {
-    font-weight: bold !important;
-  }
-}
-.navbarLeft {
-  .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
-    background: linear-gradient(213.12deg, #396afc 39.51%, #0094ff 80.26%);
+
+.sideBar {
+  .brand {
+    background: linear-gradient(75deg, #396afc 39.51%, #0094ff 80.26%);
+    padding: 7% 0;
+    display: flex;
+    justify-content: center;
+    a {
+      margin: 0;
+    }
+    .sideBarHeader {
+      span {
+        font-weight: bold !important;
+      }
+    }
+    .textBrand {
+      color: white;
+      font-family: math;
+      font-weight: bold;
+    }
   }
 }
