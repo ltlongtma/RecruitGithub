@@ -1,49 +1,7 @@
-.navigate {
-  width: 100%;
-  display: flex;
-  background: white;
-  // justify-content: space-between !important;
-  justify-content: right;
-
-  button {
-    margin-left: 1em;
-  }
-
-  .header {
-    display: flex !important;
-    margin-right: 3%;
-    width: 50%;
-    justify-content: flex-end;
-    align-items: center;
-    .action-dropdown {
-      .inside-dropdown {
-        display: flex;
-        flex-direction: column;
-        margin-left: 12px;
-        line-height: 34px;
-      }
-    }
-  }
-}
-
-.sideBar {
-  .brand {
-    background: linear-gradient(75deg, #396afc 39.51%, #0094ff 80.26%);
-    padding: 7% 0;
-    display: flex;
-    justify-content: center;
-    a {
-      margin: 0;
-    }
-    .sideBarHeader {
-      span {
-        font-weight: bold !important;
-      }
-    }
-    .textBrand {
-      color: white;
-      font-family: math;
-      font-weight: bold;
-    }
-  }
+.appBar {
+  background: linear-gradient(75deg, #396afc 39.51%, #0094ff 80.26%);
+  box-shadow: 0px 100px 80px rgba(62, 116, 255, 0.07),
+    0px 30.1471px 24.1177px rgba(62, 116, 255, 0.0456112),
+    0px 12.5216px 10.0172px rgba(62, 116, 255, 0.035),
+    0px 4.5288px 3.62304px rgba(62, 116, 255, 0.0243888);
 }

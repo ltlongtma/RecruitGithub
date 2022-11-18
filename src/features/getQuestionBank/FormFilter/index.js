@@ -67,17 +67,17 @@ export const FormFilter = ({
             <option value="PENDING">Pending</option>
           </Form.Select>
 
-          <Form.Control
+          {/* <Form.Control
             className={cx("form-group-input")}
             type="text"
             placeholder="Search..."
             name="keyword"
             onChange={handleChangeSelectValue}
-          />
+          /> */}
         </Form.Group>
       </Form>
 
-      <Fab
+      {/* <Fab
         size="medium"
         color="info"
         aria-label="add"
@@ -87,7 +87,7 @@ export const FormFilter = ({
       >
         <AddIcon sx={{ mr: 1 }} />
         new
-      </Fab>
+      </Fab> */}
     </div>
   );
 };

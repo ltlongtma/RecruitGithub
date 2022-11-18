@@ -1,59 +1,42 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import className from "classnames/bind";
-import styles from "./Navigation.module.scss";
-import { useNavigate } from "react-router-dom";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import HelpCenterIcon from "@mui/icons-material/HelpCenter";
+import Collapse from "@mui/material/Collapse";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CategoryIcon from "@mui/icons-material/Category";
 import StairsIcon from "@mui/icons-material/Stairs";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import MessageIcon from "@mui/icons-material/Message";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import BallotIcon from "@mui/icons-material/Ballot";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import { Navbar } from "react-bootstrap";
-import logo from "../../assets/logo-tma.png";
-
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import className from "classnames/bind";
+import styles from "./Navigation.module.scss";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 const cx = className.bind(styles);
 
-const MenuSidebar = ({ stateMenuSideBar }) => {
-  // const [stateMenuSideBar, setStateMenuSideBar] = React.useState(true);
+const ListSidebar = ({ anchor }) => {
   const [collapseQuestionBank, setCollapseQuestionBank] = React.useState(false);
   const [collapseInterview, setCollapseInterview] = React.useState(false);
-
   const navigate = useNavigate();
+
   const handleClickQuestionBank = () => {
     setCollapseQuestionBank(!collapseQuestionBank);
   };
   const handleClickInterview = () => {
     setCollapseInterview(!collapseInterview);
   };
-
-  const list = (anchor) => (
+  return (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
       className={cx("sideBar")}
-      //   onClick={toggleDrawer}
-      //   onKeyDown={toggleDrawer}
     >
-      <div className={cx("brand")}>
-        <Navbar.Brand href="/">
-          <img alt="tma-logo" src={logo} width="80" height="auto" className={cx("logo")} />
-          <span className={cx("textBrand")}>Recruitment Tool</span>
-        </Navbar.Brand>
-      </div>
-      <Divider />
-
       <div>
         <List>
           <ListItemButton onClick={handleClickQuestionBank}>
@@ -167,29 +150,5 @@ const MenuSidebar = ({ stateMenuSideBar }) => {
       </div>
     </Box>
   );
-
-  return (
-    <aside>
-      <Drawer
-        anchor="left"
-        // onClose={toggleDrawer}
-        open={stateMenuSideBar}
-        sx={{
-          position: "absolute",
-          zIndex: 0,
-          // width: "13vw",
-          "& .MuiBackdrop-root": {
-            background: "rgba(0, 0, 0, 0)",
-            // width: "13vw",
-          },
-          "& .MuiDrawer-paper": {
-            background: "white",
-          },
-        }}
-      >
-        {list()}
-      </Drawer>
-    </aside>
-  );
 };
-export default MenuSidebar;
+export default ListSidebar;

@@ -3,15 +3,53 @@ import { Questionbank } from "../../../features/getQuestionBank";
 import className from "classnames/bind";
 import styles from "./Home.module.scss";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumb } from "../../../components/Breadcrumb";
+import { Fab, Typography } from "@mui/material";
+import Form from "react-bootstrap/Form";
+import AddIcon from "@mui/icons-material/Add";
+
 const cx = className.bind(styles);
 
 export const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Breadcrumb firstTitle={"Question Bank"} secondTitle={"View All"} href={"/question"} />
+    <div className={cx("container")}>
+      <div className={cx("header")}>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ fontFamily: "system-ui", flexGrow: 1, fontSize: "2em" }}
+        >
+          Question Bank
+        </Typography>
+        <Form>
+          <Form.Control
+            className={cx("form-group-input")}
+            type="text"
+            placeholder="Search..."
+            name="keyword"
+            // onChange={handleChangeSelectValue}
+          />
+        </Form>
+
+        <Fab
+          size="medium"
+          color="info"
+          aria-label="add"
+          variant="extended"
+          sx={{
+            borderRadius: "7px",
+            marginLeft: "2%",
+          }}
+          // onClick={handleCreateQuestion}
+          // hidden={hiddenCreateButton}
+        >
+          <AddIcon sx={{ mr: 1 }} />
+          new
+        </Fab>
+      </div>
+
       <div className={cx("table")}>
         <Questionbank
           navigateWithState={(e) => {
