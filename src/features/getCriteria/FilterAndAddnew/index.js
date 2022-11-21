@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import className from "classnames/bind";
 import styles from "./filter.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { Form } from "react-bootstrap";
+import { Form, FormLabel } from "react-bootstrap";
 import { Button, FormGroup } from "@mui/material";
 import { ModalAddNewCriteria } from "../Modal/AddNewCriteria";
 import questionCriteriaApi from "../../../services/questionCriteriaApi";
@@ -28,7 +28,7 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     if (e !== "") {
       questionCriteriaApi
         .create(e)
-        .then( await setOpenAlert(true))
+        .then(await setOpenAlert(true))
 
         .catch((e) => {
           console.log("ERROR in addNewCriteria ", e);
@@ -47,13 +47,19 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
         <FormGroup className={cx("form-group")}>
-          <Form.Select name="active" onChange={handleChangeSelectValueStatus}>
-            <option value="">Status - All</option>
+          <FormLabel>STATUS</FormLabel>
+
+          <Form.Select
+            name="active"
+            onChange={handleChangeSelectValueStatus}
+            className={cx("form-group-input")}
+          >
+            <option value="">All</option>
             <option value="true">Active</option>
             <option value="false">Inactive</option>
           </Form.Select>
         </FormGroup>
-        <FormGroup className={cx("form-group")}>
+        {/* <FormGroup className={cx("form-group")}>
           <Form.Control
             className={cx("form-group-input")}
             type="text"
@@ -61,16 +67,16 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
             onChange={handleChangeSelectValueStatus}
             name="keyword"
           />
-        </FormGroup>
+        </FormGroup> */}
       </Form>
-      <Button
+      {/* <Button
         variant="outlined"
         onClick={() => {
           setShowModal(true);
         }}
       >
         <AddIcon /> New
-      </Button>
+      </Button> */}
       <ModalAddNewCriteria
         show={showModal}
         handleClose={() => {

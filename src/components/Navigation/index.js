@@ -21,6 +21,7 @@ import { Search, SearchIconWrapper, StyledInputBase } from "./SearchBar";
 import { UserInfor } from "../UserInfor";
 import userApi from "../../services/ManageUserApi";
 import ListSidebar from "./listSidebar";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 const cx = className.bind(styles);
 
@@ -88,7 +89,7 @@ export default function Navigate({ children }) {
   }, []);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -99,42 +100,40 @@ export default function Navigate({ children }) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} className={cx("appBar")}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Navbar.Brand href="/">
-            <img alt="tma-logo" src={logo} width="80" height="auto" className={cx("logo")} />
-          </Navbar.Brand>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ fontFamily: "system-ui", flexGrow: 1 }}
-          >
-            Recruitment Tool
-          </Typography>
-
-          <Search sx={{ background: "transparent" }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
-          </Search>
-
-          <Notifications profile={profile} />
-
-          <UserInfor profile={profile} />
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <div className={cx("naviLeft")}>
+            <Navbar.Brand href="/">
+              <img alt="tma-logo" src={logo} width="80" height="auto" className={cx("logo")} />
+            </Navbar.Brand>
+            <Typography noWrap component="div" sx={{ fontFamily: "system-ui", fontWeight: "700" }}>
+              Recruitment Tool
+            </Typography>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              sx={{
+                left: "5%",
+              }}
+            >
+              {open === true ? <MenuOpenIcon /> : <MenuIcon />}
+            </IconButton>
+          </div>
+          <div className={cx("naviLeft")}>
+            <Search sx={{ background: "transparent" }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+            </Search>
+            <Notifications profile={profile} />
+            <UserInfor profile={profile} />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
         sx={{
+          zIndex: 1,
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {

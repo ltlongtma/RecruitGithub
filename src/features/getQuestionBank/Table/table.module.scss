@@ -5,6 +5,11 @@
     &:hover {
     }
   }
+
+  thead {
+    background: linear-gradient(to top, #0858f7, #2b77e5);
+    color: white;
+  }
   tbody {
     tr {
       &:hover {

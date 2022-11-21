@@ -4,8 +4,9 @@ import className from "classnames/bind";
 import styles from "./form.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, FormLabel } from "@mui/material";
 import Fab from "@mui/material/Fab";
+import { Box } from "@mui/system";
 
 const cx = className.bind(styles);
 
@@ -33,29 +34,38 @@ export const FormFilter = ({
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
         <Form.Group className={cx("form-group")}>
+          <FormLabel>LEVEL</FormLabel>
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}
             name="level"
           >
-            <option value="">Level - All</option>
+            <option value="">All</option>
 
             <option value="EASY">Easy</option>
             <option value="MEDIUM">Medium</option>
             <option value="HARD">Hard</option>
           </Form.Select>
+        </Form.Group>
+        <Form.Group className={cx("form-group")}>
+          <FormLabel>CATEGORY</FormLabel>
+
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}
             name="categoryId"
           >
-            <option value="">Category - All</option>
+            <option value="">All</option>
             {onFilterCategory?.map((item, index) => (
               <option value={item.id} key={index}>
                 {item.name}
               </option>
             ))}
           </Form.Select>
+        </Form.Group>
+        <Form.Group className={cx("form-group")}>
+          <FormLabel>STATUS</FormLabel>
+
           <Form.Select
             className={cx("form-group-input")}
             onChange={handleChangeSelectValue}
@@ -66,15 +76,15 @@ export const FormFilter = ({
 
             <option value="PENDING">Pending</option>
           </Form.Select>
+        </Form.Group>
 
-          {/* <Form.Control
+        {/* <Form.Control
             className={cx("form-group-input")}
             type="text"
             placeholder="Search..."
             name="keyword"
             onChange={handleChangeSelectValue}
           /> */}
-        </Form.Group>
       </Form>
 
       {/* <Fab

@@ -1,20 +1,24 @@
 .form {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2em;
-  
-    .form-filter {
-      display: flex;
-      margin-left: 3rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+
+  .form-filter {
+    width: 30%;
+    .form-group {
       width: 100%;
-      .form-group {
-        // display: flex;
-        height: auto;
-        padding: 5px;
-        width: 30%;
+      margin: 1% 0;
+      label {
+        font-size: 12px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .form-group-input {
+        background-color: #f0f0f0;
+        border: 1px solid #e4e4e4;
+        cursor: pointer;
+        border-radius: 8px;
       }
     }
   }
-  
- 
-  
+}

@@ -7,18 +7,20 @@
   margin-bottom: 2em;
   .form-filter {
     display: flex;
-    margin-left: 3rem;
-    & button {
-      margin: auto;
-      padding: auto;
-    }
+    width: 100%;
     .form-group {
-      display: flex;
-      height: auto;
-      width: 54rem;
+      width: 100%;
+      margin: 1% 0;
+      label {
+        font-size: 12px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
       .form-group-input {
-        margin: 0 10px;
-        text-align: justify;
+        background-color: #f0f0f0;
+        border: 1px solid #e4e4e4;
+        cursor: pointer;
+        border-radius: 8px;
       }
     }
   }

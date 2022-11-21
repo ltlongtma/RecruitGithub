@@ -52,14 +52,14 @@ export default function FormFilterUser({ onFilterAll, params }) {
           </Form.Select>
         </Form.Group>
       </Form>
-      <Button
+      {/* <Button
         className={cx("btn-addNewUser")}
         variant="outlined"
         size="sm"
         onClick={() => toggleModalAddNewUser(!showModalAddNewUser)}
       >
         <AddIcon /> new
-      </Button>
+      </Button> */}
       <ModalAddNewUser
         show={showModalAddNewUser}
         onHide={() => toggleModalAddNewUser(!showModalAddNewUser)}

@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { Fab, Typography } from "@mui/material";
 import Form from "react-bootstrap/Form";
 import AddIcon from "@mui/icons-material/Add";
-
+import { CardInfo } from "../../../components/CardInfo";
+import StoreIcon from "@mui/icons-material/Store";
+import BeenhereIcon from "@mui/icons-material/Beenhere";
+import PendingIcon from "@mui/icons-material/Pending";
 const cx = className.bind(styles);
 
 export const Home = () => {
@@ -19,7 +22,7 @@ export const Home = () => {
           variant="h6"
           noWrap
           component="div"
-          sx={{ fontFamily: "system-ui", flexGrow: 1, fontSize: "2em" }}
+          sx={{ fontFamily: "system-ui", flexGrow: 1, fontSize: "2em", paddingLeft: "1%" }}
         >
           Question Bank
         </Typography>
@@ -40,7 +43,8 @@ export const Home = () => {
           variant="extended"
           sx={{
             borderRadius: "7px",
-            marginLeft: "2%",
+            marginLeft: "1%",
+            width: "6vw",
           }}
           // onClick={handleCreateQuestion}
           // hidden={hiddenCreateButton}
@@ -48,6 +52,20 @@ export const Home = () => {
           <AddIcon sx={{ mr: 1 }} />
           new
         </Fab>
+      </div>
+      <div className={cx("row", "CardInfo")}>
+        <div className={cx("col-lg-4 col-sm-6", "card1")}>
+          <CardInfo number="500" content="Total Questions" />
+          <StoreIcon />
+        </div>
+        <div className={cx("col-lg-4 col-sm-6", "card2")}>
+          <CardInfo number="400" content="Approved" />
+          <BeenhereIcon />
+        </div>
+        <div className={cx("col-lg-4 col-sm-6", "card3")}>
+          <CardInfo number="100" content="Pending" />
+          <PendingIcon />
+        </div>
       </div>
 
       <div className={cx("table")}>

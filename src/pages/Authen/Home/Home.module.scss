@@ -5,4 +5,48 @@
     margin: 2% auto;
     align-items: center;
   }
+  .CardInfo {
+    margin: 1% 0;
+    .card1 {
+      background: linear-gradient(#64b3f6, #2b77e5);
+      border-radius: 8px;
+      position: relative;
+      svg {
+        color: #96cefa;
+        font-size: 3em;
+        position: absolute;
+        top: -10%;
+        right: 3%;
+      }
+    }
+    .card2 {
+      background: linear-gradient(#4eda89, #1a9f53);
+      border-radius: 8px;
+      position: relative;
+
+      svg {
+        font-size: 3em;
+        position: absolute;
+        color: #89ecb3;
+        top: -10%;
+        right: 3%;
+      }
+    }
+    .card3 {
+      background: linear-gradient(#ed68ff, #be0ee1);
+      border-radius: 8px;
+      position: relative;
+      svg {
+        font-size: 3em;
+        position: absolute;
+        color: #f3a0ff;
+        top: -10%;
+        right: 3%;
+      }
+    }
+  }
+  .table {
+    background: white;
+    margin-top: 2%;
+  }
 }

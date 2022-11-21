@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import className from "classnames/bind";
 import styles from "./filter.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { Form } from "react-bootstrap";
+import { Form, FormLabel } from "react-bootstrap";
 import { Button, FormGroup } from "@mui/material";
 import { ModalAddNewCategory } from "../Modal/modalAddNew";
 import questionCategoryApi from "../../../services/questionCategoryApi";
@@ -28,7 +28,7 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     if (e !== "") {
       questionCategoryApi
         .create(e)
-        .then( await setOpenAlert(true))
+        .then(await setOpenAlert(true))
 
         .catch((e) => {
           console.log("ERROR in addNewCategory ", e);
@@ -47,13 +47,18 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
     <div className={cx("form")}>
       <Form className={cx("form-filter")}>
         <FormGroup className={cx("form-group")}>
-          <Form.Select name="active" onChange={handleChangeSelectValueStatus}>
+          <FormLabel>STATUS</FormLabel>
+          <Form.Select
+            name="active"
+            onChange={handleChangeSelectValueStatus}
+            className={cx("form-group-input")}
+          >
             <option value="">Status - All</option>
             <option value="true">Active</option>
             <option value="false">Inactive</option>
           </Form.Select>
         </FormGroup>
-        <FormGroup className={cx("form-group")}>
+        {/* <FormGroup className={cx("form-group")}>
           <Form.Control
             className={cx("form-group-input")}
             type="text"
@@ -61,10 +66,10 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
             onChange={handleChangeSelectValueStatus}
             name="keyword"
           />
-        </FormGroup>
+        </FormGroup> */}
       </Form>
 
-      <Button
+      {/* <Button
         variant="outlined"
         onClick={() => {
           setShowModal(true);
@@ -78,7 +83,7 @@ export const FilterAndAddNew = ({ data, onFilterStatus, paramStatus }) => {
           setShowModal(!showModal);
         }}
         handleModalAddNewCategory={handleModalAddNewCategory}
-      />
+      /> */}
       <div>
         <AlertSuccess
           title="A new category was added successfully"
